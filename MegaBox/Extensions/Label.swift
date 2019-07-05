@@ -13,4 +13,11 @@ extension UILabel {
     self.text = text
     self.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
   }
+  
+  func labelSetup(text: String, color: UIColor, fontSize: CGFloat, alignment: NSTextAlignment?) {
+    self.text = text
+    self.font = UIFont.systemFont(ofSize: fontSize, weight: .semibold)
+    self.textColor = color
+    self.textAlignment = alignment ?? NSTextAlignment.left
+  }
 }

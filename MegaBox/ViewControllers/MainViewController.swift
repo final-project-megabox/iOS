@@ -12,12 +12,10 @@ class MainViewController: UIViewController {
   
   private let mainVC = MainView()
   
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
-  }
-
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.view.backgroundColor = .black
+    
     mainVC.delegate = self
     setupMainVC()
   }
@@ -38,7 +36,8 @@ class MainViewController: UIViewController {
 extension MainViewController: MainViewDelegate {
   func openQuickReservationView() {
     let quickReservationVC = QuickReservationViewController()
-    self.present(quickReservationVC, animated: true)
+    quickReservationVC.modalPresentationStyle = .overCurrentContext
+    self.present(quickReservationVC, animated: false)
   }
 }
 

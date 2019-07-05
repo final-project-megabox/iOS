@@ -32,7 +32,8 @@ class MovieReservationView: UIView {
   }()
   
   private let movieReservationCollection: UICollectionView = {
-    let collectionView = UICollectionView()
+    let layout = UICollectionViewFlowLayout()
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     return collectionView
   }()
@@ -56,13 +57,18 @@ class MovieReservationView: UIView {
   }
   
   private func autoLayout() {
+    let margin: CGFloat = 10
     NSLayoutConstraint.activate([
-      titleLabel.topAnchor.constraint(equalTo: self.topAnchor),
-      titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+      titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: margin * 2),
+      titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 2),
       
-      plusButton.topAnchor.constraint(equalTo: self.topAnchor),
-      plusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      plusButton.widthAnchor.constraint(equalToConstant: 50),
+      plusButton.topAnchor.constraint(equalTo: self.topAnchor, constant: margin * 2),
+      plusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 2),
+      
+      divisionLine.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin),
+      divisionLine.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 2),
+      divisionLine.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 2),
+      divisionLine.heightAnchor.constraint(equalToConstant: 1),
       ])
   }
   

@@ -107,8 +107,8 @@ class MainView: UIView {
   }()
   
   // 영화예매
-  private let movieReservationView: UIView = {
-    let view = UIView()
+  private let movieReservationView: MovieReservationView = {
+    let view = MovieReservationView()
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
