@@ -18,8 +18,7 @@ class MainViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    
+    mainVC.delegate = self
     setupMainVC()
   }
   
@@ -34,6 +33,12 @@ class MainViewController: UIViewController {
       mainVC.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
       ])
   }
-  
+}
+
+extension MainViewController: MainViewDelegate {
+  func openQuickReservationView() {
+    let quickReservationVC = QuickReservationViewController()
+    self.present(quickReservationVC, animated: true)
+  }
 }
 

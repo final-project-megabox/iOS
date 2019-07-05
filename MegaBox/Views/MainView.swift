@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol MainViewDelegate: class {
+  func openQuickReservationView()
+}
+
 class MainView: UIView {
   
   // MARK:- Properties
+  var delegate: MainViewDelegate?
+  
   // MARK: topProperties
   private let topView: UIView = {
     let view = UIView()
@@ -39,6 +45,7 @@ class MainView: UIView {
   private let quickReservationButton: UIButton = {
     let button = UIButton()
     button.setTitle("빠른예매", for: .normal)
+    button.addTarget(self, action: #selector(quickReservationButtonDidTapped), for: .touchUpInside)
     button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 10, weight: .bold)
     button.layer.borderColor = UIColor.white.cgColor
@@ -189,6 +196,10 @@ class MainView: UIView {
     super.init(frame: frame)
     
     setupProperties()
+  }
+  
+  @objc private func quickReservationButtonDidTapped() {
+    delegate?.openQuickReservationView()
   }
   
   private func setupProperties() {
