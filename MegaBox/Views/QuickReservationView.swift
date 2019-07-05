@@ -9,7 +9,7 @@
 import UIKit
 
 class QuickReservationView: UIView {
-  
+  // MARK: - Properties
   let topView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
