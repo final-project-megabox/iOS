@@ -10,6 +10,8 @@
 		CF8C20B722CF1F5A00879224 /* MovieReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C20B622CF1F5A00879224 /* MovieReservationView.swift */; };
 		CF8C20B922CF22C900879224 /* QuickReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C20B822CF22C900879224 /* QuickReservationViewController.swift */; };
 		CF8C20BB22CF22FA00879224 /* QuickReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */; };
+		CF8C20BE22CF456E00879224 /* MovieReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C20BD22CF456E00879224 /* MovieReservationCell.swift */; };
+		CF8C20C022D0950200879224 /* ShortMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C20BF22D0950200879224 /* ShortMenuView.swift */; };
 		CFA93DC222CDF8840025F96C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DC122CDF8840025F96C /* AppDelegate.swift */; };
 		CFA93DC422CDF8840025F96C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DC322CDF8840025F96C /* MainViewController.swift */; };
 		CFA93DC922CDF8840025F96C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFA93DC822CDF8840025F96C /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 		CF8C20B622CF1F5A00879224 /* MovieReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReservationView.swift; sourceTree = "<group>"; };
 		CF8C20B822CF22C900879224 /* QuickReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickReservationViewController.swift; sourceTree = "<group>"; };
 		CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickReservationView.swift; sourceTree = "<group>"; };
+		CF8C20BD22CF456E00879224 /* MovieReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReservationCell.swift; sourceTree = "<group>"; };
+		CF8C20BF22D0950200879224 /* ShortMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortMenuView.swift; sourceTree = "<group>"; };
 		CFA93DBE22CDF8840025F96C /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MegaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFA93DC122CDF8840025F96C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFA93DC322CDF8840025F96C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF8C20BC22CF455600879224 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CF8C20BD22CF456E00879224 /* MovieReservationCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		CFA93DB522CDF8840025F96C = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +93,8 @@
 				CFA93DD522CDF8F70025F96C /* MainView.swift */,
 				CF8C20B622CF1F5A00879224 /* MovieReservationView.swift */,
 				CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */,
+				CF8C20BF22D0950200879224 /* ShortMenuView.swift */,
+				CF8C20BC22CF455600879224 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -177,10 +191,12 @@
 				CF8C20B922CF22C900879224 /* QuickReservationViewController.swift in Sources */,
 				CFA93DC422CDF8840025F96C /* MainViewController.swift in Sources */,
 				CFA93DDD22CE53210025F96C /* Label.swift in Sources */,
+				CF8C20C022D0950200879224 /* ShortMenuView.swift in Sources */,
 				CFA93DD622CDF8F70025F96C /* MainView.swift in Sources */,
 				CFA93DDB22CE531A0025F96C /* TextField.swift in Sources */,
 				CFA93DC222CDF8840025F96C /* AppDelegate.swift in Sources */,
 				CF8C20BB22CF22FA00879224 /* QuickReservationView.swift in Sources */,
+				CF8C20BE22CF456E00879224 /* MovieReservationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

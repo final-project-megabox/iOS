@@ -68,7 +68,7 @@ class MovieReservationView: UIView {
       divisionLine.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin),
       divisionLine.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 2),
       divisionLine.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 2),
-      divisionLine.heightAnchor.constraint(equalToConstant: 1),
+      divisionLine.heightAnchor.constraint(equalToConstant: 0.5),
       ])
   }
   

@@ -115,8 +115,8 @@ class MainView: UIView {
   }()
   
   // 영화관 할인카드 스토어 포토카드
-  private let temp1: UIView = {
-    let view = UIView()
+  private let shortMenuView: ShortMenuView = {
+    let view = ShortMenuView()
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
@@ -219,7 +219,7 @@ class MainView: UIView {
     
     // 진행중
     mainScrollView.addSubview(movieReservationView)
-    mainScrollView.addSubview(temp1)
+    mainScrollView.addSubview(shortMenuView)
     mainScrollView.addSubview(temp2)
     mainScrollView.addSubview(eventView)
     mainScrollView.addSubview(movieBoxView)
@@ -288,12 +288,12 @@ class MainView: UIView {
       movieReservationView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor, constant: -margin),
       movieReservationView.heightAnchor.constraint(equalToConstant: 400),
       
-      temp1.topAnchor.constraint(equalTo: movieReservationView.bottomAnchor, constant: margin),
-      temp1.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
-      temp1.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
-      temp1.heightAnchor.constraint(equalToConstant: 100),
+      shortMenuView.topAnchor.constraint(equalTo: movieReservationView.bottomAnchor, constant: margin),
+      shortMenuView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
+      shortMenuView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
+      shortMenuView.heightAnchor.constraint(equalToConstant: 100),
       
-      temp2.topAnchor.constraint(equalTo: temp1.bottomAnchor, constant: margin),
+      temp2.topAnchor.constraint(equalTo: shortMenuView.bottomAnchor, constant: margin),
       temp2.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
       temp2.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
       temp2.heightAnchor.constraint(equalToConstant: 100),
