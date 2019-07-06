@@ -19,6 +19,7 @@
 		CFA93DD622CDF8F70025F96C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DD522CDF8F70025F96C /* MainView.swift */; };
 		CFA93DDB22CE531A0025F96C /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DDA22CE531A0025F96C /* TextField.swift */; };
 		CFA93DDD22CE53210025F96C /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DDC22CE53210025F96C /* Label.swift */; };
+		E603EC2B22D09BBA0011E985 /* MovieCategoryReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E603EC2A22D09BBA0011E985 /* MovieCategoryReservationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		CFA93DD522CDF8F70025F96C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CFA93DDA22CE531A0025F96C /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		CFA93DDC22CE53210025F96C /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		E603EC2A22D09BBA0011E985 /* MovieCategoryReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategoryReservationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			children = (
 				CFA93DC322CDF8840025F96C /* MainViewController.swift */,
 				CF8C20B822CF22C900879224 /* QuickReservationViewController.swift */,
+				E603EC2A22D09BBA0011E985 /* MovieCategoryReservationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				CF8C20C022D0950200879224 /* ShortMenuView.swift in Sources */,
 				CFA93DD622CDF8F70025F96C /* MainView.swift in Sources */,
 				CFA93DDB22CE531A0025F96C /* TextField.swift in Sources */,
+				E603EC2B22D09BBA0011E985 /* MovieCategoryReservationViewController.swift in Sources */,
 				CFA93DC222CDF8840025F96C /* AppDelegate.swift in Sources */,
 				CF8C20BB22CF22FA00879224 /* QuickReservationView.swift in Sources */,
 				CF8C20BE22CF456E00879224 /* MovieReservationCell.swift in Sources */,
