@@ -174,7 +174,12 @@ class MovieCategoryReservationView: UIView {
   
   private func setupTableView() {
     movieListTableView.dataSource = self
+    movieListTableView.delegate = self
     movieListTableView.register(MovieListCell.self, forCellReuseIdentifier: MovieListCell.identifier)
+  }
+  
+  @objc func dismissButtonDidTpaaed() {
+    reservationDelegate?.dismissButtonDidTapped()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -230,9 +235,19 @@ extension MovieCategoryReservationView: UITableViewDataSource {
     return cell
   }
   
-  // DELEGATE로 옮길 것
-  @objc func dismissButtonDidTpaaed() {
-    reservationDelegate?.dismissButtonDidTapped()
+}
+
+extension MovieCategoryReservationView: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard let cell = tableView.cellForRow(at: indexPath) as? MovieListCell else {return}
+    if cell.isSelected {
+      cell.contentView.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.7450980392, blue: 0.7843137255, alpha: 1)
+      cell.movieTitleLabel.textColor = .white
+      cell.movieSubTitleLabel.textColor = .white
+    }else {
+      cell.movieTitleLabel.textColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+      cell.movieSubTitleLabel.textColor = #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1)
+    }
+    
   }
-  
 }

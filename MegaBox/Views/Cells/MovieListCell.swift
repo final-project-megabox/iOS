@@ -13,33 +13,31 @@ class MovieListCell: UITableViewCell {
   
   let gradeImageView: UIImageView = {
     let imageView = UIImageView()
-//    imageView.image = #imageLiteral(resourceName: <#T##String#>)
-    imageView.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+    imageView.image = #imageLiteral(resourceName: "all")
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
   
   let movieTitleLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "title", color: .black, fontSize: 13, alignment: .left)
+    label.labelSetup(text: "스파이더맨: 파 프롬 홈", color: #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), fontSize: 13, alignment: .left)
     label.font = UIFont.boldSystemFont(ofSize: 13)
-    label.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   let movieSubTitleLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "subTitle", color: #colorLiteral(red: 0.9441822652, green: 0.9441822652, blue: 0.9441822652, alpha: 1), fontSize: 12, alignment: .left)
-    label.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+    label.labelSetup(text: "디지털(자막),ATMOS(자막),3D(자막),3D ATMOS(자막)", color: #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1), fontSize: 11, alignment: .left)
+    label.font = UIFont.systemFont(ofSize: 11, weight: .thin)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   let movieDurationLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "000분", color: #colorLiteral(red: 0.9441822652, green: 0.9441822652, blue: 0.9441822652, alpha: 1), fontSize: 12, alignment: .center)
-    label.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+    label.labelSetup(text: "000분", color: #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1), fontSize: 12, alignment: .center)
+    label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -53,18 +51,30 @@ class MovieListCell: UITableViewCell {
   private func setupTableViewCell() {
     contentView.addSubview(gradeImageView)
     contentView.addSubview(movieTitleLabel)
-//    contentView.addSubview(movieSubTitleLabel)
-//    contentView.addSubview(movieDurationLabel)
-    
-    gradeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+    contentView.addSubview(movieSubTitleLabel)
+    contentView.addSubview(movieDurationLabel)
+
     gradeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
-    gradeImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1).isActive = true
-    gradeImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5).isActive = true
+    gradeImageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
+    gradeImageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+    gradeImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     
+    movieTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
     movieTitleLabel.leadingAnchor.constraint(equalTo: gradeImageView.trailingAnchor, constant: 10).isActive = true
-    movieTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
     movieTitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.7).isActive = true
     movieTitleLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.4).isActive = true
+    
+    movieSubTitleLabel.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor).isActive = true
+    movieSubTitleLabel.leadingAnchor.constraint(equalTo: movieTitleLabel.leadingAnchor).isActive = true
+    movieSubTitleLabel.widthAnchor.constraint(equalTo: movieTitleLabel.widthAnchor).isActive = true
+    movieSubTitleLabel.heightAnchor.constraint(equalTo: movieTitleLabel.heightAnchor).isActive = true
+    movieSubTitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
+    
+    
+    movieDurationLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
+    movieDurationLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1).isActive = true
+    movieDurationLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3).isActive = true
+    movieDurationLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     
     
     
