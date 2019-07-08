@@ -19,7 +19,7 @@ class MainView: UIView {
   var titleImageHeight: CGFloat = 0
   
   // MARK: topProperties
-  private let topView: UIView = {
+  private let topMediaVisualTopView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     view.alpha = 0.3
@@ -36,7 +36,8 @@ class MainView: UIView {
   
   private let titleImage: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = #imageLiteral(resourceName: "megaboxkids_logo_w")
+    imageView.image = #imageLiteral(resourceName: "megabox_logo")
+    imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -46,7 +47,7 @@ class MainView: UIView {
     button.setTitle("빠른예매", for: .normal)
     button.addTarget(self, action: #selector(quickReservationButtonDidTapped), for: .touchUpInside)
     button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 10, weight: .bold)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 10, weight: .heavy)
     button.layer.borderColor = UIColor.white.cgColor
     button.layer.borderWidth = 2
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -60,18 +61,27 @@ class MainView: UIView {
     return scrollView
   }()
   
-  private let topMediaPlayView: UIImageView = {
+  private let topMediaImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "image1")
+    imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
+  }()
+  
+  private let topMediaVisualBottomView: UIView = {
+    let view = UIView()
+    view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    view.alpha = 0.2
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
   }()
   
   private let topMediaTitleText: UITextField = {
     let textField = UITextField()
     textField.text = "스파이더맨: 파 프롬 홈"
     textField.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    textField.font = UIFont.systemFont(ofSize: 18, weight: .black)
+    textField.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     textField.translatesAutoresizingMaskIntoConstraints = false
     return textField
   }()
@@ -80,7 +90,7 @@ class MainView: UIView {
     let textField = UITextField()
     textField.text = "모든 것이 다시 시작된다!"
     textField.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    textField.font = UIFont.systemFont(ofSize: 13, weight: .bold)
+    textField.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     textField.translatesAutoresizingMaskIntoConstraints = false
     return textField
   }()
@@ -89,7 +99,7 @@ class MainView: UIView {
     let button = UIButton()
     button.setTitle("상세보기", for: .normal)
     button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 10, weight: .bold)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 10, weight: .heavy)
     button.layer.borderColor = UIColor.white.cgColor
     button.layer.borderWidth = 2
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -210,16 +220,16 @@ class MainView: UIView {
   override func layoutSubviews() {
     super.layoutSubviews()
     titleImageHeight = (self.frame.width * 907) / 1080
-    print(self.frame.width )
     autoLayout()
   }
   
   private func addSubView() {
     self.addSubview(mainScrollView)
-    mainScrollView.addSubview(topMediaPlayView)
-    topMediaPlayView.addSubview(topMediaTitleText)
-    topMediaPlayView.addSubview(topMediaSubTitleText)
-    topMediaPlayView.addSubview(viewDetailButton)
+    mainScrollView.addSubview(topMediaImageView)
+    topMediaImageView.addSubview(topMediaVisualBottomView)
+    topMediaImageView.addSubview(topMediaTitleText)
+    topMediaImageView.addSubview(topMediaSubTitleText)
+    topMediaImageView.addSubview(viewDetailButton)
     
     
     mainScrollView.addSubview(mainBGView)
@@ -237,40 +247,32 @@ class MainView: UIView {
     mainScrollView.addSubview(notiView)
     mainScrollView.addSubview(notificationView)
     
-    self.addSubview(topView)
+    self.addSubview(topMediaVisualTopView)
     self.addSubview(hamburgerMenu)
     self.addSubview(titleImage)
     self.addSubview(quickReservationButton)
-    
-    titleImage.contentMode = .scaleAspectFill
-    titleImage.contentMode = .left
-    titleImage.clipsToBounds = true
-    
-    topMediaPlayView.contentMode = .scaleAspectFit
-    topMediaPlayView.backgroundColor = .red
     
     lastBannerImageView.contentMode = .scaleAspectFit
   }
   
   private func autoLayout() {
-    let margin: CGFloat = 15
+    let margin: CGFloat = 10
     NSLayoutConstraint.activate([
-      topView.topAnchor.constraint(equalTo: self.topAnchor),
-      topView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-      topView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      topView.heightAnchor.constraint(equalToConstant: 44),
+      topMediaVisualTopView.topAnchor.constraint(equalTo: self.topAnchor),
+      topMediaVisualTopView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+      topMediaVisualTopView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       
-      hamburgerMenu.topAnchor.constraint(equalTo: self.topAnchor),
       hamburgerMenu.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
-      hamburgerMenu.heightAnchor.constraint(equalToConstant: 44),
+      hamburgerMenu.centerYAnchor.constraint(equalTo: topMediaVisualTopView.centerYAnchor),
       
-      titleImage.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
-      titleImage.leadingAnchor.constraint(equalTo: hamburgerMenu.trailingAnchor, constant: margin),
+      titleImage.leadingAnchor.constraint(equalTo: hamburgerMenu.trailingAnchor, constant: margin * 2),
+      titleImage.centerYAnchor.constraint(equalTo: topMediaVisualTopView.centerYAnchor),
       titleImage.heightAnchor.constraint(equalToConstant: 20),
-      titleImage.widthAnchor.constraint(equalToConstant: 80),
+      titleImage.widthAnchor.constraint(equalToConstant: 120),
       
       quickReservationButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 12.5),
       quickReservationButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin),
+      quickReservationButton.centerYAnchor.constraint(equalTo: topMediaVisualTopView.centerYAnchor),
       quickReservationButton.heightAnchor.constraint(equalToConstant: 25),
       
       mainScrollView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -278,22 +280,27 @@ class MainView: UIView {
       mainScrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       mainScrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
       
-      topMediaPlayView.topAnchor.constraint(equalTo: mainScrollView.topAnchor),
-      topMediaPlayView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-      topMediaPlayView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      topMediaPlayView.heightAnchor.constraint(equalToConstant: titleImageHeight),
+      topMediaImageView.topAnchor.constraint(equalTo: mainScrollView.topAnchor),
+      topMediaImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+      topMediaImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+      topMediaImageView.heightAnchor.constraint(equalToConstant: titleImageHeight),
       
-      topMediaTitleText.leadingAnchor.constraint(equalTo: topMediaPlayView.leadingAnchor, constant: margin * 2),
+      topMediaVisualBottomView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+      topMediaVisualBottomView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+      topMediaVisualBottomView.bottomAnchor.constraint(equalTo: topMediaImageView.bottomAnchor),
       
-      topMediaSubTitleText.topAnchor.constraint(equalTo: topMediaTitleText.bottomAnchor, constant: 5),
-      topMediaSubTitleText.leadingAnchor.constraint(equalTo: topMediaPlayView.leadingAnchor, constant: margin * 2),
-      topMediaSubTitleText.bottomAnchor.constraint(equalTo: topMediaPlayView.bottomAnchor, constant: -margin),
+      topMediaTitleText.topAnchor.constraint(equalTo: topMediaVisualBottomView.topAnchor, constant: margin),
+      topMediaTitleText.leadingAnchor.constraint(equalTo: topMediaImageView.leadingAnchor, constant: margin * 3),
       
-      viewDetailButton.trailingAnchor.constraint(equalTo: topMediaPlayView.trailingAnchor, constant: -margin * 2),
-      viewDetailButton.bottomAnchor.constraint(equalTo: topMediaPlayView.bottomAnchor, constant: -25),
+      topMediaSubTitleText.topAnchor.constraint(equalTo: topMediaTitleText.bottomAnchor, constant: margin / 2),
+      topMediaSubTitleText.leadingAnchor.constraint(equalTo: topMediaImageView.leadingAnchor, constant: margin * 3),
+      topMediaSubTitleText.bottomAnchor.constraint(equalTo: topMediaImageView.bottomAnchor, constant: -margin * 2),
+      
+      viewDetailButton.trailingAnchor.constraint(equalTo: topMediaImageView.trailingAnchor, constant: -margin * 2),
+      viewDetailButton.bottomAnchor.constraint(equalTo: topMediaImageView.bottomAnchor, constant: -25),
       viewDetailButton.heightAnchor.constraint(equalToConstant: 25),
       
-      mainBGView.topAnchor.constraint(equalTo: topMediaPlayView.bottomAnchor),
+      mainBGView.topAnchor.constraint(equalTo: topMediaImageView.bottomAnchor),
       mainBGView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
       mainBGView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       mainBGView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor),

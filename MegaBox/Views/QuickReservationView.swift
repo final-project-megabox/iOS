@@ -19,7 +19,7 @@ class QuickReservationView: UIView {
   
   private let cancelButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "cancel_icon"), for: .normal)
+    button.setImage(UIImage(named: "whiteCancel_icon"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
