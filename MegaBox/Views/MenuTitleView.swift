@@ -22,8 +22,10 @@ class MenuTitleView: UIView {
   
   private let menuTitleDismissButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.setTitle("닫기", for: .normal)
-    button.setTitleColor(#colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1), for: .normal)
+//    button.setTitle("닫기", for: .normal)
+//    button.setTitleColor(#colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "cancel_icon"), for: .normal)
+    button.tintColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -170,7 +172,7 @@ class MenuTitleView: UIView {
   
   private func setupTableView() {
     movieListTableView.dataSource = self
-    movieListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    movieListTableView.register(MovieListCell.self, forCellReuseIdentifier: MovieListCell.identifier)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -221,8 +223,8 @@ extension MenuTitleView: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = movieListTableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-    cell.textLabel?.text = "영화 제목"
+    let cell = movieListTableView.dequeueReusableCell(withIdentifier: MovieListCell.identifier, for: indexPath) as! MovieListCell
+    
     return cell
   }
   
