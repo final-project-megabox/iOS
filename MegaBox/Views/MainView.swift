@@ -16,6 +16,7 @@ class MainView: UIView {
   
   // MARK:- Properties
   var delegate: MainViewDelegate?
+  var titleImageHeight: CGFloat = 0
   
   // MARK: topProperties
   private let topView: UIView = {
@@ -36,8 +37,6 @@ class MainView: UIView {
   private let titleImage: UIImageView = {
     let imageView = UIImageView()
     imageView.image = #imageLiteral(resourceName: "megaboxkids_logo_w")
-    imageView.contentMode = .left
-    imageView.clipsToBounds = true
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -205,6 +204,13 @@ class MainView: UIView {
   
   private func setupProperties() {
     addSubView()
+    
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    titleImageHeight = (self.frame.width * 907) / 1080
+    print(self.frame.width )
     autoLayout()
   }
   
@@ -214,6 +220,8 @@ class MainView: UIView {
     topMediaPlayView.addSubview(topMediaTitleText)
     topMediaPlayView.addSubview(topMediaSubTitleText)
     topMediaPlayView.addSubview(viewDetailButton)
+    
+    
     mainScrollView.addSubview(mainBGView)
     mainScrollView.addSubview(lastBannerBGImageView)
     mainScrollView.addSubview(lastBannerImageView)
@@ -233,7 +241,14 @@ class MainView: UIView {
     self.addSubview(hamburgerMenu)
     self.addSubview(titleImage)
     self.addSubview(quickReservationButton)
-    topMediaPlayView.contentMode = .scaleToFill
+    
+    titleImage.contentMode = .scaleAspectFill
+    titleImage.contentMode = .left
+    titleImage.clipsToBounds = true
+    
+    topMediaPlayView.contentMode = .scaleAspectFit
+    topMediaPlayView.backgroundColor = .red
+    
     lastBannerImageView.contentMode = .scaleAspectFit
   }
   
@@ -243,11 +258,11 @@ class MainView: UIView {
       topView.topAnchor.constraint(equalTo: self.topAnchor),
       topView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
       topView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      topView.heightAnchor.constraint(equalToConstant: 50),
+      topView.heightAnchor.constraint(equalToConstant: 44),
       
       hamburgerMenu.topAnchor.constraint(equalTo: self.topAnchor),
       hamburgerMenu.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
-      hamburgerMenu.heightAnchor.constraint(equalToConstant: 50),
+      hamburgerMenu.heightAnchor.constraint(equalToConstant: 44),
       
       titleImage.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
       titleImage.leadingAnchor.constraint(equalTo: hamburgerMenu.trailingAnchor, constant: margin),
@@ -266,7 +281,7 @@ class MainView: UIView {
       topMediaPlayView.topAnchor.constraint(equalTo: mainScrollView.topAnchor),
       topMediaPlayView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
       topMediaPlayView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      topMediaPlayView.heightAnchor.constraint(equalToConstant: 320),
+      topMediaPlayView.heightAnchor.constraint(equalToConstant: titleImageHeight),
       
       topMediaTitleText.leadingAnchor.constraint(equalTo: topMediaPlayView.leadingAnchor, constant: margin * 2),
       
@@ -291,7 +306,7 @@ class MainView: UIView {
       shortMenuView.topAnchor.constraint(equalTo: movieReservationView.bottomAnchor, constant: margin),
       shortMenuView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
       shortMenuView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
-      shortMenuView.heightAnchor.constraint(equalToConstant: 100),
+      shortMenuView.heightAnchor.constraint(equalToConstant: 130),
       
       firstAdView.topAnchor.constraint(equalTo: shortMenuView.bottomAnchor, constant: margin),
       firstAdView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
