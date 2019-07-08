@@ -16,3 +16,8 @@ protocol MenuTitleViewDelegate {
 protocol QuickReservationViewDelegate {
   func farightButtonDidSelected()
 }
+
+//영화별 예매 버튼 클릭 후 X 버튼 클릭
+protocol MovieCategoryReservationViewDelegate {
+  func dismissButtonDidTapped()
+}

@@ -10,12 +10,13 @@ import UIKit
 
 class MovieCategoryReservationViewController: UIViewController {
   
-  let menuView = MenuTitleView()
+  let menuView = MovieCategoryReservationView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    menuView.reservationDelegate = self
     setupMenuView()
+    
   }
   
   private func setupMenuView() {
@@ -28,5 +29,11 @@ class MovieCategoryReservationViewController: UIViewController {
       menuView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
       menuView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
       ])
+  }
+}
+
+extension MovieCategoryReservationViewController: MovieCategoryReservationViewDelegate {
+  func dismissButtonDidTapped() {
+    self.presentingViewController?.presentingViewController?.dismiss(animated: false)
   }
 }

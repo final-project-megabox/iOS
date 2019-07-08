@@ -8,9 +8,14 @@
 
 import UIKit
 
-class MenuTitleView: UIView {
+class MovieCategoryReservationView: UIView {
 
   // MARK: Properties
+  var reservationDelegate: MovieCategoryReservationViewDelegate?
+  var delegate: MenuTitleViewDelegate?
+  
+  var indicatorBarLeadingConstraint: NSLayoutConstraint!
+  
   private var menuTitles = ["모든영화", "큐레이션"]
   
   private let menuTitleView: UIView = {
@@ -22,6 +27,7 @@ class MenuTitleView: UIView {
   
   private let menuTitleDismissButton: UIButton = {
     let button = UIButton(type: .custom)
+    button.addTarget(self, action: #selector(dismissButtonDidTpaaed), for: .touchUpInside)
 //    button.setTitle("닫기", for: .normal)
 //    button.setTitleColor(#colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1), for: .normal)
     button.setImage(#imageLiteral(resourceName: "cancel_icon"), for: .normal)
@@ -90,10 +96,6 @@ class MenuTitleView: UIView {
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
   }()
-  
-  var indicatorBarLeadingConstraint: NSLayoutConstraint!
-  
-  var delegate: MenuTitleViewDelegate?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -181,7 +183,7 @@ class MenuTitleView: UIView {
 }
 
 
-extension MenuTitleView: UICollectionViewDataSource{
+extension MovieCategoryReservationView: UICollectionViewDataSource{
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return menuTitles.count
   }
@@ -194,7 +196,7 @@ extension MenuTitleView: UICollectionViewDataSource{
   
 }
 
-extension MenuTitleView: UICollectionViewDelegate {
+extension MovieCategoryReservationView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     delegate?.meunBarDidSelected(indexPath)
     
@@ -203,7 +205,7 @@ extension MenuTitleView: UICollectionViewDelegate {
   }
 }
 
-extension MenuTitleView: UICollectionViewDelegateFlowLayout{
+extension MovieCategoryReservationView: UICollectionViewDelegateFlowLayout{
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: self.frame.width / CGFloat(menuTitles.count), height: 40)
   }
@@ -217,7 +219,7 @@ extension MenuTitleView: UICollectionViewDelegateFlowLayout{
   }
 }
 
-extension MenuTitleView: UITableViewDataSource {
+extension MovieCategoryReservationView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 20 //영화 목록
   }
@@ -226,6 +228,11 @@ extension MenuTitleView: UITableViewDataSource {
     let cell = movieListTableView.dequeueReusableCell(withIdentifier: MovieListCell.identifier, for: indexPath) as! MovieListCell
     
     return cell
+  }
+  
+  // DELEGATE로 옮길 것
+  @objc func dismissButtonDidTpaaed() {
+    reservationDelegate?.dismissButtonDidTapped()
   }
   
 }
