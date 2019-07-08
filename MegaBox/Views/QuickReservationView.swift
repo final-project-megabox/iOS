@@ -52,6 +52,7 @@ class QuickReservationView: UIView {
   private let farightButton: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(named: "fa_right"), for: .normal)
+    button.addTarget(self, action: #selector(didTapfarightButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -78,6 +79,8 @@ class QuickReservationView: UIView {
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
+  
+  var delegate: QuickReservationViewDelegate?
   
   //#392074
   
@@ -141,6 +144,10 @@ class QuickReservationView: UIView {
       bottomImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 130),
       bottomImageView.heightAnchor.constraint(equalToConstant: 130),
       ])
+  }
+  
+  @objc private func didTapfarightButton(_ sender: UIButton) {
+     delegate?.farightButtonDidSelected()
   }
   
   required init?(coder aDecoder: NSCoder) {

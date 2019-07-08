@@ -20,6 +20,7 @@ class QuickReservationViewController: UIViewController {
     super.viewDidLoad()
     self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
     setupQuickReservationView()
+    quickReservationView.delegate = self
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -56,4 +57,15 @@ class QuickReservationViewController: UIViewController {
       quickReservationView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
       ])
   } 
+}
+
+extension QuickReservationViewController: QuickReservationViewDelegate {
+  func farightButtonDidSelected() {
+    let movieCategoryVC = MovieCategoryReservationViewController()
+    self.present(movieCategoryVC, animated: false)
+    
+    //quickReservationView -> hidden
+    
+  }
+  
 }
