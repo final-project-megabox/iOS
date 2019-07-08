@@ -9,12 +9,24 @@
 import UIKit
 
 class MovieCategoryReservationViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
+  
+  let menuView = MenuTitleView()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-
-
+    setupMenuView()
+  }
+  
+  private func setupMenuView() {
+    view.addSubview(menuView)
+    menuView.translatesAutoresizingMaskIntoConstraints = false
+    let guide = view.safeAreaLayoutGuide
+    NSLayoutConstraint.activate([
+      menuView.topAnchor.constraint(equalTo: guide.topAnchor),
+      menuView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+      menuView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+      menuView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+      ])
+  }
 }

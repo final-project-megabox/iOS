@@ -21,6 +21,9 @@
 		CFA93DDD22CE53210025F96C /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DDC22CE53210025F96C /* Label.swift */; };
 		CFEA77D122D0D98700E1136D /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEA77D022D0D98700E1136D /* AdView.swift */; };
 		E603EC2B22D09BBA0011E985 /* MovieCategoryReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E603EC2A22D09BBA0011E985 /* MovieCategoryReservationViewController.swift */; };
+		E61845AF22D2ED06004B1346 /* MenuTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61845AE22D2ED06004B1346 /* MenuTitleView.swift */; };
+		E61845B122D2ED45004B1346 /* MenuTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61845B022D2ED45004B1346 /* MenuTitleCell.swift */; };
+		E61845B422D2ED9F004B1346 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61845B322D2ED9F004B1346 /* Protocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		CFA93DDC22CE53210025F96C /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		CFEA77D022D0D98700E1136D /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		E603EC2A22D09BBA0011E985 /* MovieCategoryReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategoryReservationViewController.swift; sourceTree = "<group>"; };
+		E61845AE22D2ED06004B1346 /* MenuTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitleView.swift; sourceTree = "<group>"; };
+		E61845B022D2ED45004B1346 /* MenuTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitleCell.swift; sourceTree = "<group>"; };
+		E61845B322D2ED9F004B1346 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				CF8C20BD22CF456E00879224 /* MovieReservationCell.swift */,
+				E61845B022D2ED45004B1346 /* MenuTitleCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -80,6 +87,7 @@
 		CFA93DC022CDF8840025F96C /* MegaBox */ = {
 			isa = PBXGroup;
 			children = (
+				E61845B222D2ED93004B1346 /* Util */,
 				CFA93DC122CDF8840025F96C /* AppDelegate.swift */,
 				CFA93DCA22CDF8840025F96C /* LaunchScreen.storyboard */,
 				CFA93DD922CE52A70025F96C /* Extensions */,
@@ -95,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				CFA93DD522CDF8F70025F96C /* MainView.swift */,
+				E61845AE22D2ED06004B1346 /* MenuTitleView.swift */,
 				CF8C20B622CF1F5A00879224 /* MovieReservationView.swift */,
 				CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */,
 				CF8C20BF22D0950200879224 /* ShortMenuView.swift */,
@@ -121,6 +130,14 @@
 				CFA93DDC22CE53210025F96C /* Label.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E61845B222D2ED93004B1346 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				E61845B322D2ED9F004B1346 /* Protocol.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,10 +211,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF8C20B722CF1F5A00879224 /* MovieReservationView.swift in Sources */,
+				E61845B122D2ED45004B1346 /* MenuTitleCell.swift in Sources */,
 				CF8C20B922CF22C900879224 /* QuickReservationViewController.swift in Sources */,
+				E61845B422D2ED9F004B1346 /* Protocol.swift in Sources */,
 				CFA93DC422CDF8840025F96C /* MainViewController.swift in Sources */,
 				CFEA77D122D0D98700E1136D /* AdView.swift in Sources */,
 				CFA93DDD22CE53210025F96C /* Label.swift in Sources */,
+				E61845AF22D2ED06004B1346 /* MenuTitleView.swift in Sources */,
 				CF8C20C022D0950200879224 /* ShortMenuView.swift in Sources */,
 				CFA93DD622CDF8F70025F96C /* MainView.swift in Sources */,
 				CFA93DDB22CE531A0025F96C /* TextField.swift in Sources */,
@@ -343,6 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4MM77V7NH;
 				INFOPLIST_FILE = MegaBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -360,6 +381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4MM77V7NH;
 				INFOPLIST_FILE = MegaBox/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
