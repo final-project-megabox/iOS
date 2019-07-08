@@ -64,7 +64,6 @@ class MainView: UIView {
   private let topMediaPlayView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "image1")
-    
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -123,8 +122,9 @@ class MainView: UIView {
   }()
   
   // 광고
-  private let temp2: UIView = {
-    let view = UIView()
+  private let firstAdView: AdView = {
+    let view = AdView()
+    view.adImage.image = UIImage(named: "first_ad")
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
@@ -147,8 +147,9 @@ class MainView: UIView {
   }()
   
   // 광고
-  private let temp3: UIView = {
-    let view = UIView()
+  private let secondAdView: AdView = {
+    let view = AdView()
+    view.adImage.image = UIImage(named: "second_ad")
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
@@ -220,10 +221,10 @@ class MainView: UIView {
     // 진행중
     mainScrollView.addSubview(movieReservationView)
     mainScrollView.addSubview(shortMenuView)
-    mainScrollView.addSubview(temp2)
+    mainScrollView.addSubview(firstAdView)
     mainScrollView.addSubview(eventView)
     mainScrollView.addSubview(movieBoxView)
-    mainScrollView.addSubview(temp3)
+    mainScrollView.addSubview(secondAdView)
     mainScrollView.addSubview(moviePostView)
     mainScrollView.addSubview(notiView)
     mainScrollView.addSubview(notificationView)
@@ -282,7 +283,6 @@ class MainView: UIView {
       mainBGView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       mainBGView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor),
       
-      
       movieReservationView.topAnchor.constraint(equalTo: mainBGView.topAnchor, constant: margin),
       movieReservationView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor, constant: margin),
       movieReservationView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor, constant: -margin),
@@ -293,12 +293,12 @@ class MainView: UIView {
       shortMenuView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
       shortMenuView.heightAnchor.constraint(equalToConstant: 100),
       
-      temp2.topAnchor.constraint(equalTo: shortMenuView.bottomAnchor, constant: margin),
-      temp2.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
-      temp2.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
-      temp2.heightAnchor.constraint(equalToConstant: 100),
+      firstAdView.topAnchor.constraint(equalTo: shortMenuView.bottomAnchor, constant: margin),
+      firstAdView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
+      firstAdView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
+      firstAdView.heightAnchor.constraint(equalToConstant: 100),
       
-      eventView.topAnchor.constraint(equalTo: temp2.bottomAnchor, constant: margin),
+      eventView.topAnchor.constraint(equalTo: firstAdView.bottomAnchor, constant: margin),
       eventView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor, constant: margin),
       eventView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor, constant: -margin),
       eventView.heightAnchor.constraint(equalToConstant: 400),
@@ -308,12 +308,12 @@ class MainView: UIView {
       movieBoxView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor, constant: -margin),
       movieBoxView.heightAnchor.constraint(equalToConstant: 400),
       
-      temp3.topAnchor.constraint(equalTo: movieBoxView.bottomAnchor, constant: margin),
-      temp3.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
-      temp3.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
-      temp3.heightAnchor.constraint(equalToConstant: 100),
+      secondAdView.topAnchor.constraint(equalTo: movieBoxView.bottomAnchor, constant: margin),
+      secondAdView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
+      secondAdView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
+      secondAdView.heightAnchor.constraint(equalToConstant: 100),
       
-      moviePostView.topAnchor.constraint(equalTo: temp3.bottomAnchor, constant: margin),
+      moviePostView.topAnchor.constraint(equalTo: secondAdView.bottomAnchor, constant: margin),
       moviePostView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor, constant: margin),
       moviePostView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor, constant: -margin),
       moviePostView.heightAnchor.constraint(equalToConstant: 400),
