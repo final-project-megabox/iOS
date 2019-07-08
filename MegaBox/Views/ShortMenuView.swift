@@ -12,7 +12,7 @@ class ShortMenuView: UIView {
   
   private let theaterImageButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "theater_icon"), for: .normal)
+//    button.setImage(UIImage(named: "theater_icon"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -92,6 +92,8 @@ class ShortMenuView: UIView {
     self.addSubview(storeTextLabel)
     self.addSubview(photoCardImageButton)
     self.addSubview(photoCardTextLabel)
+    
+    theaterImageButton.backgroundColor = .red
   }
   
   private func autoLayout() {
@@ -101,8 +103,8 @@ class ShortMenuView: UIView {
       theaterImageButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
       theaterImageButton.widthAnchor.constraint(equalToConstant: frame.width / 4),
       
-//      theaterTextLabel.topAnchor.constraint(equalTo: theaterImageButton.bottomAnchor),
-//      theaterTextLabel.centerXAnchor.constraint(equalTo: theaterImageButton.centerXAnchor),
+      theaterTextLabel.topAnchor.constraint(equalTo: theaterImageButton.bottomAnchor),
+      theaterTextLabel.centerXAnchor.constraint(equalTo: theaterImageButton.centerXAnchor),
       
       discountCardImageButton.topAnchor.constraint(equalTo: self.topAnchor),
       discountCardImageButton.leadingAnchor.constraint(equalTo: theaterImageButton.trailingAnchor),
