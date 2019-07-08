@@ -58,7 +58,7 @@ class MovieListCell: UITableViewCell {
     gradeImageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
     gradeImageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
     gradeImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-    
+
     movieTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
     movieTitleLabel.leadingAnchor.constraint(equalTo: gradeImageView.trailingAnchor, constant: 10).isActive = true
     movieTitleLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.7).isActive = true
