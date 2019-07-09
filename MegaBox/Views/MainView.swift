@@ -29,14 +29,14 @@ class MainView: UIView {
   
   private let hamburgerMenu: UIButton = {
     let button = UIButton()
-    button.setImage(#imageLiteral(resourceName: "hamburger_icon"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "main_top_menu_white_btn"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
   
   private let titleImage: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = #imageLiteral(resourceName: "megabox_logo")
+    imageView.image = #imageLiteral(resourceName: "main_top_logo_white")
     imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
@@ -46,10 +46,10 @@ class MainView: UIView {
     let button = UIButton()
     button.setTitle("빠른예매", for: .normal)
     button.addTarget(self, action: #selector(quickReservationButtonDidTapped), for: .touchUpInside)
-    button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 10, weight: .heavy)
+    button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 7, bottom: 5, right: 7)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .light)
     button.layer.borderColor = UIColor.white.cgColor
-    button.layer.borderWidth = 2
+    button.layer.borderWidth = 1
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -63,18 +63,25 @@ class MainView: UIView {
   
   private let topMediaImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "image1")
+    imageView.image = #imageLiteral(resourceName: "image1")
     imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
   
-  private let topMediaVisualBottomView: UIView = {
-    let view = UIView()
-    view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    view.alpha = 0.2
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
+  private let topMediaVisualBottomView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "main_moviebox_gradation")
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  private let topMediaPlayButton: UIButton = {
+    let button = UIButton()
+    button.setImage(#imageLiteral(resourceName: "main_moviebox_play_btn"), for: .normal)
+    button.alpha = 0.8
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
   }()
   
   private let topMediaTitleText: UITextField = {
@@ -98,10 +105,10 @@ class MainView: UIView {
   private let viewDetailButton: UIButton = {
     let button = UIButton()
     button.setTitle("상세보기", for: .normal)
-    button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 10, weight: .heavy)
+    button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 7, bottom: 5, right: 7)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .light)
     button.layer.borderColor = UIColor.white.cgColor
-    button.layer.borderWidth = 2
+    button.layer.borderWidth = 1
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -109,7 +116,7 @@ class MainView: UIView {
   // MARK: middle View
   private let mainBGView: UIView = {
     let view = UIView()
-    view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    view.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8352941176, blue: 0.862745098, alpha: 1)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -133,23 +140,23 @@ class MainView: UIView {
   // 광고
   private let firstAdView: AdView = {
     let view = AdView()
-    view.adImage.image = UIImage(named: "first_ad")
+    view.adImage.image = #imageLiteral(resourceName: "first_ad")
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
   
   // 이벤트
-  private let eventView: UIView = {
-    let view = UIView()
+  private let eventView: MovieReservationView = {
+    let view = MovieReservationView()
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
   
   // 무비박스
-  private let movieBoxView: UIView = {
-    let view = UIView()
+  private let movieBoxView: MovieBoxView = {
+    let view = MovieBoxView()
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
@@ -158,7 +165,7 @@ class MainView: UIView {
   // 광고
   private let secondAdView: AdView = {
     let view = AdView()
-    view.adImage.image = UIImage(named: "second_ad")
+    view.adImage.image = #imageLiteral(resourceName: "second_ad")
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
@@ -227,6 +234,7 @@ class MainView: UIView {
     self.addSubview(mainScrollView)
     mainScrollView.addSubview(topMediaImageView)
     topMediaImageView.addSubview(topMediaVisualBottomView)
+    topMediaImageView.addSubview(topMediaPlayButton)
     topMediaImageView.addSubview(topMediaTitleText)
     topMediaImageView.addSubview(topMediaSubTitleText)
     topMediaImageView.addSubview(viewDetailButton)
@@ -264,13 +272,15 @@ class MainView: UIView {
       
       hamburgerMenu.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
       hamburgerMenu.centerYAnchor.constraint(equalTo: topMediaVisualTopView.centerYAnchor),
+      hamburgerMenu.heightAnchor.constraint(equalToConstant: 20),
+      hamburgerMenu.widthAnchor.constraint(equalToConstant: 20),
       
       titleImage.leadingAnchor.constraint(equalTo: hamburgerMenu.trailingAnchor, constant: margin * 2),
       titleImage.centerYAnchor.constraint(equalTo: topMediaVisualTopView.centerYAnchor),
       titleImage.heightAnchor.constraint(equalToConstant: 20),
       titleImage.widthAnchor.constraint(equalToConstant: 120),
       
-      quickReservationButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 12.5),
+      quickReservationButton.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
       quickReservationButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin),
       quickReservationButton.centerYAnchor.constraint(equalTo: topMediaVisualTopView.centerYAnchor),
       quickReservationButton.heightAnchor.constraint(equalToConstant: 25),
@@ -285,14 +295,17 @@ class MainView: UIView {
       topMediaImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       topMediaImageView.heightAnchor.constraint(equalToConstant: titleImageHeight),
       
+      topMediaPlayButton.centerXAnchor.constraint(equalTo: topMediaImageView.centerXAnchor),
+      topMediaPlayButton.centerYAnchor.constraint(equalTo: topMediaImageView.centerYAnchor),
+      
       topMediaVisualBottomView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
       topMediaVisualBottomView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
       topMediaVisualBottomView.bottomAnchor.constraint(equalTo: topMediaImageView.bottomAnchor),
+      topMediaVisualBottomView.heightAnchor.constraint(equalToConstant: 85),
       
-      topMediaTitleText.topAnchor.constraint(equalTo: topMediaVisualBottomView.topAnchor, constant: margin),
       topMediaTitleText.leadingAnchor.constraint(equalTo: topMediaImageView.leadingAnchor, constant: margin * 3),
+      topMediaTitleText.bottomAnchor.constraint(equalTo: topMediaSubTitleText.topAnchor),
       
-      topMediaSubTitleText.topAnchor.constraint(equalTo: topMediaTitleText.bottomAnchor, constant: margin / 2),
       topMediaSubTitleText.leadingAnchor.constraint(equalTo: topMediaImageView.leadingAnchor, constant: margin * 3),
       topMediaSubTitleText.bottomAnchor.constraint(equalTo: topMediaImageView.bottomAnchor, constant: -margin * 2),
       
@@ -313,12 +326,12 @@ class MainView: UIView {
       shortMenuView.topAnchor.constraint(equalTo: movieReservationView.bottomAnchor, constant: margin),
       shortMenuView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
       shortMenuView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
-      shortMenuView.heightAnchor.constraint(equalToConstant: 130),
+      shortMenuView.heightAnchor.constraint(equalToConstant: 90),
       
       firstAdView.topAnchor.constraint(equalTo: shortMenuView.bottomAnchor, constant: margin),
       firstAdView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),
       firstAdView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor),
-      firstAdView.heightAnchor.constraint(equalToConstant: 100),
+      firstAdView.heightAnchor.constraint(equalToConstant: 90),
       
       eventView.topAnchor.constraint(equalTo: firstAdView.bottomAnchor, constant: margin),
       eventView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor, constant: margin),
@@ -328,7 +341,6 @@ class MainView: UIView {
       movieBoxView.topAnchor.constraint(equalTo: eventView.bottomAnchor, constant: margin),
       movieBoxView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor, constant: margin),
       movieBoxView.trailingAnchor.constraint(equalTo: mainBGView.trailingAnchor, constant: -margin),
-      movieBoxView.heightAnchor.constraint(equalToConstant: 400),
       
       secondAdView.topAnchor.constraint(equalTo: movieBoxView.bottomAnchor, constant: margin),
       secondAdView.leadingAnchor.constraint(equalTo: mainBGView.leadingAnchor),

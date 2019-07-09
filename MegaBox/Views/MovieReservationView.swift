@@ -15,13 +15,15 @@ class MovieReservationView: UIView {
   private let titleLabel: UILabel = {
     let label = UILabel()
     label.labelConfigure("영화예매")
+    label.labelSetup(text: "영화에매", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 16, alignment: .left)
+    label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let plusButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "plus_icon"), for: .normal)
+    button.setImage(UIImage(named: "main_more_btn"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -42,15 +44,15 @@ class MovieReservationView: UIView {
     let button = UIButton(type: .system)
     button.setTitle("박스오피스", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .bold)
     return button
   }()
   
   private let showingScheduleLabel: UIButton = {
     let button = UIButton(type: .system)
-    button.setTitle("개봉예정", for: .normal)
+    button.setTitle("상영예정", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
     return button
   }()
   
@@ -58,7 +60,15 @@ class MovieReservationView: UIView {
     let button = UIButton(type: .system)
     button.setTitle("큐레이션", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+    return button
+  }()
+  
+  private let stageGreetingLabel: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("무대인사", for: .normal)
+    button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
     return button
   }()
   
@@ -71,6 +81,7 @@ class MovieReservationView: UIView {
   
   private let movieReservationCollection: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     return collectionView
@@ -83,6 +94,9 @@ class MovieReservationView: UIView {
   }
   
   private func setupProperties() {
+    movieReservationCollection.dataSource = self
+    movieReservationCollection.delegate = self
+    movieReservationCollection.register(MovieReservationCell.self, forCellWithReuseIdentifier: MovieReservationCell.identifier)
     setupStackView()
     addSubViews()
   }
@@ -93,7 +107,7 @@ class MovieReservationView: UIView {
   }
   
   private func setupStackView() {
-    movieReservationStack = UIStackView(arrangedSubviews: [boxOfficeLabel, showingScheduleLabel, curationLabel])
+    movieReservationStack = UIStackView(arrangedSubviews: [boxOfficeLabel, showingScheduleLabel, curationLabel, stageGreetingLabel])
     
     movieReservationStack.translatesAutoresizingMaskIntoConstraints = false
     
@@ -121,25 +135,59 @@ class MovieReservationView: UIView {
       
       plusButton.topAnchor.constraint(equalTo: self.topAnchor, constant: margin * 2),
       plusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 2),
+      plusButton.widthAnchor.constraint(equalToConstant: 15),
+      plusButton.heightAnchor.constraint(equalToConstant: 15),
       
-      divisionLine.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin),
+      divisionLine.topAnchor.constraint(equalTo: plusButton.bottomAnchor, constant: margin),
       divisionLine.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 2),
       divisionLine.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 2),
       divisionLine.heightAnchor.constraint(equalToConstant: 0.5),
       
-      movieReservationStack.topAnchor.constraint(equalTo: divisionLine.bottomAnchor, constant: margin),
+      movieReservationStack.topAnchor.constraint(equalTo: divisionLine.bottomAnchor),
       movieReservationStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 2),
       
-      indicatorBar.topAnchor.constraint(equalTo: movieReservationStack.bottomAnchor),
+      indicatorBar.topAnchor.constraint(equalTo: movieReservationStack.bottomAnchor, constant: -3),
       indicatorBar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 2),
       indicatorBar.heightAnchor.constraint(equalToConstant: 2),
+      
+      movieReservationCollection.topAnchor.constraint(equalTo: indicatorBar.bottomAnchor, constant: margin),
+      movieReservationCollection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 2),
+      movieReservationCollection.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+      movieReservationCollection.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin * 2),
       ])
     
-    indicatorBarWidthConstraint = indicatorBar.widthAnchor.constraint(equalToConstant: 61)
+    indicatorBarWidthConstraint = indicatorBar.widthAnchor.constraint(equalToConstant: 58)
     indicatorBarWidthConstraint.isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+}
+
+extension MovieReservationView: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 3
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieReservationCell.identifier, for: indexPath) as! MovieReservationCell
+    
+    return cell
+  }
+}
+
+extension MovieReservationView: UICollectionViewDelegateFlowLayout{
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: self.frame.width, height: self.frame.height)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
   }
 }

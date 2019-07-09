@@ -19,6 +19,8 @@
 		CFA93DD622CDF8F70025F96C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DD522CDF8F70025F96C /* MainView.swift */; };
 		CFA93DDB22CE531A0025F96C /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DDA22CE531A0025F96C /* TextField.swift */; };
 		CFA93DDD22CE53210025F96C /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DDC22CE53210025F96C /* Label.swift */; };
+		CFD3BB7A22D4328B0099B582 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3BB7922D4328B0099B582 /* EventView.swift */; };
+		CFD3BB7C22D4337E0099B582 /* MovieBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3BB7B22D4337E0099B582 /* MovieBoxView.swift */; };
 		CFEA77D122D0D98700E1136D /* AdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEA77D022D0D98700E1136D /* AdView.swift */; };
 		E603EC2B22D09BBA0011E985 /* MovieCategoryReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E603EC2A22D09BBA0011E985 /* MovieCategoryReservationViewController.swift */; };
 		E61845AF22D2ED06004B1346 /* MovieCategoryReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61845AE22D2ED06004B1346 /* MovieCategoryReservationView.swift */; };
@@ -42,6 +44,8 @@
 		CFA93DD522CDF8F70025F96C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CFA93DDA22CE531A0025F96C /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		CFA93DDC22CE53210025F96C /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		CFD3BB7922D4328B0099B582 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		CFD3BB7B22D4337E0099B582 /* MovieBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBoxView.swift; sourceTree = "<group>"; };
 		CFEA77D022D0D98700E1136D /* AdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdView.swift; sourceTree = "<group>"; };
 		E603EC2A22D09BBA0011E985 /* MovieCategoryReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategoryReservationViewController.swift; sourceTree = "<group>"; };
 		E61845AE22D2ED06004B1346 /* MovieCategoryReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategoryReservationView.swift; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 				CFA93DD522CDF8F70025F96C /* MainView.swift */,
 				CF8C20B622CF1F5A00879224 /* MovieReservationView.swift */,
 				CFEA77D022D0D98700E1136D /* AdView.swift */,
+				CFD3BB7922D4328B0099B582 /* EventView.swift */,
+				CFD3BB7B22D4337E0099B582 /* MovieBoxView.swift */,
 				CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */,
 				E61845AE22D2ED06004B1346 /* MovieCategoryReservationView.swift */,
 				CF8C20BF22D0950200879224 /* ShortMenuView.swift */,
@@ -216,9 +222,11 @@
 				CF8C20B722CF1F5A00879224 /* MovieReservationView.swift in Sources */,
 				E61845B122D2ED45004B1346 /* MenuTitleCell.swift in Sources */,
 				CF8C20B922CF22C900879224 /* QuickReservationViewController.swift in Sources */,
+				CFD3BB7A22D4328B0099B582 /* EventView.swift in Sources */,
 				E61845B422D2ED9F004B1346 /* Protocol.swift in Sources */,
 				CFA93DC422CDF8840025F96C /* MainViewController.swift in Sources */,
 				CFEA77D122D0D98700E1136D /* AdView.swift in Sources */,
+				CFD3BB7C22D4337E0099B582 /* MovieBoxView.swift in Sources */,
 				CFA93DDD22CE53210025F96C /* Label.swift in Sources */,
 				E61845AF22D2ED06004B1346 /* MovieCategoryReservationView.swift in Sources */,
 				CF8C20C022D0950200879224 /* ShortMenuView.swift in Sources */,
