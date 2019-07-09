@@ -9,8 +9,12 @@
 import UIKit
 
 class MovieReservationCell: UICollectionViewCell {
+  static let identifier = "MovieReservationCell"
+  
   private let thumbnailImage: UIImageView = {
     let imageView = UIImageView()
+    imageView.image = UIImage(named: "spiderman_thumbnail")
+    imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -31,12 +35,14 @@ class MovieReservationCell: UICollectionViewCell {
   
   private let titleNameLabel: UILabel = {
     let label = UILabel()
+    label.text = "스파이더맨: 파 프롬 홈"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let subLabel: UILabel = {
     let label = UILabel()
+    label.text = "예매율 47.6 %"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()

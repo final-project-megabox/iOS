@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "main_top_menu_white_btn.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "hamburgerIcon.png",
       "scale" : "2x"
     },
     {

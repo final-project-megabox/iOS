@@ -10,65 +10,70 @@ import UIKit
 
 class ShortMenuView: UIView {
   
+  private var imageStackView: UIStackView = {
+    let stackView = UIStackView()
+    return stackView
+  }()
+  
+  private var textStackView: UIStackView = {
+    let stackView = UIStackView()
+    return stackView
+  }()
+  
   private let theaterImageButton: UIButton = {
     let button = UIButton()
-//    button.setImage(UIImage(named: "theater_icon"), for: .normal)
-    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(UIImage(named: "main_middle_theater_icon"), for: .normal)
+    button.imageView?.contentMode = .scaleAspectFit
     return button
   }()
   
   private let theaterTextLabel: UILabel = {
     let label = UILabel()
-    label.text = "영화관"
-    label.translatesAutoresizingMaskIntoConstraints = false
+    label.labelSetup(text: "영화관", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 10, alignment: .center)
     return label
   }()
   
   private let discountCardImageButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "theater_icon"), for: .normal)
-    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(UIImage(named: "main_middle_card_icon"), for: .normal)
+    button.imageView?.contentMode = .scaleAspectFit
     return button
   }()
   
   private let discountCardTextLabel: UILabel = {
     let label = UILabel()
-    label.text = "할인카드"
-    label.translatesAutoresizingMaskIntoConstraints = false
+    label.labelSetup(text: "할인카드", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 10, alignment: .center)
     return label
   }()
   
   private let storeImageButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "theater_icon"), for: .normal)
-    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(UIImage(named: "main_middle_store_icon"), for: .normal)
+    button.imageView?.contentMode = .scaleAspectFit
     return button
   }()
   
   private let storeTextLabel: UILabel = {
     let label = UILabel()
-    label.text = "스토어"
-    label.translatesAutoresizingMaskIntoConstraints = false
+    label.labelSetup(text: "스토어", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 10, alignment: .center)
     return label
   }()
   
   private let photoCardImageButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "theater_icon"), for: .normal)
-    button.translatesAutoresizingMaskIntoConstraints = false
+    button.setImage(UIImage(named: "main_middle_photocard_icon"), for: .normal)
+    button.imageView?.contentMode = .scaleAspectFit
     return button
   }()
   
   private let photoCardTextLabel: UILabel = {
     let label = UILabel()
-    label.text = "포토카드"
-    label.translatesAutoresizingMaskIntoConstraints = false
+    label.labelSetup(text: "포토카드", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 10, alignment: .center)
     return label
   }()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
     
   }
   
@@ -79,57 +84,49 @@ class ShortMenuView: UIView {
   }
   
   private func setupStackView() {
+    imageStackView = UIStackView(arrangedSubviews: [theaterImageButton, discountCardImageButton, storeImageButton, photoCardImageButton])
+    imageStackView.translatesAutoresizingMaskIntoConstraints = false
+    imageStackView.axis = .horizontal
+    imageStackView.alignment = .center
+    imageStackView.distribution = .fillEqually
+    imageStackView.spacing = 13
+    
+    textStackView = UIStackView(arrangedSubviews: [theaterTextLabel, discountCardTextLabel, storeTextLabel, photoCardTextLabel])
+    textStackView.translatesAutoresizingMaskIntoConstraints = false
+    textStackView.axis = .horizontal
+    textStackView.alignment = .center
+    textStackView.distribution = .fillEqually
+    textStackView.spacing = 13
+
     addSubViews()
     autoLayout()
   }
   
   private func addSubViews() {
-    self.addSubview(theaterImageButton)
-    self.addSubview(theaterTextLabel)
-    self.addSubview(discountCardImageButton)
-    self.addSubview(discountCardTextLabel)
-    self.addSubview(storeImageButton)
-    self.addSubview(storeTextLabel)
-    self.addSubview(photoCardImageButton)
-    self.addSubview(photoCardTextLabel)
-    
-    theaterImageButton.backgroundColor = .red
+    self.addSubview(imageStackView)
+    self.addSubview(textStackView)
+    imageStackView.addSubview(theaterImageButton)
+    textStackView.addSubview(theaterTextLabel)
+    imageStackView.addSubview(discountCardImageButton)
+    textStackView.addSubview(discountCardTextLabel)
+    imageStackView.addSubview(storeImageButton)
+    textStackView.addSubview(storeTextLabel)
+    imageStackView.addSubview(photoCardImageButton)
+    textStackView.addSubview(photoCardTextLabel)
   }
   
   private func autoLayout() {
+    let margin: CGFloat = 10
     NSLayoutConstraint.activate([
-      theaterImageButton.topAnchor.constraint(equalTo: self.topAnchor),
-      theaterImageButton.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-      theaterImageButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-      theaterImageButton.widthAnchor.constraint(equalToConstant: frame.width / 4),
-      
-      theaterTextLabel.topAnchor.constraint(equalTo: theaterImageButton.bottomAnchor),
-      theaterTextLabel.centerXAnchor.constraint(equalTo: theaterImageButton.centerXAnchor),
-      
-      discountCardImageButton.topAnchor.constraint(equalTo: self.topAnchor),
-      discountCardImageButton.leadingAnchor.constraint(equalTo: theaterImageButton.trailingAnchor),
-      discountCardImageButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-      discountCardImageButton.widthAnchor.constraint(equalToConstant: frame.width / 4),
-      
-//      discountCardTextLabel.topAnchor.constraint(equalTo: discountCardImageButton.bottomAnchor),
-//      discountCardTextLabel.centerXAnchor.constraint(equalTo: discountCardImageButton.centerXAnchor),
-      
-      storeImageButton.topAnchor.constraint(equalTo: self.topAnchor),
-      storeImageButton.leadingAnchor.constraint(equalTo: discountCardImageButton.trailingAnchor),
-      storeImageButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-      storeImageButton.widthAnchor.constraint(equalToConstant: frame.width / 4),
+      imageStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
+      imageStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 5),
+      imageStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 5),
 
-//      theaterTextLabel.topAnchor.constraint(equalTo: storeImageButton.bottomAnchor),
-//      theaterTextLabel.centerXAnchor.constraint(equalTo: storeImageButton.centerXAnchor),
-
-      photoCardImageButton.topAnchor.constraint(equalTo: self.topAnchor),
-      photoCardImageButton.leadingAnchor.constraint(equalTo: storeImageButton.trailingAnchor),
-      photoCardTextLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      photoCardImageButton.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-      photoCardImageButton.widthAnchor.constraint(equalToConstant: frame.width / 4),
-
-//      photoCardTextLabel.topAnchor.constraint(equalTo: photoCardImageButton.bottomAnchor),
-//      photoCardTextLabel.centerXAnchor.constraint(equalTo: photoCardImageButton.centerXAnchor),
+      textStackView.topAnchor.constraint(equalTo: imageStackView.bottomAnchor),
+      textStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 5),
+      textStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 5),
+      textStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin * 2),
+      textStackView.heightAnchor.constraint(equalTo: imageStackView.heightAnchor, multiplier: 0.3),
       ])
   }
   

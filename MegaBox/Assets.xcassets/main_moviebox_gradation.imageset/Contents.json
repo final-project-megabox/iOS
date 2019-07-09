@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "main_moviebox_gradation.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "theater_icon.png",
       "scale" : "2x"
     },
     {
