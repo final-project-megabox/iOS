@@ -107,10 +107,10 @@
 			children = (
 				CFA93DD522CDF8F70025F96C /* MainView.swift */,
 				CF8C20B622CF1F5A00879224 /* MovieReservationView.swift */,
-				CF8C20BF22D0950200879224 /* ShortMenuView.swift */,
 				CFEA77D022D0D98700E1136D /* AdView.swift */,
 				CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */,
 				E61845AE22D2ED06004B1346 /* MovieCategoryReservationView.swift */,
+				CF8C20BF22D0950200879224 /* ShortMenuView.swift */,
 				CF8C20BC22CF455600879224 /* Cells */,
 			);
 			path = Views;

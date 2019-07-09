@@ -41,18 +41,30 @@ class MovieListCell: UITableViewCell {
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
-
+  
+  let selectCheckImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "ticket_img_check")
+    imageView.isHidden = true
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     setupTableViewCell()
   }
   
+ 
+  
   private func setupTableViewCell() {
     contentView.addSubview(gradeImageView)
     contentView.addSubview(movieTitleLabel)
     contentView.addSubview(movieSubTitleLabel)
     contentView.addSubview(movieDurationLabel)
+    contentView.addSubview(selectCheckImageView)
 
     gradeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
     gradeImageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
@@ -75,6 +87,11 @@ class MovieListCell: UITableViewCell {
     movieDurationLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1).isActive = true
     movieDurationLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3).isActive = true
     movieDurationLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    
+    selectCheckImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+    selectCheckImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    selectCheckImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    selectCheckImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     
     
     

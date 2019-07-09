@@ -28,9 +28,7 @@ class MovieCategoryReservationView: UIView {
   private let menuTitleDismissButton: UIButton = {
     let button = UIButton(type: .custom)
     button.addTarget(self, action: #selector(dismissButtonDidTpaaed), for: .touchUpInside)
-//    button.setTitle("닫기", for: .normal)
-//    button.setTitleColor(#colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1), for: .normal)
-    button.setImage(#imageLiteral(resourceName: "cancel_icon"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "purpleCancel_icon"), for: .normal)
     button.tintColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
@@ -132,9 +130,9 @@ class MovieCategoryReservationView: UIView {
     movieTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     movieTitleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
     
-    menuTitleDismissButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
     menuTitleDismissButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin).isActive = true
     menuTitleDismissButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    menuTitleDismissButton.centerYAnchor.constraint(equalTo: menuTitleLabel.centerYAnchor).isActive = true
     
     menuTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: margin).isActive = true
     menuTitleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -175,6 +173,7 @@ class MovieCategoryReservationView: UIView {
   private func setupTableView() {
     movieListTableView.dataSource = self
     movieListTableView.delegate = self
+    
     movieListTableView.register(MovieListCell.self, forCellReuseIdentifier: MovieListCell.identifier)
   }
   
@@ -231,7 +230,7 @@ extension MovieCategoryReservationView: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = movieListTableView.dequeueReusableCell(withIdentifier: MovieListCell.identifier, for: indexPath) as! MovieListCell
-    
+    cell.movieTitleLabel.text = "스파이더맨: 파 프롬 홈 - \(indexPath.row)"
     return cell
   }
   
@@ -240,14 +239,25 @@ extension MovieCategoryReservationView: UITableViewDataSource {
 extension MovieCategoryReservationView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard let cell = tableView.cellForRow(at: indexPath) as? MovieListCell else {return}
-    if cell.isSelected {
-      cell.contentView.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.7450980392, blue: 0.7843137255, alpha: 1)
-      cell.movieTitleLabel.textColor = .white
-      cell.movieSubTitleLabel.textColor = .white
-    }else {
-      cell.movieTitleLabel.textColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
-      cell.movieSubTitleLabel.textColor = #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1)
-    }
+    cell.contentView.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.7450980392, blue: 0.7843137255, alpha: 1)
+    cell.movieTitleLabel.textColor = cell.isSelected ? .white : #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+    cell.movieSubTitleLabel.textColor = cell.isSelected ? .white : #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1)
+    cell.movieDurationLabel.text = cell.isSelected ? "" : "000분"
+    cell.selectCheckImageView.isHidden = cell.isSelected ? false : true
     
+    self.movieTitleLabel.text = cell.movieTitleLabel.text
+    self.movieTitleLabel.textColor = cell.isSelected ? #colorLiteral(red: 0.3568627451, green: 0.7450980392, blue: 0.7843137255, alpha: 1) : .white
+    
+    self.menuTitleSelectbutton.setTitleColor(#colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1), for: .normal)
+    self.menuTitleSelectbutton.layer.borderColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+    
+  }
+  
+  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    guard let cell = tableView.cellForRow(at: indexPath) as? MovieListCell else {return}
+    cell.movieTitleLabel.textColor = cell.isSelected ? .white : #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+    cell.movieSubTitleLabel.textColor = cell.isSelected ? .white : #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1)
+    cell.movieDurationLabel.text = cell.isSelected ? "" : "000분"
+    cell.selectCheckImageView.isHidden = cell.isSelected ? false : true
   }
 }
