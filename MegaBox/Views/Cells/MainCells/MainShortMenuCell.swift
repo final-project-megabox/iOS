@@ -1,14 +1,22 @@
 //
-//  ShortMenuView.swift
+//  ShortMenuCell.swift
 //  MegaBox
 //
-//  Created by Fury on 06/07/2019.
+//  Created by Fury on 10/07/2019.
 //  Copyright © 2019 Fury. All rights reserved.
 //
 
 import UIKit
 
-class ShortMenuView: UIView {
+class MainShortMenuCell: UITableViewCell {
+  static let identifier = "ShortMenuCell"
+  
+  private let guideBGView: UIView = {
+    let view = UIView()
+    view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
   
   private var imageStackView: UIStackView = {
     let stackView = UIStackView()
@@ -72,15 +80,16 @@ class ShortMenuView: UIView {
     return label
   }()
   
-  override init(frame: CGRect) {
-    super.init(frame: frame)
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
     
+    setupStackView()
+    self.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    
-    setupStackView()
+    makeAutoLayout()
   }
   
   private func setupStackView() {
@@ -97,37 +106,27 @@ class ShortMenuView: UIView {
     textStackView.alignment = .center
     textStackView.distribution = .fillEqually
     textStackView.spacing = 13
-
-    addSubViews()
-    autoLayout()
   }
   
-  private func addSubViews() {
-    self.addSubview(imageStackView)
-    self.addSubview(textStackView)
-    imageStackView.addSubview(theaterImageButton)
-    textStackView.addSubview(theaterTextLabel)
-    imageStackView.addSubview(discountCardImageButton)
-    textStackView.addSubview(discountCardTextLabel)
-    imageStackView.addSubview(storeImageButton)
-    textStackView.addSubview(storeTextLabel)
-    imageStackView.addSubview(photoCardImageButton)
-    textStackView.addSubview(photoCardTextLabel)
-  }
-  
-  private func autoLayout() {
+  private func makeAutoLayout() {
     let margin: CGFloat = 10
-    NSLayoutConstraint.activate([
-      imageStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
-      imageStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 5),
-      imageStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 5),
-
-      textStackView.topAnchor.constraint(equalTo: imageStackView.bottomAnchor),
-      textStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 5),
-      textStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 5),
-      textStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin * 2),
-      textStackView.heightAnchor.constraint(equalTo: imageStackView.heightAnchor, multiplier: 0.3),
-      ])
+    contentView.addSubview(guideBGView)
+    guideBGView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin).isActive = true
+    guideBGView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    guideBGView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+    guideBGView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
+    
+    guideBGView.addSubview(imageStackView)
+    imageStackView.topAnchor.constraint(equalTo: guideBGView.topAnchor, constant: margin).isActive = true
+    imageStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 5).isActive = true
+    imageStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 5).isActive = true
+    
+    guideBGView.addSubview(textStackView)
+    textStackView.topAnchor.constraint(equalTo: imageStackView.bottomAnchor).isActive = true
+    textStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 5).isActive = true
+    textStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin * 5).isActive = true
+    textStackView.bottomAnchor.constraint(equalTo: guideBGView.bottomAnchor, constant: -margin * 2).isActive = true
+    textStackView.heightAnchor.constraint(equalTo: imageStackView.heightAnchor, multiplier: 0.3).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
