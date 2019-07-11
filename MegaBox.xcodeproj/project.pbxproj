@@ -33,10 +33,6 @@
 		E61845B122D2ED45004B1346 /* MenuTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61845B022D2ED45004B1346 /* MenuTitleCell.swift */; };
 		E61845B422D2ED9F004B1346 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61845B322D2ED9F004B1346 /* Protocol.swift */; };
 		E61845B622D307E6004B1346 /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61845B522D307E6004B1346 /* MovieListCell.swift */; };
-		E62CAF3022D5A40A00268A83 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62CAF2F22D5A40A00268A83 /* ListCell.swift */; };
-		E62CAF3222D5A41B00268A83 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62CAF3122D5A41B00268A83 /* MenuCell.swift */; };
-		E62CAF3622D5A44600268A83 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62CAF3522D5A44600268A83 /* MenuBar.swift */; };
-		E62CAF3822D5A45000268A83 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62CAF3722D5A45000268A83 /* MenuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,10 +64,6 @@
 		E61845B022D2ED45004B1346 /* MenuTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitleCell.swift; sourceTree = "<group>"; };
 		E61845B322D2ED9F004B1346 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		E61845B522D307E6004B1346 /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
-		E62CAF2F22D5A40A00268A83 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
-		E62CAF3122D5A41B00268A83 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
-		E62CAF3522D5A44600268A83 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
-		E62CAF3722D5A45000268A83 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,12 +82,7 @@
 			children = (
 				E61845B022D2ED45004B1346 /* MenuTitleCell.swift */,
 				E61845B522D307E6004B1346 /* MovieListCell.swift */,
-<<<<<<< HEAD
-				E62CAF2F22D5A40A00268A83 /* ListCell.swift */,
-				E62CAF3122D5A41B00268A83 /* MenuCell.swift */,
-=======
 				CFD3BB9622D58CFD0099B582 /* MainCells */,
->>>>>>> 97e8127ca62bba78ad36671109f1b8a508860347
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -134,23 +121,13 @@
 		CFA93DD322CDF88E0025F96C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				CF8C20BC22CF455600879224 /* Cells */,
-=======
 				CFD3BB9222D58A9A0099B582 /* MainTopView.swift */,
->>>>>>> 97e8127ca62bba78ad36671109f1b8a508860347
 				CFA93DD522CDF8F70025F96C /* MainView.swift */,
 				CFD3BB7922D4328B0099B582 /* EventView.swift */,
 				CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */,
 				E61845AE22D2ED06004B1346 /* MovieCategoryReservationView.swift */,
-<<<<<<< HEAD
-				CF8C20BF22D0950200879224 /* ShortMenuView.swift */,
-				E62CAF3522D5A44600268A83 /* MenuBar.swift */,
-				E62CAF3722D5A45000268A83 /* MenuView.swift */,
-=======
 				CFD3BB9022D4E5290099B582 /* NavigationDrawerView.swift */,
 				CF8C20BC22CF455600879224 /* Cells */,
->>>>>>> 97e8127ca62bba78ad36671109f1b8a508860347
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,20 +245,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-<<<<<<< HEAD
-				E62CAF3822D5A45000268A83 /* MenuView.swift in Sources */,
-				CF8C20B722CF1F5A00879224 /* MovieReservationView.swift in Sources */,
-=======
 				CFD3BBA422D5D26E0099B582 /* UIApplication.swift in Sources */,
->>>>>>> 97e8127ca62bba78ad36671109f1b8a508860347
 				E61845B122D2ED45004B1346 /* MenuTitleCell.swift in Sources */,
 				CF8C20B922CF22C900879224 /* QuickReservationViewController.swift in Sources */,
 				CFD3BB9522D58CFA0099B582 /* MainTopMediaPlayCell.swift in Sources */,
 				CFD3BB9C22D5B0A60099B582 /* MainShortMenuCell.swift in Sources */,
 				CFD3BB7A22D4328B0099B582 /* EventView.swift in Sources */,
-				E62CAF3022D5A40A00268A83 /* ListCell.swift in Sources */,
 				E61845B422D2ED9F004B1346 /* Protocol.swift in Sources */,
-				E62CAF3222D5A41B00268A83 /* MenuCell.swift in Sources */,
 				CFA93DC422CDF8840025F96C /* MainViewController.swift in Sources */,
 				CFD3BBA222D5CA960099B582 /* MainMovieBoxCell.swift in Sources */,
 				CFA93DDD22CE53210025F96C /* Label.swift in Sources */,
@@ -298,7 +268,6 @@
 				CFA93DC222CDF8840025F96C /* AppDelegate.swift in Sources */,
 				CFD3BB9E22D5B46D0099B582 /* CALayer.swift in Sources */,
 				CF8C20BB22CF22FA00879224 /* QuickReservationView.swift in Sources */,
-				E62CAF3622D5A44600268A83 /* MenuBar.swift in Sources */,
 				CF8C20BE22CF456E00879224 /* MovieReservationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

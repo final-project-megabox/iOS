@@ -10,32 +10,30 @@ import UIKit
 
 class MovieCategoryReservationViewController: UIViewController {
   
-  // MARK: - Properties
-  
-  var menuView = MenuView()
-  
-  var menuTitles = ["모든영화","큐레이션"]
+  let menuView = MovieCategoryReservationView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    menuView.reservationDelegate = self
+    setupMenuView()
     
-    menuView.menuTitles = menuTitles
-    menuView.menuBar.menuCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
-    
+  }
+  
+  private func setupMenuView() {
     view.addSubview(menuView)
     menuView.translatesAutoresizingMaskIntoConstraints = false
-    menuView.menuBar.indicatorBar.widthAnchor.constraint(equalToConstant: self.view.frame.width / CGFloat(menuTitles.count)).isActive = true
-    
-    menuView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-    menuView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-    menuView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    menuView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    
+    let guide = view.safeAreaLayoutGuide
+    NSLayoutConstraint.activate([
+      menuView.topAnchor.constraint(equalTo: guide.topAnchor),
+      menuView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
+      menuView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
+      menuView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+      ])
   }
 }
 
-//extension MovieCategoryReservationViewController: MovieCategoryReservationViewDelegate {
-//  func dismissButtonDidTapped() {
-//    self.presentingViewController?.presentingViewController?.dismiss(animated: false)
-//  }
-//}
+extension MovieCategoryReservationViewController: MovieCategoryReservationViewDelegate {
+  func dismissButtonDidTapped() {
+    self.presentingViewController?.presentingViewController?.dismiss(animated: false)
+  }
+}

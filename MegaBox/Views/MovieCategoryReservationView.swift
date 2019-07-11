@@ -12,7 +12,7 @@ class MovieCategoryReservationView: UIView {
 
   // MARK: Properties
   var reservationDelegate: MovieCategoryReservationViewDelegate?
-  var delegate: MenuBarDelegate?
+  var delegate: MenuTitleViewDelegate?
   
   var indicatorBarLeadingConstraint: NSLayoutConstraint!
   
