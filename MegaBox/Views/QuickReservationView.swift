@@ -19,7 +19,7 @@ class QuickReservationView: UIView {
   
   private let cancelButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "whiteCancel_icon"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "menu_event_close_btn"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -27,7 +27,9 @@ class QuickReservationView: UIView {
   //fa_left
   private let faleftButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "fa_left"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "booking_icon_theater_normal"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "booking_icon_theater_selected"), for: .selected)
+    button.contentMode = .scaleAspectFit
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -51,7 +53,9 @@ class QuickReservationView: UIView {
   //fa_right
   private let farightButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "fa_right"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "booking_icon_movie_normal"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "booking_icon_movie_selected"), for: .selected)
+    button.contentMode = .scaleAspectFit
     button.addTarget(self, action: #selector(didTapfarightButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
@@ -74,16 +78,14 @@ class QuickReservationView: UIView {
   
   let bottomImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "bottom_ad")
+    imageView.image = #imageLiteral(resourceName: "bottom_ad")
     imageView.contentMode = .scaleToFill
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
   
   var delegate: QuickReservationViewDelegate?
-  
-  //#392074
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupProperties()

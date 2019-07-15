@@ -111,10 +111,10 @@ class MainShortMenuCell: UITableViewCell {
   private func makeAutoLayout() {
     let margin: CGFloat = 10
     contentView.addSubview(guideBGView)
-    guideBGView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin).isActive = true
+    guideBGView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
     guideBGView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     guideBGView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-    guideBGView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
+    guideBGView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     
     guideBGView.addSubview(imageStackView)
     imageStackView.topAnchor.constraint(equalTo: guideBGView.topAnchor, constant: margin).isActive = true

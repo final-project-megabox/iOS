@@ -11,9 +11,9 @@ import UIKit
 class MainAdCell: UITableViewCell {
   static let identifier = "AdCell"
   
-  private let guideBGView: UIView = {
+  let guideBGView: UIView = {
     let view = UIView()
-    view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+//    view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -39,10 +39,10 @@ class MainAdCell: UITableViewCell {
   private func setupAdImageView() {
     let margin: CGFloat = 10
     contentView.addSubview(guideBGView)
-    guideBGView.topAnchor.constraint(equalTo: self.topAnchor, constant: -margin).isActive = true
+    guideBGView.topAnchor.constraint(equalTo: self.topAnchor, constant: margin).isActive = true
     guideBGView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     guideBGView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    guideBGView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin).isActive = true
+    guideBGView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     
     guideBGView.addSubview(adImage)
     adImage.topAnchor.constraint(equalTo: guideBGView.topAnchor).isActive = true

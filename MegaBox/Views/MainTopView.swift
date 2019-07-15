@@ -10,6 +10,7 @@ import UIKit
 
 protocol MainTopViewDelegate: class {
   func openQuickReservationView()
+  func openNavigationDrawerView()
 }
 
 class MainTopView: UIView {
@@ -27,6 +28,7 @@ class MainTopView: UIView {
   private let hamburgerMenu: UIButton = {
     let button = UIButton()
     button.setImage(#imageLiteral(resourceName: "main_top_menu_white_btn"), for: .normal)
+    button.addTarget(self, action: #selector(hamburgerMenuButtonDidTpaaed), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -56,8 +58,11 @@ class MainTopView: UIView {
 
   }
   
+  @objc private func hamburgerMenuButtonDidTpaaed() {
+    delegate?.openNavigationDrawerView()
+  }
+  
   @objc private func quickReservationButtonDidTapped() {
-    print("Hello")
     delegate?.openQuickReservationView()
   }
   

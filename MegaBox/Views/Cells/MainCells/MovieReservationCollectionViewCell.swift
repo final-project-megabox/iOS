@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieReservationCell: UICollectionViewCell {
+class MovieReservationCollectionViewCell: UICollectionViewCell {
   static let identifier = "MovieReservationCell"
   
   private var movieReservationStackView = UIStackView()
@@ -21,10 +21,11 @@ class MovieReservationCell: UICollectionViewCell {
     return imageView
   }()
   
-  private let thumbnailNumLabel: UILabel = {
+  let thumbnailNumLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "1", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 5, alignment: .center)
+    label.labelSetup(text: "1", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 15, alignment: .center)
     label.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.1607843137, blue: 0.3764705882, alpha: 1)
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
@@ -84,11 +85,17 @@ class MovieReservationCell: UICollectionViewCell {
     thumbnailImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     thumbnailImage.heightAnchor.constraint(equalToConstant: thumbnailImageHeight).isActive = true
     
-        contentView.addSubview(movieReservationStackView)
-        movieReservationStackView.topAnchor.constraint(equalTo: thumbnailImage.bottomAnchor, constant: margin).isActive = true
-        movieReservationStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        movieReservationStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        movieReservationStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
+    thumbnailImage.addSubview(thumbnailNumLabel)
+    thumbnailNumLabel.topAnchor.constraint(equalTo: thumbnailImage.topAnchor, constant: -5).isActive = true
+    thumbnailNumLabel.leadingAnchor.constraint(equalTo: thumbnailImage.leadingAnchor, constant: margin).isActive = true
+    thumbnailNumLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    thumbnailNumLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    
+    contentView.addSubview(movieReservationStackView)
+    movieReservationStackView.topAnchor.constraint(equalTo: thumbnailImage.bottomAnchor, constant: margin).isActive = true
+    movieReservationStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    movieReservationStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+    movieReservationStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {

@@ -9,22 +9,38 @@
 import UIKit
 
 class NavigationDrawerViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+  
+  private let navigationDrawerView: NavigationDrawerView = {
+    let view = NavigationDrawerView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
+    
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    setupNavigationDrawerView()
+  }
+  
+  private func setupNavigationDrawerView() {
+    view.addSubview(navigationDrawerView)
+    let guide = view.safeAreaLayoutGuide
+    
+    navigationDrawerView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+    navigationDrawerView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+    navigationDrawerView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+    navigationDrawerView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
+  }
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+extension NavigationDrawerViewController: NavigationDrawerCellDelegate {
+  func touchUpLoginButton() {
+    
+  }
 }

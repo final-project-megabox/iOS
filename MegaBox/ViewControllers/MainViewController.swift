@@ -20,6 +20,7 @@ class MainViewController: UIViewController {
     mainTableView.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
     mainTableView.showsVerticalScrollIndicator = false
     mainTableView.separatorColor = UIColor.clear
+    mainTableView.allowsSelection = false
     
     mainTableView.dataSource = self
     mainTableView.delegate = self
@@ -59,11 +60,24 @@ class MainViewController: UIViewController {
   }
 }
 
+// MARK:- 수정이 필요한 사항
+// 뷰 띄우는 행위 컨트롤러로 이동기킬 것
 extension MainViewController: MainTopViewDelegate {
+  func openNavigationDrawerView() {
+    let navigationDrawerVC = NavigationDrawerViewController()
+    self.present(navigationDrawerVC, animated: false)
+  }
+  
   func openQuickReservationView() {
     let quickReservationVC = QuickReservationViewController()
     quickReservationVC.modalPresentationStyle = .overCurrentContext
     self.present(quickReservationVC, animated: false)
+  }
+}
+
+extension MainViewController: MainMovieReservationCellDelegate {
+  func touchUpOwlStageButton(_ sender: UIButton, _ width: NSLayoutConstraint, _ leading: NSLayoutConstraint) {
+    
   }
 }
 
@@ -77,13 +91,22 @@ extension MainViewController: UITableViewDataSource {
     
     if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainMovieReservationCell.identifier) as! MainMovieReservationCell
+      // Owl Stage Button Click Delegate
+      cell.delegate = self
       return cell
     } else if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainShortMenuCell.identifier) as! MainShortMenuCell
       return cell
     } else if indexPath.row == 3 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainAdCell.identifier) as! MainAdCell
-      cell.adImage.image = #imageLiteral(resourceName: "second_ad")
+      guard let adImageNum: Int = (0...1).randomElement() else { return cell }
+      let adImageArr: [UIImage] = [#imageLiteral(resourceName: "ad1"), #imageLiteral(resourceName: "ad2")]
+      if adImageNum == 0 {
+        cell.guideBGView.backgroundColor = #colorLiteral(red: 1, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
+      } else {
+        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.01960784314, green: 0.2745098039, blue: 0.8431372549, alpha: 1)
+      }
+      cell.adImage.image = adImageArr[adImageNum]
       return cell
     } else if indexPath.row == 4 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainMovieReservationCell.identifier) as! MainMovieReservationCell
@@ -110,7 +133,7 @@ extension MainViewController: UITableViewDelegate {
     } else if indexPath.row == 2 {
       return 90
     } else if indexPath.row == 3 {
-      return (UIScreen.main.bounds.width * 200) / 640
+      return 90
     } else if indexPath.row == 4 {
       return 400
     } else if indexPath.row == 5 {
