@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		CF35AEAF22DC3B4500BDF70E /* MainEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF35AEAE22DC3B4500BDF70E /* MainEventCell.swift */; };
 		CF35AEB122DC4F2B00BDF70E /* QuickReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF35AEB022DC4F2A00BDF70E /* QuickReservationViewController.swift */; };
+		CF4F3ECB22DCB7D400BC1D4E /* MainMoviePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3ECA22DCB7D400BC1D4E /* MainMoviePostCell.swift */; };
+		CF4F3ECD22DCB98100BC1D4E /* MainBranchNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3ECC22DCB98100BC1D4E /* MainBranchNewsCell.swift */; };
+		CF4F3ECF22DCBD0B00BC1D4E /* MainNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3ECE22DCBD0B00BC1D4E /* MainNotificationCell.swift */; };
 		CF8C20BB22CF22FA00879224 /* QuickReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */; };
 		CF8C20BE22CF456E00879224 /* MovieReservationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C20BD22CF456E00879224 /* MovieReservationCollectionViewCell.swift */; };
 		CFA93DC222CDF8840025F96C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DC122CDF8840025F96C /* AppDelegate.swift */; };
@@ -39,6 +42,9 @@
 /* Begin PBXFileReference section */
 		CF35AEAE22DC3B4500BDF70E /* MainEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainEventCell.swift; sourceTree = "<group>"; };
 		CF35AEB022DC4F2A00BDF70E /* QuickReservationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickReservationViewController.swift; sourceTree = "<group>"; };
+		CF4F3ECA22DCB7D400BC1D4E /* MainMoviePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMoviePostCell.swift; sourceTree = "<group>"; };
+		CF4F3ECC22DCB98100BC1D4E /* MainBranchNewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBranchNewsCell.swift; sourceTree = "<group>"; };
+		CF4F3ECE22DCBD0B00BC1D4E /* MainNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotificationCell.swift; sourceTree = "<group>"; };
 		CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickReservationView.swift; sourceTree = "<group>"; };
 		CF8C20BD22CF456E00879224 /* MovieReservationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReservationCollectionViewCell.swift; sourceTree = "<group>"; };
 		CFA93DBE22CDF8840025F96C /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MegaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +171,9 @@
 				CFD3BB9922D5B0900099B582 /* MainAdCell.swift */,
 				CF35AEAE22DC3B4500BDF70E /* MainEventCell.swift */,
 				CFD3BBA122D5CA960099B582 /* MainMovieBoxCell.swift */,
+				CF4F3ECA22DCB7D400BC1D4E /* MainMoviePostCell.swift */,
+				CF4F3ECC22DCB98100BC1D4E /* MainBranchNewsCell.swift */,
+				CF4F3ECE22DCBD0B00BC1D4E /* MainNotificationCell.swift */,
 			);
 			path = MainCells;
 			sourceTree = "<group>";
@@ -261,11 +270,13 @@
 				E61845B122D2ED45004B1346 /* MenuTitleCell.swift in Sources */,
 				CFD3BB9522D58CFA0099B582 /* MainTopMediaPlayCell.swift in Sources */,
 				CFD3BB9C22D5B0A60099B582 /* MainShortMenuCell.swift in Sources */,
+				CF4F3ECB22DCB7D400BC1D4E /* MainMoviePostCell.swift in Sources */,
 				E61845B422D2ED9F004B1346 /* Protocol.swift in Sources */,
 				CFA93DC422CDF8840025F96C /* MainViewController.swift in Sources */,
 				CFD3BBA222D5CA960099B582 /* MainMovieBoxCell.swift in Sources */,
 				CFA93DDD22CE53210025F96C /* Label.swift in Sources */,
 				CFD3BB9122D4E5290099B582 /* NavigationDrawerView.swift in Sources */,
+				CF4F3ECD22DCB98100BC1D4E /* MainBranchNewsCell.swift in Sources */,
 				CFD3BB9822D5AC670099B582 /* MainMovieReservationCell.swift in Sources */,
 				E61845AF22D2ED06004B1346 /* MovieCategoryReservationView.swift in Sources */,
 				CFD3BB9322D58A9A0099B582 /* MainTopView.swift in Sources */,
@@ -279,6 +290,7 @@
 				CFD3BBA622D7517A0099B582 /* NavigationDrawerCell.swift in Sources */,
 				CFA93DC222CDF8840025F96C /* AppDelegate.swift in Sources */,
 				CFD3BB9E22D5B46D0099B582 /* CALayer.swift in Sources */,
+				CF4F3ECF22DCBD0B00BC1D4E /* MainNotificationCell.swift in Sources */,
 				CF8C20BB22CF22FA00879224 /* QuickReservationView.swift in Sources */,
 				CF8C20BE22CF456E00879224 /* MovieReservationCollectionViewCell.swift in Sources */,
 			);

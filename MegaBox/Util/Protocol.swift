@@ -29,5 +29,5 @@ protocol NavigationDrawerCellDelegate {
 
 // OwlStageOuter 버튼 클릭 (박스오피스, 상영예정, 큐레이션, 무대인사)
 protocol MainMovieReservationCellDelegate {
-  func touchUpOwlStageButton(_ sender: UIButton, _ width: NSLayoutConstraint, _ leading: NSLayoutConstraint)
+  func touchUpOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading: NSLayoutConstraint, _ stackViewWidth: CGFloat)
 }

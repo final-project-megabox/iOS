@@ -24,7 +24,6 @@ class MainMovieReservationCell: UITableViewCell {
   
   private let titleLabel: UILabel = {
     let label = UILabel()
-    label.labelConfigure("영화예매")
     label.labelSetup(text: "영화에매", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 16, alignment: .left)
     label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -54,6 +53,7 @@ class MainMovieReservationCell: UITableViewCell {
     let button = UIButton(type: .system)
     button.setTitle("박스오피스", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    button.tag = 0
     button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .bold)
     return button
   }()
@@ -62,6 +62,7 @@ class MainMovieReservationCell: UITableViewCell {
     let button = UIButton(type: .system)
     button.setTitle("상영예정", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    button.tag = 1
     button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
     return button
   }()
@@ -70,6 +71,7 @@ class MainMovieReservationCell: UITableViewCell {
     let button = UIButton(type: .system)
     button.setTitle("큐레이션", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    button.tag = 2
     button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
     return button
   }()
@@ -78,6 +80,7 @@ class MainMovieReservationCell: UITableViewCell {
     let button = UIButton(type: .system)
     button.setTitle("무대인사", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    button.tag = 3
     button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
     return button
   }()
@@ -103,19 +106,17 @@ class MainMovieReservationCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
     setupProperties()
-    
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    print("[Log] :", movieReservationStack.arrangedSubviews[0].frame.width)
     makeAutoLayout()
   }
   
   @objc func touchUpOwlStageButton(_ sender: UIButton) {
     print("[Log] OwlStaageButtonDidTapped")
-    indicatorBarLeadingConstraint.constant = 100
-    delegate?.touchUpOwlStageButton(sender, indicatorBarTrailingConstraint, indicatorBarLeadingConstraint)
+    let stackViewWidth = guideBGView.frame.width
+    delegate?.touchUpOwlStageButton(sender, indicatorBarTrailingConstraint, indicatorBarLeadingConstraint, stackViewWidth)
   }
   
   private func setupProperties() {
@@ -172,9 +173,8 @@ class MainMovieReservationCell: UITableViewCell {
     indicatorBar.topAnchor.constraint(equalTo: movieReservationStack.bottomAnchor, constant: -3).isActive = true
     indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2)
     indicatorBarLeadingConstraint.isActive = true
-    indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
-    indicatorBarTrailingConstraint = indicatorBar.widthAnchor.constraint(equalToConstant: 50)
-//    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor)
+    indicatorBar.heightAnchor.constraint(equalToConstant: 3).isActive = true
+    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -278)
     indicatorBarTrailingConstraint.isActive = true
     
     guideBGView.addSubview(movieReservationCollection)
