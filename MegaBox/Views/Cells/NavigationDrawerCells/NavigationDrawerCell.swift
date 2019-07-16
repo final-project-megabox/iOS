@@ -53,7 +53,7 @@ class NavigationDrawerCell: UICollectionViewCell {
   
   private let naviDrawerCancelButton: UIButton = {
     let button = UIButton()
-    button.setImage(#imageLiteral(resourceName: "main_btn_topbar_close"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "btn_slid_close_nor"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()

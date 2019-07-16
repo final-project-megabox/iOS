@@ -12,9 +12,12 @@ protocol MenuTitleViewDelegate {
   func meunBarDidSelected(_ indexPath: IndexPath)
 }
 
-//영화별 예매 버튼 클릭 후 QuickReservationViewController 띄움
 protocol QuickReservationViewDelegate {
+  // 영화별 예매 버튼 클릭 후 QuickReservationViewController 띄움
   func farightButtonDidSelected()
+  
+  // 영화별 예매 버튼 쿨릭 후 취소 버튼 클릭
+  func touchUpCancelButton()
 }
 
 //영화별 예매 버튼 클릭 후 X 버튼 클릭

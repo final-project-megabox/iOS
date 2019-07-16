@@ -10,6 +10,8 @@ import UIKit
 
 class QuickReservationView: UIView {
   
+  var delegate: QuickReservationViewDelegate?
+  
   let topView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -17,9 +19,10 @@ class QuickReservationView: UIView {
     return view
   }()
   
-  private let cancelButton: UIButton = {
+  let cancelButton: UIButton = {
     let button = UIButton()
     button.setImage(#imageLiteral(resourceName: "menu_event_close_btn"), for: .normal)
+    button.addTarget(self, action: #selector(touchUpCancelButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -78,17 +81,23 @@ class QuickReservationView: UIView {
   
   let bottomImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = #imageLiteral(resourceName: "bottom_ad")
-    imageView.contentMode = .scaleToFill
+    imageView.image = #imageLiteral(resourceName: "34d0e05746c0dd8d6f9320a69c91d8be")
+    imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
-  
-  var delegate: QuickReservationViewDelegate?
 
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupProperties()
+  }
+  
+  @objc private func touchUpCancelButton(_ sender: UIButton) {
+    delegate?.touchUpCancelButton()
+  }
+  
+  @objc private func didTapfarightButton(_ sender: UIButton) {
+    delegate?.farightButtonDidSelected()
   }
   
   private func setupProperties() {
@@ -114,7 +123,7 @@ class QuickReservationView: UIView {
       topView.topAnchor.constraint(equalTo: self.topAnchor, constant: -250),
       topView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
       topView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      topView.heightAnchor.constraint(equalToConstant: 250),
+      topView.heightAnchor.constraint(equalToConstant: 270),
       
       cancelButton.topAnchor.constraint(equalTo: topView.topAnchor),
       cancelButton.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
@@ -143,13 +152,9 @@ class QuickReservationView: UIView {
       
       bottomImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
       bottomImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-      bottomImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 130),
-      bottomImageView.heightAnchor.constraint(equalToConstant: 130),
+      bottomImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 150),
+      bottomImageView.heightAnchor.constraint(equalToConstant: 150),
       ])
-  }
-  
-  @objc private func didTapfarightButton(_ sender: UIButton) {
-     delegate?.farightButtonDidSelected()
   }
   
   required init?(coder aDecoder: NSCoder) {

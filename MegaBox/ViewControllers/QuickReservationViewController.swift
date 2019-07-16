@@ -26,7 +26,7 @@ class QuickReservationViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    setAnimations()
+    startAnimations(isCancel: false)
   }
   
   private func setupQuickReservationView() {
@@ -34,14 +34,28 @@ class QuickReservationViewController: UIViewController {
     autoLayout()
   }
   
-  private func setAnimations() {
-    UIView.animate(withDuration: 0.3) {
-      self.quickReservationView.topView.transform = CGAffineTransform(translationX: 0, y: 250)
+  private func startAnimations(isCancel: Bool) {
+    if isCancel {
+      UIView.animate(withDuration: 0.3) {
+        self.quickReservationView.topView.transform = CGAffineTransform(translationX: 0, y: -250)
+      }
+      
+      UIView.animate(withDuration: 0.3, animations: {
+        self.quickReservationView.bottomImageView.transform = CGAffineTransform(translationX: 0, y: 130)
+      }) { (Bool) in
+        self.dismiss(animated: false)
+      }
+      
+    } else {
+      UIView.animate(withDuration: 0.3) {
+        self.quickReservationView.topView.transform = CGAffineTransform(translationX: 0, y: 250)
+      }
+      
+      UIView.animate(withDuration: 0.3) {
+        self.quickReservationView.bottomImageView.transform = CGAffineTransform(translationX: 0, y: -130)
+      }
     }
     
-    UIView.animate(withDuration: 0.3) {
-      self.quickReservationView.bottomImageView.transform = CGAffineTransform(translationX: 0, y: -130)
-    }
   }
   
   private func addSubView() {
@@ -60,6 +74,10 @@ class QuickReservationViewController: UIViewController {
 }
 
 extension QuickReservationViewController: QuickReservationViewDelegate {
+  func touchUpCancelButton() {
+    startAnimations(isCancel: true)
+  }
+  
   func farightButtonDidSelected() {
     let movieCategoryVC = MovieCategoryReservationViewController()
     self.present(movieCategoryVC, animated: false)
