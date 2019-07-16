@@ -55,7 +55,6 @@ class QuickReservationViewController: UIViewController {
         self.quickReservationView.bottomImageView.transform = CGAffineTransform(translationX: 0, y: -130)
       }
     }
-    
   }
   
   private func addSubView() {
@@ -74,16 +73,17 @@ class QuickReservationViewController: UIViewController {
 }
 
 extension QuickReservationViewController: QuickReservationViewDelegate {
+  func touchUpfarightButton() {
+    let movieCategoryVC = MovieCategoryReservationViewController()
+    self.present(movieCategoryVC, animated: false)
+  }
+  
+  func touchUpfaleftButton() {
+    let theaterCategoryVC = TheaterCategoryReservationViewController()
+    self.present(theaterCategoryVC, animated: false)
+  }
+  
   func touchUpCancelButton() {
     startAnimations(isCancel: true)
   }
-  
-  func farightButtonDidSelected() {
-    let movieCategoryVC = MovieCategoryReservationViewController()
-    self.present(movieCategoryVC, animated: false)
-    
-    //quickReservationView -> hidden
-    
-  }
-  
 }

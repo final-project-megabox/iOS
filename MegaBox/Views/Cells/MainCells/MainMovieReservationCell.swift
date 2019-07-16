@@ -181,7 +181,7 @@ class MainMovieReservationCell: UITableViewCell {
     movieReservationCollection.topAnchor.constraint(equalTo: indicatorBar.bottomAnchor, constant: margin * 2).isActive = true
     movieReservationCollection.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     movieReservationCollection.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    movieReservationCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin * 3).isActive = true
+    movieReservationCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin * 2).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -196,15 +196,16 @@ extension MainMovieReservationCell: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieReservationCollectionViewCell.identifier, for: indexPath) as! MovieReservationCollectionViewCell
-    cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-    cell.layer.borderWidth = 0.5
     if indexPath.row == 0 {
       cell.thumbnailImage.image = #imageLiteral(resourceName: "temp_reservation_image")
+      cell.thumbnailImage.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+      cell.thumbnailImage.layer.borderWidth = 0.5
       cell.thumbnailNumLabel.isHidden = true
       cell.subLabel.numberOfLines = 0
       cell.directReservationButton.isHidden = true
     } else {
-      cell.thumbnailNumLabel.text = String(indexPath.row)
+      cell.thumbnailImage.image = #imageLiteral(resourceName: "spiderman_thumbnail")
+      cell.thumbnailNumLabel.labelSetup(text: String(indexPath.row), color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 15, alignment: .center)
     }
     return cell
   }
@@ -215,7 +216,7 @@ extension MainMovieReservationCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let height = movieReservationCollection.frame.height
     if indexPath.row == 0 {
-      return CGSize(width: UIScreen.main.bounds.width - 80, height: height)
+      return CGSize(width: UIScreen.main.bounds.width - 94, height: height)
     } else {
       return CGSize(width: UIScreen.main.bounds.width / 2.7, height: height)
     }

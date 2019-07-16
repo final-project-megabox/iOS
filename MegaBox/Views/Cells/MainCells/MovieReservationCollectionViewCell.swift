@@ -11,11 +11,17 @@ import UIKit
 class MovieReservationCollectionViewCell: UICollectionViewCell {
   static let identifier = "MovieReservationCell"
   
-  private var movieReservationStackView = UIStackView()
+  private var movieReservationView: UIView = {
+    let view = UIView()
+    view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    view.layer.borderColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+    view.layer.borderWidth = 0.5
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
   
   let thumbnailImage: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = #imageLiteral(resourceName: "spiderman_thumbnail")
     imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
@@ -25,21 +31,24 @@ class MovieReservationCollectionViewCell: UICollectionViewCell {
     let label = UILabel()
     label.labelSetup(text: "1", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 15, alignment: .center)
     label.backgroundColor = #colorLiteral(red: 0.1843137255, green: 0.1607843137, blue: 0.3764705882, alpha: 1)
+    label.alpha = 0.95
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let titleNameLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "스파이더맨: 파 프롬 홈", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 15, alignment: .center)
-    label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+    label.labelSetup(text: "스파이더맨: 파 프롬 홈", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 14, alignment: .center)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   let subLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "예매율 47.6 %", color: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), fontSize: 13, alignment: .center)
-    label.font = UIFont.systemFont(ofSize: 13, weight: .light)
+    label.labelSetup(text: "예매율 47.6 %", color: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), fontSize: 12, alignment: .center)
+    label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
@@ -49,8 +58,9 @@ class MovieReservationCollectionViewCell: UICollectionViewCell {
     button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 7, bottom: 5, right: 7)
     button.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .light)
-    button.layer.borderColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+    button.layer.borderColor = #colorLiteral(red: 0.6016481519, green: 0.5980746746, blue: 0.6043972373, alpha: 1)
     button.layer.borderWidth = 0.5
+    button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
   
@@ -60,27 +70,16 @@ class MovieReservationCollectionViewCell: UICollectionViewCell {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    setupStackView()
     setupProperties()
-  }
-  
-  private func setupStackView() {
-    
-    movieReservationStackView = UIStackView(arrangedSubviews: [titleNameLabel, subLabel, directReservationButton])
-    movieReservationStackView.axis = .vertical
-    movieReservationStackView.alignment = .center
-    movieReservationStackView.distribution = .fillEqually
-    movieReservationStackView.spacing = 5
-    movieReservationStackView.translatesAutoresizingMaskIntoConstraints = false
   }
   
   private func setupProperties() {
     // thumbnail Image 비율로 hieght 구하기
     let margin: CGFloat = 10
     let thumbnailImageHeight = ((UIScreen.main.bounds.width / 2.7) * 916) / 640
-    
+    print("[Log] \(thumbnailImageHeight)")
     contentView.addSubview(thumbnailImage)
-    thumbnailImage.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+    thumbnailImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
     thumbnailImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     thumbnailImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     thumbnailImage.heightAnchor.constraint(equalToConstant: thumbnailImageHeight).isActive = true
@@ -88,14 +87,31 @@ class MovieReservationCollectionViewCell: UICollectionViewCell {
     thumbnailImage.addSubview(thumbnailNumLabel)
     thumbnailNumLabel.topAnchor.constraint(equalTo: thumbnailImage.topAnchor, constant: -5).isActive = true
     thumbnailNumLabel.leadingAnchor.constraint(equalTo: thumbnailImage.leadingAnchor, constant: margin).isActive = true
-    thumbnailNumLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-    thumbnailNumLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    thumbnailNumLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+    thumbnailNumLabel.widthAnchor.constraint(equalToConstant: 25).isActive = true
     
-    contentView.addSubview(movieReservationStackView)
-    movieReservationStackView.topAnchor.constraint(equalTo: thumbnailImage.bottomAnchor, constant: margin).isActive = true
-    movieReservationStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-    movieReservationStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-    movieReservationStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
+    contentView.addSubview(movieReservationView)
+    movieReservationView.topAnchor.constraint(equalTo: thumbnailImage.bottomAnchor).isActive = true
+    movieReservationView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    movieReservationView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+    movieReservationView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
+    
+    movieReservationView.addSubview(titleNameLabel)
+    titleNameLabel.topAnchor.constraint(equalTo: movieReservationView.topAnchor, constant: margin).isActive = true
+    titleNameLabel.leadingAnchor.constraint(equalTo: movieReservationView.leadingAnchor).isActive = true
+    titleNameLabel.trailingAnchor.constraint(equalTo: movieReservationView.trailingAnchor).isActive = true
+    
+    movieReservationView.addSubview(subLabel)
+    subLabel.topAnchor.constraint(equalTo: titleNameLabel.bottomAnchor, constant: margin / 2).isActive = true
+    subLabel.leadingAnchor.constraint(equalTo: movieReservationView.leadingAnchor).isActive = true
+    subLabel.trailingAnchor.constraint(equalTo: movieReservationView.trailingAnchor).isActive = true
+    subLabel.heightAnchor.constraint(equalTo: titleNameLabel.heightAnchor).isActive = true
+    
+    movieReservationView.addSubview(directReservationButton)
+    directReservationButton.topAnchor.constraint(equalTo: subLabel.bottomAnchor, constant: margin / 2).isActive = true
+    directReservationButton.centerXAnchor.constraint(equalTo: movieReservationView.centerXAnchor).isActive = true
+    directReservationButton.bottomAnchor.constraint(equalTo: movieReservationView.bottomAnchor, constant: -margin).isActive = true
+    directReservationButton.heightAnchor.constraint(equalTo: subLabel.heightAnchor).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {

@@ -18,7 +18,7 @@ class TheaterCategoryReservationViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
   }
   
   override func viewWillLayoutSubviews() {
@@ -28,6 +28,11 @@ class TheaterCategoryReservationViewController: UIViewController {
   }
   
   private func setupMenuView() {
-    
+    let guide = view.safeAreaLayoutGuide
+    view.addSubview(menuView)
+    menuView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+    menuView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+    menuView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+    menuView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
   }
 }

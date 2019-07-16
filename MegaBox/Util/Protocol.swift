@@ -14,7 +14,8 @@ protocol MenuTitleViewDelegate {
 
 protocol QuickReservationViewDelegate {
   // 영화별 예매 버튼 클릭 후 QuickReservationViewController 띄움
-  func farightButtonDidSelected()
+  func touchUpfarightButton()
+  func touchUpfaleftButton()
   
   // 영화별 예매 버튼 쿨릭 후 취소 버튼 클릭
   func touchUpCancelButton()

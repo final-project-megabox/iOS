@@ -30,9 +30,11 @@ class QuickReservationView: UIView {
   //fa_left
   private let faleftButton: UIButton = {
     let button = UIButton()
+    button.tag = 0
     button.setImage(#imageLiteral(resourceName: "booking_icon_theater_normal"), for: .normal)
     button.setImage(#imageLiteral(resourceName: "booking_icon_theater_selected"), for: .selected)
     button.contentMode = .scaleAspectFit
+    button.addTarget(self, action: #selector(touchUpFALeftRightButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -56,10 +58,11 @@ class QuickReservationView: UIView {
   //fa_right
   private let farightButton: UIButton = {
     let button = UIButton()
+    button.tag = 1
     button.setImage(#imageLiteral(resourceName: "booking_icon_movie_normal"), for: .normal)
     button.setImage(#imageLiteral(resourceName: "booking_icon_movie_selected"), for: .selected)
     button.contentMode = .scaleAspectFit
-    button.addTarget(self, action: #selector(didTapfarightButton(_:)), for: .touchUpInside)
+    button.addTarget(self, action: #selector(touchUpFALeftRightButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -96,8 +99,13 @@ class QuickReservationView: UIView {
     delegate?.touchUpCancelButton()
   }
   
-  @objc private func didTapfarightButton(_ sender: UIButton) {
-    delegate?.farightButtonDidSelected()
+  @objc private func touchUpFALeftRightButton(_ sender: UIButton) {
+    if sender.tag == 0 {
+      delegate?.touchUpfaleftButton()
+    } else {
+      delegate?.touchUpfarightButton()
+    }
+    
   }
   
   private func setupProperties() {

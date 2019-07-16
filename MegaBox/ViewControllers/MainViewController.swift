@@ -47,7 +47,6 @@ class MainViewController: UIViewController {
     cell?.movieReservationCollection.scrollToItem(at: IndexPath(item: 1, section: 0), at: .left, animated: false)
   }
   
-  
   private func setupMainTopView() {
     mainTopView.translatesAutoresizingMaskIntoConstraints = false
     mainTableView.translatesAutoresizingMaskIntoConstraints = false
