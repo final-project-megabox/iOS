@@ -15,6 +15,7 @@ class QuickReservationView: UIView {
   let topView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    view.alpha = 0.9
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()

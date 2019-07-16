@@ -63,10 +63,11 @@ class TheaterCategoryReservationView: UIView {
     menuTitleView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     menuTitleView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     
-    menuTitleView.addSubview(menuTitleLabel)
-    menuTitleLabel.topAnchor.constraint(equalTo: menuTitleView.topAnchor).isActive = true
-    menuTitleLabel.centerXAnchor.constraint(equalTo: menuTitleView.centerXAnchor).isActive = true
-    menuTitleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    self.addSubview(menuTitleLabel)
+    menuTitleLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+    menuTitleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    menuTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    menuTitleLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
     
     menuTitleView.addSubview(menuTitleDismissButton)
     menuTitleDismissButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
