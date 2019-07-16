@@ -92,7 +92,7 @@ class MainMovieReservationCell: UITableViewCell {
     return view
   }()
   
-  private let movieReservationCollection: UICollectionView = {
+  let movieReservationCollection: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)

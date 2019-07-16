@@ -41,6 +41,11 @@ class MainViewController: UIViewController {
     setupMainTopView()
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    let cell = mainTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? MainMovieReservationCell
+    cell?.movieReservationCollection.scrollToItem(at: IndexPath(item: 1, section: 0), at: .left, animated: false)
+  }
   
   
   private func setupMainTopView() {
