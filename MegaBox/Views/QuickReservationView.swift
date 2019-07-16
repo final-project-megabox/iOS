@@ -95,7 +95,7 @@ class QuickReservationView: UIView {
     setupProperties()
   }
   
-  @objc private func touchUpCancelButton(_ sender: UIButton) {
+  @objc private func touchUpCancelButton(_ sender: Any) {
     delegate?.touchUpCancelButton()
   }
   
@@ -105,10 +105,12 @@ class QuickReservationView: UIView {
     } else {
       delegate?.touchUpfarightButton()
     }
-    
   }
   
   private func setupProperties() {
+    // add view animation gesture
+    let gesture = UITapGestureRecognizer(target: self, action: #selector(touchUpCancelButton(_:)))
+    self.addGestureRecognizer(gesture)
     addSubViews()
     autoLayout()
   }
