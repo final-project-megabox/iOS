@@ -102,7 +102,7 @@ class LoginView: UIView {
   
   let loginButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.backgroundColor = #colorLiteral(red: 0.3319479695, green: 0.3319479695, blue: 0.3319479695, alpha: 1)
+    button.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
     button.setTitle("로그인", for: .normal)
     button.addTarget(self, action: #selector(loginBtnAction), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false

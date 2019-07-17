@@ -48,9 +48,7 @@ class TheaterCategoryReservationViewController: UIViewController {
   
   // MARK: adAnimation
   @objc private func adAnimation() {
-    let cell = menuView.theaterTableView.cellForRow(at: IndexPath(item: 0, section: 0)) as! TheaterCategoryAdCell
-    print("[Log] :", numPages)
-    cell.adCollectionView.scrollToItem(at: IndexPath(item: numPages, section: 0), at: .centeredHorizontally, animated: true)
+     menuView.headerView.adCollectionView.scrollToItem(at: IndexPath(item: numPages, section: 0), at: .centeredHorizontally, animated: true)
     if numPages == 4 {
       numPages = 0
     } else {

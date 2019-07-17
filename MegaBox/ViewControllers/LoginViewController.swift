@@ -16,6 +16,8 @@ class LoginViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    
     view.addSubview(loginTopView)
     loginTopView.translatesAutoresizingMaskIntoConstraints = false
     let guide = view.safeAreaLayoutGuide

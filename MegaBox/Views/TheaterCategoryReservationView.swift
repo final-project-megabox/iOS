@@ -9,6 +9,9 @@
 import UIKit
 
 class TheaterCategoryReservationView: UIView {
+  
+  let headerView = TheaterCategoryReservationHeaderView()
+  
   private let menuTitleView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -47,7 +50,6 @@ class TheaterCategoryReservationView: UIView {
   private func setupProperties() {
     theaterTableView.dataSource = self
     theaterTableView.delegate = self
-    theaterTableView.register(TheaterCategoryAdCell.self, forCellReuseIdentifier: TheaterCategoryAdCell.identifier)
     theaterTableView.register(TheaterCategoryCell.self, forCellReuseIdentifier: TheaterCategoryCell.identifier)
     
     self.addSubview(menuTitleView)
@@ -67,7 +69,7 @@ class TheaterCategoryReservationView: UIView {
     menuTitleDismissButton.centerYAnchor.constraint(equalTo: menuTitleView.centerYAnchor).isActive = true
     
     self.addSubview(theaterTableView)
-    theaterTableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+    theaterTableView.topAnchor.constraint(equalTo: menuTitleView.bottomAnchor).isActive = true
     theaterTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     theaterTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     theaterTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
@@ -84,22 +86,35 @@ extension TheaterCategoryReservationView: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if indexPath.row == 0 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryAdCell.identifier, for: indexPath) as! TheaterCategoryAdCell
-      return cell
-    } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryCell.identifier, for: indexPath) as! TheaterCategoryCell
-      return cell
-    }
+    
+    let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryCell.identifier, for: indexPath) as! TheaterCategoryCell
+    return cell
   }
 }
 
 extension TheaterCategoryReservationView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.row == 0 {
-      return (UIScreen.main.bounds.width * 495) / 844
-    } else {
-      return 80
+    return 80
+  }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    print("[Log2] : values", ((UIScreen.main.bounds.width * 495) / 844) - 50)
+    print("[Log2] : scroll", scrollView.bounds.minY)
+    
+    if scrollView.bounds.minY == (((UIScreen.main.bounds.width * 495) / 844) - 50) {
     }
+  }
+  
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return nil
+  }
+  
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    
+    return headerView
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return (UIScreen.main.bounds.width * 495) / 844
   }
 }
