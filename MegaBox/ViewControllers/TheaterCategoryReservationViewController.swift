@@ -9,6 +9,8 @@
 import UIKit
 
 class TheaterCategoryReservationViewController: UIViewController {
+  // MARK:- Properties
+  var numPages: Int = 0
   
   let menuView: TheaterCategoryReservationView = {
     let view = TheaterCategoryReservationView()
@@ -16,17 +18,47 @@ class TheaterCategoryReservationViewController: UIViewController {
     return view
   }()
   
+  // MARK:- Life Cycles
+  // MARK: viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-  }
-  
-  override func viewWillLayoutSubviews() {
-    super.viewWillLayoutSubviews()
-    
     setupMenuView()
+    
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    startAdAnimation()
+  }
+  
+  // MARK:- Methods
+  // MARK: startAdAnimation
+  private func startAdAnimation() {
+    let timer: Timer = Timer.scheduledTimer(
+      timeInterval: 3,
+      target: self,
+      selector: #selector(adAnimation),
+      userInfo: nil,
+      repeats: true
+    )
+    timer.fire()
+  }
+  
+  // MARK: adAnimation
+  @objc private func adAnimation() {
+    let cell = menuView.theaterTableView.cellForRow(at: IndexPath(item: 0, section: 0)) as! TheaterCategoryAdCell
+    print("[Log] :", numPages)
+    cell.adCollectionView.scrollToItem(at: IndexPath(item: numPages, section: 0), at: .centeredHorizontally, animated: true)
+    if numPages == 4 {
+      numPages = 0
+    } else {
+      numPages += 1
+    }
+  }
+  
+  // MARK: setupMenuView
   private func setupMenuView() {
     let guide = view.safeAreaLayoutGuide
     view.addSubview(menuView)
