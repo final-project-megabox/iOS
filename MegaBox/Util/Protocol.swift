@@ -27,7 +27,7 @@ protocol MovieCategoryReservationViewDelegate {
 }
 
 // 로그인 버튼 클릭
-protocol NavigationDrawerCellDelegate {
+protocol NavigationDrawerViewDelegate {
   func touchUpLoginButton()
 }
 

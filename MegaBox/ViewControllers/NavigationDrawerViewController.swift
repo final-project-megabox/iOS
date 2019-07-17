@@ -18,8 +18,8 @@ class NavigationDrawerViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    
+
+    navigationDrawerView.delegate = self
   }
   
   override func viewWillLayoutSubviews() {
@@ -39,8 +39,10 @@ class NavigationDrawerViewController: UIViewController {
   }
 }
 
-extension NavigationDrawerViewController: NavigationDrawerCellDelegate {
+extension NavigationDrawerViewController: NavigationDrawerViewDelegate {
   func touchUpLoginButton() {
+    let loginPageVC = LoginViewController()
     
+    self.present(loginPageVC, animated: false)
   }
 }

@@ -10,6 +10,8 @@ import UIKit
 
 class NavigationDrawerView: UIView {
   
+  var delegate: NavigationDrawerViewDelegate?
+  
   let navigationDrawerCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -20,12 +22,17 @@ class NavigationDrawerView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
     
     setupCollectionView()
+  }
+  
+  @objc func touchUpLoginButton(_ sender: UIButton) {
+    delegate?.touchUpLoginButton()
   }
   
   private func setupCollectionView() {
@@ -55,6 +62,7 @@ extension NavigationDrawerView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if indexPath.row == 0 {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NavigationDrawerCell.identifier, for: indexPath) as! NavigationDrawerCell
+      cell.loginButton.addTarget(self, action: #selector(touchUpLoginButton(_:)), for: .touchUpInside)
       return cell
     } else {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NavigationDrawerAdCell.identifier, for: indexPath) as! NavigationDrawerAdCell

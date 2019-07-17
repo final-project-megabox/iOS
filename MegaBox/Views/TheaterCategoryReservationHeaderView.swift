@@ -1,17 +1,14 @@
 //
-//  AdCell.swift
+//  TheaterCategoryReservationHeaderView.swift
 //  MegaBox
 //
-//  Created by Fury on 16/07/2019.
+//  Created by Fury on 17/07/2019.
 //  Copyright © 2019 Fury. All rights reserved.
 //
 
 import UIKit
 
-class TheaterCategoryAdCell: UITableViewCell {
-  
-  static let identifier = "AdCell"
-  
+class TheaterCategoryReservationHeaderView: UIView {
   let adCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -25,6 +22,9 @@ class TheaterCategoryAdCell: UITableViewCell {
     return collectionView
   }()
   
+  var stackViewTopConstraint: NSLayoutConstraint!
+  var stackViewBottomConstraint: NSLayoutConstraint!
+  
   private let pageControl: UIPageControl = {
     let pageControl = UIPageControl()
     pageControl.hidesForSinglePage = true
@@ -34,6 +34,8 @@ class TheaterCategoryAdCell: UITableViewCell {
     return pageControl
   }()
   
+  var buttonStackView = UIStackView()
+  
   let placeButton: UIButton = {
     let button = UIButton()
     button.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.2862745098, blue: 0.2901960784, alpha: 1)
@@ -42,7 +44,7 @@ class TheaterCategoryAdCell: UITableViewCell {
     button.setImage(#imageLiteral(resourceName: "main_moviebox_right_btn"), for: .normal)
     button.contentHorizontalAlignment = .left
     button.imageEdgeInsets = UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.maxX / 2) - 40, bottom: 0, right: 0)
-    button.translatesAutoresizingMaskIntoConstraints = false
+    //    button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
   
@@ -54,18 +56,30 @@ class TheaterCategoryAdCell: UITableViewCell {
     button.setImage(#imageLiteral(resourceName: "main_moviebox_right_btn"), for: .normal)
     button.contentHorizontalAlignment = .left
     button.imageEdgeInsets = UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.maxX / 2) - 40, bottom: 0, right: 0)
-    button.translatesAutoresizingMaskIntoConstraints = false
+    //    button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
-
-  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    
+    setupStackView()
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    setupProperties()
     
+    setupProperties()
+  }
+  
+  private func setupStackView() {
+    buttonStackView = UIStackView(arrangedSubviews: [placeButton, dateButton])
+    buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+    buttonStackView.axis = .horizontal
+    buttonStackView.alignment = .center
+    buttonStackView.distribution = .fillEqually
+    buttonStackView.spacing = 1
+    buttonStackView.addBackground(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
   }
   
   private func setupProperties() {
@@ -74,29 +88,26 @@ class TheaterCategoryAdCell: UITableViewCell {
     
     adCollectionView.register(TheaterCategoryAdCollectionCell.self, forCellWithReuseIdentifier: TheaterCategoryAdCollectionCell.identifier)
     
-    contentView.addSubview(adCollectionView)
-    adCollectionView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+    self.addSubview(adCollectionView)
+    adCollectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
     adCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     adCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     adCollectionView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width * 495) / 844).isActive = true
     
-    contentView.addSubview(pageControl)
+    self.addSubview(pageControl)
     pageControl.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     pageControl.centerYAnchor.constraint(equalTo: adCollectionView.centerYAnchor).isActive = true
     pageControl.widthAnchor.constraint(equalToConstant: 100).isActive = true
     pageControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
     
-    contentView.addSubview(placeButton)
-    placeButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    placeButton.leadingAnchor.constraint(equalTo: adCollectionView.leadingAnchor).isActive = true
-    placeButton.bottomAnchor.constraint(equalTo: adCollectionView.bottomAnchor).isActive = true
-    
-    contentView.addSubview(dateButton)
-    dateButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    dateButton.leadingAnchor.constraint(equalTo: placeButton.trailingAnchor).isActive = true
-    dateButton.trailingAnchor.constraint(equalTo: adCollectionView.trailingAnchor).isActive = true
-    dateButton.bottomAnchor.constraint(equalTo: adCollectionView.bottomAnchor).isActive = true
-    dateButton.widthAnchor.constraint(equalTo: placeButton.widthAnchor).isActive = true
+    self.addSubview(buttonStackView)
+    buttonStackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//    stackViewTopConstraint = buttonStackView.topAnchor.constraint(equalTo: self.topAnchor)
+//    stackViewTopConstraint.isActive = true
+    buttonStackView.leadingAnchor.constraint(equalTo: adCollectionView.leadingAnchor).isActive = true
+    buttonStackView.trailingAnchor.constraint(equalTo: adCollectionView.trailingAnchor).isActive = true
+    stackViewBottomConstraint = buttonStackView.bottomAnchor.constraint(equalTo: adCollectionView.bottomAnchor)
+    stackViewBottomConstraint.isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -104,7 +115,7 @@ class TheaterCategoryAdCell: UITableViewCell {
   }
 }
 
-extension TheaterCategoryAdCell: UICollectionViewDataSource {
+extension TheaterCategoryReservationHeaderView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return 5
   }
@@ -126,7 +137,7 @@ extension TheaterCategoryAdCell: UICollectionViewDataSource {
   }
 }
 
-extension TheaterCategoryAdCell: UICollectionViewDelegateFlowLayout {
+extension TheaterCategoryReservationHeaderView: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let height = (UIScreen.main.bounds.width * 495) / 844
     return CGSize(width: UIScreen.main.bounds.width, height: height)
@@ -141,10 +152,8 @@ extension TheaterCategoryAdCell: UICollectionViewDelegateFlowLayout {
   }
 }
 
-extension TheaterCategoryAdCell: UICollectionViewDelegate {
+extension TheaterCategoryReservationHeaderView: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
     self.pageControl.currentPage = indexPath.row
   }
-  
-  scrollview
 }

@@ -12,8 +12,6 @@ class NavigationDrawerCell: UICollectionViewCell {
   static let identifier = "NavigationDrawerCell"
   private var naviDrawerTopStack = UIStackView()
   
-  var delegate: NavigationDrawerCellDelegate?
-  
   private let guideView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -58,13 +56,12 @@ class NavigationDrawerCell: UICollectionViewCell {
     return button
   }()
   
-  private let loginButton: UIButton = {
+  let loginButton: UIButton = {
     let button = UIButton()
     button.setTitle("로그인", for: .normal)
     button.layer.borderWidth = 0.5
     button.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-    button.addTarget(self, action: #selector(touchUpLoginButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -79,10 +76,6 @@ class NavigationDrawerCell: UICollectionViewCell {
     super.layoutSubviews()
     
     setupAdImageView()
-  }
-  
-  @objc private func touchUpLoginButton(_ sender: UIButton) {
-    delegate?.touchUpLoginButton()
   }
   
   private func setupStackView() {
