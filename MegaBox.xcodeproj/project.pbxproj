@@ -14,12 +14,6 @@
 		CF4F3ECF22DCBD0B00BC1D4E /* MainNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3ECE22DCBD0B00BC1D4E /* MainNotificationCell.swift */; };
 		CF4F3ED122DD74CF00BC1D4E /* TheaterCategoryReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3ED022DD74CF00BC1D4E /* TheaterCategoryReservationViewController.swift */; };
 		CF4F3ED322DD753400BC1D4E /* TheaterCategoryReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3ED222DD753400BC1D4E /* TheaterCategoryReservationView.swift */; };
-		CF4F3ED622DDD15B00BC1D4E /* TheaterCategoryAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3ED522DDD15B00BC1D4E /* TheaterCategoryAdCell.swift */; };
-		CF4F3EDD22DDF0E200BC1D4E /* TheaterCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3EDC22DDF0E200BC1D4E /* TheaterCategoryCell.swift */; };
-		CF4F3EDF22DDF45300BC1D4E /* SelectSeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3EDE22DDF45300BC1D4E /* SelectSeatViewController.swift */; };
-		CF4F3EE122DDF48100BC1D4E /* SelectPersonCountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3EE022DDF48100BC1D4E /* SelectPersonCountViewController.swift */; };
-		CF4F3EE322DDF49E00BC1D4E /* SelectPersonCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3EE222DDF49E00BC1D4E /* SelectPersonCountView.swift */; };
-		CF4F3EE522DEEA8A00BC1D4E /* TheaterCategoryAdCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4F3EE422DEEA8A00BC1D4E /* TheaterCategoryAdCollectionCell.swift */; };
 		CF8C20BB22CF22FA00879224 /* QuickReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */; };
 		CF8C20BE22CF456E00879224 /* MovieReservationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8C20BD22CF456E00879224 /* MovieReservationCollectionViewCell.swift */; };
 		CFA93DC222CDF8840025F96C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA93DC122CDF8840025F96C /* AppDelegate.swift */; };
@@ -67,12 +61,6 @@
 		CF4F3ECE22DCBD0B00BC1D4E /* MainNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNotificationCell.swift; sourceTree = "<group>"; };
 		CF4F3ED022DD74CF00BC1D4E /* TheaterCategoryReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryReservationViewController.swift; sourceTree = "<group>"; };
 		CF4F3ED222DD753400BC1D4E /* TheaterCategoryReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryReservationView.swift; sourceTree = "<group>"; };
-		CF4F3ED522DDD15B00BC1D4E /* TheaterCategoryAdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryAdCell.swift; sourceTree = "<group>"; };
-		CF4F3EDC22DDF0E200BC1D4E /* TheaterCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryCell.swift; sourceTree = "<group>"; };
-		CF4F3EDE22DDF45300BC1D4E /* SelectSeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectSeatViewController.swift; sourceTree = "<group>"; };
-		CF4F3EE022DDF48100BC1D4E /* SelectPersonCountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPersonCountViewController.swift; sourceTree = "<group>"; };
-		CF4F3EE222DDF49E00BC1D4E /* SelectPersonCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPersonCountView.swift; sourceTree = "<group>"; };
-		CF4F3EE422DEEA8A00BC1D4E /* TheaterCategoryAdCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryAdCollectionCell.swift; sourceTree = "<group>"; };
 		CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickReservationView.swift; sourceTree = "<group>"; };
 		CF8C20BD22CF456E00879224 /* MovieReservationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieReservationCollectionViewCell.swift; sourceTree = "<group>"; };
 		CFA93DBE22CDF8840025F96C /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MegaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,27 +113,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CF4F3ED422DDD13A00BC1D4E /* ReservationCells */ = {
-			isa = PBXGroup;
-			children = (
-				CF4F3ED522DDD15B00BC1D4E /* TheaterCategoryAdCell.swift */,
-				CF4F3EE422DEEA8A00BC1D4E /* TheaterCategoryAdCollectionCell.swift */,
-				CF4F3EDC22DDF0E200BC1D4E /* TheaterCategoryCell.swift */,
-			);
-			path = ReservationCells;
-			sourceTree = "<group>";
-		};
-		CF4F3ED722DDE6D300BC1D4E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		CF8C20BC22CF455600879224 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				CF4F3ED422DDD13A00BC1D4E /* ReservationCells */,
 				E693604522DDB15700C1D2D1 /* MypageCells */,
 				E61845B022D2ED45004B1346 /* MenuTitleCell.swift */,
 				E61845B522D307E6004B1346 /* MovieListCell.swift */,
@@ -176,7 +146,6 @@
 			children = (
 				CFA93DC122CDF8840025F96C /* AppDelegate.swift */,
 				CFA93DCA22CDF8840025F96C /* LaunchScreen.storyboard */,
-				CF4F3ED722DDE6D300BC1D4E /* Model */,
 				E61845B222D2ED93004B1346 /* Util */,
 				CFA93DD922CE52A70025F96C /* Extensions */,
 				CFA93DD422CDF8910025F96C /* ViewControllers */,
@@ -190,20 +159,15 @@
 		CFA93DD322CDF88E0025F96C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E693603C22DDB02300C1D2D1 /* LoginView.swift */,
 				E693604122DDB11500C1D2D1 /* MyPageTopView.swift */,
-				CFD3BB9022D4E5290099B582 /* NavigationDrawerView.swift */,
+				E693604322DDB13100C1D2D1 /* MyPageContentView.swift */,
+				E693603C22DDB02300C1D2D1 /* LoginView.swift */,
 				CFD3BB9222D58A9A0099B582 /* MainTopView.swift */,
 				CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */,
 				CF4F3ED222DD753400BC1D4E /* TheaterCategoryReservationView.swift */,
 				E61845AE22D2ED06004B1346 /* MovieCategoryReservationView.swift */,
-<<<<<<< HEAD
 				E693605022DDC10D00C1D2D1 /* MovieCategorySelectTheatherView.swift */,
 				CFD3BB9022D4E5290099B582 /* NavigationDrawerView.swift */,
-=======
-				CF4F3EE222DDF49E00BC1D4E /* SelectPersonCountView.swift */,
-				E693604322DDB13100C1D2D1 /* MyPageContentView.swift */,
->>>>>>> 90242cf44959dd52add6139a7126c38578486a30
 				CF8C20BC22CF455600879224 /* Cells */,
 			);
 			path = Views;
@@ -212,14 +176,12 @@
 		CFA93DD422CDF8910025F96C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				E693603A22DDAFB200C1D2D1 /* LoginViewController.swift */,
-				CFD3BB8E22D4E4FD0099B582 /* NavigationDrawerViewController.swift */,
 				CFA93DC322CDF8840025F96C /* MainViewController.swift */,
 				CF35AEB022DC4F2A00BDF70E /* QuickReservationViewController.swift */,
 				CF4F3ED022DD74CF00BC1D4E /* TheaterCategoryReservationViewController.swift */,
 				E603EC2A22D09BBA0011E985 /* MovieCategoryReservationViewController.swift */,
-				CF4F3EDE22DDF45300BC1D4E /* SelectSeatViewController.swift */,
-				CF4F3EE022DDF48100BC1D4E /* SelectPersonCountViewController.swift */,
+				CFD3BB8E22D4E4FD0099B582 /* NavigationDrawerViewController.swift */,
+				E693603A22DDAFB200C1D2D1 /* LoginViewController.swift */,
 				E693603F22DDB0D300C1D2D1 /* MypageViewController.swift */,
 				E693609322DEE61500C1D2D1 /* MovieCategorySelectTheatherViewController.swift */,
 			);
@@ -359,7 +321,6 @@
 				E61845B122D2ED45004B1346 /* MenuTitleCell.swift in Sources */,
 				CFD3BB9522D58CFA0099B582 /* MainTopMediaPlayCell.swift in Sources */,
 				CFD3BB9C22D5B0A60099B582 /* MainShortMenuCell.swift in Sources */,
-				CF4F3ED622DDD15B00BC1D4E /* TheaterCategoryAdCell.swift in Sources */,
 				E693604422DDB13100C1D2D1 /* MyPageContentView.swift in Sources */,
 				CF4F3ECB22DCB7D400BC1D4E /* MainMoviePostCell.swift in Sources */,
 				E693604F22DDB17500C1D2D1 /* MyPageFourContentCell.swift in Sources */,
@@ -375,15 +336,12 @@
 				CF4F3ECD22DCB98100BC1D4E /* MainBranchNewsCell.swift in Sources */,
 				CFD3BB9822D5AC670099B582 /* MainMovieReservationCell.swift in Sources */,
 				E61845AF22D2ED06004B1346 /* MovieCategoryReservationView.swift in Sources */,
-				CF4F3EDF22DDF45300BC1D4E /* SelectSeatViewController.swift in Sources */,
 				E693604222DDB11500C1D2D1 /* MyPageTopView.swift in Sources */,
 				E693604D22DDB17500C1D2D1 /* MyPageThreeContentCell.swift in Sources */,
 				E693604C22DDB17500C1D2D1 /* MyPageTwoContentCell.swift in Sources */,
 				CFD3BB9322D58A9A0099B582 /* MainTopView.swift in Sources */,
 				CF35AEAF22DC3B4500BDF70E /* MainEventCell.swift in Sources */,
 				E693604B22DDB17500C1D2D1 /* MyPageHeaderCell.swift in Sources */,
-				CF4F3EDD22DDF0E200BC1D4E /* TheaterCategoryCell.swift in Sources */,
-				CF4F3EE322DDF49E00BC1D4E /* SelectPersonCountView.swift in Sources */,
 				E61845B622D307E6004B1346 /* MovieListCell.swift in Sources */,
 				CFA93DDB22CE531A0025F96C /* TextField.swift in Sources */,
 				E693604022DDB0D300C1D2D1 /* MypageViewController.swift in Sources */,
@@ -393,10 +351,8 @@
 				CFD3BBA822D7519A0099B582 /* NavigationDrawerAdCell.swift in Sources */,
 				CFD3BB8F22D4E4FD0099B582 /* NavigationDrawerViewController.swift in Sources */,
 				CFD3BBA622D7517A0099B582 /* NavigationDrawerCell.swift in Sources */,
-				CF4F3EE522DEEA8A00BC1D4E /* TheaterCategoryAdCollectionCell.swift in Sources */,
 				CFA93DC222CDF8840025F96C /* AppDelegate.swift in Sources */,
 				CFD3BB9E22D5B46D0099B582 /* CALayer.swift in Sources */,
-				CF4F3EE122DDF48100BC1D4E /* SelectPersonCountViewController.swift in Sources */,
 				CF4F3ECF22DCBD0B00BC1D4E /* MainNotificationCell.swift in Sources */,
 				CF8C20BB22CF22FA00879224 /* QuickReservationView.swift in Sources */,
 				E693603D22DDB02300C1D2D1 /* LoginView.swift in Sources */,
