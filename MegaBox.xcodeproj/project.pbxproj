@@ -49,6 +49,8 @@
 		E693604D22DDB17500C1D2D1 /* MyPageThreeContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E693604822DDB17500C1D2D1 /* MyPageThreeContentCell.swift */; };
 		E693604E22DDB17500C1D2D1 /* MyPageOneContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E693604922DDB17500C1D2D1 /* MyPageOneContentCell.swift */; };
 		E693604F22DDB17500C1D2D1 /* MyPageFourContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E693604A22DDB17500C1D2D1 /* MyPageFourContentCell.swift */; };
+		E693605122DDC10D00C1D2D1 /* MovieCategorySelectTheatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E693605022DDC10D00C1D2D1 /* MovieCategorySelectTheatherView.swift */; };
+		E693609422DEE61500C1D2D1 /* MovieCategorySelectTheatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E693609322DEE61500C1D2D1 /* MovieCategorySelectTheatherViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,8 @@
 		E693604822DDB17500C1D2D1 /* MyPageThreeContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageThreeContentCell.swift; sourceTree = "<group>"; };
 		E693604922DDB17500C1D2D1 /* MyPageOneContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageOneContentCell.swift; sourceTree = "<group>"; };
 		E693604A22DDB17500C1D2D1 /* MyPageFourContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageFourContentCell.swift; sourceTree = "<group>"; };
+		E693605022DDC10D00C1D2D1 /* MovieCategorySelectTheatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategorySelectTheatherView.swift; sourceTree = "<group>"; };
+		E693609322DEE61500C1D2D1 /* MovieCategorySelectTheatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategorySelectTheatherViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,7 @@
 				CF8C20BA22CF22FA00879224 /* QuickReservationView.swift */,
 				CF4F3ED222DD753400BC1D4E /* TheaterCategoryReservationView.swift */,
 				E61845AE22D2ED06004B1346 /* MovieCategoryReservationView.swift */,
+				E693605022DDC10D00C1D2D1 /* MovieCategorySelectTheatherView.swift */,
 				CFD3BB9022D4E5290099B582 /* NavigationDrawerView.swift */,
 				CF8C20BC22CF455600879224 /* Cells */,
 			);
@@ -178,6 +183,7 @@
 				CFD3BB8E22D4E4FD0099B582 /* NavigationDrawerViewController.swift */,
 				E693603A22DDAFB200C1D2D1 /* LoginViewController.swift */,
 				E693603F22DDB0D300C1D2D1 /* MypageViewController.swift */,
+				E693609322DEE61500C1D2D1 /* MovieCategorySelectTheatherViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -319,6 +325,7 @@
 				CF4F3ECB22DCB7D400BC1D4E /* MainMoviePostCell.swift in Sources */,
 				E693604F22DDB17500C1D2D1 /* MyPageFourContentCell.swift in Sources */,
 				E693604E22DDB17500C1D2D1 /* MyPageOneContentCell.swift in Sources */,
+				E693605122DDC10D00C1D2D1 /* MovieCategorySelectTheatherView.swift in Sources */,
 				CF4F3ED122DD74CF00BC1D4E /* TheaterCategoryReservationViewController.swift in Sources */,
 				E61845B422D2ED9F004B1346 /* Protocol.swift in Sources */,
 				CFA93DC422CDF8840025F96C /* MainViewController.swift in Sources */,
@@ -338,6 +345,7 @@
 				E61845B622D307E6004B1346 /* MovieListCell.swift in Sources */,
 				CFA93DDB22CE531A0025F96C /* TextField.swift in Sources */,
 				E693604022DDB0D300C1D2D1 /* MypageViewController.swift in Sources */,
+				E693609422DEE61500C1D2D1 /* MovieCategorySelectTheatherViewController.swift in Sources */,
 				E603EC2B22D09BBA0011E985 /* MovieCategoryReservationViewController.swift in Sources */,
 				CFD3BB9A22D5B0900099B582 /* MainAdCell.swift in Sources */,
 				CFD3BBA822D7519A0099B582 /* NavigationDrawerAdCell.swift in Sources */,
