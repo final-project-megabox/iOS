@@ -9,7 +9,7 @@
 import UIKit
 
 class MovieCategoryReservationView: UIView {
-
+  
   // MARK: Properties
   var reservationDelegate: MovieCategoryReservationViewDelegate?
   var delegate: MenuTitleViewDelegate?
@@ -166,7 +166,6 @@ class MovieCategoryReservationView: UIView {
     
     menuCollectionView.dataSource = self
     menuCollectionView.delegate = self
-    
     menuCollectionView.register(MenuTitleCell.self,forCellWithReuseIdentifier: MenuTitleCell.identifier)
   }
   
