@@ -87,6 +87,7 @@ extension MainViewController: MainMovieReservationCellDelegate {
     // +-20은 StackView의 Spacing
     leading.constant = sender.frame.minX + 20
     trailing.constant = -(stackViewWidth - sender.frame.maxX - 20)
+    self.view.layoutIfNeeded()
   }
 }
 

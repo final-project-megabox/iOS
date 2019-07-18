@@ -98,10 +98,13 @@ extension TheaterCategoryReservationView: UITableViewDelegate {
   }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    print("[Log2] : values", ((UIScreen.main.bounds.width * 495) / 844) - 50)
-    print("[Log2] : scroll", scrollView.bounds.minY)
-    
-    if scrollView.bounds.minY == (((UIScreen.main.bounds.width * 495) / 844) - 50) {
+    // 해더뷰 고정 해제
+    let scrollHeaderHeight = ((UIScreen.main.bounds.width * 495) / 844) - 50
+    print("[Log] contentOffset.y :", scrollView.contentOffset.y)
+    if scrollView.contentOffset.y <= scrollHeaderHeight {
+      if scrollView.contentOffset.y >= 0 {
+        scrollView.contentInset = UIEdgeInsets(top: -scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)
+      }
     }
   }
   

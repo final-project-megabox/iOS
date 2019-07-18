@@ -175,16 +175,16 @@
 			isa = PBXGroup;
 			children = (
 				CFBC1C1422DF5532006B6839 /* LoginView.swift */,
+				CFBC1C1822DF5532006B6839 /* NavigationDrawerView.swift */,
 				CFBC1C1722DF5532006B6839 /* MainTopView.swift */,
+				CFBC1C1122DF5532006B6839 /* QuickReservationView.swift */,
+				CFBC1C1322DF5532006B6839 /* TheaterCategoryReservationView.swift */,
+				CFBC1C1222DF5532006B6839 /* TheaterCategoryReservationHeaderView.swift */,
 				CFBC1C1022DF5532006B6839 /* MovieCategoryReservationView.swift */,
 				CFBC1C0E22DF5532006B6839 /* MovieCategorySelectTheatherView.swift */,
-				CFBC1C0F22DF5532006B6839 /* MyPageContentView.swift */,
-				CFBC1C1622DF5532006B6839 /* MyPageTopView.swift */,
-				CFBC1C1822DF5532006B6839 /* NavigationDrawerView.swift */,
-				CFBC1C1122DF5532006B6839 /* QuickReservationView.swift */,
 				CFBC1C1522DF5532006B6839 /* SelectPersonCountView.swift */,
-				CFBC1C1222DF5532006B6839 /* TheaterCategoryReservationHeaderView.swift */,
-				CFBC1C1322DF5532006B6839 /* TheaterCategoryReservationView.swift */,
+				CFBC1C1622DF5532006B6839 /* MyPageTopView.swift */,
+				CFBC1C0F22DF5532006B6839 /* MyPageContentView.swift */,
 				CF8C20BC22CF455600879224 /* Cells */,
 			);
 			path = Views;
@@ -194,15 +194,15 @@
 			isa = PBXGroup;
 			children = (
 				CFBC1C2A22DF5588006B6839 /* LoginViewController.swift */,
+				CFBC1C2422DF5588006B6839 /* NavigationDrawerViewController.swift */,
 				CFBC1C2B22DF5588006B6839 /* MainViewController.swift */,
+				CFBC1C2C22DF5589006B6839 /* QuickReservationViewController.swift */,
+				CFBC1C2922DF5588006B6839 /* TheaterCategoryReservationViewController.swift */,
 				CFBC1C2822DF5588006B6839 /* MovieCategoryReservationViewController.swift */,
 				CFBC1C2D22DF5589006B6839 /* MovieCategorySelectTheatherViewController.swift */,
-				CFBC1C2522DF5588006B6839 /* MypageViewController.swift */,
-				CFBC1C2422DF5588006B6839 /* NavigationDrawerViewController.swift */,
-				CFBC1C2C22DF5589006B6839 /* QuickReservationViewController.swift */,
 				CFBC1C2622DF5588006B6839 /* SelectPersonCountViewController.swift */,
 				CFBC1C2722DF5588006B6839 /* SelectSeatViewController.swift */,
-				CFBC1C2922DF5588006B6839 /* TheaterCategoryReservationViewController.swift */,
+				CFBC1C2522DF5588006B6839 /* MypageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -252,16 +252,16 @@
 		CFBC1C5222DF5656006B6839 /* MainCells */ = {
 			isa = PBXGroup;
 			children = (
+				CFBC1C5322DF5662006B6839 /* MainTopMediaPlayCell.swift */,
+				CFBC1C5B22DF5662006B6839 /* MainMovieReservationCell.swift */,
+				CFBC1C5822DF5662006B6839 /* MovieReservationCollectionViewCell.swift */,
+				CFBC1C5A22DF5662006B6839 /* MainShortMenuCell.swift */,
 				CFBC1C5C22DF5662006B6839 /* MainAdCell.swift */,
-				CFBC1C5622DF5662006B6839 /* MainBranchNewsCell.swift */,
 				CFBC1C5522DF5662006B6839 /* MainEventCell.swift */,
 				CFBC1C5922DF5662006B6839 /* MainMovieBoxCell.swift */,
 				CFBC1C5422DF5662006B6839 /* MainMoviePostCell.swift */,
-				CFBC1C5B22DF5662006B6839 /* MainMovieReservationCell.swift */,
+				CFBC1C5622DF5662006B6839 /* MainBranchNewsCell.swift */,
 				CFBC1C5722DF5662006B6839 /* MainNotificationCell.swift */,
-				CFBC1C5A22DF5662006B6839 /* MainShortMenuCell.swift */,
-				CFBC1C5322DF5662006B6839 /* MainTopMediaPlayCell.swift */,
-				CFBC1C5822DF5662006B6839 /* MovieReservationCollectionViewCell.swift */,
 			);
 			path = MainCells;
 			sourceTree = "<group>";

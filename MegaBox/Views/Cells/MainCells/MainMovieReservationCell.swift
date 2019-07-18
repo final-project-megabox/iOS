@@ -179,8 +179,8 @@ class MainMovieReservationCell: UITableViewCell {
     
     guideBGView.addSubview(movieReservationCollection)
     movieReservationCollection.topAnchor.constraint(equalTo: indicatorBar.bottomAnchor, constant: margin * 2).isActive = true
-    movieReservationCollection.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-    movieReservationCollection.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    movieReservationCollection.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: -margin).isActive = true
+    movieReservationCollection.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: margin).isActive = true
     movieReservationCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin * 2).isActive = true
   }
   
