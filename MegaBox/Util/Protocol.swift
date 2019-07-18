@@ -33,5 +33,10 @@ protocol NavigationDrawerViewDelegate {
 
 // OwlStageOuter 버튼 클릭 (박스오피스, 상영예정, 큐레이션, 무대인사)
 protocol MainMovieReservationCellDelegate {
-  func touchUpOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading: NSLayoutConstraint, _ stackViewWidth: CGFloat)
+  func touchUpReservationOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading: NSLayoutConstraint, _ stackViewWidth: CGFloat)
+}
+
+// OwlStageOuter 버튼 클릭 (전체, 메가박스, 영화, 제휴, 영화관)
+protocol MainEventCellDelegate {
+  func touchUpEventOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading: NSLayoutConstraint, _ stackViewWidth: CGFloat)
 }

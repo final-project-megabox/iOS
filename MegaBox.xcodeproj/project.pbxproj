@@ -55,6 +55,7 @@
 		CFBC1C6422DF5662006B6839 /* MainShortMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C5A22DF5662006B6839 /* MainShortMenuCell.swift */; };
 		CFBC1C6522DF5662006B6839 /* MainMovieReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C5B22DF5662006B6839 /* MainMovieReservationCell.swift */; };
 		CFBC1C6622DF5662006B6839 /* MainAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C5C22DF5662006B6839 /* MainAdCell.swift */; };
+		CFBC1C6822DFFDD9006B6839 /* EventCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C6722DFFDD9006B6839 /* EventCollectionCell.swift */; };
 		CFD3BB9E22D5B46D0099B582 /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3BB9D22D5B46D0099B582 /* CALayer.swift */; };
 		CFD3BBA422D5D26E0099B582 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3BBA322D5D26E0099B582 /* UIApplication.swift */; };
 		E61845B422D2ED9F004B1346 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61845B322D2ED9F004B1346 /* Protocol.swift */; };
@@ -111,6 +112,7 @@
 		CFBC1C5A22DF5662006B6839 /* MainShortMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainShortMenuCell.swift; sourceTree = "<group>"; };
 		CFBC1C5B22DF5662006B6839 /* MainMovieReservationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMovieReservationCell.swift; sourceTree = "<group>"; };
 		CFBC1C5C22DF5662006B6839 /* MainAdCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAdCell.swift; sourceTree = "<group>"; };
+		CFBC1C6722DFFDD9006B6839 /* EventCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionCell.swift; sourceTree = "<group>"; };
 		CFD3BB9D22D5B46D0099B582 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		CFD3BBA322D5D26E0099B582 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		E61845B322D2ED9F004B1346 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 				CFBC1C5A22DF5662006B6839 /* MainShortMenuCell.swift */,
 				CFBC1C5C22DF5662006B6839 /* MainAdCell.swift */,
 				CFBC1C5522DF5662006B6839 /* MainEventCell.swift */,
+				CFBC1C6722DFFDD9006B6839 /* EventCollectionCell.swift */,
 				CFBC1C5922DF5662006B6839 /* MainMovieBoxCell.swift */,
 				CFBC1C5422DF5662006B6839 /* MainMoviePostCell.swift */,
 				CFBC1C5622DF5662006B6839 /* MainBranchNewsCell.swift */,
@@ -374,6 +377,7 @@
 				CFBC1C6622DF5662006B6839 /* MainAdCell.swift in Sources */,
 				CFBC1C4D22DF5652006B6839 /* MyPageThreeContentCell.swift in Sources */,
 				CFBC1C6422DF5662006B6839 /* MainShortMenuCell.swift in Sources */,
+				CFBC1C6822DFFDD9006B6839 /* EventCollectionCell.swift in Sources */,
 				CFBC1C4E22DF5652006B6839 /* MyPageHeaderCell.swift in Sources */,
 				CFBC1C4722DF5648006B6839 /* NavigationDrawerCell.swift in Sources */,
 				CFBC1C3422DF5589006B6839 /* LoginViewController.swift in Sources */,

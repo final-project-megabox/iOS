@@ -77,7 +77,7 @@ class MovieReservationCollectionViewCell: UICollectionViewCell {
     // thumbnail Image 비율로 hieght 구하기
     let margin: CGFloat = 10
     let thumbnailImageHeight = ((UIScreen.main.bounds.width / 2.7) * 916) / 640
-    print("[Log] \(thumbnailImageHeight)")
+    
     contentView.addSubview(thumbnailImage)
     thumbnailImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
     thumbnailImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true

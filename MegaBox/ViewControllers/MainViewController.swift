@@ -30,6 +30,7 @@ class MainViewController: UIViewController {
     self.mainTableView.register(MainMovieReservationCell.self, forCellReuseIdentifier: MainMovieReservationCell.identifier)
     self.mainTableView.register(MainShortMenuCell.self, forCellReuseIdentifier: MainShortMenuCell.identifier)
     self.mainTableView.register(MainAdCell.self, forCellReuseIdentifier: MainAdCell.identifier)
+    self.mainTableView.register(MainEventCell.self, forCellReuseIdentifier: MainEventCell.identifier)
     self.mainTableView.register(MainMovieBoxCell.self, forCellReuseIdentifier: MainMovieBoxCell.identifier)
     self.mainTableView.register(MainMoviePostCell.self, forCellReuseIdentifier: MainMoviePostCell.identifier)
     self.mainTableView.register(MainBranchNewsCell.self, forCellReuseIdentifier: MainBranchNewsCell.identifier)
@@ -43,8 +44,9 @@ class MainViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    let cell = mainTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? MainMovieReservationCell
-    cell?.movieReservationCollection.scrollToItem(at: IndexPath(item: 1, section: 0), at: .left, animated: false)
+    let movieReservationCell = mainTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? MainMovieReservationCell
+    
+    movieReservationCell?.movieReservationCollection.scrollToItem(at: IndexPath(item: 1, section: 0), at: .left, animated: false)
   }
   
   private func setupMainTopView() {
@@ -83,8 +85,18 @@ extension MainViewController: MainTopViewDelegate {
 }
 
 extension MainViewController: MainMovieReservationCellDelegate {
-  func touchUpOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading: NSLayoutConstraint, _ stackViewWidth: CGFloat) {
+  func touchUpReservationOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading: NSLayoutConstraint, _ stackViewWidth: CGFloat) {
     // +-20은 StackView의 Spacing
+    leading.constant = sender.frame.minX + 20
+    trailing.constant = -(stackViewWidth - sender.frame.maxX - 20)
+    self.view.layoutIfNeeded()
+  }
+}
+
+extension MainViewController: MainEventCellDelegate {
+  func touchUpEventOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading:
+    NSLayoutConstraint, _ stackViewWidth: CGFloat) {
+    
     leading.constant = sender.frame.minX + 20
     trailing.constant = -(stackViewWidth - sender.frame.maxX - 20)
     self.view.layoutIfNeeded()
@@ -119,7 +131,9 @@ extension MainViewController: UITableViewDataSource {
       cell.adImage.image = adImageArr[adImageNum]
       return cell
     } else if indexPath.row == 4 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: MainMovieReservationCell.identifier) as! MainMovieReservationCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: MainEventCell.identifier) as! MainEventCell
+      // Owl Stage Button Click Delegate
+      cell.delegate = self
       return cell
     } else if indexPath.row == 5 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainMovieBoxCell.identifier) as! MainMovieBoxCell
@@ -176,7 +190,7 @@ extension MainViewController: UITableViewDelegate {
       return 90
     } else if indexPath.row == 4 {
       // 이벤트
-      return 400
+      return 380
     } else if indexPath.row == 5 {
       // 무비박스
       return ((UIScreen.main.bounds.width) * 460) / 750

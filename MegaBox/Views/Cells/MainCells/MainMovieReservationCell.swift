@@ -116,7 +116,7 @@ class MainMovieReservationCell: UITableViewCell {
   @objc func touchUpOwlStageButton(_ sender: UIButton) {
     print("[Log] OwlStaageButtonDidTapped")
     let stackViewWidth = guideBGView.frame.width
-    delegate?.touchUpOwlStageButton(sender, indicatorBarTrailingConstraint, indicatorBarLeadingConstraint, stackViewWidth)
+    delegate?.touchUpReservationOwlStageButton(sender, indicatorBarTrailingConstraint, indicatorBarLeadingConstraint, stackViewWidth)
   }
   
   private func setupProperties() {
@@ -173,12 +173,12 @@ class MainMovieReservationCell: UITableViewCell {
     indicatorBar.topAnchor.constraint(equalTo: movieReservationStack.bottomAnchor, constant: -3).isActive = true
     indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2)
     indicatorBarLeadingConstraint.isActive = true
-    indicatorBar.heightAnchor.constraint(equalToConstant: 3).isActive = true
+    indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
     indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -278)
     indicatorBarTrailingConstraint.isActive = true
     
     guideBGView.addSubview(movieReservationCollection)
-    movieReservationCollection.topAnchor.constraint(equalTo: indicatorBar.bottomAnchor, constant: margin * 2).isActive = true
+    movieReservationCollection.topAnchor.constraint(equalTo: indicatorBar.bottomAnchor, constant: margin).isActive = true
     movieReservationCollection.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: -margin).isActive = true
     movieReservationCollection.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: margin).isActive = true
     movieReservationCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin * 2).isActive = true
