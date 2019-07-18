@@ -56,6 +56,7 @@
 		CFBC1CE522E02EC8006B6839 /* MyPageOneContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CE422E02EC8006B6839 /* MyPageOneContentCell.swift */; };
 		CFBC1CE722E02ED7006B6839 /* MyPageThreeContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CE622E02ED7006B6839 /* MyPageThreeContentCell.swift */; };
 		CFBC1CE922E02F02006B6839 /* MyPageTwoContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CE822E02F02006B6839 /* MyPageTwoContentCell.swift */; };
+		E693609622E09D8600C1D2D1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E693609522E09D8100C1D2D1 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,7 @@
 		CFBC1CE422E02EC8006B6839 /* MyPageOneContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageOneContentCell.swift; sourceTree = "<group>"; };
 		CFBC1CE622E02ED7006B6839 /* MyPageThreeContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageThreeContentCell.swift; sourceTree = "<group>"; };
 		CFBC1CE822E02F02006B6839 /* MyPageTwoContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTwoContentCell.swift; sourceTree = "<group>"; };
+		E693609522E09D8100C1D2D1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		CFBC1C6922E0298F006B6839 = {
 			isa = PBXGroup;
 			children = (
+				E693609522E09D8100C1D2D1 /* Default-568h@2x.png */,
 				CFBC1C7422E0298F006B6839 /* MegaBox */,
 				CFBC1C7322E0298F006B6839 /* Products */,
 			);
@@ -210,8 +213,8 @@
 		CFBC1C8B22E029F6006B6839 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				CFBC1CBE22E02D0D006B6839 /* MenuTitleCell.swift */,
 				CFBC1CC022E02D1F006B6839 /* MovieListCell.swift */,
+				CFBC1CBE22E02D0D006B6839 /* MenuTitleCell.swift */,
 				CFBC1C8C22E029FF006B6839 /* MainCells */,
 				CFBC1C8F22E02A12006B6839 /* ReservationCells */,
 				CFBC1C8E22E02A0C006B6839 /* NavigationDrawerCells */,
@@ -328,6 +331,7 @@
 			files = (
 				CFBC1C8022E02991006B6839 /* LaunchScreen.storyboard in Resources */,
 				CFBC1C7D22E02991006B6839 /* Assets.xcassets in Resources */,
+				E693609622E09D8600C1D2D1 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
