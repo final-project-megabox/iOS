@@ -59,7 +59,6 @@ class MovieCategorySelectTheatherView: UIView {
     label.clipsToBounds = true
     label.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     label.layer.shadowOffset = CGSize(width: 3, height: 3)
-    label.layer.shadowRadius = 4.0
     label.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
