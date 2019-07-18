@@ -47,6 +47,25 @@ class MovieCategorySelectTheatherView: UIView {
     return imageView
   }()
   
+  private let movieTitleLabel: UILabel = {
+    let label = UILabel()
+    label.text = "영화"
+    label.font = UIFont.systemFont(ofSize: 11)
+    label.textAlignment = .center
+    label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    label.backgroundColor = #colorLiteral(red: 0.2199999988, green: 0.2199999988, blue: 0.2199999988, alpha: 1)
+    label.alpha = 0.7
+    label.layer.cornerRadius = 5
+    label.clipsToBounds = true
+    label.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    label.layer.shadowOffset = CGSize(width: 3, height: 3)
+    label.layer.shadowOpacity = 0.7
+    label.layer.shadowRadius = 4.0
+    label.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
   private let firstLine: UILabel = {
     let label = UILabel()
     label.backgroundColor = #colorLiteral(red: 0.8800999603, green: 0.8800999603, blue: 0.8800999603, alpha: 1)
@@ -112,6 +131,12 @@ class MovieCategorySelectTheatherView: UIView {
     selectMovieImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     selectMovieImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 3).isActive = true
     selectMovieImageView.heightAnchor.constraint(equalTo: selectMovieImageView.widthAnchor).isActive = true
+    
+    selectMovieImageView.addSubview(movieTitleLabel)
+    movieTitleLabel.topAnchor.constraint(equalTo: selectMovieImageView.topAnchor).isActive = true
+    movieTitleLabel.leadingAnchor.constraint(equalTo: selectMovieImageView.leadingAnchor, constant: 10).isActive = true
+    movieTitleLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    movieTitleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
     
     selectMovieImageView.addSubview(firstLine)
     firstLine.topAnchor.constraint(equalTo: selectMovieImageView.topAnchor).isActive = true
