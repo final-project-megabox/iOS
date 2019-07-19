@@ -9,6 +9,9 @@
 import UIKit
 
 class TheaterCategoryReservationHeaderView: UIView {
+  var stackViewTopConstraint: NSLayoutConstraint!
+  var stackViewBottomConstraint: NSLayoutConstraint!
+  
   let adCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -21,9 +24,6 @@ class TheaterCategoryReservationHeaderView: UIView {
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     return collectionView
   }()
-  
-  var stackViewTopConstraint: NSLayoutConstraint!
-  var stackViewBottomConstraint: NSLayoutConstraint!
   
   private let pageControl: UIPageControl = {
     let pageControl = UIPageControl()
@@ -40,8 +40,9 @@ class TheaterCategoryReservationHeaderView: UIView {
     let button = UIButton()
     button.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.2862745098, blue: 0.2901960784, alpha: 1)
     button.setTitle("동탄", for: .normal)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
     button.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    button.setImage(#imageLiteral(resourceName: "main_moviebox_right_btn"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "android_drop_down_arrow"), for: .normal)
     button.contentHorizontalAlignment = .left
     button.imageEdgeInsets = UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.maxX / 2) - 40, bottom: 0, right: 0)
     //    button.translatesAutoresizingMaskIntoConstraints = false
@@ -52,8 +53,9 @@ class TheaterCategoryReservationHeaderView: UIView {
     let button = UIButton()
     button.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.2862745098, blue: 0.2901960784, alpha: 1)
     button.setTitle("7월 17일(수)", for: .normal)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
     button.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    button.setImage(#imageLiteral(resourceName: "main_moviebox_right_btn"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "android_drop_down_arrow"), for: .normal)
     button.contentHorizontalAlignment = .left
     button.imageEdgeInsets = UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.maxX / 2) - 40, bottom: 0, right: 0)
     //    button.translatesAutoresizingMaskIntoConstraints = false
@@ -76,7 +78,7 @@ class TheaterCategoryReservationHeaderView: UIView {
     buttonStackView = UIStackView(arrangedSubviews: [placeButton, dateButton])
     buttonStackView.translatesAutoresizingMaskIntoConstraints = false
     buttonStackView.axis = .horizontal
-    buttonStackView.alignment = .center
+    buttonStackView.alignment = .fill
     buttonStackView.distribution = .fillEqually
     buttonStackView.spacing = 1
     buttonStackView.addBackground(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
@@ -102,8 +104,7 @@ class TheaterCategoryReservationHeaderView: UIView {
     
     self.addSubview(buttonStackView)
     buttonStackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    //    stackViewTopConstraint = buttonStackView.topAnchor.constraint(equalTo: self.topAnchor)
-    //    stackViewTopConstraint.isActive = true
+    stackViewTopConstraint = buttonStackView.topAnchor.constraint(equalTo: adCollectionView.topAnchor)
     buttonStackView.leadingAnchor.constraint(equalTo: adCollectionView.leadingAnchor).isActive = true
     buttonStackView.trailingAnchor.constraint(equalTo: adCollectionView.trailingAnchor).isActive = true
     stackViewBottomConstraint = buttonStackView.bottomAnchor.constraint(equalTo: adCollectionView.bottomAnchor)

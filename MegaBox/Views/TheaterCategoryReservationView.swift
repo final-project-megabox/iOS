@@ -38,6 +38,7 @@ class TheaterCategoryReservationView: UIView {
   
   let theaterTableView: UITableView = {
     let tableView = UITableView()
+    tableView.register(TheaterCategoryCell.self, forCellReuseIdentifier: TheaterCategoryCell.identifier)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
   }()
@@ -50,7 +51,6 @@ class TheaterCategoryReservationView: UIView {
   private func setupProperties() {
     theaterTableView.dataSource = self
     theaterTableView.delegate = self
-    theaterTableView.register(TheaterCategoryCell.self, forCellReuseIdentifier: TheaterCategoryCell.identifier)
     
     self.addSubview(menuTitleView)
     menuTitleView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -100,7 +100,8 @@ extension TheaterCategoryReservationView: UITableViewDelegate {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     // 해더뷰 고정 해제
     let scrollHeaderHeight = ((UIScreen.main.bounds.width * 495) / 844) - 50
-    print("[Log] contentOffset.y :", scrollView.contentOffset.y)
+    print("[Log] \(scrollView.contentOffset.y)")
+    print("[Log] \(scrollHeaderHeight)")
     if scrollView.contentOffset.y <= scrollHeaderHeight {
       if scrollView.contentOffset.y >= 0 {
         scrollView.contentInset = UIEdgeInsets(top: -scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)
@@ -110,12 +111,8 @@ extension TheaterCategoryReservationView: UITableViewDelegate {
     }
   }
   
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return nil
-  }
-  
+  // Tableview Header
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    
     return headerView
   }
   
