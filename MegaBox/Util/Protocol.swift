@@ -21,6 +21,18 @@ protocol QuickReservationViewDelegate {
   func touchUpCancelButton()
 }
 
+protocol TheaterCategorySelectTheaterViewDelegate {
+  // 영화관별 예매 버튼 쿨릭 후 X 버튼 클릭
+  func touchUpCancelButton()
+  
+  // 영화관별 예매 버튼 쿨릭 후 선택완료 버튼 클릭
+  func touchUpmenuTitleSelectbutton()
+}
+
+protocol TheaterCategoryReservationViewDelegate {
+  func touchUpMenuTitleDismissButton()
+}
+
 //영화별 예매 버튼 클릭 후 X 버튼 클릭
 protocol MovieCategoryReservationViewDelegate {
   func dismissButtonDidTapped()

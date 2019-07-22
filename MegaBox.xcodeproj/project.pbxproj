@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9994DC02CF888F8371EC0186 /* Pods_MegaBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5938270819C4F9728D0770 /* Pods_MegaBox.framework */; };
 		CFBC1C7622E0298F006B6839 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C7522E0298F006B6839 /* AppDelegate.swift */; };
 		CFBC1C7822E0298F006B6839 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C7722E0298F006B6839 /* MainViewController.swift */; };
 		CFBC1C7D22E02991006B6839 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBC1C7C22E02991006B6839 /* Assets.xcassets */; };
@@ -64,9 +65,12 @@
 		CFBC1CF822E19CA1006B6839 /* TheaterCategorySelectTheaterRegionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CF722E19CA1006B6839 /* TheaterCategorySelectTheaterRegionListCell.swift */; };
 		CFBC1CFE22E1A238006B6839 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CFD22E1A238006B6839 /* Button.swift */; };
 		CFC9724922E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724822E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift */; };
+		CFC9724B22E5A21600199FD0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724A22E5A21600199FD0 /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		328D43D246D883E45A2C9055 /* Pods-MegaBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaBox.debug.xcconfig"; path = "Target Support Files/Pods-MegaBox/Pods-MegaBox.debug.xcconfig"; sourceTree = "<group>"; };
+		3D5938270819C4F9728D0770 /* Pods_MegaBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MegaBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFBC1C7222E0298F006B6839 /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MegaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFBC1C7522E0298F006B6839 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFBC1C7722E0298F006B6839 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 		CFBC1CF722E19CA1006B6839 /* TheaterCategorySelectTheaterRegionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySelectTheaterRegionListCell.swift; sourceTree = "<group>"; };
 		CFBC1CFD22E1A238006B6839 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		CFC9724822E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySelectTheaterEmptyCell.swift; sourceTree = "<group>"; };
+		CFC9724A22E5A21600199FD0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		F238FC7C9463514149694227 /* Pods-MegaBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaBox.release.xcconfig"; path = "Target Support Files/Pods-MegaBox/Pods-MegaBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,17 +139,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9994DC02CF888F8371EC0186 /* Pods_MegaBox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		85DD6922286E43D4E730C749 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D5938270819C4F9728D0770 /* Pods_MegaBox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C6B37FADA8A7003DF9B929FC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				328D43D246D883E45A2C9055 /* Pods-MegaBox.debug.xcconfig */,
+				F238FC7C9463514149694227 /* Pods-MegaBox.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CFBC1C6922E0298F006B6839 = {
 			isa = PBXGroup;
 			children = (
 				CFBC1C7422E0298F006B6839 /* MegaBox */,
 				CFBC1C7322E0298F006B6839 /* Products */,
+				C6B37FADA8A7003DF9B929FC /* Pods */,
+				85DD6922286E43D4E730C749 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -185,6 +212,7 @@
 				CFBC1C9222E02A66006B6839 /* Label.swift */,
 				CFBC1C9422E02A95006B6839 /* StackView.swift */,
 				CFBC1CFD22E1A238006B6839 /* Button.swift */,
+				CFC9724A22E5A21600199FD0 /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -316,9 +344,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFBC1C8422E02991006B6839 /* Build configuration list for PBXNativeTarget "MegaBox" */;
 			buildPhases = (
+				48C4B93EFE7EADD55E2C4E8D /* [CP] Check Pods Manifest.lock */,
 				CFBC1C6E22E0298F006B6839 /* Sources */,
 				CFBC1C6F22E0298F006B6839 /* Frameworks */,
 				CFBC1C7022E0298F006B6839 /* Resources */,
+				AEF9B7B707B6591091DD4201 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -374,6 +404,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		48C4B93EFE7EADD55E2C4E8D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MegaBox-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AEF9B7B707B6591091DD4201 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MegaBox/Pods-MegaBox-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MegaBox/Pods-MegaBox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CFBC1C6E22E0298F006B6839 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -389,6 +466,7 @@
 				CFBC1CD522E02E14006B6839 /* MainBranchNewsCell.swift in Sources */,
 				CFBC1CA922E02BBB006B6839 /* LoginView.swift in Sources */,
 				CFBC1CE322E02EB8006B6839 /* MyPageHeaderCell.swift in Sources */,
+				CFC9724B22E5A21600199FD0 /* Color.swift in Sources */,
 				CFBC1CBD22E02C7C006B6839 /* MyPageContentView.swift in Sources */,
 				CFBC1CC122E02D1F006B6839 /* MovieListCell.swift in Sources */,
 				CFBC1CF222E1947E006B6839 /* TheaterCategorySelectTheaterViewController.swift in Sources */,
@@ -569,6 +647,7 @@
 		};
 		CFBC1C8522E02991006B6839 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 328D43D246D883E45A2C9055 /* Pods-MegaBox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -587,6 +666,7 @@
 		};
 		CFBC1C8622E02991006B6839 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F238FC7C9463514149694227 /* Pods-MegaBox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

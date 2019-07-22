@@ -14,10 +14,10 @@ public extension UIButton {
     self.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
     let border = CALayer()
     let width = UIScreen.main.bounds.width
-    border.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+    border.backgroundColor = UIColor.appColor(.megaBoxColor).cgColor
     if isTouched {
       border.frame = CGRect(x: 0, y: 37, width: width, height: 3)
-      self.setTitleColor(#colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1), for: .normal)
+      self.setTitleColor(UIColor.appColor(.megaBoxColor), for: .normal)
       self.layer.addSublayer(border)
     } else {
       border.frame = .zero

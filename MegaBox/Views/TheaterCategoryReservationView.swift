@@ -9,7 +9,7 @@
 import UIKit
 
 class TheaterCategoryReservationView: UIView {
-  
+  var delegate: TheaterCategoryReservationViewDelegate?
   let headerView = TheaterCategoryReservationHeaderView()
   
   private let menuTitleView: UIView = {
@@ -23,6 +23,7 @@ class TheaterCategoryReservationView: UIView {
     let button = UIButton(type: .custom)
     button.setImage(#imageLiteral(resourceName: "common_btn_topbar_prev2"), for: .normal)
     button.contentMode = .scaleAspectFit
+    button.addTarget(self, action: #selector(touchUpMenuTitleDismissButton), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -46,6 +47,10 @@ class TheaterCategoryReservationView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupProperties()
+  }
+  
+  @objc private func touchUpMenuTitleDismissButton() {
+    delegate?.touchUpMenuTitleDismissButton()
   }
   
   private func setupProperties() {
