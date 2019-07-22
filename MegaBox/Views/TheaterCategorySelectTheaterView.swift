@@ -143,8 +143,6 @@ class TheaterCategorySelectTheaterView: UIView {
     regionButton.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor).isActive = true
     regionButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     regionButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    regionButton.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-    regionButton.layer.borderWidth = 1
     
     self.addSubview(regionListButton)
     regionListButton.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor).isActive = true
@@ -190,12 +188,16 @@ extension TheaterCategorySelectTheaterView: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let bgColorView = UIView()
+    bgColorView.backgroundColor = #colorLiteral(red: 0.9384746552, green: 0.9328956604, blue: 0.9427630305, alpha: 1)
     if tableView == regionTableView {
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionCell
+      cell.selectedBackgroundView = bgColorView
       cell.regionName.text = regionNames[indexPath.row]
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterEmptyCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterEmptyCell
+      cell.selectedBackgroundView = bgColorView
       return cell
     }
   }
