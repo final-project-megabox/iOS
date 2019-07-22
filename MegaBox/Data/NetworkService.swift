@@ -7,3 +7,10 @@
 //
 
 import Foundation
+import Alamofire
+
+class NetworkService {
+  static func getAllMovieData(_ urlStr: String, completion: @escaping ([MovieData]?) -> Void) {
+//    let url = URL(string: urlStr)!
+  }
+}

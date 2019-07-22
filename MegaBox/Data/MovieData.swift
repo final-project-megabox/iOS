@@ -19,7 +19,7 @@ struct MovieData: Decodable {
   var bookingRate: Int
   var title: String
   var age: Int
-  var type: Int
+  var type: [String]
   
   enum CodingKeys: String, CodingKey {
     case movieID = "movie_id"

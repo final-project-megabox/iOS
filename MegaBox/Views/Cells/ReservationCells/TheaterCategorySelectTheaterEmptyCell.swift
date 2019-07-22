@@ -30,7 +30,7 @@ class TheaterCategorySelectTheaterEmptyCell: UITableViewCell {
   
   private let favoriteTheaterButton: UIButton = {
     let button = UIButton()
-    button.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+    button.backgroundColor = UIColor.appColor(.megaBoxColor)
     button.setTitle("선호영화관 등록", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
