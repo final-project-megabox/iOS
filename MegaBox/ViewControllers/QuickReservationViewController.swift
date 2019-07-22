@@ -79,7 +79,7 @@ extension QuickReservationViewController: QuickReservationViewDelegate {
   }
   
   func touchUpfaleftButton() {
-    let theaterCategoryVC = TheaterCategoryReservationViewController()
+    let theaterCategoryVC = TheaterCategorySelectTheaterViewController()
     self.present(theaterCategoryVC, animated: false)
   }
   

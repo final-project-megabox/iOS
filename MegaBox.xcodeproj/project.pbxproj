@@ -63,8 +63,8 @@
 		CFBC1CF422E194AD006B6839 /* TheaterCategorySelectTheaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CF322E194AD006B6839 /* TheaterCategorySelectTheaterView.swift */; };
 		CFBC1CF622E19C90006B6839 /* TheaterCategorySelectTheaterRegionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CF522E19C90006B6839 /* TheaterCategorySelectTheaterRegionCell.swift */; };
 		CFBC1CF822E19CA1006B6839 /* TheaterCategorySelectTheaterRegionListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CF722E19CA1006B6839 /* TheaterCategorySelectTheaterRegionListCell.swift */; };
-		CFBC1CFA22E1A000006B6839 /* TheaterCategorySelectTheaterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CF922E1A000006B6839 /* TheaterCategorySelectTheaterHeaderView.swift */; };
 		CFBC1CFE22E1A238006B6839 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CFD22E1A238006B6839 /* Button.swift */; };
+		CFC9724922E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724822E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,8 +126,8 @@
 		CFBC1CF322E194AD006B6839 /* TheaterCategorySelectTheaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySelectTheaterView.swift; sourceTree = "<group>"; };
 		CFBC1CF522E19C90006B6839 /* TheaterCategorySelectTheaterRegionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySelectTheaterRegionCell.swift; sourceTree = "<group>"; };
 		CFBC1CF722E19CA1006B6839 /* TheaterCategorySelectTheaterRegionListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySelectTheaterRegionListCell.swift; sourceTree = "<group>"; };
-		CFBC1CF922E1A000006B6839 /* TheaterCategorySelectTheaterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySelectTheaterHeaderView.swift; sourceTree = "<group>"; };
 		CFBC1CFD22E1A238006B6839 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		CFC9724822E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySelectTheaterEmptyCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +217,6 @@
 				CFBC1CAC22E02BDC006B6839 /* MainTopView.swift */,
 				CFBC1CAE22E02BE8006B6839 /* QuickReservationView.swift */,
 				CFBC1CF322E194AD006B6839 /* TheaterCategorySelectTheaterView.swift */,
-				CFBC1CF922E1A000006B6839 /* TheaterCategorySelectTheaterHeaderView.swift */,
 				CFBC1CB022E02BFC006B6839 /* TheaterCategoryReservationView.swift */,
 				CFBC1CB222E02C07006B6839 /* TheaterCategoryReservationHeaderView.swift */,
 				CFBC1CB422E02C17006B6839 /* MovieCategoryReservationView.swift */,
@@ -285,10 +284,11 @@
 		CFBC1C8F22E02A12006B6839 /* ReservationCells */ = {
 			isa = PBXGroup;
 			children = (
+				CFBC1CF522E19C90006B6839 /* TheaterCategorySelectTheaterRegionCell.swift */,
+				CFC9724822E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift */,
+				CFBC1CF722E19CA1006B6839 /* TheaterCategorySelectTheaterRegionListCell.swift */,
 				CFBC1CD822E02E41006B6839 /* TheaterCategoryAdCollectionCell.swift */,
 				CFBC1CDA22E02E53006B6839 /* TheaterCategoryCell.swift */,
-				CFBC1CF522E19C90006B6839 /* TheaterCategorySelectTheaterRegionCell.swift */,
-				CFBC1CF722E19CA1006B6839 /* TheaterCategorySelectTheaterRegionListCell.swift */,
 			);
 			path = ReservationCells;
 			sourceTree = "<group>";
@@ -389,6 +389,7 @@
 				CFBC1CF222E1947E006B6839 /* TheaterCategorySelectTheaterViewController.swift in Sources */,
 				CFBC1CEE22E1810B006B6839 /* NetworkService.swift in Sources */,
 				CFBC1C9F22E02B38006B6839 /* MovieCategoryReservationViewController.swift in Sources */,
+				CFC9724922E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift in Sources */,
 				CFBC1CBB22E02C6E006B6839 /* MyPageTopView.swift in Sources */,
 				CFBC1CB922E02C60006B6839 /* SelectPersonCountView.swift in Sources */,
 				CFBC1CAB22E02BD2006B6839 /* NavigationDrawerView.swift in Sources */,
@@ -406,7 +407,6 @@
 				CFBC1CDF22E02E86006B6839 /* NavigationDrawerCell.swift in Sources */,
 				CFBC1CD122E02DEE006B6839 /* MainMovieBoxCell.swift in Sources */,
 				CFBC1CCD22E02DAB006B6839 /* MainEventCell.swift in Sources */,
-				CFBC1CFA22E1A000006B6839 /* TheaterCategorySelectTheaterHeaderView.swift in Sources */,
 				CFBC1CCB22E02D9C006B6839 /* MainAdCell.swift in Sources */,
 				CFBC1CFE22E1A238006B6839 /* Button.swift in Sources */,
 				CFBC1CE922E02F02006B6839 /* MyPageTwoContentCell.swift in Sources */,

@@ -12,6 +12,9 @@ class TheaterCategorySelectTheaterView: UIView {
   
   private var sectionTitles = ["지역별", "특별관"]
   
+  private let regionData = RegionData()
+  lazy var regionNames: [String] = regionData.regionNames
+  
   private let menuTitleView: UIView = {
     let view = UIView()
     view.backgroundColor = .white
@@ -21,7 +24,7 @@ class TheaterCategorySelectTheaterView: UIView {
   
   private let menuTitleDismissButton: UIButton = {
     let button = UIButton(type: .custom)
-//    button.addTarget(self, action: #selector(dismissButtonDidTpaaed), for: .touchUpInside)
+    //    button.addTarget(self, action: #selector(dismissButtonDidTpaaed), for: .touchUpInside)
     button.setImage(#imageLiteral(resourceName: "purpleCancel_icon"), for: .normal)
     button.tintColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +66,6 @@ class TheaterCategorySelectTheaterView: UIView {
   private let regionButton: UIButton = {
     let button = UIButton()
     button.setTitle("지역별", for: .normal)
-    button.touchUpButton(isTouched: true, ratio: 3)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -71,7 +73,6 @@ class TheaterCategorySelectTheaterView: UIView {
   private let regionListButton: UIButton = {
     let button = UIButton()
     button.setTitle("특별관", for: .normal)
-    button.touchUpButton(isTouched: false, ratio: 7)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -85,9 +86,11 @@ class TheaterCategorySelectTheaterView: UIView {
   
   private let regionListTableView: UITableView = {
     let tableView = UITableView()
+    tableView.register(TheaterCategorySelectTheaterEmptyCell.self, forCellReuseIdentifier: TheaterCategorySelectTheaterEmptyCell.identifier)
     tableView.register(TheaterCategorySelectTheaterRegionListCell.self, forCellReuseIdentifier: TheaterCategorySelectTheaterRegionListCell.identifier)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
+    
   }()
   
   override init(frame: CGRect) {
@@ -95,6 +98,8 @@ class TheaterCategorySelectTheaterView: UIView {
     
     regionTableView.dataSource = self
     regionListTableView.dataSource = self
+    regionTableView.delegate = self
+    regionListTableView.delegate = self
   }
   
   override func layoutSubviews() {
@@ -120,7 +125,7 @@ class TheaterCategorySelectTheaterView: UIView {
     menuTitleDismissButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin).isActive = true
     menuTitleDismissButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     menuTitleDismissButton.centerYAnchor.constraint(equalTo: menuTitleLabel.centerYAnchor).isActive = true
-
+    
     menuTitleView.addSubview(menuTitleSelectbutton)
     menuTitleSelectbutton.topAnchor.constraint(equalTo: self.topAnchor, constant: 12.5).isActive = true
     menuTitleSelectbutton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin).isActive = true
@@ -166,22 +171,56 @@ class TheaterCategorySelectTheaterView: UIView {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  override func draw(_ rect: CGRect) {
+    super.draw(rect)
+    
+    regionButton.touchUpButton(isTouched: true, width: regionButton.frame.width)
+    regionListButton.touchUpButton(isTouched: false, width: regionListButton.frame.width)
+  }
 }
 
 extension TheaterCategorySelectTheaterView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 20
+    if tableView == regionTableView {
+      return regionNames.count
+    } else {
+      return 1
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if tableView == regionTableView {
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionCell
-      
+      cell.regionName.text = regionNames[indexPath.row]
       return cell
     } else {
-     let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionListCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionListCell
-      
+      let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterEmptyCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterEmptyCell
       return cell
+    }
+  }
+}
+
+extension TheaterCategorySelectTheaterView: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if tableView == regionTableView {
+      return 40
+    } else {
+      if indexPath.row == 0 {
+        tableView.isScrollEnabled = false
+        tableView.allowsSelection = false
+        return tableView.frame.height
+      } else {
+        return 40
+      }
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if tableView == regionTableView {
+      
+    } else {
+      
     }
   }
 }
