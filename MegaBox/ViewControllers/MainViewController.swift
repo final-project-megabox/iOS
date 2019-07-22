@@ -10,6 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController {
   
+  private let movieData: [MovieData] = []
+  
   private let mainTopView = MainTopView()
   private let mainTableView = UITableView()
   

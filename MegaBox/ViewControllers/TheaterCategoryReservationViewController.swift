@@ -23,6 +23,9 @@ class TheaterCategoryReservationViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    
+    menuView.delegate = self
+    
     setupMenuView()
     
   }
@@ -64,5 +67,11 @@ class TheaterCategoryReservationViewController: UIViewController {
     menuView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
     menuView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
     menuView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
+  }
+}
+
+extension TheaterCategoryReservationViewController: TheaterCategoryReservationViewDelegate {
+  func touchUpMenuTitleDismissButton() {
+    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)
   }
 }

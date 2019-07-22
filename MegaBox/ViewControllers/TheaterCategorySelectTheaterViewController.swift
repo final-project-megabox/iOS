@@ -19,6 +19,7 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    selectTheaterView.delegate = self
   }
   
   override func viewWillLayoutSubviews() {
@@ -36,3 +37,17 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
     selectTheaterView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
   }
 }
+
+extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheaterViewDelegate {
+  func touchUpmenuTitleSelectbutton() {
+    let theaterCategoryReservationVC = TheaterCategoryReservationViewController()
+    
+    self.present(theaterCategoryReservationVC, animated: false)
+  }
+
+  func touchUpCancelButton() {
+  self.presentingViewController?.presentingViewController?.dismiss(animated: false)
+  }
+}
+
+

@@ -10,10 +10,12 @@ import UIKit
 
 class TheaterCategorySelectTheaterView: UIView {
   
-  private var sectionTitles = ["지역별", "특별관"]
+  var delegate: TheaterCategorySelectTheaterViewDelegate?
   
   private let regionData = RegionData()
   lazy var regionNames: [String] = regionData.regionNames
+  
+  private var selectedRegionNumber: Int = 0
   
   private let menuTitleView: UIView = {
     let view = UIView()
@@ -24,9 +26,9 @@ class TheaterCategorySelectTheaterView: UIView {
   
   private let menuTitleDismissButton: UIButton = {
     let button = UIButton(type: .custom)
-    //    button.addTarget(self, action: #selector(dismissButtonDidTpaaed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(touchUpDismissButton), for: .touchUpInside)
     button.setImage(#imageLiteral(resourceName: "purpleCancel_icon"), for: .normal)
-    button.tintColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+    button.tintColor = UIColor.appColor(.megaBoxColor)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -42,12 +44,14 @@ class TheaterCategorySelectTheaterView: UIView {
   private let menuTitleSelectbutton: UIButton = {
     let button = UIButton()
     button.setTitle("선택완료", for: .normal)
+    button.addTarget(self, action: #selector(touchUpmenuTitleSelectbutton(_:)), for: .touchUpInside)
     button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-    button.setTitleColor(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), for: .normal)
-    button.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    button.setTitleColor(UIColor.appColor(.defaultGrayColor), for: .normal)
+    button.layer.borderColor = UIColor.appColor(.defaultGrayColor).cgColor
     button.layer.borderWidth = 1
     button.layer.cornerRadius = 5
+    button.isEnabled = false
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -58,7 +62,7 @@ class TheaterCategorySelectTheaterView: UIView {
     label.textAlignment = .center
     label.font = UIFont.systemFont(ofSize: 13)
     label.textColor = .white
-    label.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+    label.backgroundColor = UIColor.appColor(.darkBgColor)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -80,6 +84,7 @@ class TheaterCategorySelectTheaterView: UIView {
   private let regionTableView: UITableView = {
     let tableView = UITableView()
     tableView.register(TheaterCategorySelectTheaterRegionCell.self, forCellReuseIdentifier: TheaterCategorySelectTheaterRegionCell.identifier)
+    tableView.separatorStyle = .none
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
   }()
@@ -88,6 +93,7 @@ class TheaterCategorySelectTheaterView: UIView {
     let tableView = UITableView()
     tableView.register(TheaterCategorySelectTheaterEmptyCell.self, forCellReuseIdentifier: TheaterCategorySelectTheaterEmptyCell.identifier)
     tableView.register(TheaterCategorySelectTheaterRegionListCell.self, forCellReuseIdentifier: TheaterCategorySelectTheaterRegionListCell.identifier)
+    tableView.separatorStyle = .none
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
     
@@ -104,8 +110,15 @@ class TheaterCategorySelectTheaterView: UIView {
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    
     setupProperties()
+  }
+  
+  @objc private func touchUpmenuTitleSelectbutton(_ sender: UIButton) {
+    delegate?.touchUpmenuTitleSelectbutton()
+  }
+  
+  @objc private func touchUpDismissButton(_ sender: UIButton) {
+    delegate?.touchUpCancelButton()
   }
   
   private func setupProperties() {
@@ -155,8 +168,9 @@ class TheaterCategorySelectTheaterView: UIView {
     regionTableView.topAnchor.constraint(equalTo: regionButton.bottomAnchor).isActive = true
     regionTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     regionTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    regionTableView.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    regionTableView.layer.borderColor = UIColor.appColor(.defaultGrayColor).cgColor
     regionTableView.layer.borderWidth = 1
+    regionTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
     
     self.addSubview(regionListTableView)
     regionListTableView.topAnchor.constraint(equalTo: regionListButton.bottomAnchor).isActive = true
@@ -183,22 +197,36 @@ extension TheaterCategorySelectTheaterView: UITableViewDataSource {
     if tableView == regionTableView {
       return regionNames.count
     } else {
-      return 1
+      if selectedRegionNumber == 0 {
+        return 1
+      } else {
+        guard let count = regionData.region[regionNames[selectedRegionNumber]]?.count else { return 0 }
+        return count
+      }
     }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let bgColorView = UIView()
-    bgColorView.backgroundColor = #colorLiteral(red: 0.9384746552, green: 0.9328956604, blue: 0.9427630305, alpha: 1)
+    let regionTableViewBgColorView = UIView()
+    let regionListTableViewBgColorView = UIView()
+    regionTableViewBgColorView.backgroundColor = UIColor.appColor(.selectedCellGrayColor)
+    regionListTableViewBgColorView.backgroundColor = UIColor.appColor(.selectedCellMintColor)
     if tableView == regionTableView {
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionCell
-      cell.selectedBackgroundView = bgColorView
+      cell.selectedBackgroundView = regionTableViewBgColorView
       cell.regionName.text = regionNames[indexPath.row]
       return cell
     } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterEmptyCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterEmptyCell
-      cell.selectedBackgroundView = bgColorView
-      return cell
+      if selectedRegionNumber == 0 {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterEmptyCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterEmptyCell
+        cell.selectedBackgroundView = regionTableViewBgColorView
+        return cell
+      } else {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionListCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionListCell
+        cell.selectedBackgroundView = regionListTableViewBgColorView
+        cell.regionListName.text = regionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
+        return cell
+      }
     }
   }
 }
@@ -208,11 +236,13 @@ extension TheaterCategorySelectTheaterView: UITableViewDelegate {
     if tableView == regionTableView {
       return 40
     } else {
-      if indexPath.row == 0 {
+      if selectedRegionNumber == 0 {
         tableView.isScrollEnabled = false
         tableView.allowsSelection = false
         return tableView.frame.height
       } else {
+        tableView.isScrollEnabled = true
+        tableView.allowsSelection = true
         return 40
       }
     }
@@ -220,9 +250,25 @@ extension TheaterCategorySelectTheaterView: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if tableView == regionTableView {
+      selectedRegionNumber = indexPath.row
+      regionListTableView.reloadData()
+    } else {
+      movieTitleLabel.text = regionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
+      movieTitleLabel.textColor = UIColor.appColor(.selectedCellMintColor)
+      let cell = tableView.cellForRow(at: indexPath) as! TheaterCategorySelectTheaterRegionListCell
+      cell.regionListName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+      menuTitleSelectbutton.setTitleColor(UIColor.appColor(.megaBoxColor), for: .normal)
+      menuTitleSelectbutton.layer.borderColor = UIColor.appColor(.megaBoxColor).cgColor
+      menuTitleSelectbutton.isEnabled = true
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    if tableView == regionTableView {
       
     } else {
-      
+      let cell = tableView.cellForRow(at: indexPath) as! TheaterCategorySelectTheaterRegionListCell
+      cell.regionListName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
   }
 }
