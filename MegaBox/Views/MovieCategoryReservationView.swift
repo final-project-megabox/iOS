@@ -14,15 +14,22 @@ class MovieCategoryReservationView: UIView {
   var reservationDelegate: MovieCategoryReservationViewDelegate?
   var delegate: MenuTitleViewDelegate?
   
-  var indicatorBarLeadingConstraint: NSLayoutConstraint!
+//  var indicatorBarLeadingConstraint: NSLayoutConstraint!
   
-  private var menuTitles = ["모든영화", "큐레이션"]
+//  private var menuTitles = ["모든영화", "큐레이션"]
   
   private let menuTitleView: UIView = {
     let view = UIView()
     view.backgroundColor = .white
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
+  }()
+  
+  private let menuTitleViewBottomLine: UILabel = {
+    let label = UILabel()
+    label.backgroundColor = #colorLiteral(red: 0.8800999603, green: 0.8800999603, blue: 0.8800999603, alpha: 1)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
   }()
   
   private let menuTitleDismissButton: UIButton = {
@@ -37,6 +44,7 @@ class MovieCategoryReservationView: UIView {
   private let menuTitleLabel: UILabel = {
     let label = UILabel()
     label.text = "영화 선택"
+    label.textAlignment = .center
     label.font = UIFont.boldSystemFont(ofSize: 16)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
@@ -66,28 +74,44 @@ class MovieCategoryReservationView: UIView {
     return label
   }()
   
-  private let menuCollectionView: UICollectionView = {
-    // flow layout
-    let flowLayout = UICollectionViewFlowLayout()
-    flowLayout.scrollDirection = .horizontal
-    
-    // collection view
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-    
-    // not show scroll indicator
-    collectionView.showsHorizontalScrollIndicator = false
-    
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.backgroundColor = #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1)
-    return collectionView
+  private let allMovieButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("모든영화", for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
   }()
   
-  private let indicatorBar: UIView = {
-    let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
-    return view
+  private let curationButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("큐레이션", for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
   }()
+  
+//  private let menuCollectionView: UICollectionView = {
+//    // flow layout
+//    let flowLayout = UICollectionViewFlowLayout()
+//    flowLayout.scrollDirection = .horizontal
+//
+//    // collection view
+//    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+//
+//    // not show scroll indicator
+//    collectionView.showsHorizontalScrollIndicator = false
+//
+//    collectionView.translatesAutoresizingMaskIntoConstraints = false
+//    collectionView.backgroundColor = #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1)
+//    return collectionView
+//  }()
+  
+//  private let indicatorBar: UIView = {
+//    let view = UIView()
+//    view.translatesAutoresizingMaskIntoConstraints = false
+//    view.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+//    return view
+//  }()
+  
+  
   
   private let movieListTableView: UITableView = {
     let tableView = UITableView()
@@ -100,74 +124,99 @@ class MovieCategoryReservationView: UIView {
     
     addSubView()
     autoLayout()
-    setupCollectionView()
-    menuCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
+//    setupCollectionView()
+//    menuCollectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .centeredHorizontally)
     setupTableView()
     
   }
   
   private func addSubView() {
-    self.addSubview(menuTitleView)
-    self.addSubview(movieTitleLabel)
-    self.addSubview(menuTitleDismissButton)
-    self.addSubview(menuTitleLabel)
-    self.addSubview(menuTitleSelectbutton)
-    self.addSubview(menuCollectionView)
-    self.addSubview(indicatorBar)
-    self.addSubview(movieListTableView)
+    addSubview(menuTitleView)
+  
+    menuTitleView.addSubview(menuTitleDismissButton)
+    menuTitleView.addSubview(menuTitleLabel)
+    menuTitleView.addSubview(menuTitleSelectbutton)
+    menuTitleView.addSubview(menuTitleViewBottomLine)
+    
+    addSubview(movieTitleLabel)
+    
+    addSubview(allMovieButton)
+    addSubview(curationButton)
+    
+//    self.addSubview(menuCollectionView)
+//    self.addSubview(indicatorBar)
+    addSubview(movieListTableView)
     
   }
   
   private func autoLayout() {
-    let margin: CGFloat = 15
+    
+    
     menuTitleView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
     menuTitleView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     menuTitleView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     menuTitleView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    
+    menuTitleDismissButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+    menuTitleDismissButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    menuTitleDismissButton.centerYAnchor.constraint(equalTo: menuTitleLabel.centerYAnchor).isActive = true
+    
+    menuTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
+    menuTitleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    menuTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    menuTitleLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
+    
+    menuTitleSelectbutton.topAnchor.constraint(equalTo: self.topAnchor, constant: 12.5).isActive = true
+    menuTitleSelectbutton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
+    menuTitleSelectbutton.heightAnchor.constraint(equalToConstant: 25).isActive = true
     
     movieTitleLabel.topAnchor.constraint(equalTo: menuTitleView.bottomAnchor).isActive = true
     movieTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     movieTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     movieTitleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
     
-    menuTitleDismissButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin).isActive = true
-    menuTitleDismissButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    menuTitleDismissButton.centerYAnchor.constraint(equalTo: menuTitleLabel.centerYAnchor).isActive = true
+    menuTitleViewBottomLine.leadingAnchor.constraint(equalTo: menuTitleView.leadingAnchor).isActive = true
+    menuTitleViewBottomLine.trailingAnchor.constraint(equalTo: menuTitleView.trailingAnchor).isActive = true
+    menuTitleViewBottomLine.bottomAnchor.constraint(equalTo: menuTitleView.bottomAnchor).isActive = true
+    menuTitleViewBottomLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
     
-    menuTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: margin).isActive = true
-    menuTitleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    menuTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-    menuTitleLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
     
-    menuTitleSelectbutton.topAnchor.constraint(equalTo: self.topAnchor, constant: 12.5).isActive = true
-    menuTitleSelectbutton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin).isActive = true
-    menuTitleSelectbutton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+//    menuCollectionView.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor).isActive = true
+//    menuCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+//    menuCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+//    menuCollectionView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//
+//    indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: leadingAnchor)
+//    indicatorBarLeadingConstraint.isActive = true
+//
+//    indicatorBar.widthAnchor.constraint(equalToConstant: 207).isActive = true
+//    indicatorBar.heightAnchor.constraint(equalToConstant: 3).isActive = true
+//    indicatorBar.bottomAnchor.constraint(equalTo: menuCollectionView.bottomAnchor).isActive = true
     
-    menuCollectionView.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor).isActive = true
-    menuCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-    menuCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    menuCollectionView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    allMovieButton.topAnchor.constraint(equalTo: movieTitleLabel.bottomAnchor).isActive = true
+    allMovieButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+    allMovieButton.trailingAnchor.constraint(equalTo: curationButton.leadingAnchor).isActive = true
+    allMovieButton.bottomAnchor.constraint(equalTo: movieListTableView.topAnchor).isActive = true
+    allMovieButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+  
+    curationButton.topAnchor.constraint(equalTo: allMovieButton.topAnchor).isActive = true
+    curationButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+    curationButton.bottomAnchor.constraint(equalTo: allMovieButton.bottomAnchor).isActive = true
+    curationButton.widthAnchor.constraint(equalTo: allMovieButton.widthAnchor).isActive = true
+    curationButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     
-    indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: leadingAnchor)
-    indicatorBarLeadingConstraint.isActive = true
-    
-    indicatorBar.widthAnchor.constraint(equalToConstant: 207).isActive = true
-    indicatorBar.heightAnchor.constraint(equalToConstant: 3).isActive = true
-    indicatorBar.bottomAnchor.constraint(equalTo: menuCollectionView.bottomAnchor).isActive = true
-    
-    movieListTableView.topAnchor.constraint(equalTo: indicatorBar.bottomAnchor).isActive = true
     movieListTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     movieListTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     movieListTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     
   }
   
-  private func setupCollectionView() {
-    
-    menuCollectionView.dataSource = self
-    menuCollectionView.delegate = self
-    menuCollectionView.register(MenuTitleCell.self,forCellWithReuseIdentifier: MenuTitleCell.identifier)
-  }
+//  private func setupCollectionView() {
+//
+//    menuCollectionView.dataSource = self
+//    menuCollectionView.delegate = self
+//    menuCollectionView.register(MenuTitleCell.self,forCellWithReuseIdentifier: MenuTitleCell.identifier)
+//  }
   
   private func setupTableView() {
     movieListTableView.dataSource = self
@@ -183,44 +232,51 @@ class MovieCategoryReservationView: UIView {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-}
-
-
-extension MovieCategoryReservationView: UICollectionViewDataSource{
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return menuTitles.count
-  }
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuTitleCell.identifier, for: indexPath) as! MenuTitleCell
-    cell.label.text = menuTitles[indexPath.row]
-    return cell
-  }
-  
-}
-
-extension MovieCategoryReservationView: UICollectionViewDelegate {
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    delegate?.meunBarDidSelected(indexPath)
+  override func draw(_ rect: CGRect) {
+    super.draw(rect)
     
-    indicatorBarLeadingConstraint.constant = (self.frame.width / CGFloat(menuTitles.count)) * CGFloat((indexPath.item))
-    
+    allMovieButton.touchUpButton(isTouched: true, width: allMovieButton.frame.width)
+    curationButton.touchUpButton(isTouched: false, width: curationButton.frame.width)
   }
 }
 
-extension MovieCategoryReservationView: UICollectionViewDelegateFlowLayout{
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: self.frame.width / CGFloat(menuTitles.count), height: 40)
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
-  }
-}
+
+//extension MovieCategoryReservationView: UICollectionViewDataSource{
+//  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//    return menuTitles.count
+//  }
+//
+//  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MenuTitleCell.identifier, for: indexPath) as! MenuTitleCell
+//    cell.label.text = menuTitles[indexPath.row]
+//    return cell
+//  }
+//
+//}
+
+//extension MovieCategoryReservationView: UICollectionViewDelegate {
+//  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//    delegate?.meunBarDidSelected(indexPath)
+//
+//    indicatorBarLeadingConstraint.constant = (self.frame.width / CGFloat(menuTitles.count)) * CGFloat((indexPath.item))
+//
+//  }
+//}
+
+//extension MovieCategoryReservationView: UICollectionViewDelegateFlowLayout{
+//  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//    return CGSize(width: self.frame.width / CGFloat(menuTitles.count), height: 40)
+//  }
+//  
+//  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//    return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//  }
+//  
+//  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//    return 0
+//  }
+//}
 
 extension MovieCategoryReservationView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

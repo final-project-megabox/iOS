@@ -34,7 +34,6 @@
 		CFBC1CB922E02C60006B6839 /* SelectPersonCountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CB822E02C60006B6839 /* SelectPersonCountView.swift */; };
 		CFBC1CBB22E02C6E006B6839 /* MyPageTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CBA22E02C6E006B6839 /* MyPageTopView.swift */; };
 		CFBC1CBD22E02C7C006B6839 /* MyPageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CBC22E02C7C006B6839 /* MyPageContentView.swift */; };
-		CFBC1CBF22E02D0D006B6839 /* MenuTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CBE22E02D0D006B6839 /* MenuTitleCell.swift */; };
 		CFBC1CC122E02D1F006B6839 /* MovieListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CC022E02D1F006B6839 /* MovieListCell.swift */; };
 		CFBC1CC322E02D4A006B6839 /* MainTopMediaPlayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CC222E02D4A006B6839 /* MainTopMediaPlayCell.swift */; };
 		CFBC1CC522E02D62006B6839 /* MainMovieReservationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CC422E02D62006B6839 /* MainMovieReservationCell.swift */; };
@@ -97,7 +96,6 @@
 		CFBC1CB822E02C60006B6839 /* SelectPersonCountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPersonCountView.swift; sourceTree = "<group>"; };
 		CFBC1CBA22E02C6E006B6839 /* MyPageTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTopView.swift; sourceTree = "<group>"; };
 		CFBC1CBC22E02C7C006B6839 /* MyPageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageContentView.swift; sourceTree = "<group>"; };
-		CFBC1CBE22E02D0D006B6839 /* MenuTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTitleCell.swift; sourceTree = "<group>"; };
 		CFBC1CC022E02D1F006B6839 /* MovieListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCell.swift; sourceTree = "<group>"; };
 		CFBC1CC222E02D4A006B6839 /* MainTopMediaPlayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTopMediaPlayCell.swift; sourceTree = "<group>"; };
 		CFBC1CC422E02D62006B6839 /* MainMovieReservationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMovieReservationCell.swift; sourceTree = "<group>"; };
@@ -232,8 +230,7 @@
 		CFBC1C8B22E029F6006B6839 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				CFBC1CBE22E02D0D006B6839 /* MenuTitleCell.swift */,
-				CFBC1CC022E02D1F006B6839 /* MovieListCell.swift */,
+				E60C520722E5AE50004C6B4B /* MovieReservationCells */,
 				CFBC1C8C22E029FF006B6839 /* MainCells */,
 				CFBC1C8F22E02A12006B6839 /* ReservationCells */,
 				CFBC1C8E22E02A0C006B6839 /* NavigationDrawerCells */,
@@ -301,6 +298,15 @@
 				CFBC1CED22E1810B006B6839 /* NetworkService.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		E60C520722E5AE50004C6B4B /* MovieReservationCells */ = {
+			isa = PBXGroup;
+			children = (
+				CFBC1CC022E02D1F006B6839 /* MovieListCell.swift */,
+			);
+			name = MovieReservationCells;
+			path = MainCells/MovieReservationCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -374,7 +380,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFBC1C9722E02AAA006B6839 /* LoginViewController.swift in Sources */,
-				CFBC1CBF22E02D0D006B6839 /* MenuTitleCell.swift in Sources */,
 				CFBC1CA122E02B4C006B6839 /* MovieCategorySelectTheaterViewController.swift in Sources */,
 				CFBC1CB322E02C07006B6839 /* TheaterCategoryReservationHeaderView.swift in Sources */,
 				CFBC1CAD22E02BDC006B6839 /* MainTopView.swift in Sources */,
