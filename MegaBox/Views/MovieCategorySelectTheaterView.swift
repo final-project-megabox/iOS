@@ -59,8 +59,6 @@ class MovieCategorySelectTheatherView: UIView {
     label.clipsToBounds = true
     label.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     label.layer.shadowOffset = CGSize(width: 3, height: 3)
-    label.layer.shadowOpacity = 0.7
-    label.layer.shadowRadius = 4.0
     label.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
@@ -78,6 +76,23 @@ class MovieCategorySelectTheatherView: UIView {
     view.backgroundColor = #colorLiteral(red: 0.2199999988, green: 0.2199999988, blue: 0.2199999988, alpha: 1)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
+  }()
+  
+  private let theaterTitleLabel: UILabel = {
+    let label = UILabel()
+    label.text = "영화관"
+    label.font = UIFont.systemFont(ofSize: 11)
+    label.textAlignment = .center
+    label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    label.backgroundColor = #colorLiteral(red: 0.2199999988, green: 0.2199999988, blue: 0.2199999988, alpha: 1)
+    label.alpha = 0.7
+    label.layer.cornerRadius = 5
+    label.clipsToBounds = true
+    label.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    label.layer.shadowOffset = CGSize(width: 3, height: 3)
+    label.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
   }()
   
   private let secondLine: UILabel = {
@@ -149,6 +164,12 @@ class MovieCategorySelectTheatherView: UIView {
     selectTheaterView.leadingAnchor.constraint(equalTo: selectMovieImageView.trailingAnchor).isActive = true
     selectTheaterView.widthAnchor.constraint(equalTo: selectMovieImageView.widthAnchor).isActive = true
     selectTheaterView.heightAnchor.constraint(equalTo: selectMovieImageView.heightAnchor).isActive = true
+    
+    selectTheaterView.addSubview(theaterTitleLabel)
+    theaterTitleLabel.topAnchor.constraint(equalTo: selectTheaterView.topAnchor).isActive = true
+    theaterTitleLabel.leadingAnchor.constraint(equalTo: selectTheaterView.leadingAnchor, constant: 10).isActive = true
+    theaterTitleLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    theaterTitleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
     
     selectTheaterView.addSubview(secondLine)
     secondLine.topAnchor.constraint(equalTo: selectTheaterView.topAnchor).isActive = true
