@@ -9,8 +9,10 @@
 import UIKit
 
 class TheaterCategoryReservationViewController: UIViewController {
+  private let shared = MovieDataManager.shared
   // MARK:- Properties
   var numPages: Int = 0
+  var regionName: String = ""
   
   let menuView: TheaterCategoryReservationView = {
     let view = TheaterCategoryReservationView()
@@ -27,13 +29,18 @@ class TheaterCategoryReservationViewController: UIViewController {
     menuView.delegate = self
     
     setupMenuView()
-    
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
     startAdAnimation()
+  }
+  
+  override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    
+    menuView.headerView.placeButton.setTitle(regionName, for: .normal)
   }
   
   // MARK:- Methods

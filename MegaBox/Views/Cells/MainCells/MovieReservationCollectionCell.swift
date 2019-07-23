@@ -44,10 +44,11 @@ class MovieReservationCollectionCell: UICollectionViewCell {
     return label
   }()
   
-  let subLabel: UILabel = {
+  private let subLabel: UILabel = {
     let label = UILabel()
     label.labelSetup(text: "예매율 47.6 %", color: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), fontSize: 12, alignment: .center)
     label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+    label.numberOfLines = 0
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -71,6 +72,13 @@ class MovieReservationCollectionCell: UICollectionViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
     setupProperties()
+  }
+  
+  func cellConfigure(_ thumbImage: Data, _ movieData: MovieData, _ movieNum: Int) {
+    self.thumbnailImage.image = UIImage(data: thumbImage)
+    self.titleNameLabel.text = movieData.title
+    self.thumbnailNumLabel.text = "\(movieNum)"
+    self.subLabel.text = "예매율 \(movieData.bookingRate) %"
   }
   
   private func setupProperties() {
