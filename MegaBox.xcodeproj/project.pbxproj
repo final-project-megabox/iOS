@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9994DC02CF888F8371EC0186 /* Pods_MegaBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5938270819C4F9728D0770 /* Pods_MegaBox.framework */; };
+		CF0847E122E6AD6E0070F4FD /* ReservationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0847E022E6AD6E0070F4FD /* ReservationData.swift */; };
+		CF9CCED322E6D40800021962 /* TheaterCategorySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9CCED222E6D40800021962 /* TheaterCategorySectionCell.swift */; };
 		CFBC1C7622E0298F006B6839 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C7522E0298F006B6839 /* AppDelegate.swift */; };
 		CFBC1C7822E0298F006B6839 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C7722E0298F006B6839 /* MainViewController.swift */; };
 		CFBC1C7D22E02991006B6839 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFBC1C7C22E02991006B6839 /* Assets.xcassets */; };
@@ -67,11 +69,15 @@
 		CFBC1CFE22E1A238006B6839 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CFD22E1A238006B6839 /* Button.swift */; };
 		CFC9724922E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724822E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift */; };
 		CFC9724B22E5A21600199FD0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724A22E5A21600199FD0 /* Color.swift */; };
+		CFC9724D22E5D1B400199FD0 /* MovieDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */; };
+		CFC9724F22E5D36B00199FD0 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		328D43D246D883E45A2C9055 /* Pods-MegaBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaBox.debug.xcconfig"; path = "Target Support Files/Pods-MegaBox/Pods-MegaBox.debug.xcconfig"; sourceTree = "<group>"; };
 		3D5938270819C4F9728D0770 /* Pods_MegaBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MegaBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF0847E022E6AD6E0070F4FD /* ReservationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationData.swift; sourceTree = "<group>"; };
+		CF9CCED222E6D40800021962 /* TheaterCategorySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySectionCell.swift; sourceTree = "<group>"; };
 		CFBC1C7222E0298F006B6839 /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MegaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFBC1C7522E0298F006B6839 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFBC1C7722E0298F006B6839 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +139,8 @@
 		CFBC1CFD22E1A238006B6839 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		CFC9724822E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySelectTheaterEmptyCell.swift; sourceTree = "<group>"; };
 		CFC9724A22E5A21600199FD0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataManager.swift; sourceTree = "<group>"; };
+		CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F238FC7C9463514149694227 /* Pods-MegaBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaBox.release.xcconfig"; path = "Target Support Files/Pods-MegaBox/Pods-MegaBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,7 +170,6 @@
 				328D43D246D883E45A2C9055 /* Pods-MegaBox.debug.xcconfig */,
 				F238FC7C9463514149694227 /* Pods-MegaBox.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -222,6 +229,7 @@
 		CFBC1C8922E029D7006B6839 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */,
 				CFBC1C9622E02AAA006B6839 /* LoginViewController.swift */,
 				CFBC1C9822E02ADE006B6839 /* NavigationDrawerViewController.swift */,
 				CFBC1C7722E0298F006B6839 /* MainViewController.swift */,
@@ -316,6 +324,7 @@
 				CFC9724822E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift */,
 				CFBC1CF722E19CA1006B6839 /* TheaterCategorySelectTheaterRegionListCell.swift */,
 				CFBC1CD822E02E41006B6839 /* TheaterCategoryAdCollectionCell.swift */,
+				CF9CCED222E6D40800021962 /* TheaterCategorySectionCell.swift */,
 				CFBC1CDA22E02E53006B6839 /* TheaterCategoryCell.swift */,
 			);
 			path = ReservationCells;
@@ -325,8 +334,10 @@
 			isa = PBXGroup;
 			children = (
 				CFBC1CEB22E180FD006B6839 /* MovieData.swift */,
+				CF0847E022E6AD6E0070F4FD /* ReservationData.swift */,
 				CFBC1CEF22E1829F006B6839 /* RegionData.swift */,
 				CFBC1CED22E1810B006B6839 /* NetworkService.swift */,
+				CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -456,6 +467,7 @@
 				CFBC1CB322E02C07006B6839 /* TheaterCategoryReservationHeaderView.swift in Sources */,
 				CFBC1CAD22E02BDC006B6839 /* MainTopView.swift in Sources */,
 				CFBC1CE522E02EC8006B6839 /* MyPageOneContentCell.swift in Sources */,
+				CFC9724F22E5D36B00199FD0 /* SplashViewController.swift in Sources */,
 				CFBC1C7822E0298F006B6839 /* MainViewController.swift in Sources */,
 				CFBC1CC722E02D79006B6839 /* MovieReservationCollectionCell.swift in Sources */,
 				CFBC1CD522E02E14006B6839 /* MainBranchNewsCell.swift in Sources */,
@@ -464,6 +476,8 @@
 				CFC9724B22E5A21600199FD0 /* Color.swift in Sources */,
 				CFBC1CBD22E02C7C006B6839 /* MyPageContentView.swift in Sources */,
 				CFBC1CC122E02D1F006B6839 /* MovieListCell.swift in Sources */,
+				CF9CCED322E6D40800021962 /* TheaterCategorySectionCell.swift in Sources */,
+				CF0847E122E6AD6E0070F4FD /* ReservationData.swift in Sources */,
 				CFBC1CF222E1947E006B6839 /* TheaterCategorySelectTheaterViewController.swift in Sources */,
 				CFBC1CEE22E1810B006B6839 /* NetworkService.swift in Sources */,
 				CFBC1C9F22E02B38006B6839 /* MovieCategoryReservationViewController.swift in Sources */,
@@ -500,6 +514,7 @@
 				CFBC1CB522E02C17006B6839 /* MovieCategoryReservationView.swift in Sources */,
 				CFBC1CAF22E02BE8006B6839 /* QuickReservationView.swift in Sources */,
 				CFBC1CD722E02E22006B6839 /* MainNotificationCell.swift in Sources */,
+				CFC9724D22E5D1B400199FD0 /* MovieDataManager.swift in Sources */,
 				CFBC1CF622E19C90006B6839 /* TheaterCategorySelectTheaterRegionCell.swift in Sources */,
 				CFBC1C9322E02A66006B6839 /* Label.swift in Sources */,
 				CFBC1C9B22E02AF5006B6839 /* QuickReservationViewController.swift in Sources */,
