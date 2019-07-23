@@ -13,14 +13,14 @@ class MovieListCell: UITableViewCell {
   
   let gradeImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = #imageLiteral(resourceName: "all")
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
   
   let movieTitleLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "스파이더맨: 파 프롬 홈", color: #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), fontSize: 13, alignment: .left)
+    label.textColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+    label.textAlignment = .left
     label.font = UIFont.boldSystemFont(ofSize: 13)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
@@ -28,7 +28,8 @@ class MovieListCell: UITableViewCell {
   
   let movieSubTitleLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "디지털(자막),ATMOS(자막),3D(자막),3D ATMOS(자막)", color: #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1), fontSize: 11, alignment: .left)
+    label.textColor = #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1)
+    label.textAlignment = .left
     label.font = UIFont.systemFont(ofSize: 11, weight: .thin)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
@@ -36,7 +37,8 @@ class MovieListCell: UITableViewCell {
   
   let movieDurationLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "000분", color: #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1), fontSize: 12, alignment: .center)
+    label.textColor = #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1)
+    label.textAlignment = .center
     label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
@@ -44,7 +46,6 @@ class MovieListCell: UITableViewCell {
   
   let selectCheckImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = #imageLiteral(resourceName: "ticket_img_check")
     imageView.isHidden = true
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
@@ -57,6 +58,31 @@ class MovieListCell: UITableViewCell {
     setupTableViewCell()
   }
   
+  func setting(movie: MovieList) {
+    movie.isSelect ? isTrue() : isFalse()
+    
+    gradeImageView.image = UIImage(named: movie.ageImage)
+    movieTitleLabel.text = movie.title
+    movieSubTitleLabel.text = movie.type
+    movieDurationLabel.text = movie.duration
+    selectCheckImageView.image = UIImage(named: movie.checkImage)
+  }
+  
+  func isTrue() {
+    contentView.backgroundColor = #colorLiteral(red: 0.3568627451, green: 0.7450980392, blue: 0.7843137255, alpha: 1)
+    movieTitleLabel.textColor = .white
+    movieSubTitleLabel.textColor = .white
+    movieDurationLabel.alpha = 0
+    selectCheckImageView.isHidden = false
+  }
+  
+  func isFalse() {
+    contentView.backgroundColor = .white
+    movieTitleLabel.textColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+    movieSubTitleLabel.textColor = #colorLiteral(red: 0.5960784314, green: 0.5960784314, blue: 0.5960784314, alpha: 1)
+    movieDurationLabel.alpha = 1
+    selectCheckImageView.isHidden = true
+  }
   
   
   private func setupTableViewCell() {
@@ -82,7 +108,6 @@ class MovieListCell: UITableViewCell {
     movieSubTitleLabel.heightAnchor.constraint(equalTo: movieTitleLabel.heightAnchor).isActive = true
     movieSubTitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
     
-    
     movieDurationLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
     movieDurationLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1).isActive = true
     movieDurationLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.3).isActive = true
@@ -93,14 +118,7 @@ class MovieListCell: UITableViewCell {
     selectCheckImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
     selectCheckImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     
-    
-    
-    
   }
-  
-  
-  
-  
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

@@ -11,7 +11,7 @@ import UIKit
 public extension UIButton {
   func touchUpButton(isTouched: Bool, width: CGFloat) {
     self.backgroundColor = #colorLiteral(red: 0.8784313725, green: 0.8784313725, blue: 0.8784313725, alpha: 1)
-    self.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+    self.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .regular)
     let border = CALayer()
     let width = UIScreen.main.bounds.width
     border.backgroundColor = UIColor.appColor(.megaBoxColor).cgColor

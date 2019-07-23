@@ -36,4 +36,10 @@ extension MovieCategoryReservationViewController: MovieCategoryReservationViewDe
   func dismissButtonDidTapped() {
     self.presentingViewController?.presentingViewController?.dismiss(animated: false)
   }
+  
+  func touchUpSelectMovieButton() {
+    let selectTheaterVC = MovieCategorySelectTheatherViewController()
+    present(selectTheaterVC, animated: false)
+  }
+  
 }
