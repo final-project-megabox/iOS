@@ -9,7 +9,9 @@
 import UIKit
 
 class TheaterCategoryReservationView: UIView {
+  private let shared = MovieDataManager.shared
   var delegate: TheaterCategoryReservationViewDelegate?
+  
   let headerView = TheaterCategoryReservationHeaderView()
   
   private let menuTitleView: UIView = {
@@ -46,6 +48,10 @@ class TheaterCategoryReservationView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    
+    theaterTableView.dataSource = self
+    theaterTableView.delegate = self
+    
     setupProperties()
   }
   
@@ -54,23 +60,19 @@ class TheaterCategoryReservationView: UIView {
   }
   
   private func setupProperties() {
-    theaterTableView.dataSource = self
-    theaterTableView.delegate = self
-    
     self.addSubview(menuTitleView)
     menuTitleView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
     menuTitleView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     menuTitleView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    menuTitleView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     
-    menuTitleView.addSubview(menuTitleLabel)
-    menuTitleLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-    menuTitleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    self.addSubview(menuTitleLabel)
+    menuTitleLabel.topAnchor.constraint(equalTo: menuTitleView.topAnchor, constant: 15).isActive = true
+    menuTitleLabel.centerXAnchor.constraint(equalTo: menuTitleView.centerXAnchor).isActive = true
     menuTitleLabel.centerYAnchor.constraint(equalTo: menuTitleView.centerYAnchor).isActive = true
     menuTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
-    menuTitleView.addSubview(menuTitleDismissButton)
-    menuTitleDismissButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+    self.addSubview(menuTitleDismissButton)
+    menuTitleDismissButton.leadingAnchor.constraint(equalTo: menuTitleView.leadingAnchor).isActive = true
     menuTitleDismissButton.centerYAnchor.constraint(equalTo: menuTitleView.centerYAnchor).isActive = true
     
     self.addSubview(theaterTableView)
@@ -87,7 +89,7 @@ class TheaterCategoryReservationView: UIView {
 
 extension TheaterCategoryReservationView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 20
+    return shared.reservationMovieData.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

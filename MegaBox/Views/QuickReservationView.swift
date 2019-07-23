@@ -130,7 +130,6 @@ class QuickReservationView: UIView {
   
   private func autoLayout() {
     let margin: CGFloat = 10
-    print("[Log] \(UIScreen.main.bounds.width)")
     NSLayoutConstraint.activate([
       topView.topAnchor.constraint(equalTo: self.topAnchor, constant: -250),
       topView.leadingAnchor.constraint(equalTo: self.leadingAnchor),

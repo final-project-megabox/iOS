@@ -9,6 +9,8 @@
 import UIKit
 
 class TheaterCategorySelectTheaterViewController: UIViewController {
+  private let shared = MovieDataManager.shared
+  private let urlStr: String = "http://megabox.hellocoding.shop//database/reservationFirstView/"
   
   private let selectTheaterView: TheaterCategorySelectTheaterView = {
     let view = TheaterCategorySelectTheaterView()
@@ -41,8 +43,20 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
 extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheaterViewDelegate {
   func touchUpmenuTitleSelectbutton() {
     let theaterCategoryReservationVC = TheaterCategoryReservationViewController()
+    guard let selectedRegionName = selectTheaterView.movieTitleLabel.text else { return }
+    theaterCategoryReservationVC.regionName = selectedRegionName
     
-    self.present(theaterCategoryReservationVC, animated: false)
+    NetworkService.getReservationData(urlStr, regionName: selectedRegionName, date: "2019-07-20") { result in
+      switch result {
+      case .success(let data):
+        
+        self.shared.reservationMovieData = data.sorted(by: { $0.movie < $1.movie })
+        print(self.shared.reservationMovieData)
+        self.present(theaterCategoryReservationVC, animated: false)
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
   }
 
   func touchUpCancelButton() {

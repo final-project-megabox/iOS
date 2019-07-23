@@ -56,7 +56,7 @@ class TheaterCategorySelectTheaterView: UIView {
     return button
   }()
   
-  private let movieTitleLabel: UILabel = {
+  let movieTitleLabel: UILabel = {
     let label = UILabel()
     label.text = "원하는 영화관을 선택해주세요."
     label.textAlignment = .center
@@ -253,10 +253,13 @@ extension TheaterCategorySelectTheaterView: UITableViewDelegate {
       selectedRegionNumber = indexPath.row
       regionListTableView.reloadData()
     } else {
-      movieTitleLabel.text = regionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
-      movieTitleLabel.textColor = UIColor.appColor(.selectedCellMintColor)
       let cell = tableView.cellForRow(at: indexPath) as! TheaterCategorySelectTheaterRegionListCell
       cell.regionListName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+      
+      
+      movieTitleLabel.text = regionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
+      movieTitleLabel.textColor = UIColor.appColor(.selectedCellMintColor)
+      
       menuTitleSelectbutton.setTitleColor(UIColor.appColor(.megaBoxColor), for: .normal)
       menuTitleSelectbutton.layer.borderColor = UIColor.appColor(.megaBoxColor).cgColor
       menuTitleSelectbutton.isEnabled = true

@@ -10,10 +10,20 @@ import UIKit
 
 class MainViewController: UIViewController {
   
-  private let movieData: [MovieData] = []
-  
   private let mainTopView = MainTopView()
-  private let mainTableView = UITableView()
+  private let mainTableView: UITableView = {
+    let tableView = UITableView()
+    tableView.register(MainTopMediaPlayCell.self, forCellReuseIdentifier: MainTopMediaPlayCell.identifier)
+    tableView.register(MainMovieReservationCell.self, forCellReuseIdentifier: MainMovieReservationCell.identifier)
+    tableView.register(MainShortMenuCell.self, forCellReuseIdentifier: MainShortMenuCell.identifier)
+    tableView.register(MainAdCell.self, forCellReuseIdentifier: MainAdCell.identifier)
+    tableView.register(MainEventCell.self, forCellReuseIdentifier: MainEventCell.identifier)
+    tableView.register(MainMovieBoxCell.self, forCellReuseIdentifier: MainMovieBoxCell.identifier)
+    tableView.register(MainMoviePostCell.self, forCellReuseIdentifier: MainMoviePostCell.identifier)
+    tableView.register(MainBranchNewsCell.self, forCellReuseIdentifier: MainBranchNewsCell.identifier)
+    tableView.register(MainNotificationCell.self, forCellReuseIdentifier: MainNotificationCell.identifier)
+    return tableView
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,16 +37,6 @@ class MainViewController: UIViewController {
     self.mainTableView.dataSource = self
     self.mainTableView.delegate = self
     self.mainTopView.delegate = self
-    
-    self.mainTableView.register(MainTopMediaPlayCell.self, forCellReuseIdentifier: MainTopMediaPlayCell.identifier)
-    self.mainTableView.register(MainMovieReservationCell.self, forCellReuseIdentifier: MainMovieReservationCell.identifier)
-    self.mainTableView.register(MainShortMenuCell.self, forCellReuseIdentifier: MainShortMenuCell.identifier)
-    self.mainTableView.register(MainAdCell.self, forCellReuseIdentifier: MainAdCell.identifier)
-    self.mainTableView.register(MainEventCell.self, forCellReuseIdentifier: MainEventCell.identifier)
-    self.mainTableView.register(MainMovieBoxCell.self, forCellReuseIdentifier: MainMovieBoxCell.identifier)
-    self.mainTableView.register(MainMoviePostCell.self, forCellReuseIdentifier: MainMoviePostCell.identifier)
-    self.mainTableView.register(MainBranchNewsCell.self, forCellReuseIdentifier: MainBranchNewsCell.identifier)
-    self.mainTableView.register(MainNotificationCell.self, forCellReuseIdentifier: MainNotificationCell.identifier)
   }
   
   override func viewDidLayoutSubviews() {
@@ -116,7 +116,6 @@ extension MainViewController: UITableViewDataSource {
     if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainMovieReservationCell.identifier) as! MainMovieReservationCell
       // Owl Stage Button Click Delegate
-      cell.delegate = self
       return cell
     } else if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainShortMenuCell.identifier) as! MainShortMenuCell
@@ -195,7 +194,7 @@ extension MainViewController: UITableViewDelegate {
       return 380
     } else if indexPath.row == 5 {
       // 무비박스
-      return ((UIScreen.main.bounds.width) * 460) / 750
+      return ((UIScreen.main.bounds.width - 20) * 460) / 708
     } else if indexPath.row == 6 {
       // 광고
       return 90
