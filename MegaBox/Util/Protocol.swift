@@ -33,9 +33,13 @@ protocol TheaterCategoryReservationViewDelegate {
   func touchUpMenuTitleDismissButton()
 }
 
-//영화별 예매 버튼 클릭 후 X 버튼 클릭
+
 protocol MovieCategoryReservationViewDelegate {
+  //영화별 예매 버튼 클릭 후 X 버튼 클릭
   func dismissButtonDidTapped()
+  
+  // 영화별 예매 버튼 클릭 후 선택완료버튼
+  func touchUpSelectMovieButton()
 }
 
 // 로그인 버튼 클릭
@@ -51,4 +55,19 @@ protocol MainMovieReservationCellDelegate {
 // OwlStageOuter 버튼 클릭 (전체, 메가박스, 영화, 제휴, 영화관)
 protocol MainEventCellDelegate {
   func touchUpEventOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading: NSLayoutConstraint, _ stackViewWidth: CGFloat)
+}
+
+protocol MovieCategorySelectTheatherViewDelegate {
+  //영화별 예매 -> 뒤로가기(메인화면으로)
+  func touchUpDismissButton()
+  
+  //영화별 예매 -> 영화선택
+  func touchUpSelectMovieButton()
+  
+  //영화별 예매 -> 영화관 선택
+  func touchUpSelectTheaterButton()
+  
+  //영화별 예매 -> 날짜 선택
+  func touchUpDateButton()
+  
 }
