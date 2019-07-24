@@ -27,6 +27,8 @@ class SplashViewController: UIViewController {
       switch result {
       case .success(let data):
         self.shared.allMovieData = data
+        self.shared.sortedMovieTitle = data.sorted(by: { $0.bookingRate > $1.bookingRate }).map({ $0.title })
+        
         let mainVC = MainViewController()
         self.present(mainVC, animated: false)
       case .failure(let err):

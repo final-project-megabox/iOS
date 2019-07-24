@@ -13,12 +13,14 @@ class TheaterCategorySectionCell: UITableViewCell {
   
   let movieGradeImage: UIImageView = {
     let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
   
   let movieTitle: UILabel = {
     let label = UILabel()
+    label.text = "라이온 킹"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()

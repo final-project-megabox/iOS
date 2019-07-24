@@ -17,4 +17,8 @@ class MovieDataManager {
   
   var reservationMovieData: [ReservationData] = []
   var sortedReservationMovie: [ReservationData] = []
+  
+  var sortedMovieTitle: [String] = []
+  
+  var movieCounts: [String: Int] = [:]
 }

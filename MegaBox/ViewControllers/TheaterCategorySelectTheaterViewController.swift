@@ -49,16 +49,36 @@ extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheat
     NetworkService.getReservationData(urlStr, regionName: selectedRegionName, date: "2019-07-20") { result in
       switch result {
       case .success(let data):
-        
         self.shared.reservationMovieData = data.sorted(by: { $0.movie < $1.movie })
-        print(self.shared.reservationMovieData)
+        
+        let movies = self.shared.reservationMovieData
+        let titles = self.shared.sortedMovieTitle
+        var movieCounts: [String: Int] = [:]
+        
+        // 영화 데이터 갯수 구하는 로직
+        for i in 0..<movies.count {
+          for j in 0..<titles.count {
+            if movies[i].movie == titles[j] {
+              if movieCounts[movies[i].movie] == nil {
+                movieCounts[movies[i].movie] = 1
+              } else {
+                var value = movieCounts[movies[i].movie]!
+                value += 1
+                movieCounts[movies[i].movie] = value
+              }
+            }
+          }
+        }
+        
+        self.shared.movieCounts = movieCounts
+        
         self.present(theaterCategoryReservationVC, animated: false)
       case .failure(let err):
         print(err.localizedDescription)
       }
     }
   }
-
+ 
   func touchUpCancelButton() {
   self.presentingViewController?.presentingViewController?.dismiss(animated: false)
   }
