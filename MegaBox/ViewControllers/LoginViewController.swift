@@ -10,26 +10,41 @@ import UIKit
 
 class LoginViewController: UIViewController {
   
-  let loginTopView = LoginView()
+  let loginView: LoginView = {
+    let view = LoginView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    loginView.delegate = self
     self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    setupLoginView()
+  }
+  
+  private func setupLoginView() {
+    view.addSubview(loginView)
     
-    view.addSubview(loginTopView)
-    loginTopView.translatesAutoresizingMaskIntoConstraints = false
     let guide = view.safeAreaLayoutGuide
-    loginTopView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
-    loginTopView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
-    loginTopView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
-    loginTopView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
-    
+    loginView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+    loginView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+    loginView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+    loginView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
     self.view.endEditing(true)
   }
+}
+
+extension LoginViewController: LoginViewDelegate {
+  func touchUpSelectDismissButton() {
+    self.presentingViewController?.presentingViewController?.dismiss(animated: false)
+  }
+  
+  
 }

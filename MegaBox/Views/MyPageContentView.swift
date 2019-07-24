@@ -90,7 +90,7 @@ extension MyPageContentView: UITableViewDataSource {
       return one
     case 3:
       three.selectionStyle = .none
-      three.firstCountLabel.text = "관람권/할인쿠폰/포토카드쿠폰"
+      three.firstContentLabel.text = "관람권/할인쿠폰/포토카드쿠폰"
       three.firstCountLabel.text = "0"
       three.secondContentLabel.text = "고객 만족도조사 발급쿠폰"
       three.secondCountLabel.text = "0"
@@ -136,18 +136,7 @@ extension MyPageContentView: UITableViewDataSource {
       return one
     }
     
-    
-    
-    
-    //    if indexPath.row == 0 {
-    //      let cell = MyPageHeaderCell()
-    //      cell.selectionStyle = .none
-    //      return cell
-    //    } else {
-    //      let cell = MyPageContentCell()
-    //      cell.selectionStyle = .none
-    //      return cell
-    //    }
+
     
   }
   

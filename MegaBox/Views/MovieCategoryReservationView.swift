@@ -32,7 +32,7 @@ class MovieCategoryReservationView: UIView {
   
   private let menuTitleViewBottomLine: UILabel = {
     let label = UILabel()
-    label.backgroundColor = #colorLiteral(red: 0.8800999603, green: 0.8800999603, blue: 0.8800999603, alpha: 1)
+    label.backgroundColor = UIColor.appColor(.defaultGrayColor)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -41,7 +41,7 @@ class MovieCategoryReservationView: UIView {
     let button = UIButton(type: .custom)
     button.addTarget(self, action: #selector(dismissButtonDidTpaaed), for: .touchUpInside)
     button.setImage(#imageLiteral(resourceName: "purpleCancel_icon"), for: .normal)
-    button.tintColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+    button.tintColor = UIColor.appColor(.megaBoxColor)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -60,7 +60,7 @@ class MovieCategoryReservationView: UIView {
     button.setTitle("선택완료", for: .normal)
     button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-    button.setTitleColor(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), for: .normal)
+    button.setTitleColor(UIColor.appColor(.defaultGrayColor), for: .normal)
     button.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
     button.layer.borderWidth = 1
     button.layer.cornerRadius = 5
@@ -76,21 +76,25 @@ class MovieCategoryReservationView: UIView {
     label.textAlignment = .center
     label.font = UIFont.systemFont(ofSize: 13)
     label.textColor = .white
-    label.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+    label.backgroundColor = UIColor.appColor(.darkBgColor)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
-  private let allMovieButton: UIButton = {
+  let allMovieButton: UIButton = {
     let button = UIButton()
     button.setTitle("모든영화", for: .normal)
+    button.tag = 0
+    button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
   
-  private let curationButton: UIButton = {
+  let curationButton: UIButton = {
     let button = UIButton()
     button.setTitle("큐레이션", for: .normal)
+    button.tag = 1
+    button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -113,6 +117,10 @@ class MovieCategoryReservationView: UIView {
     setupTableView()
     
     
+  }
+  
+  @objc func didTapButton(_ sender: UIButton) {
+    reservationDelegate?.touchUpButton(sender)
   }
   
   private func makeData() {
@@ -242,10 +250,10 @@ extension MovieCategoryReservationView: UITableViewDelegate {
         movieData[index].isSelect = true
 
         self.movieTitleLabel.text = cell.movieTitleLabel.text
-        self.movieTitleLabel.textColor = #colorLiteral(red: 0.3568627451, green: 0.7450980392, blue: 0.7843137255, alpha: 1)
+        self.movieTitleLabel.textColor = UIColor.appColor(.selectedCellMintColor)
         
         self.menuTitleSelectbutton.isEnabled = true
-        self.menuTitleSelectbutton.setTitleColor(#colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1), for: .normal)
+        self.menuTitleSelectbutton.setTitleColor(UIColor.appColor(.megaBoxColor), for: .normal)
         self.menuTitleSelectbutton.layer.borderColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
       case false:
         movieData[index].isSelect = false

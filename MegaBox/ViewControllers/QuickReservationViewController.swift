@@ -75,6 +75,7 @@ class QuickReservationViewController: UIViewController {
 extension QuickReservationViewController: QuickReservationViewDelegate {
   func touchUpfarightButton() {
     let movieCategoryVC = MovieCategoryReservationViewController()
+    movieCategoryVC.dismissType = .two
     self.present(movieCategoryVC, animated: false)
   }
   
