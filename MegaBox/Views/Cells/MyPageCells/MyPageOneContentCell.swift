@@ -12,7 +12,7 @@ class MyPageOneContentCell: UITableViewCell {
   
   let contentViewTopLine: UILabel = {
     let label = UILabel()
-    label.backgroundColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+    label.backgroundColor = UIColor.appColor(.defaultGrayColor)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -28,7 +28,7 @@ class MyPageOneContentCell: UITableViewCell {
   let firstContentLabel: UILabel = {
     let label = UILabel()
     label.text = "text"
-    label.textColor = #colorLiteral(red: 0.3254901961, green: 0.3411764706, blue: 0.3803921569, alpha: 1)
+    label.textColor = UIColor.appColor(.darkBgColor)
     label.font = UIFont.systemFont(ofSize: 16, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
@@ -39,7 +39,7 @@ class MyPageOneContentCell: UITableViewCell {
     label.text = "0"
     label.textAlignment = .right
     label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
-    label.textColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+    label.textColor = UIColor.appColor(.megaBoxColor)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -53,7 +53,7 @@ class MyPageOneContentCell: UITableViewCell {
   
   let firstContentViewBottomLine: UILabel = {
     let label = UILabel()
-    label.backgroundColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+    label.backgroundColor = UIColor.appColor(.defaultGrayColor)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -62,7 +62,7 @@ class MyPageOneContentCell: UITableViewCell {
   //////////
   let separatView: UIView = {
     let view = UIView()
-    view.backgroundColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
+    view.backgroundColor = UIColor.appColor(.selectedCellGrayColor)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()

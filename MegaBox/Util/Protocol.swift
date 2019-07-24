@@ -75,7 +75,11 @@ protocol MovieCategorySelectTheatherViewDelegate {
   
 }
 
-//로그인페이지 X버튼 클릭 -> 메인화면으로
+//로그인페이지
 protocol LoginViewDelegate {
+  // X버튼 클릭 -> 메인화면으로
   func touchUpSelectDismissButton()
+  
+  //임시 - 로그인 버튼 클릭후 마이페이지
+  func touchUpLoginButton()
 }
