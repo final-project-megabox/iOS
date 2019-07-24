@@ -17,15 +17,16 @@ class MainTopView: UIView {
   // MARK: topProperties
   var delegate: MainTopViewDelegate?
   
-  private let topMediaVisualTopView: UIView = {
+  let topMediaVisualTopView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     view.alpha = 0.3
+    view.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
   
-  private let hamburgerMenu: UIButton = {
+  let hamburgerMenu: UIButton = {
     let button = UIButton()
     button.setImage(#imageLiteral(resourceName: "main_top_menu_white_btn"), for: .normal)
     button.addTarget(self, action: #selector(hamburgerMenuButtonDidTpaaed), for: .touchUpInside)
@@ -33,7 +34,7 @@ class MainTopView: UIView {
     return button
   }()
   
-  private let titleImage: UIImageView = {
+  let titleImage: UIImageView = {
     let imageView = UIImageView()
     imageView.image = #imageLiteral(resourceName: "main_top_logo_white")
     imageView.contentMode = .scaleAspectFit
@@ -41,14 +42,14 @@ class MainTopView: UIView {
     return imageView
   }()
   
-  private let quickReservationButton: UIButton = {
+  let quickReservationButton: UIButton = {
     let button = UIButton()
     button.setTitle("빠른예매", for: .normal)
     button.addTarget(self, action: #selector(quickReservationButtonDidTapped), for: .touchUpInside)
     button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 7, bottom: 5, right: 7)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
     button.layer.borderColor = UIColor.white.cgColor
-    button.layer.borderWidth = 1
+    button.layer.borderWidth = 2
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()

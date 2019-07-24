@@ -10,6 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController {
   
+  private var isTop: Bool = true
+  
   private let mainTopView = MainTopView()
   private let mainTableView: UITableView = {
     let tableView = UITableView()
@@ -177,6 +179,38 @@ extension MainViewController: UITableViewDataSource {
 }
 
 extension MainViewController: UITableViewDelegate {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    // 해더뷰 고정 해제
+    let scrollHeaderHeight = ((UIScreen.main .bounds.width * 907) / 1080) + 10
+    if scrollView.contentOffset.y >= scrollHeaderHeight {
+      if isTop == false {
+        return
+      }
+      mainTopView.topMediaVisualTopView.layer.borderWidth = 0.5
+      mainTopView.titleImage.image = #imageLiteral(resourceName: "main_top_logo_purple")
+      mainTopView.quickReservationButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+      mainTopView.quickReservationButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+      mainTopView.quickReservationButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+      mainTopView.topMediaVisualTopView.alpha = 1
+      mainTopView.topMediaVisualTopView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+      mainTopView.hamburgerMenu.setImage(#imageLiteral(resourceName: "main_top_menu_gray_btn"), for: .normal)
+      isTop.toggle()
+    } else {
+      if isTop == true {
+        return
+      }
+      mainTopView.topMediaVisualTopView.layer.borderWidth = 0
+      mainTopView.titleImage.image = #imageLiteral(resourceName: "main_top_logo_white")
+      mainTopView.quickReservationButton.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+      mainTopView.quickReservationButton.backgroundColor = .clear
+      mainTopView.quickReservationButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+      mainTopView.topMediaVisualTopView.alpha = 0.3
+      mainTopView.topMediaVisualTopView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+      mainTopView.hamburgerMenu.setImage(#imageLiteral(resourceName: "main_top_menu_white_btn"), for: .normal)
+      isTop.toggle()
+    }
+  }
+  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath.row == 0 {
       return (UIScreen.main.bounds.width * 907) / 1080
