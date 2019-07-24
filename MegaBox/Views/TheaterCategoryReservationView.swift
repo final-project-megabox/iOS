@@ -14,6 +14,8 @@ class TheaterCategoryReservationView: UIView {
   
   let headerView = TheaterCategoryReservationHeaderView()
   
+  private var movieCount = 0
+  
   private let menuTitleView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -41,6 +43,7 @@ class TheaterCategoryReservationView: UIView {
   
   let theaterTableView: UITableView = {
     let tableView = UITableView()
+    tableView.register(TheaterCategorySectionCell.self, forCellReuseIdentifier: TheaterCategoryCell.identifier)
     tableView.register(TheaterCategoryCell.self, forCellReuseIdentifier: TheaterCategoryCell.identifier)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
@@ -89,12 +92,18 @@ class TheaterCategoryReservationView: UIView {
 
 extension TheaterCategoryReservationView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return shared.reservationMovieData.count
+    let movieCount = shared.reservationMovieData.count
+    let titleCount = shared.sortedMovieTitle.count
+    return movieCount + titleCount
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//    if indexPath
+//    let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySectionCell.identifier, for: indexPath) as! TheaterCategorySectionCell
     
     let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryCell.identifier, for: indexPath) as! TheaterCategoryCell
+    
+    
     return cell
   }
 }
@@ -107,8 +116,6 @@ extension TheaterCategoryReservationView: UITableViewDelegate {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     // 해더뷰 고정 해제
     let scrollHeaderHeight = ((UIScreen.main.bounds.width * 495) / 844) - 50
-    print("[Log] \(scrollView.contentOffset.y)")
-    print("[Log] \(scrollHeaderHeight)")
     if scrollView.contentOffset.y <= scrollHeaderHeight {
       if scrollView.contentOffset.y >= 0 {
         scrollView.contentInset = UIEdgeInsets(top: -scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)

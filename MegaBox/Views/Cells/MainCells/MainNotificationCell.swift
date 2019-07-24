@@ -33,6 +33,20 @@ class MainNotificationCell: UITableViewCell {
     return button
   }()
   
+  private let notificationText: UILabel = {
+    let label = UILabel()
+    label.labelSetup(text: "[광주하남] 주차장 시스템 변경 안내", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 14, alignment: .left)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
+  private let notificationDateText: UILabel = {
+    let label = UILabel()
+    label.labelSetup(text: "2019.07.23", color: #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1), fontSize: 13, alignment: .right)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
@@ -61,6 +75,14 @@ class MainNotificationCell: UITableViewCell {
     plusButton.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -margin * 2).isActive = true
     plusButton.widthAnchor.constraint(equalToConstant: 15).isActive = true
     plusButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    
+    guideBGView.addSubview(notificationText)
+    notificationText.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin * 2).isActive = true
+    notificationText.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor,constant: margin * 2).isActive = true
+
+    guideBGView.addSubview(notificationDateText)
+    notificationDateText.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin * 2).isActive = true
+    notificationDateText.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor,constant: -margin * 2).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
