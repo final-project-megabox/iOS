@@ -32,8 +32,9 @@ class TheaterCategorySelectTheaterEmptyCell: UITableViewCell {
     let button = UIButton()
     button.backgroundColor = UIColor.appColor(.megaBoxColor)
     button.setTitle("선호영화관 등록", for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .bold)
     button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+    button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()

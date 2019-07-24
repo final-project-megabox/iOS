@@ -14,6 +14,7 @@ class TheaterCategorySelectTheaterRegionCell: UITableViewCell {
   let regionName: UILabel = {
     let label = UILabel()
     label.textAlignment = .left
+    label.font = UIFont.systemFont(ofSize: 13, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -35,7 +36,7 @@ class TheaterCategorySelectTheaterRegionCell: UITableViewCell {
     let margin: CGFloat = 10
     self.addSubview(regionName)
     regionName.topAnchor.constraint(equalTo: self.topAnchor, constant: margin).isActive = true
-    regionName.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin).isActive = true
+    regionName.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 2).isActive = true
     regionName.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     regionName.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin).isActive = true
     
