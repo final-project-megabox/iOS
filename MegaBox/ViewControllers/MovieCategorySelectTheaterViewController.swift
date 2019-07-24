@@ -45,9 +45,9 @@ extension MovieCategorySelectTheatherViewController: MovieCategorySelectTheather
   
   //영화 선택
   func touchUpSelectMovieButton() {
-    print("영화 선택")
-//    let movieCategoryReservationVC = MovieCategoryReservationViewController()
-//    present(movieCategoryReservationVC, animated: true)
+    let movieCategoryVC = MovieCategoryReservationViewController()
+    movieCategoryVC.dismissType = .one
+    self.present(movieCategoryVC, animated: false)
   }
   
   //영화관 선택

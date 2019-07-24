@@ -8,9 +8,20 @@
 
 import UIKit
 
+enum DismissType {
+  case one
+  case two
+}
+
 class MovieCategoryReservationViewController: UIViewController {
   
-  let menuView = MovieCategoryReservationView()
+  let menuView: MovieCategoryReservationView = {
+    let view = MovieCategoryReservationView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  var dismissType: DismissType = .one
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,20 +32,39 @@ class MovieCategoryReservationViewController: UIViewController {
   
   private func setupMenuView() {
     view.addSubview(menuView)
-    menuView.translatesAutoresizingMaskIntoConstraints = false
+    
     let guide = view.safeAreaLayoutGuide
-    NSLayoutConstraint.activate([
-      menuView.topAnchor.constraint(equalTo: guide.topAnchor),
-      menuView.leadingAnchor.constraint(equalTo: guide.leadingAnchor),
-      menuView.trailingAnchor.constraint(equalTo: guide.trailingAnchor),
-      menuView.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
-      ])
+    
+      menuView.topAnchor.constraint(equalTo: guide.topAnchor).isActive = true
+      menuView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+      menuView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+      menuView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
+    
   }
 }
 
 extension MovieCategoryReservationViewController: MovieCategoryReservationViewDelegate {
+  func touchUpButton(_ sender: UIButton) {
+    switch sender.tag {
+    case 0:
+      sender.touchUpButton(isTouched: true, width: menuView.allMovieButton.frame.width)
+      menuView.curationButton.touchUpButton(isTouched: false, width: 0)
+    case 1:
+      menuView.allMovieButton.touchUpButton(isTouched: false, width: 0)
+      sender.touchUpButton(isTouched: true, width: menuView.curationButton.frame.width)
+    default:
+      break
+    }
+  }
+  
   func dismissButtonDidTapped() {
-    self.presentingViewController?.presentingViewController?.dismiss(animated: false)
+    switch dismissType {
+    case .one:
+      self.presentingViewController?.dismiss(animated: false)
+    case .two:
+      self.presentingViewController?.presentingViewController?.dismiss(animated: false)
+    }
+    
   }
   
   func touchUpSelectMovieButton() {

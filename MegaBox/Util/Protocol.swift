@@ -40,6 +40,9 @@ protocol MovieCategoryReservationViewDelegate {
   
   // 영화별 예매 버튼 클릭 후 선택완료버튼
   func touchUpSelectMovieButton()
+  
+  // 모든영화, 큐레이션 버튼
+  func touchUpButton(_ sender: UIButton)
 }
 
 // 로그인 버튼 클릭
@@ -70,4 +73,9 @@ protocol MovieCategorySelectTheatherViewDelegate {
   //영화별 예매 -> 날짜 선택
   func touchUpDateButton()
   
+}
+
+//로그인페이지 X버튼 클릭 -> 메인화면으로
+protocol LoginViewDelegate {
+  func touchUpSelectDismissButton()
 }

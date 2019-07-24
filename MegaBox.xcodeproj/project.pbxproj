@@ -70,6 +70,7 @@
 		CFC9724B22E5A21600199FD0 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724A22E5A21600199FD0 /* Color.swift */; };
 		CFC9724D22E5D1B400199FD0 /* MovieDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */; };
 		CFC9724F22E5D36B00199FD0 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */; };
+		E6D5693322E81B0B00C13F1E /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5693222E81B0B00C13F1E /* AlertController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +140,7 @@
 		CFC9724A22E5A21600199FD0 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataManager.swift; sourceTree = "<group>"; };
 		CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		E6D5693222E81B0B00C13F1E /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		F238FC7C9463514149694227 /* Pods-MegaBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaBox.release.xcconfig"; path = "Target Support Files/Pods-MegaBox/Pods-MegaBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,6 +222,7 @@
 				CFBC1C9422E02A95006B6839 /* StackView.swift */,
 				CFBC1CFD22E1A238006B6839 /* Button.swift */,
 				CFC9724A22E5A21600199FD0 /* Color.swift */,
+				E6D5693222E81B0B00C13F1E /* AlertController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -504,6 +507,7 @@
 				CFBC1CDF22E02E86006B6839 /* NavigationDrawerCell.swift in Sources */,
 				CFBC1CD122E02DEE006B6839 /* MainMovieBoxCell.swift in Sources */,
 				CFBC1CCD22E02DAB006B6839 /* MainEventCell.swift in Sources */,
+				E6D5693322E81B0B00C13F1E /* AlertController.swift in Sources */,
 				CFBC1CCB22E02D9C006B6839 /* MainAdCell.swift in Sources */,
 				CFBC1CFE22E1A238006B6839 /* Button.swift in Sources */,
 				CFBC1CE922E02F02006B6839 /* MyPageTwoContentCell.swift in Sources */,

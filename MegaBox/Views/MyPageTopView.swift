@@ -20,7 +20,7 @@ class MyPageTopView: UIView {
   private let titleLabel: UILabel = {
     let label = UILabel()
     label.text = "나의 메가박스"
-    label.textColor = #colorLiteral(red: 0.2199999988, green: 0.2199999988, blue: 0.2199999988, alpha: 1)
+    label.textColor = UIColor.appColor(.darkBgColor)
     label.textAlignment = .center
     label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +29,7 @@ class MyPageTopView: UIView {
   
   private let titleLabelBottomLine: UILabel = {
     let label = UILabel()
-    label.backgroundColor = #colorLiteral(red: 0.6588235294, green: 0.6588235294, blue: 0.6588235294, alpha: 1)
+    label.backgroundColor = UIColor.appColor(.defaultGrayColor)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -50,7 +50,7 @@ class MyPageTopView: UIView {
   
   private let reservationButton: UIButton = {
     let button = UIButton()
-    button.backgroundColor = #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
+    button.backgroundColor = UIColor.appColor(.megaBoxColor)
     button.setImage(#imageLiteral(resourceName: "main_btn_topbar_booking"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
