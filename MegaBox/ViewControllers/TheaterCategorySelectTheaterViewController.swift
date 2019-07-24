@@ -56,7 +56,7 @@ extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheat
         var movieCounts: [String: Int] = [:]
         
         // 영화 데이터 갯수 구하는 로직
-        for i in 0..<movies.count {
+        for i in 0..<movies.count { 
           for j in 0..<titles.count {
             if movies[i].movie == titles[j] {
               if movieCounts[movies[i].movie] == nil {
