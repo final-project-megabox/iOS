@@ -24,6 +24,7 @@ class MyPageHeaderCell: UITableViewCell {
     imageView.image = #imageLiteral(resourceName: "default_icon_profile_image")
     imageView.layer.borderWidth = 1
     imageView.layer.borderColor = #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.937254902, alpha: 1)
+    imageView.clipsToBounds = true
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -125,6 +126,11 @@ class MyPageHeaderCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     setupHeaderCell()
+  }
+  
+  override func draw(_ rect: CGRect) {
+    super.draw(rect)
+    userImageView.layer.cornerRadius = userImageView.frame.width / 2
   }
   
   private func setupHeaderCell() {

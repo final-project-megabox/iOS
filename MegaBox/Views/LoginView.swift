@@ -239,7 +239,7 @@ class LoginView: UIView {
   }
   
   @objc func loginBtnAction(_ sender: UIButton) {
-    print("Hi")
+    delegate?.touchUpLoginButton()
   }
   
   @objc func didTapCheckButton(_ sender: UIButton) {
