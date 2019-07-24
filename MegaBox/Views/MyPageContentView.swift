@@ -33,6 +33,7 @@ class MyPageContentView: UIView {
   
   
   private func setupMyPageContentView() {
+    myPageTableView.separatorStyle = .none
     
     addSubview(myPageTopView)
     myPageTopView.topAnchor.constraint(equalTo: topAnchor).isActive = true

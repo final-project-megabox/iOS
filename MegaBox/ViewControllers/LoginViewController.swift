@@ -42,6 +42,11 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: LoginViewDelegate {
+  func touchUpLoginButton() {
+    let myPageVC = MyPageViewController()
+    present(myPageVC, animated: false)
+  }
+  
   func touchUpSelectDismissButton() {
     self.presentingViewController?.presentingViewController?.dismiss(animated: false)
   }

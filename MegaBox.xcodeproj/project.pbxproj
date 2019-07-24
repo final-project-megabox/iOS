@@ -304,11 +304,11 @@
 		CFBC1C8D22E02A03006B6839 /* MyPageCells */ = {
 			isa = PBXGroup;
 			children = (
-				CFBC1CE022E02EA8006B6839 /* MyPageFourContentCell.swift */,
 				CFBC1CE222E02EB8006B6839 /* MyPageHeaderCell.swift */,
 				CFBC1CE422E02EC8006B6839 /* MyPageOneContentCell.swift */,
 				CFBC1CE822E02F02006B6839 /* MyPageTwoContentCell.swift */,
 				CFBC1CE622E02ED7006B6839 /* MyPageThreeContentCell.swift */,
+				CFBC1CE022E02EA8006B6839 /* MyPageFourContentCell.swift */,
 			);
 			path = MyPageCells;
 			sourceTree = "<group>";
