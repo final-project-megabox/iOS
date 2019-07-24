@@ -30,6 +30,7 @@ class MainBranchNewsCell: UITableViewCell {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    collectionView.backgroundColor = .clear
     collectionView.register(BranchNewsCollectionCell.self, forCellWithReuseIdentifier: BranchNewsCollectionCell.identifier)
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -87,7 +88,7 @@ extension MainBranchNewsCell: UICollectionViewDataSource {
 
 extension MainBranchNewsCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let width = UIScreen.main.bounds.width / 2.7
+    let width = UIScreen.main.bounds.width / 2.5
     return CGSize(width: width, height: width)
   }
   

@@ -60,8 +60,8 @@ class TheaterCategorySelectTheaterView: UIView {
     let label = UILabel()
     label.text = "원하는 영화관을 선택해주세요."
     label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 13)
-    label.textColor = .white
+    label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+    label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     label.backgroundColor = UIColor.appColor(.darkBgColor)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label

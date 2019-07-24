@@ -20,7 +20,7 @@ class BranchNewsCollectionCell: UICollectionViewCell {
   
   let thumbnailTextLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "지점이벤트", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 13, alignment: .center)
+    label.labelSetup(text: "지점이벤트", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 12, alignment: .center)
     label.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
@@ -36,16 +36,16 @@ class BranchNewsCollectionCell: UICollectionViewCell {
   
   private let branchNewsTitleLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "대구", color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), fontSize: 14, alignment: .center)
-    label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+    label.labelSetup(text: "대구", color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), fontSize: 14, alignment: .left)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   let branchNewsSubLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "#Me플리 #플리마켓놀이", color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), fontSize: 12, alignment: .center)
-    label.font = UIFont.systemFont(ofSize: 12, weight: .light)
+    label.labelSetup(text: "#Me플리 #플리마켓놀이", color: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), fontSize: 13, alignment: .left)
+    label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -62,6 +62,7 @@ class BranchNewsCollectionCell: UICollectionViewCell {
   }
   
   private func setupProperties() {
+    let margin: CGFloat = 10
     contentView.addSubview(branchNewsImage)
     branchNewsImage.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
     branchNewsImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
@@ -76,17 +77,16 @@ class BranchNewsCollectionCell: UICollectionViewCell {
     branchNewsBottomView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     branchNewsBottomView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     branchNewsBottomView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-    branchNewsBottomView.widthAnchor.constraint(equalToConstant: branchNewsImage.frame.width / 3).isActive = true
     
     branchNewsBottomView.addSubview(branchNewsTitleLabel)
-    branchNewsTitleLabel.topAnchor.constraint(equalTo: branchNewsBottomView.topAnchor).isActive = true
-    branchNewsTitleLabel.leadingAnchor.constraint(equalTo: branchNewsBottomView.leadingAnchor).isActive = true
+    branchNewsTitleLabel.topAnchor.constraint(equalTo: branchNewsBottomView.topAnchor, constant: margin).isActive = true
+    branchNewsTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
     
     branchNewsBottomView.addSubview(branchNewsSubLabel)
-    branchNewsSubLabel.topAnchor.constraint(equalTo: branchNewsTitleLabel.bottomAnchor).isActive = true
-    branchNewsSubLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    branchNewsSubLabel.topAnchor.constraint(equalTo: branchNewsTitleLabel.bottomAnchor, constant: margin / 2).isActive = true
+    branchNewsSubLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
     branchNewsSubLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-    branchNewsSubLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    branchNewsSubLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
     branchNewsSubLabel.widthAnchor.constraint(equalTo: branchNewsTitleLabel.widthAnchor).isActive = true
   }
   

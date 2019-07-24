@@ -56,9 +56,9 @@ class MainTopMediaPlayCell: UITableViewCell {
     let button = UIButton()
     button.setTitle("상세보기", for: .normal)
     button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 7, bottom: 5, right: 7)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
     button.layer.borderColor = UIColor.white.cgColor
-    button.layer.borderWidth = 1
+    button.layer.borderWidth = 2
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
