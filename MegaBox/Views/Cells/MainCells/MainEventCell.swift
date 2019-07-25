@@ -12,6 +12,7 @@ class MainEventCell: UITableViewCell {
   var indicatorBarLeadingConstraint: NSLayoutConstraint!
   var indicatorBarTrailingConstraint: NSLayoutConstraint!
   static let identifier = "MainEventCell"
+  private var fontSize: CGFloat = 0
   
   var delegate: MainEventCellDelegate?
   
@@ -115,6 +116,7 @@ class MainEventCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
+    getFontSize()
     setupProperties()
     makeAutoLayout()
   }
@@ -123,15 +125,14 @@ class MainEventCell: UITableViewCell {
     super.layoutSubviews()
     
   }
-  
-  override func draw(_ rect: CGRect) {
-    super.draw(rect)
-    indicatorBarTrailingConstraint.constant = -(guideBGView.frame.width - allButton.frame.maxX - 20)
-  }
 
   @objc func touchUpOwlStageButton(_ sender: UIButton) {
     let stackViewWidth = guideBGView.frame.width
     delegate?.touchUpEventOwlStageButton(sender, indicatorBarTrailingConstraint, indicatorBarLeadingConstraint, stackViewWidth)
+  }
+  
+  private func getFontSize() {
+    fontSize = ("가" as NSString).size(withAttributes: [NSAttributedString.Key.font : allButton.titleLabel?.font ?? "가"]).width
   }
   
   private func setupProperties() {
@@ -189,7 +190,7 @@ class MainEventCell: UITableViewCell {
     indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2)
     indicatorBarLeadingConstraint.isActive = true
     indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
-    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor)
+    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -(UIScreen.main.bounds.width - 40) + (fontSize * 2))
     indicatorBarTrailingConstraint.isActive = true
     
     guideBGView.addSubview(eventCollection)
