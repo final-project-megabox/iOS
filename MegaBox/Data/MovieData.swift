@@ -13,13 +13,14 @@ struct MovieData: Codable {
   let bookingRate: Double
   let title: String
   let age: Int
-  let type: [String]
+  let type: [Int]
+  let selected: Bool
   
   enum CodingKeys: String, CodingKey {
     case movieID = "movie_id"
     case imgURL = "img_url"
     case releaseDate = "release_date"
     case bookingRate = "booking_rate"
-    case title, age, type
+    case title, age, type, selected
   }
 }

@@ -10,10 +10,10 @@ import UIKit
 
 class MainMovieReservationCell: UITableViewCell {
   private let shared = MovieDataManager.shared
-  
   var indicatorBarLeadingConstraint: NSLayoutConstraint!
   var indicatorBarTrailingConstraint: NSLayoutConstraint!
   static let identifier = "MainMovieReservationCell"
+  private var fontSize: CGFloat = 0
   
   var delegate: MainMovieReservationCellDelegate?
   
@@ -109,7 +109,8 @@ class MainMovieReservationCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     self.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
-    self.setupProperties()
+    getFontSize()
+    setupProperties()
     makeAutoLayout()
   }
   
@@ -133,6 +134,10 @@ class MainMovieReservationCell: UITableViewCell {
     movieReservationCollection.delegate = self
     
     setupStackView()
+  }
+  
+  private func getFontSize() {
+    fontSize = ("가" as NSString).size(withAttributes: [NSAttributedString.Key.font : boxOfficeButton.titleLabel?.font ?? "가"]).width
   }
   
   private func setupStackView() {
@@ -177,7 +182,7 @@ class MainMovieReservationCell: UITableViewCell {
     indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2)
     indicatorBarLeadingConstraint.isActive = true
     indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
-    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor)
+    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -(UIScreen.main.bounds.width - 40) + (fontSize * 5))
     indicatorBarTrailingConstraint.isActive = true
     
     guideBGView.addSubview(movieReservationCollection)
