@@ -127,9 +127,9 @@ extension MainViewController: UITableViewDataSource {
       guard let adImageNum: Int = (0...1).randomElement() else { return cell }
       let adImageArr: [UIImage] = [#imageLiteral(resourceName: "ad1"), #imageLiteral(resourceName: "ad2")]
       if adImageNum == 0 {
-        cell.guideBGView.backgroundColor = #colorLiteral(red: 1, green: 0.9568627451, blue: 0.9647058824, alpha: 1)
+        cell.guideBGView.backgroundColor = #colorLiteral(red: 1, green: 0.9647058824, blue: 0.968627451, alpha: 1)
       } else {
-        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.01960784314, green: 0.2745098039, blue: 0.8431372549, alpha: 1)
+        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.07450980392, green: 0.3294117647, blue: 0.8470588235, alpha: 1)
       }
       cell.adImage.image = adImageArr[adImageNum]
       return cell
@@ -146,9 +146,9 @@ extension MainViewController: UITableViewDataSource {
       guard let adImageNum: Int = (0...1).randomElement() else { return cell }
       let adImageArr: [UIImage] = [#imageLiteral(resourceName: "ad4"), #imageLiteral(resourceName: "ad3")]
       if adImageNum == 0 {
-        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1333333333, blue: 0.137254902, alpha: 1)
+        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.1490196078, blue: 0.1529411765, alpha: 1)
       } else {
-        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.2, blue: 0.5450980392, alpha: 1)
+        cell.guideBGView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.8470588235)
       }
       cell.adImage.image = adImageArr[adImageNum]
       return cell
@@ -166,9 +166,9 @@ extension MainViewController: UITableViewDataSource {
       guard let adImageNum: Int = (0...1).randomElement() else { return cell }
       let adImageArr: [UIImage] = [#imageLiteral(resourceName: "ad4"), #imageLiteral(resourceName: "ad3")]
       if adImageNum == 0 {
-        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.1294117647, green: 0.1333333333, blue: 0.137254902, alpha: 1)
+        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.1490196078, blue: 0.1529411765, alpha: 1)
       } else {
-        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.1960784314, green: 0.2, blue: 0.5450980392, alpha: 1)
+        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.2392156863, blue: 0.5803921569, alpha: 1)
       }
       cell.adImage.image = adImageArr[adImageNum]
       return cell
