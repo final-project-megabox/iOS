@@ -256,7 +256,6 @@ extension TheaterCategorySelectTheaterView: UITableViewDelegate {
       let cell = tableView.cellForRow(at: indexPath) as! TheaterCategorySelectTheaterRegionListCell
       cell.regionListName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
       
-      
       movieTitleLabel.text = regionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
       movieTitleLabel.textColor = UIColor.appColor(.selectedCellMintColor)
       
