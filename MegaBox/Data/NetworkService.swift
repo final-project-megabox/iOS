@@ -48,6 +48,7 @@ class NetworkService {
           do {
             let allReservationData = try JSONDecoder().decode([ReservationData].self, from: data)
             completion(.success(allReservationData))
+            print(allReservationData)
           } catch {
             print(error.localizedDescription)
           }

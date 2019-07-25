@@ -45,14 +45,7 @@ class MainViewController: UIViewController {
     super.viewDidLayoutSubviews()
     setupMainTopView()
   }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    let movieReservationCell = mainTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? MainMovieReservationCell
-    
-    movieReservationCell?.movieReservationCollection.scrollToItem(at: IndexPath(item: 1, section: 0), at: .left, animated: false)
-  }
-  
+
   private func setupMainTopView() {
     mainTopView.translatesAutoresizingMaskIntoConstraints = false
     mainTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -118,6 +111,7 @@ extension MainViewController: UITableViewDataSource {
     if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainMovieReservationCell.identifier) as! MainMovieReservationCell
       // Owl Stage Button Click Delegate
+      cell.delegate = self
       return cell
     } else if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainShortMenuCell.identifier) as! MainShortMenuCell

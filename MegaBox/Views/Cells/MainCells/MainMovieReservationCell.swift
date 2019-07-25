@@ -56,7 +56,6 @@ class MainMovieReservationCell: UITableViewCell {
     button.setTitle("박스오피스", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     button.tag = 0
-    button.addTarget(self, action: #selector(touchUpOwlStageButton(_:)), for: .touchUpInside)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .bold)
     return button
   }()
@@ -66,7 +65,6 @@ class MainMovieReservationCell: UITableViewCell {
     button.setTitle("상영예정", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     button.tag = 1
-    button.addTarget(self, action: #selector(touchUpOwlStageButton(_:)), for: .touchUpInside)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
     return button
   }()
@@ -76,7 +74,6 @@ class MainMovieReservationCell: UITableViewCell {
     button.setTitle("큐레이션", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     button.tag = 2
-    button.addTarget(self, action: #selector(touchUpOwlStageButton(_:)), for: .touchUpInside)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
     return button
   }()
@@ -86,7 +83,6 @@ class MainMovieReservationCell: UITableViewCell {
     button.setTitle("무대인사", for: .normal)
     button.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     button.tag = 3
-    button.addTarget(self, action: #selector(touchUpOwlStageButton(_:)), for: .touchUpInside)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
     return button
   }()
@@ -114,11 +110,12 @@ class MainMovieReservationCell: UITableViewCell {
     
     self.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
     self.setupProperties()
+    makeAutoLayout()
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    makeAutoLayout()
+    
   }
   
   @objc func touchUpOwlStageButton(_ sender: UIButton) {
@@ -127,8 +124,14 @@ class MainMovieReservationCell: UITableViewCell {
   }
   
   private func setupProperties() {
+    boxOfficeButton.addTarget(self, action: #selector(touchUpOwlStageButton(_:)), for: .touchUpInside)
+    showingScheduleButton.addTarget(self, action: #selector(touchUpOwlStageButton(_:)), for: .touchUpInside)
+    curationButton.addTarget(self, action: #selector(touchUpOwlStageButton(_:)), for: .touchUpInside)
+    stageGreetingButton.addTarget(self, action: #selector(touchUpOwlStageButton(_:)), for: .touchUpInside)
+    
     movieReservationCollection.dataSource = self
     movieReservationCollection.delegate = self
+    
     setupStackView()
   }
   
@@ -174,7 +177,7 @@ class MainMovieReservationCell: UITableViewCell {
     indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2)
     indicatorBarLeadingConstraint.isActive = true
     indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
-    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -278)
+    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor)
     indicatorBarTrailingConstraint.isActive = true
     
     guideBGView.addSubview(movieReservationCollection)
@@ -191,28 +194,22 @@ class MainMovieReservationCell: UITableViewCell {
 
 extension MainMovieReservationCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return shared.allMovieData.count + 1
+    return shared.allMovieData.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieReservationCollectionCell.identifier, for: indexPath) as! MovieReservationCollectionCell
-    if indexPath.row == 0 {
-      cell.thumbnailImage.image = #imageLiteral(resourceName: "temp_reservation_image")
-      cell.thumbnailImage.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-      cell.thumbnailImage.layer.borderWidth = 0.5
-      cell.thumbnailNumLabel.isHidden = true
-      cell.directReservationButton.isHidden = true
-    } else {
-      let url = shared.allMovieData[indexPath.row - 1].imgURL
-      let dataURL = URL(string: url)!
-      let task = URLSession.shared.dataTask(with: dataURL) { (data, response, error) in
-        DispatchQueue.main.async {
-          guard let data = data else { return }
-          cell.cellConfigure(data, self.shared.allMovieData[indexPath.row - 1], indexPath.row)
-        }
+    
+    let url = shared.allMovieData[indexPath.row].imgURL
+    let dataURL = URL(string: url)!
+    let task = URLSession.shared.dataTask(with: dataURL) { (data, response, error) in
+      DispatchQueue.main.async {
+        guard let data = data else { return }
+        cell.cellConfigure(data, self.shared.allMovieData[indexPath.row], indexPath.row)
       }
-      task.resume()
     }
+    task.resume()
+    
     return cell
   }
 }
@@ -220,11 +217,8 @@ extension MainMovieReservationCell: UICollectionViewDataSource {
 extension MainMovieReservationCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let height = movieReservationCollection.frame.height
-    if indexPath.row == 0 {
-      return CGSize(width: UIScreen.main.bounds.width - 94, height: height)
-    } else {
-      return CGSize(width: UIScreen.main.bounds.width / 2.7, height: height)
-    }
+    
+    return CGSize(width: UIScreen.main.bounds.width / 2.7, height: height)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

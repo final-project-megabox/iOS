@@ -14,6 +14,7 @@ class TheaterCategorySelectTheaterRegionListCell: UITableViewCell {
   let regionListName: UILabel = {
     let label = UILabel()
     label.textAlignment = .left
+    label.font = UIFont.systemFont(ofSize: 13, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
