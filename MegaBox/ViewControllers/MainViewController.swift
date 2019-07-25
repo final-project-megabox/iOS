@@ -142,7 +142,7 @@ extension MainViewController: UITableViewDataSource {
       if adImageNum == 0 {
         cell.guideBGView.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.1490196078, blue: 0.1529411765, alpha: 1)
       } else {
-        cell.guideBGView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.8470588235)
+        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.2392156863, blue: 0.5803921569, alpha: 1)
       }
       cell.adImage.image = adImageArr[adImageNum]
       return cell
@@ -157,17 +157,9 @@ extension MainViewController: UITableViewDataSource {
       return cell
     } else if indexPath.row == 10 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainAdCell.identifier) as! MainAdCell
-      guard let adImageNum: Int = (0...1).randomElement() else { return cell }
-      let adImageArr: [UIImage] = [#imageLiteral(resourceName: "ad4"), #imageLiteral(resourceName: "ad3")]
-      if adImageNum == 0 {
-        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.1490196078, blue: 0.1529411765, alpha: 1)
-      } else {
-        cell.guideBGView.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.2392156863, blue: 0.5803921569, alpha: 1)
-      }
-      cell.adImage.image = adImageArr[adImageNum]
+      cell.adImage.image = #imageLiteral(resourceName: "lastbanner")
       return cell
     }
-    
     return cell
   }
 }
