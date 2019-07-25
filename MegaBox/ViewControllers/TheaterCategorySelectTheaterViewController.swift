@@ -78,9 +78,9 @@ extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheat
       }
     }
   }
- 
+  
   func touchUpCancelButton() {
-  self.presentingViewController?.presentingViewController?.dismiss(animated: false)
+    self.presentingViewController?.presentingViewController?.dismiss(animated: false)
   }
 }
 

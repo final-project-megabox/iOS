@@ -106,6 +106,7 @@ class MainEventCell: UITableViewCell {
     layout.scrollDirection = .horizontal
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.backgroundColor = .clear
+    collectionView.register(EventCollectionCell.self, forCellWithReuseIdentifier: EventCollectionCell.identifier)
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     return collectionView
@@ -115,17 +116,21 @@ class MainEventCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
     setupProperties()
+    makeAutoLayout()
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    makeAutoLayout()
+    
   }
   
+  override func draw(_ rect: CGRect) {
+    super.draw(rect)
+    indicatorBarTrailingConstraint.constant = -(guideBGView.frame.width - allButton.frame.maxX - 20)
+  }
+
   @objc func touchUpOwlStageButton(_ sender: UIButton) {
-    print("[Log] OwlStaageButtonDidTapped")
     let stackViewWidth = guideBGView.frame.width
-    
     delegate?.touchUpEventOwlStageButton(sender, indicatorBarTrailingConstraint, indicatorBarLeadingConstraint, stackViewWidth)
   }
   
@@ -138,7 +143,6 @@ class MainEventCell: UITableViewCell {
     
     eventCollection.dataSource = self
     eventCollection.delegate = self
-    eventCollection.register(EventCollectionCell.self, forCellWithReuseIdentifier: EventCollectionCell.identifier)
     
     setupStackView()
   }
@@ -146,7 +150,6 @@ class MainEventCell: UITableViewCell {
   private func setupStackView() {
     eventStack = UIStackView(arrangedSubviews: [allButton, megaBoxButton, movieButton, coalitionButton, theaterButton])
     eventStack.translatesAutoresizingMaskIntoConstraints = false
-    
     eventStack.axis = .horizontal
     eventStack.alignment = .leading
     eventStack.distribution = .fill
@@ -186,13 +189,13 @@ class MainEventCell: UITableViewCell {
     indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2)
     indicatorBarLeadingConstraint.isActive = true
     indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
-    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -305)
+    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor)
     indicatorBarTrailingConstraint.isActive = true
     
     guideBGView.addSubview(eventCollection)
     eventCollection.topAnchor.constraint(equalTo: indicatorBar.bottomAnchor, constant: margin).isActive = true
-    eventCollection.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: -margin).isActive = true
-    eventCollection.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: margin).isActive = true
+    eventCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    eventCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     eventCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin * 2).isActive = true
   }
   

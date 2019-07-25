@@ -77,7 +77,7 @@ class MovieReservationCollectionCell: UICollectionViewCell {
   func cellConfigure(_ thumbImage: Data, _ movieData: MovieData, _ movieNum: Int) {
     self.thumbnailImage.image = UIImage(data: thumbImage)
     self.titleNameLabel.text = movieData.title
-    self.thumbnailNumLabel.text = "\(movieNum)"
+    self.thumbnailNumLabel.text = "\(movieNum + 1)"
     self.subLabel.text = "예매율 \(movieData.bookingRate) %"
   }
   
