@@ -39,7 +39,11 @@ class NetworkService {
     let url = URL(string: urlStr)!
     let parameters: [String: String] = ["theater": regionName, "date": date]
     
-    let req = Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: nil)
+    // http://megabox.hellocoding.shop/database/reservationFirstView/?theater=대전&date=2019-07-20
+    
+    let req = Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil)
+
+//    let req = Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: nil)
     
     req.validate()
       .responseData { response in

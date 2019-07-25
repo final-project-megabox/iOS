@@ -17,6 +17,10 @@ class TheaterCategorySelectTheaterView: UIView {
   
   private var selectedRegionNumber: Int = 0
   
+  // 영화관이 선택된 지역과 영화관 정보
+  private var selectedRegion: String = ""
+  private var selectedTheater: String = ""
+  
   private let menuTitleView: UIView = {
     let view = UIView()
     view.backgroundColor = .white
@@ -101,17 +105,21 @@ class TheaterCategorySelectTheaterView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
     regionTableView.dataSource = self
-    regionListTableView.dataSource = self
     regionTableView.delegate = self
+    regionListTableView.dataSource = self
     regionListTableView.delegate = self
+    
+    setupProperties()
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    setupProperties()
+    
+    regionButton.touchUpButton(isTouched: true, width: regionButton.frame.width)
+    regionListButton.touchUpButton(isTouched: false, width: regionListButton.frame.width)
   }
+  
   
   @objc private func touchUpmenuTitleSelectbutton(_ sender: UIButton) {
     delegate?.touchUpmenuTitleSelectbutton()
@@ -183,17 +191,11 @@ class TheaterCategorySelectTheaterView: UIView {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  override func draw(_ rect: CGRect) {
-    super.draw(rect)
-    
-    regionButton.touchUpButton(isTouched: true, width: regionButton.frame.width)
-    regionListButton.touchUpButton(isTouched: false, width: regionListButton.frame.width)
-  }
 }
 
 extension TheaterCategorySelectTheaterView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    tableView.backgroundView = nil
     if tableView == regionTableView {
       return regionNames.count
     } else {
@@ -211,6 +213,7 @@ extension TheaterCategorySelectTheaterView: UITableViewDataSource {
     let regionListTableViewBgColorView = UIView()
     regionTableViewBgColorView.backgroundColor = UIColor.appColor(.selectedCellGrayColor)
     regionListTableViewBgColorView.backgroundColor = UIColor.appColor(.selectedCellMintColor)
+    
     if tableView == regionTableView {
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionCell
       cell.selectedBackgroundView = regionTableViewBgColorView
@@ -225,6 +228,12 @@ extension TheaterCategorySelectTheaterView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionListCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionListCell
         cell.selectedBackgroundView = regionListTableViewBgColorView
         cell.regionListName.text = regionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
+        if cell.regionListName.text == selectedTheater {
+          tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+          cell.regionListName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        } else {
+          cell.regionListName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        }
         return cell
       }
     }
@@ -251,14 +260,16 @@ extension TheaterCategorySelectTheaterView: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if tableView == regionTableView {
       selectedRegionNumber = indexPath.row
+      let cell = tableView.cellForRow(at: indexPath) as! TheaterCategorySelectTheaterRegionCell
+      selectedRegion = cell.regionName.text ?? ""
       regionListTableView.reloadData()
     } else {
       let cell = tableView.cellForRow(at: indexPath) as! TheaterCategorySelectTheaterRegionListCell
       cell.regionListName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-      
-      movieTitleLabel.text = regionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
+      let theater = regionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
+      movieTitleLabel.text = theater
+      selectedTheater = theater ?? ""
       movieTitleLabel.textColor = UIColor.appColor(.selectedCellMintColor)
-      
       menuTitleSelectbutton.setTitleColor(UIColor.appColor(.megaBoxColor), for: .normal)
       menuTitleSelectbutton.layer.borderColor = UIColor.appColor(.megaBoxColor).cgColor
       menuTitleSelectbutton.isEnabled = true
