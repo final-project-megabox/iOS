@@ -14,7 +14,7 @@ class TheaterCategoryReservationView: UIView {
   
   let headerView = TheaterCategoryReservationHeaderView()
   
-  private var movieCount = 0
+  private var movieCount: Int = 0
   
   private let menuTitleView: UIView = {
     let view = UIView()
@@ -27,7 +27,7 @@ class TheaterCategoryReservationView: UIView {
     let button = UIButton(type: .custom)
     button.setImage(#imageLiteral(resourceName: "common_btn_topbar_prev2"), for: .normal)
     button.contentMode = .scaleAspectFit
-    button.addTarget(self, action: #selector(touchUpMenuTitleDismissButton), for: .touchUpInside)
+    button.addTarget(self, action: #selector(touchUpMenuTitleDismissButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -58,8 +58,8 @@ class TheaterCategoryReservationView: UIView {
     setupProperties()
   }
   
-  @objc private func touchUpMenuTitleDismissButton() {
-    delegate?.touchUpMenuTitleDismissButton()
+  @objc private func touchUpMenuTitleDismissButton(_ sender: UIButton) {
+    delegate?.touchUpMenuTitleDismissButton(sender)
   }
   
   private func setupProperties() {

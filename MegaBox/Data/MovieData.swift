@@ -1,7 +1,5 @@
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
-//
-//   let movie = try? newJSONDecoder().decode(Movie.self, from: jsonData)
 
 import Foundation
 
@@ -11,9 +9,8 @@ struct MovieData: Codable {
   let imgURL: String
   let releaseDate: String
   let bookingRate: Double
-  let title: String
-  let age: Int
-  let type: [Int]
+  let title, age: String
+  let type: [[TypeElement]]
   let selected: Bool
   
   enum CodingKeys: String, CodingKey {
@@ -23,4 +20,12 @@ struct MovieData: Codable {
     case bookingRate = "booking_rate"
     case title, age, type, selected
   }
+}
+
+enum TypeElement: String, Codable {
+  case atmos = "ATMOS"
+  case the3D = "3D"
+  case 더빙 = "더빙"
+  case 디지털 = "디지털"
+  case 자막 = "자막"
 }

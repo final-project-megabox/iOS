@@ -8,8 +8,14 @@
 
 import UIKit
 
+enum TheaterDismissType {
+  case one
+  case two
+}
+
 class TheaterCategorySelectTheaterViewController: UIViewController {
   private let shared = MovieDataManager.shared
+  var dismissType: DismissType = .two
   private let urlStr: String = "http://megabox.hellocoding.shop//database/reservationFirstView/"
   
   private let selectTheaterView: TheaterCategorySelectTheaterView = {
@@ -42,45 +48,45 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
 
 extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheaterViewDelegate {
   func touchUpmenuTitleSelectbutton() {
-    let theaterCategoryReservationVC = TheaterCategoryReservationViewController()
-    guard let selectedRegionName = selectTheaterView.movieTitleLabel.text else { return }
-    theaterCategoryReservationVC.regionName = selectedRegionName
-    
-    NetworkService.getReservationData(urlStr, regionName: selectedRegionName, date: "2019-07-20") { result in
-      switch result {
-      case .success(let data):
-        self.shared.reservationMovieData = data.sorted(by: { $0.movie < $1.movie })
-        
-        let movies = self.shared.reservationMovieData
-        let titles = self.shared.sortedMovieTitle
-        var movieCounts: [String: Int] = [:]
-        
-        // 영화 데이터 갯수 구하는 로직
-        for i in 0..<movies.count { 
-          for j in 0..<titles.count {
-            if movies[i].movie == titles[j] {
-              if movieCounts[movies[i].movie] == nil {
-                movieCounts[movies[i].movie] = 1
-              } else {
-                var value = movieCounts[movies[i].movie]!
-                value += 1
-                movieCounts[movies[i].movie] = value
-              }
-            }
-          }
+    switch dismissType {
+    case .one:
+      
+      guard let selectedRegionName = selectTheaterView.movieTitleLabel.text else { return }
+      NetworkService.getReservationData(urlStr, regionName: selectedRegionName, date: "2019-07-20") { result in
+        switch result {
+        case .success(let data):
+          self.shared.reservationMovieData = data.sorted(by: { $0.movie < $1.movie })
+          
+          self.dismiss(animated: false)
+        case .failure(let err):
+          print(err.localizedDescription)
         }
-        
-        self.shared.movieCounts = movieCounts
-        
-        self.present(theaterCategoryReservationVC, animated: false)
-      case .failure(let err):
-        print(err.localizedDescription)
+      }
+    case .two:
+      let theaterCategoryReservationVC = TheaterCategoryReservationViewController()
+      guard let selectedRegionName = selectTheaterView.movieTitleLabel.text else { return }
+      theaterCategoryReservationVC.regionName = selectedRegionName
+      
+      NetworkService.getReservationData(urlStr, regionName: selectedRegionName, date: "2019-07-20") { result in
+        switch result {
+        case .success(let data):
+          self.shared.reservationMovieData = data.sorted(by: { $0.movie < $1.movie })
+          
+          self.present(theaterCategoryReservationVC, animated: false)
+        case .failure(let err):
+          print(err.localizedDescription)
+        }
       }
     }
   }
   
   func touchUpCancelButton() {
-    self.presentingViewController?.presentingViewController?.dismiss(animated: false)
+    switch dismissType {
+    case .one:
+      self.dismiss(animated: false)
+    case .two:
+      self.presentingViewController?.presentingViewController?.dismiss(animated: false)
+    }
   }
 }
 

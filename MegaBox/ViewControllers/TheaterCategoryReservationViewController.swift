@@ -28,6 +28,7 @@ class TheaterCategoryReservationViewController: UIViewController {
     self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
     menuView.delegate = self
+    menuView.headerView.delegate = self
     
     setupMenuView()
   }
@@ -46,7 +47,7 @@ class TheaterCategoryReservationViewController: UIViewController {
   
   // MARK:- Methods
   private func displayData() {
-//    menuView.theaterTableView.
+    //    menuView.theaterTableView.
   }
   
   // MARK: startAdAnimation
@@ -83,7 +84,20 @@ class TheaterCategoryReservationViewController: UIViewController {
 }
 
 extension TheaterCategoryReservationViewController: TheaterCategoryReservationViewDelegate {
-  func touchUpMenuTitleDismissButton() {
+  
+  func touchUpMenuTitleDismissButton(_ sender: UIButton) {
     self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)
+  }
+}
+
+extension TheaterCategoryReservationViewController: TheaterCategoryReservationHeaderViewDelegate {
+  func touchUpPlaceButton() {
+    let theaterCategorySelectTheaterVC = TheaterCategorySelectTheaterViewController()
+    theaterCategorySelectTheaterVC.dismissType = .one
+    self.present(theaterCategorySelectTheaterVC, animated: false)
+  }
+  
+  func touchUpDateButton() {
+    
   }
 }
