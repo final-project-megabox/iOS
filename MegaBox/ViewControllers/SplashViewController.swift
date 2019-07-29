@@ -18,8 +18,7 @@ class SplashViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    timer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(startSplash), userInfo: nil, repeats: false)
-    
+    timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(startSplash), userInfo: nil, repeats: false)
   }
   
   @objc private func startSplash() {
@@ -27,8 +26,6 @@ class SplashViewController: UIViewController {
       switch result {
       case .success(let data):
         self.shared.allMovieData = data
-        self.shared.sortedMovieTitle = data.sorted(by: { $0.bookingRate > $1.bookingRate }).map({ $0.title })
-        
         let mainVC = MainViewController()
         self.present(mainVC, animated: false)
       case .failure(let err):

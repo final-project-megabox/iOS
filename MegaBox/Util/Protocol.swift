@@ -8,6 +8,21 @@
 
 import UIKit
 
+// 네비게이션 드로우(햄버거 메뉴)
+protocol NavigationDrawerViewDelegate {
+  // 로그인 버튼 클릭
+  func touchUpLoginButton()
+}
+
+//로그인페이지
+protocol LoginViewDelegate {
+  // X버튼 클릭 -> 메인화면으로
+  func touchUpSelectDismissButton()
+  
+  //임시 - 로그인 버튼 클릭후 마이페이지
+  func touchUpLoginButton()
+}
+
 protocol MenuTitleViewDelegate {
   func meunBarDidSelected(_ indexPath: IndexPath)
 }
@@ -30,9 +45,14 @@ protocol TheaterCategorySelectTheaterViewDelegate {
 }
 
 protocol TheaterCategoryReservationViewDelegate {
-  func touchUpMenuTitleDismissButton()
+  func touchUpMenuTitleDismissButton(_ sender: UIButton)
 }
 
+protocol TheaterCategoryReservationHeaderViewDelegate {
+  func touchUpPlaceButton()
+  
+  func touchUpDateButton()
+}
 
 protocol MovieCategoryReservationViewDelegate {
   //영화별 예매 버튼 클릭 후 X 버튼 클릭
@@ -43,11 +63,6 @@ protocol MovieCategoryReservationViewDelegate {
   
   // 모든영화, 큐레이션 버튼
   func touchUpButton(_ sender: UIButton)
-}
-
-// 로그인 버튼 클릭
-protocol NavigationDrawerViewDelegate {
-  func touchUpLoginButton()
 }
 
 // OwlStageOuter 버튼 클릭 (박스오피스, 상영예정, 큐레이션, 무대인사)
@@ -75,11 +90,4 @@ protocol MovieCategorySelectTheatherViewDelegate {
   
 }
 
-//로그인페이지
-protocol LoginViewDelegate {
-  // X버튼 클릭 -> 메인화면으로
-  func touchUpSelectDismissButton()
-  
-  //임시 - 로그인 버튼 클릭후 마이페이지
-  func touchUpLoginButton()
-}
+
