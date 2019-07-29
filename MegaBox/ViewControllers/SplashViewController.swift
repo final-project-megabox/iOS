@@ -17,9 +17,8 @@ class SplashViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    timer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(startSplash), userInfo: nil, repeats: false)
-    
+
+    timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(startSplash), userInfo: nil, repeats: false)
   }
   
   @objc private func startSplash() {

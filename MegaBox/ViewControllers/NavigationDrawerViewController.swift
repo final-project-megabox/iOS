@@ -8,16 +8,6 @@
 
 import UIKit
 
-//
-//  NavigationDrawerViewController.swift
-//  MegaBox
-//
-//  Created by Fury on 10/07/2019.
-//  Copyright © 2019 Fury. All rights reserved.
-//
-
-import UIKit
-
 class NavigationDrawerViewController: UIViewController {
   
   private let navigationDrawerView: NavigationDrawerView = {
@@ -50,6 +40,10 @@ class NavigationDrawerViewController: UIViewController {
 }
 
 extension NavigationDrawerViewController: NavigationDrawerViewDelegate {
+  func touchUpDismissButton() {
+    self.dismiss(animated: false)
+  }
+  
   func touchUpLoginButton() {
     let loginPageVC = LoginViewController()
     

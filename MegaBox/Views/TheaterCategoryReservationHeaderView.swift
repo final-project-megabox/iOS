@@ -12,6 +12,8 @@ class TheaterCategoryReservationHeaderView: UIView {
   var stackViewTopConstraint: NSLayoutConstraint!
   var stackViewBottomConstraint: NSLayoutConstraint!
   
+  var delegate: TheaterCategoryReservationHeaderViewDelegate?
+  
   let adCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -39,13 +41,12 @@ class TheaterCategoryReservationHeaderView: UIView {
   let placeButton: UIButton = {
     let button = UIButton()
     button.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.2862745098, blue: 0.2901960784, alpha: 1)
-    button.setTitle("동탄", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
     button.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     button.setImage(#imageLiteral(resourceName: "android_drop_down_arrow"), for: .normal)
     button.contentHorizontalAlignment = .left
     button.imageEdgeInsets = UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.maxX / 2) - 40, bottom: 0, right: 0)
-    //    button.translatesAutoresizingMaskIntoConstraints = false
+    button.addTarget(self, action: #selector(touchUpPlaceButton), for: .touchUpInside)
     return button
   }()
   
@@ -58,7 +59,7 @@ class TheaterCategoryReservationHeaderView: UIView {
     button.setImage(#imageLiteral(resourceName: "android_drop_down_arrow"), for: .normal)
     button.contentHorizontalAlignment = .left
     button.imageEdgeInsets = UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.maxX / 2) - 40, bottom: 0, right: 0)
-    //    button.translatesAutoresizingMaskIntoConstraints = false
+    button.addTarget(self, action: #selector(touchUpDateButton), for: .touchUpInside)
     return button
   }()
   
@@ -72,6 +73,15 @@ class TheaterCategoryReservationHeaderView: UIView {
     super.layoutSubviews()
     
     setupProperties()
+  }
+  
+  @objc private func touchUpPlaceButton() {
+    print("test")
+    delegate?.touchUpPlaceButton()
+  }
+  
+  @objc private func touchUpDateButton() {
+    delegate?.touchUpDateButton()
   }
   
   private func setupStackView() {
