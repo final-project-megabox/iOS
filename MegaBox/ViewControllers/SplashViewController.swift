@@ -9,7 +9,7 @@
 import UIKit
 
 class SplashViewController: UIViewController {
-
+  
   private let shared = MovieDataManager.shared
   private let movieReservationURLStr = "http://megabox.hellocoding.shop//database/reservationFirstView/"
   
@@ -22,15 +22,17 @@ class SplashViewController: UIViewController {
   }
   
   @objc private func startSplash() {
-    NetworkService.getAllMovieData(movieReservationURLStr) { result in
-      switch result {
-      case .success(let data):
-        self.shared.allMovieData = data
-        let mainVC = MainViewController()
-        self.present(mainVC, animated: false)
-      case .failure(let err):
-        print(err)
-      }
-    }
+    let mainVC = MainViewController()
+    self.present(mainVC, animated: false)
+    //    NetworkService.getAllMovieData(movieReservationURLStr) { result in
+    //      switch result {
+    //      case .success(let data):
+    //        self.shared.allMovieData = data
+    //        let mainVC = MainViewController()
+    //        self.present(mainVC, animated: false)
+    //      case .failure(let err):
+    //        print(err)
+    //      }
+    //    }
   }
 }
