@@ -22,17 +22,15 @@ class SplashViewController: UIViewController {
   }
   
   @objc private func startSplash() {
-    let mainVC = MainViewController()
-    self.present(mainVC, animated: false)
-    //    NetworkService.getAllMovieData(movieReservationURLStr) { result in
-    //      switch result {
-    //      case .success(let data):
-    //        self.shared.allMovieData = data
-    //        let mainVC = MainViewController()
-    //        self.present(mainVC, animated: false)
-    //      case .failure(let err):
-    //        print(err)
-    //      }
-    //    }
+    NetworkService.getAllMovieData(movieReservationURLStr) { result in
+      switch result {
+      case .success(let data):
+        self.shared.allMovieData = data
+        let mainVC = MainViewController()
+        self.present(mainVC, animated: false)
+      case .failure(let err):
+        print(err)
+      }
+    }
   }
 }

@@ -62,7 +62,7 @@ class NavigationDrawerCell: UICollectionViewCell {
     return button
   }()
   
-  private let naviDrawerCancelButton: UIButton = {
+  let naviDrawerCancelButton: UIButton = {
     let button = UIButton()
     button.setImage(#imageLiteral(resourceName: "btn_slid_close_nor"), for: .normal)
     button.contentMode = .scaleAspectFit

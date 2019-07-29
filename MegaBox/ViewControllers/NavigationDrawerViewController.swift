@@ -40,6 +40,10 @@ class NavigationDrawerViewController: UIViewController {
 }
 
 extension NavigationDrawerViewController: NavigationDrawerViewDelegate {
+  func touchUpDismissButton() {
+    self.dismiss(animated: false)
+  }
+  
   func touchUpLoginButton() {
     let loginPageVC = LoginViewController()
     

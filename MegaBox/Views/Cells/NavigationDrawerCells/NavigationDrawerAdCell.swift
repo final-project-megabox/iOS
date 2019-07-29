@@ -11,9 +11,19 @@ import UIKit
 class NavigationDrawerAdCell: UICollectionViewCell {
   static let identifier = "NavigationDrawerAdCell"
   
-  private let adImageView: UIImageView = {
+  let bgImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = #imageLiteral(resourceName: "spiderman_thumbnail")
+    imageView.image = #imageLiteral(resourceName: "ad_slid_1")
+    imageView.alpha = 0.1
+    imageView.contentMode = .scaleAspectFill
+    imageView.clipsToBounds = true
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  let adImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "ad_slid_1")
     imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
@@ -26,12 +36,23 @@ class NavigationDrawerAdCell: UICollectionViewCell {
     
   }
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+  }
+  
   private func setupAdImageView() {
+    contentView.addSubview(bgImageView)
+    bgImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+    bgImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    bgImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+    bgImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    
     contentView.addSubview(adImageView)
-    adImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-    adImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-    adImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-    adImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    adImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+    adImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    adImageView.widthAnchor.constraint(equalToConstant: (contentView.frame.height * 828) / 1280).isActive = true
+    adImageView.heightAnchor.constraint(equalToConstant: (contentView.frame.width * 1280) / 828).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {

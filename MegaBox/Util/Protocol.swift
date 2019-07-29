@@ -10,6 +10,8 @@ import UIKit
 
 // 네비게이션 드로우(햄버거 메뉴)
 protocol NavigationDrawerViewDelegate {
+  // X버튼 클릭 -> 메인화면으로
+  func touchUpDismissButton()
   // 로그인 버튼 클릭
   func touchUpLoginButton()
 }
