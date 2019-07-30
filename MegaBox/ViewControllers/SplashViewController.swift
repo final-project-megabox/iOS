@@ -11,7 +11,7 @@ import UIKit
 class SplashViewController: UIViewController {
 
   private let shared = MovieDataManager.shared
-  private let movieReservationURLStr = "http://megabox.hellocoding.shop//database/reservationFirstView/"
+  private let movieReservationURLStr = "http://megabox.hellocoding.shop//database/showMovies/"
   
   private var timer: Timer!
   

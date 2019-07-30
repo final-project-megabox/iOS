@@ -76,7 +76,6 @@ class TheaterCategoryReservationHeaderView: UIView {
   }
   
   @objc private func touchUpPlaceButton() {
-    print("test")
     delegate?.touchUpPlaceButton()
   }
   
