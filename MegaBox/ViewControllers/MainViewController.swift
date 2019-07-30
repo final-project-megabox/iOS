@@ -24,6 +24,11 @@ class MainViewController: UIViewController {
     tableView.register(MainMoviePostCell.self, forCellReuseIdentifier: MainMoviePostCell.identifier)
     tableView.register(MainBranchNewsCell.self, forCellReuseIdentifier: MainBranchNewsCell.identifier)
     tableView.register(MainNotificationCell.self, forCellReuseIdentifier: MainNotificationCell.identifier)
+    tableView.register(MainFooterCell.self, forCellReuseIdentifier: MainFooterCell.identifier)
+    tableView.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8352941176, blue: 0.862745098, alpha: 1)
+    tableView.showsVerticalScrollIndicator = false
+    tableView.separatorColor = UIColor.clear
+//    tableView.allowsSelection = false
     return tableView
   }()
   
@@ -31,10 +36,6 @@ class MainViewController: UIViewController {
     super.viewDidLoad()
     
     self.view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    self.mainTableView.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
-    self.mainTableView.showsVerticalScrollIndicator = false
-    self.mainTableView.separatorColor = UIColor.clear
-    self.mainTableView.allowsSelection = false
     
     self.mainTableView.dataSource = self
     self.mainTableView.delegate = self
@@ -102,69 +103,88 @@ extension MainViewController: MainEventCellDelegate {
 
 extension MainViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 11
+    return 12
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: MainTopMediaPlayCell.identifier) as! MainTopMediaPlayCell
-    
+    cell.selectionStyle = .none
     if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainMovieReservationCell.identifier) as! MainMovieReservationCell
+      cell.selectionStyle = .none
       // Owl Stage Button Click Delegate
       cell.delegate = self
       return cell
     } else if indexPath.row == 2 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainShortMenuCell.identifier) as! MainShortMenuCell
+      cell.selectionStyle = .none
       return cell
     } else if indexPath.row == 3 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainAdCell.identifier) as! MainAdCell
       guard let adImageNum: Int = (0...1).randomElement() else { return cell }
       let adImageArr: [UIImage] = [#imageLiteral(resourceName: "ad1"), #imageLiteral(resourceName: "ad2")]
       if adImageNum == 0 {
+        cell.guideBGView.image = nil
         cell.guideBGView.backgroundColor = #colorLiteral(red: 1, green: 0.9647058824, blue: 0.968627451, alpha: 1)
       } else {
+        cell.guideBGView.image = nil
         cell.guideBGView.backgroundColor = #colorLiteral(red: 0.07450980392, green: 0.3294117647, blue: 0.8470588235, alpha: 1)
       }
+      cell.selectionStyle = .none
       cell.adImage.image = adImageArr[adImageNum]
       return cell
     } else if indexPath.row == 4 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainEventCell.identifier) as! MainEventCell
       // Owl Stage Button Click Delegate
       cell.delegate = self
+      cell.selectionStyle = .none
       return cell
     } else if indexPath.row == 5 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainMovieBoxCell.identifier) as! MainMovieBoxCell
+      cell.selectionStyle = .none
       return cell
     } else if indexPath.row == 6 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainAdCell.identifier) as! MainAdCell
       guard let adImageNum: Int = (0...1).randomElement() else { return cell }
       let adImageArr: [UIImage] = [#imageLiteral(resourceName: "ad4"), #imageLiteral(resourceName: "ad3")]
       if adImageNum == 0 {
+        cell.guideBGView.image = nil
         cell.guideBGView.backgroundColor = #colorLiteral(red: 0.1450980392, green: 0.1490196078, blue: 0.1529411765, alpha: 1)
       } else {
+        cell.guideBGView.image = nil
         cell.guideBGView.backgroundColor = #colorLiteral(red: 0.2274509804, green: 0.2392156863, blue: 0.5803921569, alpha: 1)
       }
       cell.adImage.image = adImageArr[adImageNum]
+      cell.selectionStyle = .none
       return cell
     } else if indexPath.row == 7 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainMoviePostCell.identifier) as! MainMoviePostCell
+      cell.selectionStyle = .none
       return cell
     } else if indexPath.row == 8 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainBranchNewsCell.identifier) as! MainBranchNewsCell
+      cell.selectionStyle = .none
       return cell
     } else if indexPath.row == 9 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainNotificationCell.identifier) as! MainNotificationCell
+      cell.selectionStyle = .none
       return cell
     } else if indexPath.row == 10 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainAdCell.identifier) as! MainAdCell
+      cell.guideBGView.image = #imageLiteral(resourceName: "newmain_boutiquebg")
       cell.adImage.image = #imageLiteral(resourceName: "lastbanner")
+      cell.selectionStyle = .none
+      return cell
+    } else if indexPath.row == 11 {
+      let cell = tableView.dequeueReusableCell(withIdentifier: MainFooterCell.identifier) as! MainFooterCell
+      cell.selectionStyle = .none
       return cell
     }
     return cell
   }
 }
 
-extension MainViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {  
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     // 해더뷰 고정 해제
     let scrollHeaderHeight = ((UIScreen.main .bounds.width * 907) / 1080) + 10
@@ -194,6 +214,12 @@ extension MainViewController: UITableViewDelegate {
       mainTopView.topMediaVisualTopView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
       mainTopView.hamburgerMenu.setImage(#imageLiteral(resourceName: "main_top_menu_white_btn"), for: .normal)
       isTop.toggle()
+    }
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if indexPath.row == 11 {
+      tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
     }
   }
   
@@ -230,6 +256,9 @@ extension MainViewController: UITableViewDelegate {
     } else if indexPath.row == 10 {
       // 광고
       return 90
+    } else if indexPath.row == 11 {
+      // 푸터
+      return 180
     }
     return 80
   }
