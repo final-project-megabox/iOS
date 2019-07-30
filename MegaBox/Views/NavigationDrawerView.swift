@@ -5,7 +5,6 @@
 //  Created by Fury on 18/07/2019.
 //  Copyright © 2019 Fury. All rights reserved.
 //
-
 import UIKit
 
 class NavigationDrawerView: UIView {
@@ -19,6 +18,7 @@ class NavigationDrawerView: UIView {
     layout.scrollDirection = .horizontal
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.isPagingEnabled = true
+    collectionView.showsHorizontalScrollIndicator = false
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     return collectionView
   }()
@@ -109,18 +109,13 @@ extension NavigationDrawerView: UIScrollViewDelegate {
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     print(scrollView.contentOffset.x)
-    
 
-    if self.lastContentOffset < 0 {
-      scrollView.contentOffset.x = 0
-    }
-    
-//    if scrollView.contentOffset.x <= 0 {
-//
-//    } else if scrollView.contentOffset.x > 0 && scrollView.contentOffset.x < (self.frame.width / 4) * 3 {
-//      navigationDrawerCollectionView.cellForItem(at: IndexPath(item: 1, section: 0))
-//    }
-    
     self.lastContentOffset = scrollView.contentOffset.x
+    
+    if self.lastContentOffset <= 0 {
+      scrollView.contentOffset.x = 0
+    } else {
+      scrollView.contentOffset.x = lastContentOffset
+    }
   }
 }

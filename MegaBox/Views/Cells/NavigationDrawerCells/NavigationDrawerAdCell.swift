@@ -5,7 +5,6 @@
 //  Created by Fury on 18/07/2019.
 //  Copyright © 2019 Fury. All rights reserved.
 //
-
 import UIKit
 
 class NavigationDrawerAdCell: UICollectionViewCell {

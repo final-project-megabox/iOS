@@ -12,6 +12,7 @@
 		CF09E8A622E71CC000B43066 /* TheaterCategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09E8A522E71CC000B43066 /* TheaterCategoryCollectionCell.swift */; };
 		CF09E8A822E7343C00B43066 /* BranchNewsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09E8A722E7343C00B43066 /* BranchNewsCollectionCell.swift */; };
 		CF7883BA22EF330800380C47 /* MainFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883B922EF330800380C47 /* MainFooterCell.swift */; };
+		CF7883C022EFEADA00380C47 /* NavigationDrawerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883BF22EFEADA00380C47 /* NavigationDrawerCell.swift */; };
 		CF9CCED322E6D40800021962 /* TheaterCategorySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9CCED222E6D40800021962 /* TheaterCategorySectionCell.swift */; };
 		CFBC1C7622E0298F006B6839 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C7522E0298F006B6839 /* AppDelegate.swift */; };
 		CFBC1C7822E0298F006B6839 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C7722E0298F006B6839 /* MainViewController.swift */; };
@@ -55,7 +56,6 @@
 		CFBC1CD922E02E41006B6839 /* TheaterCategoryAdCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CD822E02E41006B6839 /* TheaterCategoryAdCollectionCell.swift */; };
 		CFBC1CDB22E02E53006B6839 /* TheaterCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CDA22E02E53006B6839 /* TheaterCategoryCell.swift */; };
 		CFBC1CDD22E02E6E006B6839 /* NavigationDrawerAdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CDC22E02E6E006B6839 /* NavigationDrawerAdCell.swift */; };
-		CFBC1CDF22E02E86006B6839 /* NavigationDrawerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CDE22E02E86006B6839 /* NavigationDrawerCell.swift */; };
 		CFBC1CE122E02EA8006B6839 /* MyPageFourContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CE022E02EA8006B6839 /* MyPageFourContentCell.swift */; };
 		CFBC1CE322E02EB8006B6839 /* MyPageHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CE222E02EB8006B6839 /* MyPageHeaderCell.swift */; };
 		CFBC1CE522E02EC8006B6839 /* MyPageOneContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1CE422E02EC8006B6839 /* MyPageOneContentCell.swift */; };
@@ -83,6 +83,7 @@
 		CF09E8A522E71CC000B43066 /* TheaterCategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryCollectionCell.swift; sourceTree = "<group>"; };
 		CF09E8A722E7343C00B43066 /* BranchNewsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchNewsCollectionCell.swift; sourceTree = "<group>"; };
 		CF7883B922EF330800380C47 /* MainFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFooterCell.swift; sourceTree = "<group>"; };
+		CF7883BF22EFEADA00380C47 /* NavigationDrawerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDrawerCell.swift; sourceTree = "<group>"; };
 		CF9CCED222E6D40800021962 /* TheaterCategorySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySectionCell.swift; sourceTree = "<group>"; };
 		CFBC1C7222E0298F006B6839 /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MegaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFBC1C7522E0298F006B6839 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,7 +129,6 @@
 		CFBC1CD822E02E41006B6839 /* TheaterCategoryAdCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryAdCollectionCell.swift; sourceTree = "<group>"; };
 		CFBC1CDA22E02E53006B6839 /* TheaterCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryCell.swift; sourceTree = "<group>"; };
 		CFBC1CDC22E02E6E006B6839 /* NavigationDrawerAdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDrawerAdCell.swift; sourceTree = "<group>"; };
-		CFBC1CDE22E02E86006B6839 /* NavigationDrawerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDrawerCell.swift; sourceTree = "<group>"; };
 		CFBC1CE022E02EA8006B6839 /* MyPageFourContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFourContentCell.swift; sourceTree = "<group>"; };
 		CFBC1CE222E02EB8006B6839 /* MyPageHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderCell.swift; sourceTree = "<group>"; };
 		CFBC1CE422E02EC8006B6839 /* MyPageOneContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageOneContentCell.swift; sourceTree = "<group>"; };
@@ -319,7 +319,7 @@
 		CFBC1C8E22E02A0C006B6839 /* NavigationDrawerCells */ = {
 			isa = PBXGroup;
 			children = (
-				CFBC1CDE22E02E86006B6839 /* NavigationDrawerCell.swift */,
+				CF7883BF22EFEADA00380C47 /* NavigationDrawerCell.swift */,
 				CFBC1CDC22E02E6E006B6839 /* NavigationDrawerAdCell.swift */,
 			);
 			path = NavigationDrawerCells;
@@ -515,13 +515,13 @@
 				CFBC1CE122E02EA8006B6839 /* MyPageFourContentCell.swift in Sources */,
 				CFBC1C9122E02A4A006B6839 /* Protocol.swift in Sources */,
 				CF7883BA22EF330800380C47 /* MainFooterCell.swift in Sources */,
-				CFBC1CDF22E02E86006B6839 /* NavigationDrawerCell.swift in Sources */,
 				CFBC1CD122E02DEE006B6839 /* MainMovieBoxCell.swift in Sources */,
 				CFBC1CCD22E02DAB006B6839 /* MainEventCell.swift in Sources */,
 				E6D5693322E81B0B00C13F1E /* AlertController.swift in Sources */,
 				CFBC1CCB22E02D9C006B6839 /* MainAdCell.swift in Sources */,
 				CFBC1CFE22E1A238006B6839 /* Button.swift in Sources */,
 				CFBC1CE922E02F02006B6839 /* MyPageTwoContentCell.swift in Sources */,
+				CF7883C022EFEADA00380C47 /* NavigationDrawerCell.swift in Sources */,
 				CFBC1CA522E02B8B006B6839 /* SelectSeatViewController.swift in Sources */,
 				CFBC1CC322E02D4A006B6839 /* MainTopMediaPlayCell.swift in Sources */,
 				CFBC1CE722E02ED7006B6839 /* MyPageThreeContentCell.swift in Sources */,
