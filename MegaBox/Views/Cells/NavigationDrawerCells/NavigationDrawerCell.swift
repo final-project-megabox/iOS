@@ -5,7 +5,6 @@
 //  Created by Fury on 18/07/2019.
 //  Copyright © 2019 Fury. All rights reserved.
 //
-
 import UIKit
 
 class NavigationDrawerCell: UICollectionViewCell {
@@ -489,7 +488,7 @@ class NavigationDrawerCell: UICollectionViewCell {
     guideBottomView.addSubview(storeLabel)
     storeLabel.topAnchor.constraint(equalTo: storeButton.bottomAnchor).isActive = true
     storeLabel.centerXAnchor.constraint(equalTo: storeButton.centerXAnchor).isActive = true
-   
+    
     guideBottomView.addSubview(theaterButton)
     theaterButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     theaterButton.centerYAnchor.constraint(equalTo: storeButton.centerYAnchor).isActive = true
@@ -500,7 +499,7 @@ class NavigationDrawerCell: UICollectionViewCell {
     theaterLabel.topAnchor.constraint(equalTo: theaterButton.bottomAnchor).isActive = true
     theaterLabel.centerXAnchor.constraint(equalTo: theaterButton.centerXAnchor).isActive = true
     
-
+    
     guideBottomView.addSubview(eventButton)
     eventButton.centerYAnchor.constraint(equalTo: storeButton.centerYAnchor).isActive = true
     eventButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin * 2).isActive = true
