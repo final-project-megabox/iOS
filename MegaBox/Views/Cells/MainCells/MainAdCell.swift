@@ -11,8 +11,8 @@ import UIKit
 class MainAdCell: UITableViewCell {
   static let identifier = "AdCell"
   
-  let guideBGView: UIView = {
-    let view = UIView()
+  let guideBGView: UIImageView = {
+    let view = UIImageView()
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
