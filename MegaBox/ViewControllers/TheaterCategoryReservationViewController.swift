@@ -91,6 +91,7 @@ extension TheaterCategoryReservationViewController: TheaterCategoryReservationVi
 }
 
 extension TheaterCategoryReservationViewController: TheaterCategoryReservationHeaderViewDelegate {
+  
   func touchUpPlaceButton() {
     let theaterCategorySelectTheaterVC = TheaterCategorySelectTheaterViewController()
     theaterCategorySelectTheaterVC.dismissType = .one

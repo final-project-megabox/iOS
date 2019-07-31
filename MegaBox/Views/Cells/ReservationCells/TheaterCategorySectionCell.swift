@@ -11,23 +11,24 @@ import UIKit
 class TheaterCategorySectionCell: UITableViewCell {
   static let identifier = "TheaterCategorySectionCell"
   
-  let movieGradeImage: UIImageView = {
+  private let movieGradeImage: UIImageView = {
     let imageView = UIImageView()
     imageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
   
-  let movieTitle: UILabel = {
+  private let movieTitle: UILabel = {
     let label = UILabel()
     label.text = "라이온 킹"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
-  let rightButton: UIButton = {
-    let button = UIButton(type: .system)
+  private let rightButton: UIButton = {
+    let button = UIButton()
     button.setTitle(">", for: .normal)
+    button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -42,17 +43,27 @@ class TheaterCategorySectionCell: UITableViewCell {
     super.layoutSubviews()
     
     setupProperties()
+    self.layer.borderWidth = 1
+    self.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
   }
   
+  func cellConfigure(_ gradeImage: UIImage, _ movieTitle: String) {
+    self.movieGradeImage.image = gradeImage
+    self.movieTitle.text = movieTitle
+  }
+
+  
   private func setupProperties() {
+    let margin: CGFloat = 10
     contentView.addSubview(movieGradeImage)
     movieGradeImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-    movieGradeImage.widthAnchor.constraint(equalToConstant: 25).isActive = true
-    movieGradeImage.heightAnchor.constraint(equalToConstant: 25).isActive = true
+    movieGradeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
+    movieGradeImage.widthAnchor.constraint(equalToConstant: 20).isActive = true
+    movieGradeImage.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
     contentView.addSubview(movieTitle)
     movieTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-    movieTitle.leadingAnchor.constraint(equalTo: movieGradeImage.trailingAnchor).isActive = true
+    movieTitle.leadingAnchor.constraint(equalTo: movieGradeImage.trailingAnchor, constant: margin / 2).isActive = true
     
     contentView.addSubview(rightButton)
     rightButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true

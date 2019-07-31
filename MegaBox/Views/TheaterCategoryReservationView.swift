@@ -14,7 +14,8 @@ class TheaterCategoryReservationView: UIView {
   
   let headerView = TheaterCategoryReservationHeaderView()
   
-  private var movieCount: Int = 0
+  private var screenCount: Int = 0
+  private var movieTitleIdx: Int = 0
   
   private let menuTitleView: UIView = {
     let view = UIView()
@@ -43,7 +44,7 @@ class TheaterCategoryReservationView: UIView {
   
   let theaterTableView: UITableView = {
     let tableView = UITableView()
-    tableView.register(TheaterCategorySectionCell.self, forCellReuseIdentifier: TheaterCategoryCell.identifier)
+    tableView.register(TheaterCategorySectionCell.self, forCellReuseIdentifier: TheaterCategorySectionCell.identifier)
     tableView.register(TheaterCategoryCell.self, forCellReuseIdentifier: TheaterCategoryCell.identifier)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
@@ -60,6 +61,10 @@ class TheaterCategoryReservationView: UIView {
   
   @objc private func touchUpMenuTitleDismissButton(_ sender: UIButton) {
     delegate?.touchUpMenuTitleDismissButton(sender)
+  }
+  
+  private func calculateMoviesData() {
+    
   }
   
   private func setupProperties() {
@@ -92,22 +97,50 @@ class TheaterCategoryReservationView: UIView {
 
 extension TheaterCategoryReservationView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let movieCount = shared.reservationMovieData.count
-    let titleCount = shared.sortedMovieTitle.count
-    return movieCount + titleCount
+    let titleCount = shared.sortedTheaterMovieTitle.count
+    var screenTotalCount: Int = 0
+    
+    for (_, data) in shared.sortedTheaterMovieTitle.enumerated() {
+      
+      screenTotalCount += shared.theaterCategoryDetailMovie[data]!.count
+    }
+    
+    return titleCount + screenTotalCount
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryCell.identifier, for: indexPath) as! TheaterCategoryCell
     
-    return cell
+    if indexPath.row == screenCount {
+      let movie = shared.sortedTheaterMovieTitle[movieTitleIdx]
+      let screenCount = shared.theaterCategoryDetailMovie[movie]?.count ?? 0
+      self.screenCount += (screenCount + 1)
+      
+      let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySectionCell.identifier, for: indexPath) as! TheaterCategorySectionCell
+      
+      movieTitleIdx += 1
+
+      let grade = shared.theaterCategoryMovie[movie]![0].age
+
+      var gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
+      if grade == "전체 관람" {
+        gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
+      } else if grade == "12세 관람가" {
+        gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_12")
+      } else if grade == "15세 관람가" {
+        gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_15")
+      } else {
+        gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_18")
+      }
+      cell.cellConfigure(gradeImage, movie)
+      return cell
+    } else {
+      let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryCell.identifier, for: indexPath) as! TheaterCategoryCell
+      return cell
+    }
   }
 }
 
 extension TheaterCategoryReservationView: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 80
-  }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     // 해더뷰 고정 해제

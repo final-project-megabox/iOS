@@ -26,6 +26,7 @@ class SplashViewController: UIViewController {
       switch result {
       case .success(let data):
         self.shared.allMovieData = data
+        self.shared.sortedAllMovieTitle = data.map({ $0.title }).reversed()
         let mainVC = MainViewController()
         self.present(mainVC, animated: false)
       case .failure(let err):

@@ -16,9 +16,12 @@ class MovieDataManager {
   var allMovieData: [MovieData] = []
   
   var reservationMovieData: [ReservationData] = []
-  var sortedReservationMovie: [ReservationData] = []
   
-  var sortedMovieTitle: [String] = []
+  var sortedAllMovieTitle: [String] = []
+  var sortedTheaterMovieTitle: [String] = []
+  var sortedTitleCount: [String: [Int]] = [:]
   
-  var movieCounts: [String: Int] = [:]
+  var theaterCategoryDetailMovie = [String: [Int: [String: ReservationData]]]()
+  
+  var theaterCategoryMovie = [String: [ReservationData]]()
 }
