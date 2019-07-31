@@ -18,14 +18,13 @@ class TheaterCategoryCell: UITableViewCell {
     return label
   }()
   
-  private let timeCollectionView: UICollectionView = {
+  let timeCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     let collecionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collecionView.isScrollEnabled = false
-//    collecionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    collecionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     collecionView.register(TheaterCategoryCollectionCell.self, forCellWithReuseIdentifier: TheaterCategoryCollectionCell.identifier)
     collecionView.translatesAutoresizingMaskIntoConstraints = false
-    collecionView.isPagingEnabled = false
     return collecionView
   }()
   
@@ -63,7 +62,7 @@ class TheaterCategoryCell: UITableViewCell {
     timeCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
     timeCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin).isActive = true
     timeCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-    timeCollectionView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+    timeCollectionView.heightAnchor.constraint(equalToConstant: 190).isActive = true
     
   }
 
@@ -87,11 +86,15 @@ extension TheaterCategoryCell: UICollectionViewDataSource {
 
 extension TheaterCategoryCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.frame.width / 4, height: 50)
+    return CGSize(width: (collectionView.frame.width - 20) / 4.2, height: 70)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
     return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    
   }
 }
 

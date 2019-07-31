@@ -30,6 +30,7 @@ class TheaterCategoryReservationViewController: UIViewController {
     menuView.delegate = self
     menuView.headerView.delegate = self
     
+    
     setupMenuView()
   }
   
@@ -84,6 +85,11 @@ class TheaterCategoryReservationViewController: UIViewController {
 }
 
 extension TheaterCategoryReservationViewController: TheaterCategoryReservationViewDelegate {
+  func touchUpMovieTime() {
+    let selectSeatVC = SelectSeatViewController()
+    present(selectSeatVC, animated: true)
+  }
+  
   
   func touchUpMenuTitleDismissButton(_ sender: UIButton) {
     self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)

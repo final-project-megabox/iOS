@@ -94,5 +94,3 @@ protocol MovieCategorySelectTheatherViewDelegate {
   func touchUpDateButton()
   
 }
-
-
