@@ -28,7 +28,7 @@ class MovieListCell: UITableViewCell {
   
   let movieSubTitleLabel: UILabel = {
     let label = UILabel()
-    label.textColor = UIColor.appColor(.defaultGrayColor)
+    label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     label.textAlignment = .left
     label.font = UIFont.systemFont(ofSize: 11, weight: .thin)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +37,7 @@ class MovieListCell: UITableViewCell {
   
   let movieDurationLabel: UILabel = {
     let label = UILabel()
-    label.textColor = UIColor.appColor(.defaultGrayColor)
+    label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     label.textAlignment = .center
     label.font = UIFont.systemFont(ofSize: 12, weight: .thin)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +61,18 @@ class MovieListCell: UITableViewCell {
   func setting(movie: MovieList) {
     movie.isSelect ? isTrue() : isFalse()
     
-    gradeImageView.image = UIImage(named: movie.ageImage)
+    if movie.ageImage == "청소년 관람불가" {
+      gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_18")
+    } else if movie.ageImage == "12세 관람가" {
+      gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_12")
+    } else if movie.ageImage == "15세 관람가" {
+      gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_15")
+    } else if movie.ageImage == "전체 관람"{
+      gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
+    } else {
+      gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_noage")
+    }
+    
     movieTitleLabel.text = movie.title
     movieSubTitleLabel.text = movie.type
     movieDurationLabel.text = movie.duration
@@ -79,7 +90,7 @@ class MovieListCell: UITableViewCell {
   func isFalse() {
     contentView.backgroundColor = .white
     movieTitleLabel.textColor = UIColor.appColor(.darkBgColor)
-    movieSubTitleLabel.textColor = UIColor.appColor(.defaultGrayColor)
+    movieSubTitleLabel.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     movieDurationLabel.alpha = 1
     selectCheckImageView.isHidden = true
   }
@@ -88,7 +99,7 @@ class MovieListCell: UITableViewCell {
   private func setupTableViewCell() {
     
     contentView.addSubview(gradeImageView)
-    gradeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
+    gradeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
     gradeImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     gradeImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
     gradeImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true

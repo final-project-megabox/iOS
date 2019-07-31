@@ -42,14 +42,41 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: LoginViewDelegate {
-  func touchUpLoginButton() {
-    let myPageVC = MyPageViewController()
-    present(myPageVC, animated: false)
+  func touchUpLoginButton(id: String, pw: String) {
+    
+    if id.isEmpty {
+      UIAlertController.show(title: "", message: "아이디를 입력해주세요.", from: self)
+    }else if pw.isEmpty {
+      UIAlertController.show(title: "", message: "비밀번호를 입력해주세요.", from: self)
+    }else {
+      
+      NetworkService.getToken(email: id, pw: pw) { (result) in
+        switch result {
+        case .success(let value):
+          print("result: ", value)
+          self.presentingViewController?.dismiss(animated: false)
+        case .failure(let err):
+          print("result: ", err)
+          DispatchQueue.main.async {
+            UIAlertController.show(title: "", message: "아이디와 비밀번호를 확인해주세요.", from: self)
+          }
+          
+        }
+      }
+      
+    }
+    
+    
+    
+    
   }
   
   func touchUpSelectDismissButton() {
     self.presentingViewController?.presentingViewController?.dismiss(animated: false)
   }
   
+  func touchUpRegisterButton() {
+    UIAlertController.show(title: "", message: "m.megabox.co.kr에서\n회원가입이 가능합니다.", from: self)
+  }
   
 }

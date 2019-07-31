@@ -9,7 +9,7 @@
 import UIKit
 
 class SplashViewController: UIViewController {
-  
+
   private let shared = MovieDataManager.shared
   private let movieReservationURLStr = "http://megabox.hellocoding.shop//database/showMovies/"
   
@@ -17,7 +17,7 @@ class SplashViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(startSplash), userInfo: nil, repeats: false)
   }
   

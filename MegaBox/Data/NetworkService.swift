@@ -15,6 +15,35 @@ class NetworkService {
     case networkErr, NoData
   }
   
+  static func getToken(email: String, pw: String, completion: @escaping (Result<Token>) -> ()) {
+    let body = """
+{
+      "email": "\(email)",
+      "password": "\(pw)"
+    }
+""".data(using: .utf8)
+    
+    let headers = [
+      "Content-Type": "application/json"
+    ]
+    
+    let url = "http://megabox.hellocoding.shop/api/token/"
+    
+    guard let data = body else { return }
+    
+    Alamofire.upload(data, to: url, method: .post, headers: headers).responseData(queue: .global()) { res in
+      switch res.result {
+      case .success(let value):
+        guard let result = try? JSONDecoder().decode(Token.self, from: value) else {
+          completion(.failure(ErrorType.NoData))
+          return }
+        completion(.success(result))
+      case .failure(_):
+        completion(.failure(ErrorType.networkErr))
+      }
+    }
+  }
+  
   static func getAllMovieData(_ urlStr: String, completion: @escaping (Swift.Result<[MovieData], ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
     let req = Alamofire.request(url)
