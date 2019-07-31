@@ -135,6 +135,7 @@ extension TheaterCategoryReservationView: UITableViewDataSource {
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryCell.identifier, for: indexPath) as! TheaterCategoryCell
+      
       return cell
     }
   }
