@@ -3,6 +3,19 @@
 
 import Foundation
 
+// MARK: - Token
+struct Token: Codable {
+  let token: String
+  let user: User
+}
+
+// MARK: - User
+struct User: Codable {
+  let username, password: String
+}
+
+
+
 // MARK: - MovieData
 struct MovieData: Codable {
   let movieID: Int
@@ -10,7 +23,8 @@ struct MovieData: Codable {
   let releaseDate: String
   let bookingRate: Double
   let title, age: String
-  let types: [[TypeElement]]
+//  let types: [[TypeElement]]
+  let types: [[String]]
   let selected: Bool
   
   enum CodingKeys: String, CodingKey {
