@@ -27,6 +27,7 @@ class MovieCategoryReservationViewController: UIViewController {
     super.viewDidLoad()
     menuView.reservationDelegate = self
     setupMenuView()
+
     
   }
   

@@ -173,6 +173,7 @@ class LoginView: UIView {
     button.setTitle("회원가입", for: .normal)
     button.setTitleColor(UIColor.appColor(.darkBgColor), for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 11)
+    button.addTarget(self, action: #selector(didTapRegisterButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -211,6 +212,10 @@ class LoginView: UIView {
   let paycoLoginButton: UIButton = {
     let button = UIButton(type: .custom)
     button.setImage(#imageLiteral(resourceName: "login_socialpayco"), for: .normal)
+    button.setTitle("로그인", for: .normal)
+    button.setTitleColor(#colorLiteral(red: 0.348588198, green: 0.348588198, blue: 0.348588198, alpha: 1), for: .normal)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 11)
+    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
     button.layer.borderWidth = 1
     button.layer.borderColor = #colorLiteral(red: 0.8494448208, green: 0.8494448208, blue: 0.8494448208, alpha: 1)
     button.layer.cornerRadius = 5
@@ -233,13 +238,21 @@ class LoginView: UIView {
     setupLoginView()
   }
   
+  @objc func didTapRegisterButton(_ sender: UIButton) {
+    delegate?.touchUpRegisterButton()
+  }
+  
   @objc func didTapDismissButton(_ sender: UIButton) {
     print("dismissButton")
     delegate?.touchUpSelectDismissButton()
   }
   
   @objc func loginBtnAction(_ sender: UIButton) {
-    delegate?.touchUpLoginButton()
+    guard let id = idTextField.text else {return}
+    guard let pw = passwordTextField.text else {return}
+    
+    
+    delegate?.touchUpLoginButton(id: id, pw: pw)
   }
   
   @objc func didTapCheckButton(_ sender: UIButton) {

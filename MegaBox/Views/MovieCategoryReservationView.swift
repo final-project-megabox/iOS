@@ -20,6 +20,9 @@ struct MovieList {
 class MovieCategoryReservationView: UIView {
   
   // MARK: Properties
+  
+  private let shared = MovieDataManager.shared
+  
   var reservationDelegate: MovieCategoryReservationViewDelegate?
   var delegate: MenuTitleViewDelegate?
   
@@ -116,6 +119,7 @@ class MovieCategoryReservationView: UIView {
     autoLayout()
     setupTableView()
     
+    print(shared.allMovieData)
     
   }
   
@@ -124,10 +128,53 @@ class MovieCategoryReservationView: UIView {
   }
   
   private func makeData() {
-    for i in 0..<20 {
-      let movie = MovieList(title: "스파이더맨: 파 프로 홈 \(i)", type: "디지털(자막),ATMOS(자막),3D(자막),3D ATMOS(자막)", duration: "000분", checkImage: "ticket_img_check", ageImage: "booking_middle_filrm_rating_all", isSelect: false)
-      movieData.append(movie)
+//    for i in 0..<shared.allMovieData.count {
+//      let movie = MovieList(title: shared.allMovieData[i].title, type: shared.allMovieData[i], duration: "000분", checkImage: "ticket_img_check", ageImage: "booking_middle_filrm_rating_all", isSelect: false)
+//      movieData.append(movie)
+//    }
+    
+    shared.allMovieData.forEach { movie in
+      var tempType = ""
+      
+      for (firstIndex, type) in movie.types.enumerated() {
+        var temp = ""
+        
+        if type.count > 1 {
+          
+          for (secondIndex, value) in type.enumerated() {
+            if secondIndex == 0 {
+              temp.append(value)
+            } else {
+              if firstIndex == (movie.types.count - 1) {
+                temp.append("(\(value))")
+              } else {
+                temp.append("(\(value)), ")
+              }
+            }
+          }
+          tempType.append(temp)
+          
+        } else {
+          if firstIndex == (movie.types.count - 1) {
+            tempType.append(type[0])
+          } else {
+            tempType.append("\(type[0]), ")
+          }
+        }
+      }
+      
+      let tempMovie = MovieList(
+        title: movie.title,
+        type: tempType,
+        duration: "000분",
+        checkImage: "ticket_img_check",
+        ageImage: movie.age,
+        isSelect: false
+      )
+      
+      movieData.append(tempMovie)
     }
+    
   }
   
   
