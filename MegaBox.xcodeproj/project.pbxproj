@@ -13,6 +13,12 @@
 		CF09E8A822E7343C00B43066 /* BranchNewsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09E8A722E7343C00B43066 /* BranchNewsCollectionCell.swift */; };
 		CF7883BA22EF330800380C47 /* MainFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883B922EF330800380C47 /* MainFooterCell.swift */; };
 		CF7883C022EFEADA00380C47 /* NavigationDrawerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883BF22EFEADA00380C47 /* NavigationDrawerCell.swift */; };
+		CF7883C222F0503F00380C47 /* EightTwoMovieTheaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883C122F0503F00380C47 /* EightTwoMovieTheaterView.swift */; };
+		CF7883C522F0511C00380C47 /* ThreeSixMovieTheaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883C422F0511C00380C47 /* ThreeSixMovieTheaterView.swift */; };
+		CF7883C722F0514800380C47 /* OneThreeZeroMovieTheaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883C622F0514800380C47 /* OneThreeZeroMovieTheaterView.swift */; };
+		CF7883C922F0515600380C47 /* OneFourZeroMovieTheaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883C822F0515600380C47 /* OneFourZeroMovieTheaterView.swift */; };
+		CF7883CB22F0516300380C47 /* OneFiveZeroMovieTheaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883CA22F0516300380C47 /* OneFiveZeroMovieTheaterView.swift */; };
+		CF7883CD22F13B6A00380C47 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883CC22F13B6A00380C47 /* Array.swift */; };
 		CF9CCED322E6D40800021962 /* TheaterCategorySectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9CCED222E6D40800021962 /* TheaterCategorySectionCell.swift */; };
 		CFBC1C7622E0298F006B6839 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C7522E0298F006B6839 /* AppDelegate.swift */; };
 		CFBC1C7822E0298F006B6839 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC1C7722E0298F006B6839 /* MainViewController.swift */; };
@@ -84,6 +90,12 @@
 		CF09E8A722E7343C00B43066 /* BranchNewsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchNewsCollectionCell.swift; sourceTree = "<group>"; };
 		CF7883B922EF330800380C47 /* MainFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFooterCell.swift; sourceTree = "<group>"; };
 		CF7883BF22EFEADA00380C47 /* NavigationDrawerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDrawerCell.swift; sourceTree = "<group>"; };
+		CF7883C122F0503F00380C47 /* EightTwoMovieTheaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EightTwoMovieTheaterView.swift; sourceTree = "<group>"; };
+		CF7883C422F0511C00380C47 /* ThreeSixMovieTheaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeSixMovieTheaterView.swift; sourceTree = "<group>"; };
+		CF7883C622F0514800380C47 /* OneThreeZeroMovieTheaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneThreeZeroMovieTheaterView.swift; sourceTree = "<group>"; };
+		CF7883C822F0515600380C47 /* OneFourZeroMovieTheaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneFourZeroMovieTheaterView.swift; sourceTree = "<group>"; };
+		CF7883CA22F0516300380C47 /* OneFiveZeroMovieTheaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneFiveZeroMovieTheaterView.swift; sourceTree = "<group>"; };
+		CF7883CC22F13B6A00380C47 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		CF9CCED222E6D40800021962 /* TheaterCategorySectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategorySectionCell.swift; sourceTree = "<group>"; };
 		CFBC1C7222E0298F006B6839 /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MegaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFBC1C7522E0298F006B6839 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +191,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CF7883C322F0508E00380C47 /* MovieTheaterView */ = {
+			isa = PBXGroup;
+			children = (
+				CF7883C422F0511C00380C47 /* ThreeSixMovieTheaterView.swift */,
+				CF7883C122F0503F00380C47 /* EightTwoMovieTheaterView.swift */,
+				CF7883C622F0514800380C47 /* OneThreeZeroMovieTheaterView.swift */,
+				CF7883C822F0515600380C47 /* OneFourZeroMovieTheaterView.swift */,
+				CF7883CA22F0516300380C47 /* OneFiveZeroMovieTheaterView.swift */,
+			);
+			path = MovieTheaterView;
+			sourceTree = "<group>";
+		};
 		CFBC1C6922E0298F006B6839 = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +253,7 @@
 				CFBC1CFD22E1A238006B6839 /* Button.swift */,
 				CFC9724A22E5A21600199FD0 /* Color.swift */,
 				E6D5693222E81B0B00C13F1E /* AlertController.swift */,
+				CF7883CC22F13B6A00380C47 /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -267,6 +292,7 @@
 				CFBC1CB822E02C60006B6839 /* SelectPersonCountView.swift */,
 				CFBC1CBA22E02C6E006B6839 /* MyPageTopView.swift */,
 				CFBC1CBC22E02C7C006B6839 /* MyPageContentView.swift */,
+				CF7883C322F0508E00380C47 /* MovieTheaterView */,
 				CFBC1C8B22E029F6006B6839 /* Cells */,
 			);
 			path = Views;
@@ -482,6 +508,7 @@
 				CF09E8A822E7343C00B43066 /* BranchNewsCollectionCell.swift in Sources */,
 				CFBC1C9722E02AAA006B6839 /* LoginViewController.swift in Sources */,
 				CFBC1CA122E02B4C006B6839 /* MovieCategorySelectTheaterViewController.swift in Sources */,
+				CF7883C722F0514800380C47 /* OneThreeZeroMovieTheaterView.swift in Sources */,
 				CFBC1CB322E02C07006B6839 /* TheaterCategoryReservationHeaderView.swift in Sources */,
 				CFBC1CAD22E02BDC006B6839 /* MainTopView.swift in Sources */,
 				CFBC1CE522E02EC8006B6839 /* MyPageOneContentCell.swift in Sources */,
@@ -504,6 +531,8 @@
 				CFBC1CB922E02C60006B6839 /* SelectPersonCountView.swift in Sources */,
 				CFBC1CAB22E02BD2006B6839 /* NavigationDrawerView.swift in Sources */,
 				CFBC1CC522E02D62006B6839 /* MainMovieReservationCell.swift in Sources */,
+				CF7883C922F0515600380C47 /* OneFourZeroMovieTheaterView.swift in Sources */,
+				CF7883C522F0511C00380C47 /* ThreeSixMovieTheaterView.swift in Sources */,
 				CFBC1CDD22E02E6E006B6839 /* NavigationDrawerAdCell.swift in Sources */,
 				CFBC1C9D22E02B0F006B6839 /* TheaterCategoryReservationViewController.swift in Sources */,
 				CFBC1CCF22E02DBE006B6839 /* EventCollectionCell.swift in Sources */,
@@ -527,10 +556,12 @@
 				CFBC1CE722E02ED7006B6839 /* MyPageThreeContentCell.swift in Sources */,
 				CFBC1CF422E194AD006B6839 /* TheaterCategorySelectTheaterView.swift in Sources */,
 				CFBC1CA322E02B70006B6839 /* SelectPersonCountViewController.swift in Sources */,
+				CF7883CD22F13B6A00380C47 /* Array.swift in Sources */,
 				CFBC1CEC22E180FD006B6839 /* MovieData.swift in Sources */,
 				CFBC1CA722E02B96006B6839 /* MyPageViewController.swift in Sources */,
 				CFBC1CD922E02E41006B6839 /* TheaterCategoryAdCollectionCell.swift in Sources */,
 				CFBC1CD322E02E00006B6839 /* MainMoviePostCell.swift in Sources */,
+				CF7883CB22F0516300380C47 /* OneFiveZeroMovieTheaterView.swift in Sources */,
 				CFBC1CB522E02C17006B6839 /* MovieCategoryReservationView.swift in Sources */,
 				CFBC1CAF22E02BE8006B6839 /* QuickReservationView.swift in Sources */,
 				CFBC1CD722E02E22006B6839 /* MainNotificationCell.swift in Sources */,
@@ -542,6 +573,7 @@
 				CFBC1C9922E02ADE006B6839 /* NavigationDrawerViewController.swift in Sources */,
 				CFBC1C9522E02A95006B6839 /* StackView.swift in Sources */,
 				CFBC1CDB22E02E53006B6839 /* TheaterCategoryCell.swift in Sources */,
+				CF7883C222F0503F00380C47 /* EightTwoMovieTheaterView.swift in Sources */,
 				CFBC1CF822E19CA1006B6839 /* TheaterCategorySelectTheaterRegionListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -690,7 +722,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.fury.MegaBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -709,7 +741,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.fury.MegaBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

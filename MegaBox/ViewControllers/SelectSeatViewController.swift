@@ -9,22 +9,28 @@
 import UIKit
 
 class SelectSeatViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
+  
+  let eightTwoMovieTheaterView: EightTwoMovieTheaterView = {
+    let view = EightTwoMovieTheaterView()
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    view.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    setupEightTwoMovieTheaterView()
+  }
+  
+  private func setupEightTwoMovieTheaterView() {
+    let guide = view.safeAreaLayoutGuide
+    let frontMargin: CGFloat = 100
+    
+    view.addSubview(eightTwoMovieTheaterView)
+    eightTwoMovieTheaterView.topAnchor.constraint(equalTo: guide.topAnchor, constant: frontMargin).isActive = true
+    eightTwoMovieTheaterView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+    eightTwoMovieTheaterView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    eightTwoMovieTheaterView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+  }
 }

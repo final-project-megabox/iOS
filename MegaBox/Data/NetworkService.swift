@@ -54,6 +54,7 @@ class NetworkService {
         case .success(let data):
           do {
             let allMovieData = try JSONDecoder().decode([MovieData].self, from: data)
+            
             completion(.success(allMovieData))
           } catch {
             print(error.localizedDescription)
@@ -68,11 +69,9 @@ class NetworkService {
     let url = URL(string: urlStr)!
     let parameters: [String: String] = ["theater": regionName, "date": date]
     
-    // http://megabox.hellocoding.shop/database/reservationFirstView/?theater=대전&date=2019-07-20
+    // http://megabox.hellocoding.shop/database/reservationFirstView/?theater=대전&date=2019-07-31
     
-    let req = Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil)
-
-//    let req = Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: nil)
+    let req = Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default)
     
     req.validate()
       .responseData { response in
@@ -81,7 +80,6 @@ class NetworkService {
           do {
             let allReservationData = try JSONDecoder().decode([ReservationData].self, from: data)
             completion(.success(allReservationData))
-            print(allReservationData)
           } catch {
             print(error.localizedDescription)
           }

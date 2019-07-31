@@ -13,6 +13,7 @@ class TheaterCategoryCell: UITableViewCell {
   
   private let titleLabel: UILabel = {
     let label = UILabel()
+    label.text = "2관 총 103석 | 디지털"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -20,6 +21,8 @@ class TheaterCategoryCell: UITableViewCell {
   private let timeCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     let collecionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    collecionView.isScrollEnabled = false
+//    collecionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     collecionView.register(TheaterCategoryCollectionCell.self, forCellWithReuseIdentifier: TheaterCategoryCollectionCell.identifier)
     collecionView.translatesAutoresizingMaskIntoConstraints = false
     collecionView.isPagingEnabled = false
@@ -31,11 +34,36 @@ class TheaterCategoryCell: UITableViewCell {
     
     timeCollectionView.dataSource = self
     timeCollectionView.delegate = self
+    
+    setupProperties()
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
     
+  }
+  
+  //
+  //
+  //
+  // 영화 이름, 관 정보 받아서 데이터 모델이서 타임을 가져와 컬렉션에 뿌릴 것
+  func cellConfigure(_ title: String) {
+    self.titleLabel.text = title
+  }
+  
+  private func setupProperties() {
+    let margin: CGFloat = 10
+    contentView.addSubview(titleLabel)
+    titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin / 2).isActive = true
+    titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
+    titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+    
+    contentView.addSubview(timeCollectionView)
+    timeCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin).isActive = true
+    timeCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
+    timeCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin).isActive = true
+    timeCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+    timeCollectionView.heightAnchor.constraint(equalToConstant: 300).isActive = true
     
   }
 
@@ -47,7 +75,7 @@ class TheaterCategoryCell: UITableViewCell {
 
 extension TheaterCategoryCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 3
+    return 8
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -59,11 +87,11 @@ extension TheaterCategoryCell: UICollectionViewDataSource {
 
 extension TheaterCategoryCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: (UIScreen.main.bounds.width - 20) / 4, height: 50)
+    return CGSize(width: collectionView.frame.width / 4, height: 50)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
   }
 }
 
