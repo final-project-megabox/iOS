@@ -13,17 +13,21 @@ struct ReservationData: Codable {
   let scheduleID: Int
   let theater: String
   let screen: Int
-  let date, startTime, movie: String
-  let type: String
+  let age: String
+  let runningTime: Int
+  var date, startTime, movie: String
+  let types: [String]
   let stCount, totalSeat: Int
   let seatNumber: [String]
-  
+
   enum CodingKeys: String, CodingKey {
     case scheduleID = "schedule_id"
-    case theater, screen, date
+    case theater, screen, age
+    case runningTime = "running_time"
+    case date
     case startTime = "start_time"
     case movie
-    case type = "type_"
+    case types
     case stCount = "st_count"
     case totalSeat = "total_seat"
     case seatNumber = "seat_number"
