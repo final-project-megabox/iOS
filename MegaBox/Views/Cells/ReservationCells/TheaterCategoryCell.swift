@@ -22,7 +22,7 @@ class TheaterCategoryCell: UITableViewCell {
     let layout = UICollectionViewFlowLayout()
     let collecionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collecionView.isScrollEnabled = false
-//    collecionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    collecionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     collecionView.register(TheaterCategoryCollectionCell.self, forCellWithReuseIdentifier: TheaterCategoryCollectionCell.identifier)
     collecionView.translatesAutoresizingMaskIntoConstraints = false
     collecionView.isPagingEnabled = false
@@ -87,7 +87,7 @@ extension TheaterCategoryCell: UICollectionViewDataSource {
 
 extension TheaterCategoryCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.frame.width / 4, height: 50)
+    return CGSize(width: (collectionView.frame.width - 20) / 4, height: 70)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
