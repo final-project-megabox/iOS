@@ -75,6 +75,7 @@ extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheat
           for (_, title) in self.shared.sortedAllMovieTitle.enumerated() {
             reservationMovieDatas = reservationMovieDatas.sorted(by: { title == $1.movie })
           }
+          
           reservationMovieDatas.sort(by: { _,_ in return true })
           
           self.shared.reservationMovieData = reservationMovieDatas
@@ -95,6 +96,7 @@ extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheat
             } else {
               if self.shared.theaterCategoryDetailMovie[data.movie]![data.screen] == nil {
                 self.shared.theaterCategoryDetailMovie[data.movie]![data.screen] = [data.startTime: data]
+                
               } else {
                 self.shared.theaterCategoryDetailMovie[data.movie]![data.screen]![data.startTime] = data
               }
@@ -104,7 +106,6 @@ extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheat
           // 영화 타이틀만 저장 및 중복 제거(예매율 소팅)
           self.shared.sortedTheaterMovieTitle = reservationMovieDatas.map({ $0.movie })
           self.shared.sortedTheaterMovieTitle = self.shared.sortedTheaterMovieTitle.removeDuplicates()
-          
           self.present(theaterCategoryReservationVC, animated: false)
         case .failure(let err):
           print(err.localizedDescription)
