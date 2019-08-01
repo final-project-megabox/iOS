@@ -10,7 +10,6 @@ import UIKit
 
 class NavigationDrawerViewController: UIViewController {
   
-  let url = "http://megabox.hellocoding.shop//accounts/myPage/"
   
   private let navigationDrawerView: NavigationDrawerView = {
     let view = NavigationDrawerView()
@@ -104,19 +103,6 @@ extension NavigationDrawerViewController: NavigationDrawerViewDelegate {
 //      }
 //    }
 
-    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
-    
-    NetworkService.getUserMyPageData(url, token: "JWT \(token)") { (result) in
-      switch result {
-      case .success(let value):
-        print("value: ", value)
-        value.watchedMovieNumber
-      case .failure(let err):
-        print("result: ", err)
-      }
-    }
-
-    
     self.present(myPageVC, animated: false)
     
     

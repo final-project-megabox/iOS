@@ -25,9 +25,24 @@ class MyPageViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     myPageTopView.delegate = self
+    getUserData()
     setupMaPageView()
   }
   
+  func getUserData() {
+    let url = "http://megabox.hellocoding.shop//accounts/myPage/"
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    NetworkService.getUserMyPageData(url, token: "JWT \(token)") { (result) in
+      switch result {
+      case .success(let value):
+        print("value: ", value)
+
+      case .failure(let err):
+        print("result: ", err)
+      }
+    }
+  }
   
   private func setupMaPageView() {
     let guide = view.safeAreaLayoutGuide
