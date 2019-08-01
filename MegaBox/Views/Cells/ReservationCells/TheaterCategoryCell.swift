@@ -49,9 +49,17 @@ class TheaterCategoryCell: UITableViewCell {
   
   func cellConfigure(title: String, movieData: [ReservationData]) {
     self.titleLabel.text = title
-    self.movieData = [movieData].sorted(by: {arg0, arg1 in
-      arg0[0].startTime < arg1[0].startTime
-    })
+    self.movieData = [movieData]
+    
+    for i in 0..<movieData.count - 1 {
+      for j in 1..<movieData.count {
+        if self.movieData[0][i].startTime > self.movieData[0][j].startTime {
+          let temp = self.movieData[0][i]
+          self.movieData[0][i] = self.movieData[0][j]
+          self.movieData[0][j] = temp
+        }
+      }
+    }
     
     if movieData.count > 4 {
       collectionWidth = 190
