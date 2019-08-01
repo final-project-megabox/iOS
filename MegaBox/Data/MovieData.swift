@@ -3,19 +3,6 @@
 
 import Foundation
 
-// MARK: - Token
-struct Token: Codable {
-  let token: String
-  let user: User
-}
-
-// MARK: - User
-struct User: Codable {
-  let username, password: String
-}
-
-
-
 // MARK: - MovieData
 struct MovieData: Codable {
   let movieID: Int

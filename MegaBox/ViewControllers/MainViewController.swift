@@ -46,6 +46,13 @@ class MainViewController: UIViewController {
     super.viewDidLayoutSubviews()
     setupMainTopView()
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    guard let userName = UserDefaults.standard.value(forKey: "UserName") else { return }
+    print("로그인한 회원의 토큰:", token)
+    print("로그인한 회원의 이름: ", userName)
+  }
 
   private func setupMainTopView() {
     mainTopView.translatesAutoresizingMaskIntoConstraints = false

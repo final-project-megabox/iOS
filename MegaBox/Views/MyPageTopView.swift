@@ -10,6 +10,8 @@ import UIKit
 
 class MyPageTopView: UIView {
   
+  var delegate: MyPageTopViewDelegate?
+  
   private let topView: UIView = {
     let view = UIView()
     view.backgroundColor = .white
@@ -37,6 +39,7 @@ class MyPageTopView: UIView {
   private let menuButton: UIButton = {
     let button = UIButton()
     button.setImage(#imageLiteral(resourceName: "common_btn_topbar_menu"), for: .normal)
+    button.addTarget(self, action: #selector(didTapMenuButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -44,6 +47,7 @@ class MyPageTopView: UIView {
   private let dismissButton: UIButton = {
     let button = UIButton()
     button.setImage(#imageLiteral(resourceName: "common_btn_topbar_prev2"), for: .normal)
+    button.addTarget(self, action: #selector(didTapDismissButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -60,6 +64,14 @@ class MyPageTopView: UIView {
     super.init(frame: frame)
     
     setupMyPageTopView()
+  }
+  
+  @objc func didTapMenuButton(_ sender: UIButton) {
+    delegate?.touchUpMenuButton(sender)
+  }
+  
+  @objc func didTapDismissButton(_ sender: UIButton) {
+    delegate?.touchUpDismissButton(sender)
   }
   
   
