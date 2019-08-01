@@ -33,6 +33,11 @@ class NavigationDrawerView: UIView {
     
     setupCollectionView()
   }
+
+  // MARK: - 임시 마이페이지 이동
+  @objc func touchUpNoticeButton(_ sender: UIButton) {
+    delegate?.touchUpNoticeButton()
+  }
   
   @objc func touchUpDismissButton(_ sender: UIButton) {
     delegate?.touchUpDismissButton()
@@ -71,6 +76,9 @@ extension NavigationDrawerView: UICollectionViewDataSource {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NavigationDrawerCell.identifier, for: indexPath) as! NavigationDrawerCell
       cell.loginButton.addTarget(self, action: #selector(touchUpLoginButton(_:)), for: .touchUpInside)
       cell.naviDrawerCancelButton.addTarget(self, action: #selector(touchUpDismissButton(_:)), for: .touchUpInside)
+      
+      // MARK: - 임시 마이페이지 이동
+      cell.noticeButton.addTarget(self, action: #selector(touchUpNoticeButton(_:)), for: .touchUpInside)
       return cell
     } else {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NavigationDrawerAdCell.identifier, for: indexPath) as! NavigationDrawerAdCell
@@ -119,3 +127,5 @@ extension NavigationDrawerView: UIScrollViewDelegate {
     }
   }
 }
+
+

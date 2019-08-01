@@ -10,13 +10,6 @@ import UIKit
 
 class MyPageContentView: UIView {
   
-  
-  let myPageTopView: MyPageTopView = {
-    let view = MyPageTopView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-  
   let myPageTableView: UITableView = {
     let tableView = UITableView()
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,14 +28,8 @@ class MyPageContentView: UIView {
   private func setupMyPageContentView() {
     myPageTableView.separatorStyle = .none
     
-    addSubview(myPageTopView)
-    myPageTopView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    myPageTopView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-    myPageTopView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-    myPageTopView.heightAnchor.constraint(equalToConstant: 41).isActive = true
-    
     addSubview(myPageTableView)
-    myPageTableView.topAnchor.constraint(equalTo: myPageTopView.bottomAnchor).isActive = true
+    myPageTableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
     myPageTableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     myPageTableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     myPageTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
