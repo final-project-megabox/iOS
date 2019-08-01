@@ -40,6 +40,12 @@ class TheaterCategoryCollectionCell: UICollectionViewCell {
     setupProperties()
   }
   
+  func collectionCellConfigure(startTime: String, endTime: String, remainSeat: String) {
+    startTimeLabel.text = startTime
+    endTimeLabel.text = endTime
+    remainSeats.text = remainSeat
+  }
+  
   private func setupProperties() {
     let margin: CGFloat = 10
     contentView.addSubview(startTimeLabel)

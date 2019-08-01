@@ -12,10 +12,19 @@ class TheaterCategoryReservationView: UIView {
   private let shared = MovieDataManager.shared
   var delegate: TheaterCategoryReservationViewDelegate?
   
+  private var tableViewMovieData = [[ReservationData]]()
+  
   let headerView = TheaterCategoryReservationHeaderView()
   
-  private var screenCount: Int = 0
   private var movieTitleIdx: Int = 0
+  private var screenArr: [Int] = []
+  
+  private var indexPath: Int = 0
+  private var movie: String = ""
+  
+  private var checkTttle: String = ""
+  private var checkIdx: Int = 0
+  
   
   private let menuTitleView: UIView = {
     let view = UIView()
@@ -47,6 +56,7 @@ class TheaterCategoryReservationView: UIView {
     tableView.register(TheaterCategorySectionCell.self, forCellReuseIdentifier: TheaterCategorySectionCell.identifier)
     tableView.register(TheaterCategoryCell.self, forCellReuseIdentifier: TheaterCategoryCell.identifier)
     tableView.translatesAutoresizingMaskIntoConstraints = false
+    tableView.allowsSelection = false
     return tableView
   }()
   
@@ -59,12 +69,60 @@ class TheaterCategoryReservationView: UIView {
     setupProperties()
   }
   
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    calculateMoviesData()
+    makeTableViewMovieData()
+  }
+  
+  private func makeTableViewMovieData() {
+    let movieTitle = shared.sortedTheaterMovieTitle.removeDuplicates()
+    for (_, title) in movieTitle.enumerated() {
+      let fakeData = ReservationData(scheduleID: 0, theater: "fake", screen: 0, age: "fake", runningTime: 0, date: "fake", startTime: "fake", movie: "fake", types: ["fake"], stCount: 0, totalSeat: 0, seatNumber: ["fake"])
+      tableViewMovieData.append([fakeData])
+      
+      let movieData = shared.theaterCategoryDetailMovie[title]!.sorted(by: { arg0, arg1 in
+        arg0.key < arg1.key
+      }).map({ $0.value }).map({ $0.map({ $0.value }) })
+      
+      for (_, data) in movieData.enumerated() {
+        tableViewMovieData.append(data)
+      }
+    }
+  }
+  
   @objc private func touchUpMenuTitleDismissButton(_ sender: UIButton) {
     delegate?.touchUpMenuTitleDismissButton(sender)
   }
   
   private func calculateMoviesData() {
+    for (_, data) in shared.sortedTheaterMovieTitle.enumerated() {
+      screenArr.append(shared.theaterCategoryDetailMovie[data]!.count)
+    }
     
+    // 영화 타이틀만 저장 및 중복 제거(예매율 소팅)
+    self.shared.sortedTheaterMovieTitle = self.shared.reservationMovieData.map({ $0.movie })
+    self.shared.sortedTheaterMovieTitle = self.shared.sortedTheaterMovieTitle.removeDuplicates()
+    
+    var sumIdx = 0
+    
+    for (_, count) in screenArr.enumerated() {
+      for _ in 0..<count {
+        shared.sortedTheaterMovieTitle.insert(shared.sortedTheaterMovieTitle[sumIdx], at: sumIdx)
+      }
+      sumIdx += count + 1
+    }
+    
+    for (idx, data) in screenArr.enumerated() {
+      if idx == 0 {
+        screenArr[idx] = data + 1
+      } else {
+        screenArr[idx] = screenArr[idx - 1] + data + 1
+      }
+    }
+    screenArr.insert(0, at: 0)
+    screenArr.removeLast()
   }
   
   private func setupProperties() {
@@ -98,29 +156,19 @@ class TheaterCategoryReservationView: UIView {
 extension TheaterCategoryReservationView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let titleCount = shared.sortedTheaterMovieTitle.count
-    var screenTotalCount: Int = 0
-    
-    for (_, data) in shared.sortedTheaterMovieTitle.enumerated() {
-      
-      screenTotalCount += shared.theaterCategoryDetailMovie[data]!.count
-    }
-    
-    return titleCount + screenTotalCount
+    return titleCount
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    if indexPath.row == screenCount {
-      let movie = shared.sortedTheaterMovieTitle[movieTitleIdx]
-      let screenCount = shared.theaterCategoryDetailMovie[movie]?.count ?? 0
-      self.screenCount += (screenCount + 1)
+    movie = shared.sortedTheaterMovieTitle[indexPath.row]
+    
+    if indexPath.row == 0 || screenArr.contains(indexPath.row) {
       
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySectionCell.identifier, for: indexPath) as! TheaterCategorySectionCell
       
-      movieTitleIdx += 1
-
       let grade = shared.theaterCategoryMovie[movie]![0].age
-
+      
       var gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
       if grade == "전체 관람" {
         gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
@@ -131,11 +179,16 @@ extension TheaterCategoryReservationView: UITableViewDataSource {
       } else {
         gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_18")
       }
+      
       cell.cellConfigure(gradeImage, movie)
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryCell.identifier, for: indexPath) as! TheaterCategoryCell
       
+      let sortedData = tableViewMovieData[indexPath.row]
+      let title = ("\(sortedData[0].screen)관 \(sortedData[0].totalSeat)석 | \(sortedData[0].types[0])")
+      
+      cell.cellConfigure(title: title, movieData: sortedData)
       return cell
     }
   }
