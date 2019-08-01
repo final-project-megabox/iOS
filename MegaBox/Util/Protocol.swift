@@ -14,6 +14,9 @@ protocol NavigationDrawerViewDelegate {
   func touchUpDismissButton()
   // 로그인 버튼 클릭
   func touchUpLoginButton()
+  
+  // MARK: - 임시 마이페이지 이동
+  func touchUpNoticeButton()
 }
 
 //로그인페이지
@@ -93,4 +96,11 @@ protocol MovieCategorySelectTheatherViewDelegate {
   //영화별 예매 -> 날짜 선택
   func touchUpDateButton()
   
+}
+
+//마이페이지 버튼 클릭 (홈, 뒤로가기)
+protocol MyPageTopViewDelegate {
+  func touchUpMenuButton(_ sender: UIButton)
+  
+  func touchUpDismissButton(_ sender: UIButton)
 }

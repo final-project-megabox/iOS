@@ -27,7 +27,7 @@ class NetworkService {
       "Content-Type": "application/json"
     ]
     
-    let url = "http://megabox.hellocoding.shop/api/token/"
+    let url = "http://megabox.hellocoding.shop//api/token/"
     
     guard let data = body else { return }
     
@@ -43,6 +43,36 @@ class NetworkService {
       }
     }
   }
+  
+  
+  
+  static func getUserMyPageData(_ urlStr: String, token: String, completion: @escaping (Swift.Result<MyPage, ErrorType>) -> Void) {
+    let url = URL(string: urlStr)!
+    
+    let headers = [
+      "Content-Type": "application/json",
+      "Authorization": token
+    ]
+    
+    let req = Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
+    
+    
+    req.validate()
+      .responseData { response in
+        switch response.result {
+        case .success(let data):
+          do {
+            let userMyPageData = try JSONDecoder().decode(MyPage.self, from: data)
+            completion(.success(userMyPageData))
+          } catch {
+            print(error.localizedDescription)
+          }
+        case .failure:
+          completion(.failure(ErrorType.networkErr))
+        }
+    }
+  }
+ 
   
   static func getAllMovieData(_ urlStr: String, completion: @escaping (Swift.Result<[MovieData], ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
