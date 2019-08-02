@@ -70,15 +70,14 @@ extension MyPageSettingViewController: MyPageSettingTopViewDelegate {
 
 extension MyPageSettingViewController: MyPageSettingContentViewDelegate {
   func touchUpLogoutButton(_ sender: UIButton) {
-    print("로그아웃!")
-    UIAlertController.show(title: "", message: "로그아웃 하시겠습니까?", from: self)
-    UserDefaults.standard.removeObject(forKey: "Token")
-    UserDefaults.standard.removeObject(forKey: "UserName")
-    UserDefaults.standard.removeObject(forKey: "UserId")
     
-    print(UserDefaults.standard.removeObject(forKey: "Token"))
-    print(UserDefaults.standard.removeObject(forKey: "UserName"))
-    print(UserDefaults.standard.removeObject(forKey: "UserId"))
+    UIAlertController.cancelShow(title: "", message: "로그아웃 하시겠습니까?", from: self) { (_) in
+      UserDefaults.standard.removeObject(forKey: "Token")
+      UserDefaults.standard.removeObject(forKey: "UserName")
+      UserDefaults.standard.removeObject(forKey: "UserId")
+      
+      self.presentingViewController?.dismiss(animated: false)
+    }
     
   }
   
