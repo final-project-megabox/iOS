@@ -25,9 +25,13 @@ class MyPageViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     myPageTopView.delegate = self
+    getUserData()
     setupMaPageView()
   }
   
+  func getUserData() {
+   
+  }
   
   private func setupMaPageView() {
     let guide = view.safeAreaLayoutGuide

@@ -80,6 +80,7 @@
 		CFC9724D22E5D1B400199FD0 /* MovieDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */; };
 		CFC9724F22E5D36B00199FD0 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */; };
 		E6094AB322F2D4E7008407EA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AB222F2D4E7008407EA /* UserData.swift */; };
+		E6094AB722F4053E008407EA /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AB622F4053E008407EA /* UserDataManager.swift */; };
 		E6D5693322E81B0B00C13F1E /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5693222E81B0B00C13F1E /* AlertController.swift */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +161,7 @@
 		CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataManager.swift; sourceTree = "<group>"; };
 		CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		E6094AB222F2D4E7008407EA /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		E6094AB622F4053E008407EA /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		E6D5693222E81B0B00C13F1E /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		F238FC7C9463514149694227 /* Pods-MegaBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaBox.release.xcconfig"; path = "Target Support Files/Pods-MegaBox/Pods-MegaBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -376,6 +378,7 @@
 				CFBC1CED22E1810B006B6839 /* NetworkService.swift */,
 				CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */,
 				E6094AB222F2D4E7008407EA /* UserData.swift */,
+				E6094AB622F4053E008407EA /* UserDataManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				CF0847E122E6AD6E0070F4FD /* ReservationData.swift in Sources */,
 				CFBC1CF222E1947E006B6839 /* TheaterCategorySelectTheaterViewController.swift in Sources */,
 				CFBC1CEE22E1810B006B6839 /* NetworkService.swift in Sources */,
+				E6094AB722F4053E008407EA /* UserDataManager.swift in Sources */,
 				CFBC1C9F22E02B38006B6839 /* MovieCategoryReservationViewController.swift in Sources */,
 				CFC9724922E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift in Sources */,
 				CFBC1CBB22E02C6E006B6839 /* MyPageTopView.swift in Sources */,
