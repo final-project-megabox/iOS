@@ -13,8 +13,6 @@ class TheaterCategoryCell: UITableViewCell {
   
   private var movieData: [[ReservationData]] = []
   
-  private var collectionWidth: CGFloat = 0
-  
   private let titleLabel: UILabel = {
     let label = UILabel()
     label.text = "2관 총 103석 | 디지털"
@@ -44,26 +42,17 @@ class TheaterCategoryCell: UITableViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    print(titleLabel.frame.height)
+//    print(titleLabel.frame.height)
   }
   
   func cellConfigure(title: String, movieData: [ReservationData]) {
     self.titleLabel.text = title
     self.movieData = [movieData]
     
-    for i in 0..<movieData.count - 1 {
-      for j in 1..<movieData.count {
-        if self.movieData[0][i].startTime > self.movieData[0][j].startTime {
-          let temp = self.movieData[0][i]
-          self.movieData[0][i] = self.movieData[0][j]
-          self.movieData[0][j] = temp
-        }
-      }
-    }
+    self.movieData = [movieData.sorted(by: { arg0, arg1 in
+      arg0.startTime < arg1.startTime
+    })]
     
-    if movieData.count > 4 {
-      collectionWidth = 190
-    }
     timeCollectionView.reloadData()
   }
   
@@ -108,6 +97,7 @@ extension TheaterCategoryCell: UICollectionViewDataSource {
   }
 }
 
+
 extension TheaterCategoryCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
@@ -119,7 +109,7 @@ extension TheaterCategoryCell: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+    print(movieData[0][indexPath.row])
   }
 }
 

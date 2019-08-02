@@ -10,6 +10,9 @@ import UIKit
 
 class TheaterCategoryReservationViewController: UIViewController {
   // MARK:- Properties
+  private var isFirst = true
+  var isCancel = false
+  
   private let shared = MovieDataManager.shared
   
   var numPages: Int = 0
@@ -37,20 +40,24 @@ class TheaterCategoryReservationViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
+    if isFirst {
+      isFirst.toggle()
+    } else {
+      if !isCancel {
+        menuView.calculateMoviesData()
+        menuView.makeTableViewMovieData()
+      }
+    }
+
     startAdAnimation()
   }
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    displayData()
     menuView.headerView.placeButton.setTitle(regionName, for: .normal)
   }
   
   // MARK:- Methods
-  private func displayData() {
-    //    menuView.theaterTableView.
-  }
-  
   // MARK: startAdAnimation
   private func startAdAnimation() {
     let timer: Timer = Timer.scheduledTimer(

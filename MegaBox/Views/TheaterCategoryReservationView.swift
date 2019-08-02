@@ -76,7 +76,10 @@ class TheaterCategoryReservationView: UIView {
     makeTableViewMovieData()
   }
   
-  private func makeTableViewMovieData() {
+  
+  
+  func makeTableViewMovieData() {
+    tableViewMovieData = []
     let movieTitle = shared.sortedTheaterMovieTitle.removeDuplicates()
     for (_, title) in movieTitle.enumerated() {
       let fakeData = ReservationData(scheduleID: 0, theater: "fake", screen: 0, age: "fake", runningTime: 0, date: "fake", startTime: "fake", movie: "fake", types: ["fake"], stCount: 0, totalSeat: 0, seatNumber: ["fake"])
@@ -90,13 +93,15 @@ class TheaterCategoryReservationView: UIView {
         tableViewMovieData.append(data)
       }
     }
+    theaterTableView.reloadData()
   }
   
   @objc private func touchUpMenuTitleDismissButton(_ sender: UIButton) {
     delegate?.touchUpMenuTitleDismissButton(sender)
   }
   
-  private func calculateMoviesData() {
+  func calculateMoviesData() {
+    screenArr = []
     for (_, data) in shared.sortedTheaterMovieTitle.enumerated() {
       screenArr.append(shared.theaterCategoryDetailMovie[data]!.count)
     }
@@ -156,6 +161,7 @@ class TheaterCategoryReservationView: UIView {
 extension TheaterCategoryReservationView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let titleCount = shared.sortedTheaterMovieTitle.count
+    
     return titleCount
   }
   
