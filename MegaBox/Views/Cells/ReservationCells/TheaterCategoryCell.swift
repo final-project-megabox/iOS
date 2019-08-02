@@ -42,7 +42,7 @@ class TheaterCategoryCell: UITableViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    print(titleLabel.frame.height)
+//    print(titleLabel.frame.height)
   }
   
   func cellConfigure(title: String, movieData: [ReservationData]) {
@@ -97,6 +97,7 @@ extension TheaterCategoryCell: UICollectionViewDataSource {
   }
 }
 
+
 extension TheaterCategoryCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
@@ -108,7 +109,7 @@ extension TheaterCategoryCell: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+    print(movieData[0][indexPath.row])
   }
 }
 

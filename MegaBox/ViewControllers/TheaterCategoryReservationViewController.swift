@@ -11,6 +11,7 @@ import UIKit
 class TheaterCategoryReservationViewController: UIViewController {
   // MARK:- Properties
   private var isFirst = true
+  var isCancel = false
   
   private let shared = MovieDataManager.shared
   
@@ -42,8 +43,10 @@ class TheaterCategoryReservationViewController: UIViewController {
     if isFirst {
       isFirst.toggle()
     } else {
-      menuView.calculateMoviesData()
-      menuView.makeTableViewMovieData()
+      if !isCancel {
+        menuView.calculateMoviesData()
+        menuView.makeTableViewMovieData()
+      }
     }
 
     startAdAnimation()
