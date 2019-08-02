@@ -33,10 +33,13 @@ class NavigationDrawerView: UIView {
     
     setupCollectionView()
   }
+  
+  @objc func touchUpSettingButton(_ sender: UIButton) {
+    delegate?.touchUpSettingButton()
+  }
 
-  // MARK: - 임시 마이페이지 이동
-  @objc func touchUpNoticeButton(_ sender: UIButton) {
-    delegate?.touchUpNoticeButton()
+  @objc func touchUpUserNameButton(_ sender: UIButton) {
+    delegate?.touchUpUserNameButton()
   }
   
   @objc func touchUpDismissButton(_ sender: UIButton) {
@@ -52,6 +55,8 @@ class NavigationDrawerView: UIView {
     navigationDrawerCollectionView.delegate = self
     navigationDrawerCollectionView.register(NavigationDrawerCell.self, forCellWithReuseIdentifier: NavigationDrawerCell.identifier)
     navigationDrawerCollectionView.register(NavigationDrawerAdCell.self, forCellWithReuseIdentifier: NavigationDrawerAdCell.identifier)
+    //로그인 되었을때
+    navigationDrawerCollectionView.register(isLoginNavigationDrawerCell.self, forCellWithReuseIdentifier: isLoginNavigationDrawerCell.identifier)
     
     self.addSubview(navigationDrawerCollectionView)
     
@@ -73,13 +78,28 @@ extension NavigationDrawerView: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if indexPath.row == 0 {
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NavigationDrawerCell.identifier, for: indexPath) as! NavigationDrawerCell
-      cell.loginButton.addTarget(self, action: #selector(touchUpLoginButton(_:)), for: .touchUpInside)
-      cell.naviDrawerCancelButton.addTarget(self, action: #selector(touchUpDismissButton(_:)), for: .touchUpInside)
       
-      // MARK: - 임시 마이페이지 이동
-      cell.noticeButton.addTarget(self, action: #selector(touchUpNoticeButton(_:)), for: .touchUpInside)
-      return cell
+      //로그인 되었을때
+      if UserDefaults.standard.value(forKeyPath: "Token") != nil {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: isLoginNavigationDrawerCell.identifier, for: indexPath) as! isLoginNavigationDrawerCell
+        //마이페이지로 이동
+        cell.userNameButton.addTarget(self, action: #selector(touchUpUserNameButton(_:)), for: .touchUpInside)
+        //환경설정으로 이동
+        cell.naviDrawerSettingButton.addTarget(self, action: #selector(touchUpSettingButton(_:)), for: .touchUpInside)
+        cell.naviDrawerCancelButton.addTarget(self, action: #selector(touchUpDismissButton(_:)), for: .touchUpInside)
+        
+        guard let userName = UserDefaults.standard.value(forKey: "UserName") else { return cell }
+        cell.userNameButton.setTitle("\(userName)", for: .normal)
+        return cell
+        
+      } else {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NavigationDrawerCell.identifier, for: indexPath) as! NavigationDrawerCell
+        cell.loginButton.addTarget(self, action: #selector(touchUpLoginButton(_:)), for: .touchUpInside)
+        cell.naviDrawerCancelButton.addTarget(self, action: #selector(touchUpDismissButton(_:)), for: .touchUpInside)
+  
+        return cell
+      }
+      
     } else {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NavigationDrawerAdCell.identifier, for: indexPath) as! NavigationDrawerAdCell
       cell.bgImageView.image = UIImage(named: "ad_slid_\(indexPath.row)")
