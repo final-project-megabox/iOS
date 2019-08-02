@@ -180,6 +180,8 @@ extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheat
   func touchUpCancelButton() {
     switch dismissType {
     case .one:
+      let presentingVC = self.presentingViewController as! TheaterCategoryReservationViewController
+      presentingVC.isCancel = true
       self.dismiss(animated: false)
     case .two:
       self.presentingViewController?.presentingViewController?.dismiss(animated: false)
