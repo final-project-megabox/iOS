@@ -10,6 +10,7 @@ import UIKit
 
 class NavigationDrawerViewController: UIViewController {
   
+  private let shared = UserDataManager.shared
   
   private let navigationDrawerView: NavigationDrawerView = {
     let view = NavigationDrawerView()
@@ -80,30 +81,22 @@ extension NavigationDrawerViewController: NavigationDrawerViewDelegate {
   // MARK: - 임시 마이페이지 이동
   func touchUpNoticeButton() {
     let myPageVC = MyPageViewController()
-//    myPageVC.modalTransitionStyle = UIModalTransitionStyle.coverVertical
-    
-//    NetworkService.getToken(email: id, pw: pw) { (result) in
-//      switch result {
-//      case .success(let value):
-//        print("token: ", value.token)
-//        print("userName: ", value.user.name)
-//        let token = value.token
-//        let userName = value.user.name
-//
-//        UserDefaults.standard.set(token, forKey: "Token")
-//        UserDefaults.standard.set(userName, forKey: "UserName")
-//
-//        self.presentingViewController?.dismiss(animated: false)
-//      case .failure(let err):
-//        print("result: ", err)
-//        DispatchQueue.main.async {
-//          UIAlertController.show(title: "", message: "아이디와 비밀번호를 확인해주세요.", from: self)
-//        }
-//
-//      }
-//    }
 
-    self.present(myPageVC, animated: false)
+    let url = "http://megabox.hellocoding.shop//accounts/myPage/"
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    NetworkService.getUserMyPageData(url, token: "JWT \(token)") { (result) in
+      switch result {
+      case .success(let value):
+        self.shared.myPageData = value
+        print(value)
+        self.present(myPageVC, animated: false)
+      case .failure(let err):
+        print("result: ", err)
+      }
+    }
+
+    
     
     
   }

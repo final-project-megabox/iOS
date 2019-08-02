@@ -10,6 +10,9 @@ import UIKit
 
 class MyPageContentView: UIView {
   
+  private let shared = UserDataManager.shared
+
+  
   let myPageTableView: UITableView = {
     let tableView = UITableView()
     tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,6 +25,8 @@ class MyPageContentView: UIView {
     
     setupMyPageContentView()
     setupTableView()
+    
+
   }
   
   
@@ -115,7 +120,13 @@ extension MyPageContentView: UITableViewDataSource {
       four.secondContentLabel.text = "보고싶은 영화"
       four.secondCountLabel.text = "0"
       four.thirdContentLabel.text = "내가 본 영화"
-      four.thirdCountLabel.text = "0"
+      guard let number = shared.myPageData?.watchedMovieNumber else { return four }
+      four.thirdCountLabel.text = "\(number)"
+      
+//      if let number = shared.myPageData?.watchedMovieNumber {
+//        four.thirdCountLabel.text = "\(number)"
+//      }
+      
       four.fourthContentLabel.text = "나의 무비포스트"
       four.fourthCountLabel.text = "0"
       return four
