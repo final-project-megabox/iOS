@@ -11,6 +11,8 @@ import UIKit
 class TheaterCategoryCell: UITableViewCell {
   static let identifier = "TheaterCategoryCell"
   
+  var delegate: TheaterCategoryCellDelegate?
+  
   private var movieData: [[ReservationData]] = []
   
   private let titleLabel: UILabel = {
@@ -109,7 +111,9 @@ extension TheaterCategoryCell: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    print(movieData[0][indexPath.row])
+    let data = movieData[0][indexPath.row]
+    
+    delegate?.touchUpMovieTime(data)
   }
 }
 

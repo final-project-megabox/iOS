@@ -92,6 +92,16 @@ class TheaterCategoryReservationViewController: UIViewController {
 }
 
 extension TheaterCategoryReservationViewController: TheaterCategoryReservationViewDelegate {
+  func sendTitleData() {
+    print("TheaterCategoryReservationViewController[96Line] - titleDelegate")
+  }
+  
+  func sendMovieData(_ data: ReservationData) {
+    let selectSeatVC = SelectSeatViewController()
+    selectSeatVC.movieData = data
+    self.present(selectSeatVC, animated: true)
+  }
+  
   func touchUpMovieTime() {
     let selectSeatVC = SelectSeatViewController()
     present(selectSeatVC, animated: true)

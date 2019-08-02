@@ -54,12 +54,26 @@ protocol TheaterCategorySelectTheaterViewDelegate {
 
 protocol TheaterCategoryReservationViewDelegate {
   func touchUpMenuTitleDismissButton(_ sender: UIButton)
+  
+  func sendTitleData()
+  
+  func sendMovieData(_ data: ReservationData)
 }
 
 protocol TheaterCategoryReservationHeaderViewDelegate {
   func touchUpPlaceButton()
   
   func touchUpDateButton()
+}
+
+// 영화관별 예매 영화 타이틀 선택 시
+protocol TheaterCategorySectionCellDelegate {
+  func touchUpMovieTitle()
+}
+
+// 영화관별 예매 영화 시간 선택 시
+protocol TheaterCategoryCellDelegate {
+  func touchUpMovieTime(_ data: ReservationData)
 }
 
 protocol MovieCategoryReservationViewDelegate {
