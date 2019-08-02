@@ -11,6 +11,8 @@ import UIKit
 class TheaterCategorySectionCell: UITableViewCell {
   static let identifier = "TheaterCategorySectionCell"
   
+  var delegate: TheaterCategorySectionCellDelegate?
+  
   private let movieGradeImage: UIImageView = {
     let imageView = UIImageView()
     imageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
@@ -45,13 +47,14 @@ class TheaterCategorySectionCell: UITableViewCell {
     setupProperties()
     self.layer.borderWidth = 1
     self.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    
+    self.delegate?.touchUpMovieTitle()
   }
   
   func cellConfigure(_ gradeImage: UIImage, _ movieTitle: String) {
     self.movieGradeImage.image = gradeImage
     self.movieTitle.text = movieTitle
   }
-
   
   private func setupProperties() {
     let margin: CGFloat = 10
@@ -72,4 +75,5 @@ class TheaterCategorySectionCell: UITableViewCell {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
-  }}
+  }
+}

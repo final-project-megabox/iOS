@@ -173,6 +173,9 @@ extension TheaterCategoryReservationView: UITableViewDataSource {
       
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySectionCell.identifier, for: indexPath) as! TheaterCategorySectionCell
       
+      // 영화관별 예매 섹션 선택 Delegate
+      cell.delegate = self
+      
       let grade = shared.theaterCategoryMovie[movie]![0].age
       
       var gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
@@ -190,6 +193,8 @@ extension TheaterCategoryReservationView: UITableViewDataSource {
       return cell
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryCell.identifier, for: indexPath) as! TheaterCategoryCell
+      // 영화관별 예매 Time 선택 Delegate
+      cell.delegate = self
       
       let sortedData = tableViewMovieData[indexPath.row]
       let title = ("\(sortedData[0].screen)관 \(sortedData[0].totalSeat)석 | \(sortedData[0].types[0])")
@@ -221,5 +226,17 @@ extension TheaterCategoryReservationView: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return (UIScreen.main.bounds.width * 495) / 844
+  }
+}
+
+extension TheaterCategoryReservationView: TheaterCategorySectionCellDelegate {
+  func touchUpMovieTitle() {
+    delegate?.sendTitleData()
+  }
+}
+
+extension TheaterCategoryReservationView: TheaterCategoryCellDelegate {
+  func touchUpMovieTime(_ data: ReservationData) {
+   delegate?.sendMovieData(data)
   }
 }

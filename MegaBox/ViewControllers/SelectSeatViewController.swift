@@ -10,6 +10,8 @@ import UIKit
 
 class SelectSeatViewController: UIViewController {
   
+  var movieData: ReservationData? = nil
+  
   let eightTwoMovieTheaterView: EightTwoMovieTheaterView = {
     let view = EightTwoMovieTheaterView()
     view.translatesAutoresizingMaskIntoConstraints = false
