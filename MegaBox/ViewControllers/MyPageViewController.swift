@@ -58,7 +58,7 @@ extension MyPageViewController: MyPageTopViewDelegate {
   }
   
   func touchUpDismissButton(_ sender: UIButton) {
-    self.presentingViewController?.dismiss(animated: true)
+    self.presentingViewController?.dismiss(animated: false)
   }
   
   
