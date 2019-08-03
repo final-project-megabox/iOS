@@ -99,6 +99,7 @@ extension TheaterCategoryReservationViewController: TheaterCategoryReservationVi
   func sendMovieData(_ data: ReservationData) {
     let selectSeatVC = SelectSeatViewController()
     selectSeatVC.movieData = data
+    selectSeatVC.movieTheaterNumber = data.totalSeat
     self.present(selectSeatVC, animated: true)
   }
   
