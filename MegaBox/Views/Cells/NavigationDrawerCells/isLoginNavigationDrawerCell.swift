@@ -492,6 +492,8 @@ class isLoginNavigationDrawerCell: UICollectionViewCell {
     userMembership.topAnchor.constraint(equalTo: userNameButton.bottomAnchor, constant: 10).isActive = true
     userMembership.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
     
+    guideTopView.addSubview(firstTopLine)
+    
     
     
     
