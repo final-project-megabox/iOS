@@ -274,8 +274,8 @@
 				CFBC1C9C22E02B0F006B6839 /* TheaterCategoryReservationViewController.swift */,
 				CFBC1C9E22E02B38006B6839 /* MovieCategoryReservationViewController.swift */,
 				CFBC1CA022E02B4C006B6839 /* MovieCategorySelectTheaterViewController.swift */,
-				CFBC1CA222E02B70006B6839 /* SelectPersonCountViewController.swift */,
 				CFBC1CA422E02B8B006B6839 /* SelectSeatViewController.swift */,
+				CFBC1CA222E02B70006B6839 /* SelectPersonCountViewController.swift */,
 				CFBC1CA622E02B96006B6839 /* MyPageViewController.swift */,
 			);
 			path = ViewControllers;
