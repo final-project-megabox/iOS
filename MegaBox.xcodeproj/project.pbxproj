@@ -81,6 +81,10 @@
 		CFC9724F22E5D36B00199FD0 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */; };
 		E6094AB322F2D4E7008407EA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AB222F2D4E7008407EA /* UserData.swift */; };
 		E6094AB722F4053E008407EA /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AB622F4053E008407EA /* UserDataManager.swift */; };
+		E6094ADF22F433A8008407EA /* isLoginNavigationDrawerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094ADE22F433A8008407EA /* isLoginNavigationDrawerCell.swift */; };
+		E6094AE222F45483008407EA /* MyPageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AE122F45483008407EA /* MyPageSettingViewController.swift */; };
+		E6094AE422F454B1008407EA /* MyPageSettingTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AE322F454B1008407EA /* MyPageSettingTopView.swift */; };
+		E6094AE622F454D9008407EA /* MyPageSettingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AE522F454D9008407EA /* MyPageSettingContentView.swift */; };
 		E6D5693322E81B0B00C13F1E /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5693222E81B0B00C13F1E /* AlertController.swift */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +166,10 @@
 		CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		E6094AB222F2D4E7008407EA /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		E6094AB622F4053E008407EA /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
+		E6094ADE22F433A8008407EA /* isLoginNavigationDrawerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isLoginNavigationDrawerCell.swift; sourceTree = "<group>"; };
+		E6094AE122F45483008407EA /* MyPageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSettingViewController.swift; sourceTree = "<group>"; };
+		E6094AE322F454B1008407EA /* MyPageSettingTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSettingTopView.swift; sourceTree = "<group>"; };
+		E6094AE522F454D9008407EA /* MyPageSettingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSettingContentView.swift; sourceTree = "<group>"; };
 		E6D5693222E81B0B00C13F1E /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		F238FC7C9463514149694227 /* Pods-MegaBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaBox.release.xcconfig"; path = "Target Support Files/Pods-MegaBox/Pods-MegaBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -277,6 +285,7 @@
 				CFBC1CA422E02B8B006B6839 /* SelectSeatViewController.swift */,
 				CFBC1CA222E02B70006B6839 /* SelectPersonCountViewController.swift */,
 				CFBC1CA622E02B96006B6839 /* MyPageViewController.swift */,
+				E6094AE122F45483008407EA /* MyPageSettingViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -294,8 +303,7 @@
 				CFBC1CB422E02C17006B6839 /* MovieCategoryReservationView.swift */,
 				CFBC1CB622E02C2F006B6839 /* MovieCategorySelectTheaterView.swift */,
 				CFBC1CB822E02C60006B6839 /* SelectPersonCountView.swift */,
-				CFBC1CBA22E02C6E006B6839 /* MyPageTopView.swift */,
-				CFBC1CBC22E02C7C006B6839 /* MyPageContentView.swift */,
+				E6094AE022F45439008407EA /* MyPageView */,
 				CF7883C322F0508E00380C47 /* MovieTheaterView */,
 				CFBC1C8B22E029F6006B6839 /* Cells */,
 			);
@@ -351,6 +359,7 @@
 			children = (
 				CF7883BF22EFEADA00380C47 /* NavigationDrawerCell.swift */,
 				CFBC1CDC22E02E6E006B6839 /* NavigationDrawerAdCell.swift */,
+				E6094ADE22F433A8008407EA /* isLoginNavigationDrawerCell.swift */,
 			);
 			path = NavigationDrawerCells;
 			sourceTree = "<group>";
@@ -381,6 +390,17 @@
 				E6094AB622F4053E008407EA /* UserDataManager.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		E6094AE022F45439008407EA /* MyPageView */ = {
+			isa = PBXGroup;
+			children = (
+				CFBC1CBA22E02C6E006B6839 /* MyPageTopView.swift */,
+				CFBC1CBC22E02C7C006B6839 /* MyPageContentView.swift */,
+				E6094AE322F454B1008407EA /* MyPageSettingTopView.swift */,
+				E6094AE522F454D9008407EA /* MyPageSettingContentView.swift */,
+			);
+			path = MyPageView;
 			sourceTree = "<group>";
 		};
 		E60C520722E5AE50004C6B4B /* MovieReservationCells */ = {
@@ -426,7 +446,6 @@
 				TargetAttributes = {
 					CFBC1C7122E0298F006B6839 = {
 						CreatedOnToolsVersion = 10.2.1;
-						LastSwiftMigration = 1030;
 					};
 				};
 			};
@@ -522,6 +541,7 @@
 				CFC9724F22E5D36B00199FD0 /* SplashViewController.swift in Sources */,
 				CFBC1C7822E0298F006B6839 /* MainViewController.swift in Sources */,
 				CFBC1CC722E02D79006B6839 /* MovieReservationCollectionCell.swift in Sources */,
+				E6094ADF22F433A8008407EA /* isLoginNavigationDrawerCell.swift in Sources */,
 				CFBC1CD522E02E14006B6839 /* MainBranchNewsCell.swift in Sources */,
 				CFBC1CA922E02BBB006B6839 /* LoginView.swift in Sources */,
 				CFBC1CE322E02EB8006B6839 /* MyPageHeaderCell.swift in Sources */,
@@ -529,6 +549,7 @@
 				CFBC1CBD22E02C7C006B6839 /* MyPageContentView.swift in Sources */,
 				CFBC1CC122E02D1F006B6839 /* MovieListCell.swift in Sources */,
 				CF9CCED322E6D40800021962 /* TheaterCategorySectionCell.swift in Sources */,
+				E6094AE422F454B1008407EA /* MyPageSettingTopView.swift in Sources */,
 				CF0847E122E6AD6E0070F4FD /* ReservationData.swift in Sources */,
 				CFBC1CF222E1947E006B6839 /* TheaterCategorySelectTheaterViewController.swift in Sources */,
 				CFBC1CEE22E1810B006B6839 /* NetworkService.swift in Sources */,
@@ -543,12 +564,14 @@
 				CF7883C522F0511C00380C47 /* ThreeSixMovieTheaterView.swift in Sources */,
 				CFBC1CDD22E02E6E006B6839 /* NavigationDrawerAdCell.swift in Sources */,
 				CFBC1C9D22E02B0F006B6839 /* TheaterCategoryReservationViewController.swift in Sources */,
+				E6094AE222F45483008407EA /* MyPageSettingViewController.swift in Sources */,
 				CFBC1CCF22E02DBE006B6839 /* EventCollectionCell.swift in Sources */,
 				CFBC1C7622E0298F006B6839 /* AppDelegate.swift in Sources */,
 				CFBC1CB122E02BFC006B6839 /* TheaterCategoryReservationView.swift in Sources */,
 				CFBC1CC922E02D8B006B6839 /* MainShortMenuCell.swift in Sources */,
 				CFBC1CF022E1829F006B6839 /* RegionData.swift in Sources */,
 				CFBC1CB722E02C2F006B6839 /* MovieCategorySelectTheaterView.swift in Sources */,
+				E6094AE622F454D9008407EA /* MyPageSettingContentView.swift in Sources */,
 				CFBC1CE122E02EA8006B6839 /* MyPageFourContentCell.swift in Sources */,
 				CFBC1C9122E02A4A006B6839 /* Protocol.swift in Sources */,
 				CF7883BA22EF330800380C47 /* MainFooterCell.swift in Sources */,
@@ -731,7 +754,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.fury.MegaBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -750,7 +773,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.fury.MegaBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

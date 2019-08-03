@@ -55,12 +55,17 @@ extension LoginViewController: LoginViewDelegate {
         case .success(let value):
           print("token: ", value.token)
           print("userName: ", value.user.name)
+          print("userId: ", value.user.username)
           let token = value.token
           let userName = value.user.name
+          let userId = value.user.username
           
+          //로그인후 토큰, 이름, 아이디 UserDefaults에 저장
           UserDefaults.standard.set(token, forKey: "Token")
           UserDefaults.standard.set(userName, forKey: "UserName")
+          UserDefaults.standard.set(userId, forKey: "UserId")
           
+          //UserDefaults에 저장후 dismiss
           self.presentingViewController?.dismiss(animated: false)
         case .failure(let err):
           print("result: ", err)

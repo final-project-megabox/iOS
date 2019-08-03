@@ -28,6 +28,7 @@ class NavigationDrawerViewController: UIViewController {
     super.viewWillAppear(animated)
     
     startAnimations(isCancel: false)
+    navigationDrawerView.navigationDrawerCollectionView.reloadData()
   }
   
   override func viewWillLayoutSubviews() {
@@ -74,12 +75,11 @@ extension NavigationDrawerViewController: NavigationDrawerViewDelegate {
   
   func touchUpLoginButton() {
     let loginPageVC = LoginViewController()
-    
     self.present(loginPageVC, animated: false)
   }
   
-  // MARK: - 임시 마이페이지 이동
-  func touchUpNoticeButton() {
+  //마이페이지 이동
+  func touchUpUserNameButton() {
     let myPageVC = MyPageViewController()
 
     let url = "http://megabox.hellocoding.shop//accounts/myPage/"
@@ -95,11 +95,16 @@ extension NavigationDrawerViewController: NavigationDrawerViewDelegate {
         print("result: ", err)
       }
     }
-
-    
-    
     
   }
+  
+  //환경설정으로 이동
+  func touchUpSettingButton() {
+    let settingVC = MyPageSettingViewController()
+    present(settingVC, animated: false)
+  }
+  
+  
 }
 
 

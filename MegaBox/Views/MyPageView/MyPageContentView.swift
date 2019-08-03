@@ -70,6 +70,8 @@ extension MyPageContentView: UITableViewDataSource {
     switch indexPath.row {
     case 0:
       headerCell.selectionStyle = .none
+      headerCell.userName.text = "\(UserDefaults.standard.value(forKey: "UserName")!)"
+      headerCell.userId.text = "\(UserDefaults.standard.value(forKey: "UserId")!)"
       return headerCell
     case 1:
       one.selectionStyle = .none

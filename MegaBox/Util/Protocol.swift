@@ -15,8 +15,12 @@ protocol NavigationDrawerViewDelegate {
   // 로그인 버튼 클릭
   func touchUpLoginButton()
   
-  // MARK: - 임시 마이페이지 이동
-  func touchUpNoticeButton()
+  // MARK: - 로그인후
+  //마이페이지 이동
+  func touchUpUserNameButton()
+  
+  //환경설정으로 이동
+  func touchUpSettingButton()
 }
 
 //로그인페이지
@@ -117,4 +121,17 @@ protocol MyPageTopViewDelegate {
   func touchUpMenuButton(_ sender: UIButton)
   
   func touchUpDismissButton(_ sender: UIButton)
+}
+
+
+//환경설정 버튼 클릭 (홈, 뒤로가기)
+protocol MyPageSettingTopViewDelegate {
+  func touchUpMenuButton(_ sender: UIButton)
+  
+  func touchUpDismissButton(_ sender: UIButton)
+  
+}
+
+protocol MyPageSettingContentViewDelegate: class {
+  func touchUpLogoutButton(_ sender: UIButton)
 }
