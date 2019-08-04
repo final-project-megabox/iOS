@@ -20,7 +20,7 @@ class isLoginNavigationDrawerCell: UICollectionViewCell {
   
   private let guideBottomView: UIView = {
     let view = UIView()
-    view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -169,7 +169,7 @@ class isLoginNavigationDrawerCell: UICollectionViewCell {
   
   let reservationTitleLabel: UILabel = {
     let label = UILabel()
-    label.text = "관람권/쿠폰"
+    label.text = "예매내역"
     label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
     label.textColor = UIColor.appColor(.darkBgColor)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -444,7 +444,7 @@ class isLoginNavigationDrawerCell: UICollectionViewCell {
     guideBottomView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     guideBottomView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     guideBottomView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-    guideBottomView.heightAnchor.constraint(equalTo: guideTopView.heightAnchor, multiplier: 2.5).isActive = true
+    
     
     guideTopView.addSubview(naviDrawerHomeButton)
     naviDrawerHomeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin / 2).isActive = true
@@ -493,11 +493,69 @@ class isLoginNavigationDrawerCell: UICollectionViewCell {
     userMembership.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
     
     guideTopView.addSubview(firstTopLine)
+    firstTopLine.topAnchor.constraint(equalTo: userMembership.bottomAnchor, constant: 20).isActive = true
+    firstTopLine.leadingAnchor.constraint(equalTo: guideTopView.leadingAnchor, constant: 15).isActive = true
+    firstTopLine.trailingAnchor.constraint(equalTo: guideTopView.trailingAnchor, constant: -15).isActive = true
+    firstTopLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    
+    guideTopView.addSubview(pointTitleLabel)
+    pointTitleLabel.topAnchor.constraint(equalTo: firstTopLine.bottomAnchor, constant: 20).isActive = true
+    pointTitleLabel.leadingAnchor.constraint(equalTo: guideTopView.leadingAnchor, constant: 15).isActive = true
+    
+    guideTopView.addSubview(pointAddImageView)
+    pointAddImageView.trailingAnchor.constraint(equalTo: guideTopView.trailingAnchor, constant: -15).isActive = true
+    pointAddImageView.centerYAnchor.constraint(equalTo: pointTitleLabel.centerYAnchor).isActive = true
+    pointAddImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    pointAddImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    
+    guideTopView.addSubview(pointLabel)
+    pointLabel.trailingAnchor.constraint(equalTo: pointAddImageView.leadingAnchor).isActive = true
+    pointLabel.centerYAnchor.constraint(equalTo: pointTitleLabel.centerYAnchor).isActive = true
     
     
+    guideTopView.addSubview(secondTopLine)
+    secondTopLine.topAnchor.constraint(equalTo: pointTitleLabel.bottomAnchor, constant: 20).isActive = true
+    secondTopLine.leadingAnchor.constraint(equalTo: guideTopView.leadingAnchor, constant: 15).isActive = true
+    secondTopLine.trailingAnchor.constraint(equalTo: guideTopView.trailingAnchor, constant: -15).isActive = true
+    secondTopLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    
+    guideTopView.addSubview(coponTitleLabel)
+    coponTitleLabel.topAnchor.constraint(equalTo: secondTopLine.bottomAnchor, constant: 20).isActive = true
+    coponTitleLabel.leadingAnchor.constraint(equalTo: guideTopView.leadingAnchor, constant: 15).isActive = true
+    
+    guideTopView.addSubview(coponAddImageView)
+    coponAddImageView.trailingAnchor.constraint(equalTo: guideTopView.trailingAnchor, constant: -15).isActive = true
+    coponAddImageView.centerYAnchor.constraint(equalTo: coponTitleLabel.centerYAnchor).isActive = true
+    coponAddImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    coponAddImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    
+    guideTopView.addSubview(coponLabel)
+    coponLabel.trailingAnchor.constraint(equalTo: coponAddImageView.leadingAnchor).isActive = true
+    coponLabel.centerYAnchor.constraint(equalTo: coponTitleLabel.centerYAnchor).isActive = true
+    
+    guideTopView.addSubview(thirdTopLine)
+    thirdTopLine.topAnchor.constraint(equalTo: coponTitleLabel.bottomAnchor, constant: 20).isActive = true
+    thirdTopLine.leadingAnchor.constraint(equalTo: guideTopView.leadingAnchor, constant: 15).isActive = true
+    thirdTopLine.trailingAnchor.constraint(equalTo: guideTopView.trailingAnchor, constant: -15).isActive = true
+    thirdTopLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    
+    guideTopView.addSubview(reservationTitleLabel)
+    reservationTitleLabel.topAnchor.constraint(equalTo: thirdTopLine.bottomAnchor, constant: 20).isActive = true
+    reservationTitleLabel.leadingAnchor.constraint(equalTo: guideTopView.leadingAnchor, constant: 15).isActive = true
+    
+    guideTopView.addSubview(reservationAddImageView)
+    reservationAddImageView.trailingAnchor.constraint(equalTo: guideTopView.trailingAnchor, constant: -15).isActive = true
+    reservationAddImageView.centerYAnchor.constraint(equalTo: reservationTitleLabel.centerYAnchor).isActive = true
+    reservationAddImageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    reservationAddImageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    
+    guideTopView.addSubview(reservationLabel)
+    reservationLabel.trailingAnchor.constraint(equalTo: reservationAddImageView.leadingAnchor).isActive = true
+    reservationLabel.centerYAnchor.constraint(equalTo: reservationTitleLabel.centerYAnchor).isActive = true
     
     
     guideTopView.addSubview(theaterCategoryReservationButton)
+    theaterCategoryReservationButton.topAnchor.constraint(equalTo: reservationTitleLabel.bottomAnchor, constant: 20).isActive = true
     theaterCategoryReservationButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     theaterCategoryReservationButton.bottomAnchor.constraint(equalTo:  guideTopView.bottomAnchor).isActive = true
     
