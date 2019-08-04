@@ -409,7 +409,7 @@ class EightTwoMovieTheaterView: UIView {
   }
   
   @objc private func touchUpButton(_ sender: UIButton) {
-    delegate?.touchUpTheaterSeat(sender)
+    delegate?.touchUpEightTwoTheaterSeat(sender)
   }
   
   private func appendLabels() {
@@ -468,8 +468,6 @@ class EightTwoMovieTheaterView: UIView {
   
   private func setUpProperties() {
     let margin: CGFloat = 10
-    
-    
     
     self.addSubview(scrollView)
     scrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
