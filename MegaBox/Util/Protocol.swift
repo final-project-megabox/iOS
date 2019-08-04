@@ -116,6 +116,17 @@ protocol MovieCategorySelectTheatherViewDelegate {
   
 }
 
+protocol selectPersonCountViewDelegate {
+  func touchUpPlusButton(_ sender: UIButton)
+  
+  func touchUpFinishButton(_ sender: UIButton, reservationPersonCount: ReservationPersonCount?)
+}
+
+protocol EightTwoMovieTheaterViewDelegate {
+  // 좌석 선택시
+  func touchUpTheaterSeat(_ sender: UIButton)
+}
+
 //마이페이지 버튼 클릭 (홈, 뒤로가기)
 protocol MyPageTopViewDelegate {
   func touchUpMenuButton(_ sender: UIButton)

@@ -19,9 +19,7 @@ class SelectPersonCountViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3118311216)
-    
-//    selectPeopleCountView.delegate = self
+    selectPersonCountView.delegate = self
     setupSelectPeopleCountView()
     
   }
@@ -34,17 +32,24 @@ class SelectPersonCountViewController: UIViewController {
     selectPersonCountView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
     selectPersonCountView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
     selectPersonCountView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
-    
   }
-  
 }
 
-//extension SelectSeatViewController: SelectSeatViewDelegate {
-//  func touchUpFinishButton(_ sender: UIButton) {
-//    UIAlertController.show(title: "", message: "관람하실 인원을 선택해주세요.", from: self)
-//  }
-//
-//  func touchUpPlusButton(_ sender: UIButton) {
-//    UIAlertController.show(title: "", message: "인원선택은 총 8명까지 가능합니다", from: self)
-//  }
-//}
+extension SelectPersonCountViewController: selectPersonCountViewDelegate {
+  func touchUpFinishButton(_ sender: UIButton, reservationPersonCount: ReservationPersonCount?) {
+    guard let reservationPersonCount = reservationPersonCount else {
+      UIAlertController.show(title: "", message: "관람하실 인원을 선택해주세요.", from: self)
+      return
+    }
+    
+    let presentingVC = presentingViewController as! SelectSeatViewController
+    
+    presentingVC.selectPersonCountData = reservationPersonCount
+    
+    self.dismiss(animated: false, completion: nil)
+  }
+
+  func touchUpPlusButton(_ sender: UIButton) {
+    UIAlertController.show(title: "", message: "인원선택은 총 8명까지 가능합니다", from: self)
+  }
+}
