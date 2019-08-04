@@ -12,8 +12,72 @@ class EightTwoMovieTheaterView: UIView {
   
   var alphbetIndex = 0
   var seatButtonArr: [UIButton] = []
+  var selectedSeatLabelArr: [UILabel] = []
+  
+  var delegate: EightTwoMovieTheaterViewDelegate?
   
   let alphbetArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"]
+  
+  var adultCount: Int = 0 {
+    didSet {
+      totalAdultCountLabel.text = "\(adultCount)"
+    }
+  }
+  
+  var teenagerCount: Int = 0 {
+    didSet {
+      totalTeenagerCountLabel.text = "\(teenagerCount)"
+    }
+  }
+  
+  var childCount: Int = 0 {
+    didSet {
+      totalChildCountLabel.text = "\(childCount)"
+    }
+  }
+  
+  var seniorCount: Int = 0 {
+    didSet {
+      totalSeniorCountLabel.text = "\(seniorCount)"
+    }
+  }
+  
+  var selectedSeatArr: [String] = [] {
+    didSet {
+      for i in 0..<selectedSeatLabelArr.count {
+        selectedSeatLabelArr[i].backgroundColor = #colorLiteral(red: 0.7785103917, green: 0.7738838792, blue: 0.7820675969, alpha: 1)
+        selectedSeatLabelArr[i].text = nil
+      }
+      
+      for (idx, value) in selectedSeatArr.enumerated() {
+        if idx == 0 {
+          selectedSeatOneLabel.text = value
+          selectedSeatOneLabel.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        } else if idx == 1 {
+          selectedSeatTwoLabel.text = value
+          selectedSeatTwoLabel.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        } else if idx == 2 {
+          selectedSeatThreeLabel.text = value
+          selectedSeatThreeLabel.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        } else if idx == 3 {
+          selectedSeatFourLabel.text = value
+          selectedSeatFourLabel.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        } else if idx == 4 {
+          selectedSeatFiveLabel.text = value
+          selectedSeatFiveLabel.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        } else if idx == 5 {
+          selectedSeaSixLabel.text = value
+          selectedSeaSixLabel.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        } else if idx == 6 {
+          selectedSeatSevenLabel.text = value
+          selectedSeatSevenLabel.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        } else {
+          selectedSeatEightLabel.text = value
+          selectedSeatEightLabel.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        }
+      }
+    }
+  }
   
   // 영화관 탑(인원수)
   private let totalCountView: UIView = {
@@ -127,71 +191,101 @@ class EightTwoMovieTheaterView: UIView {
     return label
   }()
   
-  // 선택 된 좌석 보여주는 View
-//  private let showingSelectedSeatView: UIView = {
-//    let view = UIView()
-//    view.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-//    view.translatesAutoresizingMaskIntoConstraints = false
-//    return view
-//  }()
+  // MARK: 선택 된 좌석 보여주는 뷰
+  private let showingSelectedSeatView: UIView = {
+    let view = UIView()
+    view.backgroundColor = #colorLiteral(red: 0.9331558347, green: 0.9276085496, blue: 0.9374198318, alpha: 1)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
   
-  private var showingSelectedSeatStackView =  UIStackView()
   private let selectedSeatOneLabel: UILabel = {
     let label = UILabel()
-//    label.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
-    label.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.backgroundColor = #colorLiteral(red: 0.7785103917, green: 0.7738838792, blue: 0.7820675969, alpha: 1)
+    label.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.layer.borderWidth = 0.5
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.textAlignment = .center
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let selectedSeatTwoLabel: UILabel = {
     let label = UILabel()
-//    label.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
-    label.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.backgroundColor = #colorLiteral(red: 0.7785103917, green: 0.7738838792, blue: 0.7820675969, alpha: 1)
+    label.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.layer.borderWidth = 0.5
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.textAlignment = .center
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let selectedSeatThreeLabel: UILabel = {
     let label = UILabel()
-//    label.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
-    label.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.backgroundColor = #colorLiteral(red: 0.7785103917, green: 0.7738838792, blue: 0.7820675969, alpha: 1)
+    label.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.layer.borderWidth = 0.5
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.textAlignment = .center
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let selectedSeatFourLabel: UILabel = {
     let label = UILabel()
-//    label.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
-    label.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.backgroundColor = #colorLiteral(red: 0.7785103917, green: 0.7738838792, blue: 0.7820675969, alpha: 1)
+    label.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.layer.borderWidth = 0.5
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.textAlignment = .center
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let selectedSeatFiveLabel: UILabel = {
     let label = UILabel()
-//    label.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
-    label.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.backgroundColor = #colorLiteral(red: 0.7785103917, green: 0.7738838792, blue: 0.7820675969, alpha: 1)
+    label.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.layer.borderWidth = 0.5
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.textAlignment = .center
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let selectedSeaSixLabel: UILabel = {
     let label = UILabel()
-//    label.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
-    label.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.backgroundColor = #colorLiteral(red: 0.7785103917, green: 0.7738838792, blue: 0.7820675969, alpha: 1)
+    label.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.layer.borderWidth = 0.5
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.textAlignment = .center
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let selectedSeatSevenLabel: UILabel = {
     let label = UILabel()
-//    label.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
-    label.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.backgroundColor = #colorLiteral(red: 0.7785103917, green: 0.7738838792, blue: 0.7820675969, alpha: 1)
+    label.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.layer.borderWidth = 0.5
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.textAlignment = .center
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let selectedSeatEightLabel: UILabel = {
     let label = UILabel()
-//    label.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
-    label.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.backgroundColor = #colorLiteral(red: 0.7785103917, green: 0.7738838792, blue: 0.7820675969, alpha: 1)
+    label.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+    label.layer.borderWidth = 0.5
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.textAlignment = .center
+    label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
-  
   
   // 영화관
   private let screenImage: UIImageView = {
@@ -254,7 +348,8 @@ class EightTwoMovieTheaterView: UIView {
   private let normalLabel: UILabel = {
     let label = UILabel()
     label.text = "일반석"
-    label.labelSetup(text: "일반석", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 13, alignment: .left)
+    label.labelSetup(text: "일반석", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 12, alignment: .left)
+    label.font = UIFont.systemFont(ofSize: 12, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -269,7 +364,8 @@ class EightTwoMovieTheaterView: UIView {
   
   private let disabledLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "장애인/휠체어석", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 13, alignment: .left)
+    label.labelSetup(text: "장애인/휠체어석", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 12, alignment: .left)
+    label.font = UIFont.systemFont(ofSize: 12, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -281,14 +377,14 @@ class EightTwoMovieTheaterView: UIView {
     return view
   }()
   
-  private let paymentLabel: UILabel = {
+  let paymentLabel: UILabel = {
     let label = UILabel()
     label.text = "결제금액"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
-  private let paymentTotalLabel: UILabel = {
+  let paymentTotalLabel: UILabel = {
     let label = UILabel()
     label.text = "0원"
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -307,9 +403,24 @@ class EightTwoMovieTheaterView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
+    appendLabels()
     makeSeatButtons()
-    setUpStackView()
     setUpProperties()
+  }
+  
+  @objc private func touchUpButton(_ sender: UIButton) {
+    delegate?.touchUpTheaterSeat(sender)
+  }
+  
+  private func appendLabels() {
+    selectedSeatLabelArr.append(selectedSeatOneLabel)
+    selectedSeatLabelArr.append(selectedSeatTwoLabel)
+    selectedSeatLabelArr.append(selectedSeatThreeLabel)
+    selectedSeatLabelArr.append(selectedSeatFourLabel)
+    selectedSeatLabelArr.append(selectedSeatFiveLabel)
+    selectedSeatLabelArr.append(selectedSeaSixLabel)
+    selectedSeatLabelArr.append(selectedSeatSevenLabel)
+    selectedSeatLabelArr.append(selectedSeatEightLabel)
   }
   
   private func makeSeatButtons() {
@@ -328,6 +439,9 @@ class EightTwoMovieTheaterView: UIView {
         button.addTarget(self, action: #selector(touchUpButton(_:)), for: .touchUpInside)
         if i == 0 && (j == 0 || j == 1 || j == 4 || j == 5 || j == 6 || j == 7) {
           button.isHidden = true
+        } else if i == 0 && (j == 2 || j == 3) {
+          button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+          button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         }
         
         if j == 7 {
@@ -352,15 +466,6 @@ class EightTwoMovieTheaterView: UIView {
     }
   }
   
-  private func setUpStackView() {
-    showingSelectedSeatStackView = UIStackView(arrangedSubviews: [selectedSeatOneLabel, selectedSeatTwoLabel, selectedSeatThreeLabel, selectedSeatFourLabel, selectedSeatFiveLabel, selectedSeaSixLabel, selectedSeatSevenLabel, selectedSeatEightLabel])
-    showingSelectedSeatStackView.translatesAutoresizingMaskIntoConstraints = false
-    showingSelectedSeatStackView.axis = .horizontal
-    showingSelectedSeatStackView.alignment = .fill
-    showingSelectedSeatStackView.distribution = .fill
-    showingSelectedSeatStackView.spacing = 8
-  }
-  
   private func setUpProperties() {
     let margin: CGFloat = 10
     
@@ -371,40 +476,40 @@ class EightTwoMovieTheaterView: UIView {
     scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-
+    
     scrollView.addSubview(screenImage)
     screenImage.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: margin * 15).isActive = true
     screenImage.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
     screenImage.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
     screenImage.widthAnchor.constraint(equalToConstant: 500).isActive = true
     screenImage.heightAnchor.constraint(equalToConstant: 25).isActive = true
-
+    
     scrollView.addSubview(firstView)
     firstView.topAnchor.constraint(equalTo: screenImage.bottomAnchor, constant: 80).isActive = true
     firstView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 40).isActive = true
     firstView.widthAnchor.constraint(equalToConstant: 35 * 4).isActive = true
     firstView.heightAnchor.constraint(equalToConstant: 35 * 6).isActive = true
-
+    
     scrollView.addSubview(secondView)
     secondView.topAnchor.constraint(equalTo: screenImage.bottomAnchor, constant: 80).isActive = true
     secondView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -40).isActive = true
     secondView.widthAnchor.constraint(equalToConstant: 35 * 4).isActive = true
     secondView.heightAnchor.constraint(equalToConstant: 35 * 6).isActive = true
-
-
+    
+    
     scrollView.addSubview(thirdView)
     thirdView.topAnchor.constraint(equalTo: firstView.bottomAnchor, constant: 70).isActive = true
     thirdView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 40).isActive = true
     thirdView.widthAnchor.constraint(equalToConstant: 35 * 4).isActive = true
     thirdView.heightAnchor.constraint(equalToConstant: 35 * 5).isActive = true
     
-
+    
     scrollView.addSubview(fourthView)
     fourthView.topAnchor.constraint(equalTo: secondView.bottomAnchor, constant: 70).isActive = true
     fourthView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -40).isActive = true
     fourthView.widthAnchor.constraint(equalToConstant: 35 * 4).isActive = true
     fourthView.heightAnchor.constraint(equalToConstant: 35 * 5).isActive = true
-
+    
     for i in 0..<seatButtonArr.count {
       if i < 48 {
         // 앞라인 좌석
@@ -567,15 +672,59 @@ class EightTwoMovieTheaterView: UIView {
     seniorTitleLabel.bottomAnchor.constraint(equalTo: adultTitleLabel.bottomAnchor).isActive = true
     seniorTitleLabel.widthAnchor.constraint(equalTo: adultTitleLabel.widthAnchor).isActive = true
     
-//    self.addSubview(showingSelectedSeatView)
-    
-    
-//    self.addSubview(showingSelectedSeatStackView)
-//    showingSelectedSeatStackView.topAnchor.constraint(equalTo: topViewBottomLine.bottomAnchor).isActive = true
-//    showingSelectedSeatStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-//    showingSelectedSeatStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-//    showingSelectedSeatStackView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-    
+    self.addSubview(showingSelectedSeatView)
+    showingSelectedSeatView.topAnchor.constraint(equalTo: topViewBottomLine.bottomAnchor).isActive = true
+    showingSelectedSeatView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+    showingSelectedSeatView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    showingSelectedSeatView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+ 
+    showingSelectedSeatView.addSubview(selectedSeatFourLabel)
+    selectedSeatFourLabel.centerYAnchor.constraint(equalTo: showingSelectedSeatView.centerYAnchor).isActive = true
+    selectedSeatFourLabel.trailingAnchor.constraint(equalTo: showingSelectedSeatView.centerXAnchor, constant: -2.5).isActive = true
+    selectedSeatFourLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 10).isActive = true
+    selectedSeatFourLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+
+    showingSelectedSeatView.addSubview(selectedSeatThreeLabel)
+    selectedSeatThreeLabel.centerYAnchor.constraint(equalTo: showingSelectedSeatView.centerYAnchor).isActive = true
+    selectedSeatThreeLabel.trailingAnchor.constraint(equalTo: selectedSeatFourLabel.leadingAnchor, constant: -margin / 2).isActive = true
+    selectedSeatThreeLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 10).isActive = true
+    selectedSeatThreeLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+
+    showingSelectedSeatView.addSubview(selectedSeatTwoLabel)
+    selectedSeatTwoLabel.centerYAnchor.constraint(equalTo: showingSelectedSeatView.centerYAnchor).isActive = true
+    selectedSeatTwoLabel.trailingAnchor.constraint(equalTo: selectedSeatThreeLabel.leadingAnchor, constant: -margin / 2).isActive = true
+    selectedSeatTwoLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 10).isActive = true
+    selectedSeatTwoLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+
+    showingSelectedSeatView.addSubview(selectedSeatOneLabel)
+    selectedSeatOneLabel.centerYAnchor.constraint(equalTo: showingSelectedSeatView.centerYAnchor).isActive = true
+    selectedSeatOneLabel.trailingAnchor.constraint(equalTo: selectedSeatTwoLabel.leadingAnchor, constant: -margin / 2).isActive = true
+    selectedSeatOneLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 10).isActive = true
+    selectedSeatOneLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+
+    showingSelectedSeatView.addSubview(selectedSeatFiveLabel)
+    selectedSeatFiveLabel.centerYAnchor.constraint(equalTo: showingSelectedSeatView.centerYAnchor).isActive = true
+    selectedSeatFiveLabel.leadingAnchor.constraint(equalTo: showingSelectedSeatView.centerXAnchor, constant: 2.5).isActive = true
+    selectedSeatFiveLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 10).isActive = true
+    selectedSeatFiveLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+
+    showingSelectedSeatView.addSubview(selectedSeaSixLabel)
+    selectedSeaSixLabel.centerYAnchor.constraint(equalTo: showingSelectedSeatView.centerYAnchor).isActive = true
+    selectedSeaSixLabel.leadingAnchor.constraint(equalTo: selectedSeatFiveLabel.trailingAnchor, constant: margin / 2).isActive = true
+    selectedSeaSixLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 10).isActive = true
+    selectedSeaSixLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+
+    showingSelectedSeatView.addSubview(selectedSeatSevenLabel)
+    selectedSeatSevenLabel.centerYAnchor.constraint(equalTo: showingSelectedSeatView.centerYAnchor).isActive = true
+    selectedSeatSevenLabel.leadingAnchor.constraint(equalTo: selectedSeaSixLabel.trailingAnchor, constant: margin / 2).isActive = true
+    selectedSeatSevenLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 10).isActive = true
+    selectedSeatSevenLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+
+    showingSelectedSeatView.addSubview(selectedSeatEightLabel)
+    selectedSeatEightLabel.centerYAnchor.constraint(equalTo: showingSelectedSeatView.centerYAnchor).isActive = true
+    selectedSeatEightLabel.leadingAnchor.constraint(equalTo: selectedSeatSevenLabel.trailingAnchor, constant: margin / 2).isActive = true
+    selectedSeatEightLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 10).isActive = true
+    selectedSeatEightLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
     
     self.addSubview(bottomView)
     bottomView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
@@ -586,24 +735,24 @@ class EightTwoMovieTheaterView: UIView {
     bottomView.addSubview(normalView)
     normalView.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: margin).isActive = true
     normalView.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: margin).isActive = true
-    normalView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-    normalView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    normalView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    normalView.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
     bottomView.addSubview(normalLabel)
     normalLabel.centerYAnchor.constraint(equalTo: normalView.centerYAnchor).isActive = true
-    normalLabel.leadingAnchor.constraint(equalTo: normalView.trailingAnchor, constant: margin).isActive = true
-    normalLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    normalLabel.leadingAnchor.constraint(equalTo: normalView.trailingAnchor, constant: margin / 2).isActive = true
+    normalLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
     bottomView.addSubview(disabledView)
     disabledView.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: margin).isActive = true
     disabledView.leadingAnchor.constraint(equalTo: normalLabel.trailingAnchor, constant: margin * 2).isActive = true
-    disabledView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-    disabledView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    disabledView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    disabledView.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
     bottomView.addSubview(disabledLabel)
     disabledLabel.centerYAnchor.constraint(equalTo: normalView.centerYAnchor).isActive = true
-    disabledLabel.leadingAnchor.constraint(equalTo: disabledView.trailingAnchor, constant: margin).isActive = true
-    disabledLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    disabledLabel.leadingAnchor.constraint(equalTo: disabledView.trailingAnchor, constant: margin / 2).isActive = true
+    disabledLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
     bottomView.addSubview(bottomOfBottomView)
     bottomOfBottomView.topAnchor.constraint(equalTo: normalView.bottomAnchor, constant: margin).isActive = true
@@ -623,20 +772,7 @@ class EightTwoMovieTheaterView: UIView {
     selectOkButton.topAnchor.constraint(equalTo: bottomOfBottomView.topAnchor).isActive = true
     selectOkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     selectOkButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    selectOkButton.widthAnchor.constraint(equalToConstant: self.frame.width / 3).isActive = true
-  }
-  
-  @objc private func touchUpButton(_ sender: UIButton) {
-    if sender.currentTitle == "" {
-      
-    } else {
-      sender.setTitle("", for: .normal)
-      sender.setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
-    }
-    
-    
-    print(sender.accessibilityIdentifier as Any)
-    
+    selectOkButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 3).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
