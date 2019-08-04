@@ -17,11 +17,11 @@ class NetworkService {
   
   static func getToken(email: String, pw: String, completion: @escaping (Result<Token>) -> ()) {
     let body = """
-{
+      {
       "email": "\(email)",
       "password": "\(pw)"
-    }
-""".data(using: .utf8)
+      }
+      """.data(using: .utf8)
     
     let headers = [
       "Content-Type": "application/json"
@@ -94,6 +94,29 @@ class NetworkService {
         }
     }
   }
+  
+  static func getMovieDetailData(_ urlStr: String, completion: @escaping (Swift.Result<MovieDetailData, ErrorType>) -> Void) {
+    let url = URL(string: urlStr)!
+    let req = Alamofire.request(url)
+    
+    req.validate()
+      .responseData { response in
+        switch response.result {
+        case .success(let data):
+          do {
+            let movieDetailData = try JSONDecoder().decode(MovieDetailData.self, from: data)
+            
+            completion(.success(movieDetailData))
+          } catch {
+            print(error.localizedDescription)
+          }
+        case .failure:
+          completion(.failure(.NoData))
+        }
+    }
+  }
+  
+  
   
   static func getReservationData(_ urlStr: String, regionName: String, date: String, completion: @escaping (Swift.Result<[ReservationData], ErrorType>) -> Void) {
     let url = URL(string: urlStr)!

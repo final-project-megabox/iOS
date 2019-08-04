@@ -10,6 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController {
   
+  private let shared = MovieDataManager.shared
   private var isTop: Bool = true
   
   private let mainTopView = MainTopView()
@@ -98,6 +99,14 @@ extension MainViewController: MainMovieReservationCellDelegate {
     leading.constant = sender.frame.minX + 20
     trailing.constant = -(stackViewWidth - sender.frame.maxX - 20)
     self.view.layoutIfNeeded()
+  }
+  
+  func touchUpItem(_ indexPath: Int) {
+    print("컬렉션뷰의 인텍스:", indexPath)
+    let movieDetailVC = MovieDetailViewController()
+    movieDetailVC.id = "\(shared.allMovieData[indexPath].movieID)"
+    
+    self.present(movieDetailVC, animated: false)
   }
 }
 

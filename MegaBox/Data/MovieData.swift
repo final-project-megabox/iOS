@@ -30,3 +30,4 @@ enum TypeElement: String, Codable {
   case 디지털 = "디지털"
   case 자막 = "자막"
 }
+
