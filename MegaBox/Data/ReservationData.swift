@@ -33,3 +33,11 @@ struct ReservationData: Codable {
     case seatNumber = "seat_number"
   }
 }
+
+struct ReservationPersonCount {
+  let theaterNumber: Int
+  let adultCount: Int
+  let teenagerCount: Int
+  let childCount: Int
+  let seniorCount: Int
+}
