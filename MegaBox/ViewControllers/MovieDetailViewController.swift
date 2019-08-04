@@ -47,6 +47,7 @@ class MovieDetailViewController: UIViewController {
       switch result {
       case .success(let data):
         self.shared.movieDetailData = data
+        print(self.shared.movieDetailData)
       case .failure(let err):
         print(err.localizedDescription)
       }
