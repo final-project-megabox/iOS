@@ -10,6 +10,7 @@ import UIKit
 
 class SelectSeatViewController: UIViewController {
   
+  let urlStr = "http://megabox.hellocoding.shop//database/reservationSecond/"
   var timer: Timer!
   
   var movieTheaterNumber = 0
@@ -130,6 +131,29 @@ class SelectSeatViewController: UIViewController {
     }
   }
   
+  private func pushReservationSeatData(seatNumber: [String], seatCount: Int) {
+    
+    guard let movieData = self.movieData else { return }
+    let scheduleId = movieData.scheduleID
+    let price = seatCount * 10000
+    
+    NetworkService.pushSeatReservationData(
+      urlStr,
+      scheduleId: scheduleId,
+      seatNumber: seatNumber,
+      price: price,
+      seatCount: seatCount) { result in
+        switch result {
+        case .success:
+          let paymentVC = PaymentViewController()
+          paymentVC.movieData = movieData
+          self.present(paymentVC, animated: false)
+        case .failure(let err):
+          print(err.localizedDescription)
+        }
+    }
+  }
+  
   private func returnSeatIndex(seatString: String, basePlusNum: Int) -> Int {
     var resultIdx: Int = -1
     var resultStr: String = ""
@@ -142,10 +166,7 @@ class SelectSeatViewController: UIViewController {
     }
     
     guard let resultValue = Int(resultStr) else { return -1 }
-    
-    
-    print("[Log] :", resultValue)
-    
+ 
     if seatString.contains("A") {
       resultIdx = resultValue - 1
     } else if seatString.contains("B") {
@@ -175,6 +196,7 @@ class SelectSeatViewController: UIViewController {
     } else {
       resultIdx = resultValue + (basePlusNum * 13) - 1
     }
+    
     return resultIdx
   }
   
@@ -219,6 +241,10 @@ class SelectSeatViewController: UIViewController {
 }
 
 extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
+  func touchUpThreeSixSelectOkButton(seatNumber: [String], seatCount: Int) {
+    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
+  }
+  
   func touchUpThreeSixTheaterSeat(_ sender: UIButton) {
     guard let buttonTitle = sender.currentTitle else { return }
     if buttonTitle == "" {
@@ -270,6 +296,10 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
 }
 
 extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
+  func touchUpEightTwoSelectOkButton(seatNumber: [String], seatCount: Int) {
+    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
+  }
+  
   func touchUpEightTwoTheaterSeat(_ sender: UIButton) {
     guard let buttonTitle = sender.currentTitle else { return }
     if buttonTitle == "" {
@@ -312,6 +342,10 @@ extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
 }
 
 extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
+  func touchUpOneThreeZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
+    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
+  }
+  
   func touchUpOneThreeZeroTheaterSeat(_ sender: UIButton) {
     guard let buttonTitle = sender.currentTitle else { return }
     if buttonTitle == "" {
@@ -354,6 +388,10 @@ extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
 }
 
 extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
+  func touchUpOneFourZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
+    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
+  }
+  
   func touchUpOneFourZeroTheaterSeat(_ sender: UIButton) {
     guard let buttonTitle = sender.currentTitle else { return }
     if buttonTitle == "" {
@@ -397,6 +435,10 @@ extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
 }
 
 extension SelectSeatViewController: OneFiveZeroMovieTheaterViewDelegate {
+  func touchUpOneFiveZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
+    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
+  }
+  
   func touchUpOneFiveZeroTheaterSeat(_ sender: UIButton) {
     guard let buttonTitle = sender.currentTitle else { return }
     if buttonTitle == "" {

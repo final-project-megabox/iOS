@@ -8,7 +8,12 @@
 
 import Foundation
 
-struct RegionData {
+struct RegionData: Codable {
+  let id: Int
+  let name: String
+}
+
+struct AllRegionData {
   let regionNames: [String] = [
     "선호영화관", "서울", "경기", "인천", "대전/충청/세종", "부산/대구/경상",
     "광주/전라", "강원", "제주"

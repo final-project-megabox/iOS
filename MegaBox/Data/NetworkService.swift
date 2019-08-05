@@ -44,8 +44,6 @@ class NetworkService {
     }
   }
   
-  
-  
   static func getUserMyPageData(_ urlStr: String, token: String, completion: @escaping (Swift.Result<MyPage, ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
     
@@ -72,7 +70,6 @@ class NetworkService {
         }
     }
   }
- 
   
   static func getAllMovieData(_ urlStr: String, completion: @escaping (Swift.Result<[MovieData], ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
@@ -95,7 +92,12 @@ class NetworkService {
     }
   }
   
+<<<<<<< HEAD
   static func getMovieDetailData(_ urlStr: String, completion: @escaping (Swift.Result<MovieDetailData, ErrorType>) -> Void) {
+=======
+  static func getRegionData() {
+    let urlStr = "http://megabox.hellocoding.shop//database/showregion/"
+>>>>>>> 2526bebe1a8d55f441f3ad68c686c05d5aaffbf4
     let url = URL(string: urlStr)!
     let req = Alamofire.request(url)
     
@@ -104,6 +106,7 @@ class NetworkService {
         switch response.result {
         case .success(let data):
           do {
+<<<<<<< HEAD
             let movieDetailData = try JSONDecoder().decode(MovieDetailData.self, from: data)
             
             completion(.success(movieDetailData))
@@ -112,12 +115,24 @@ class NetworkService {
           }
         case .failure:
           completion(.failure(.NoData))
+=======
+            let regionData = try JSONDecoder().decode([RegionData].self, from: data)
+            print("[Log] regionData:", regionData)
+          } catch {
+            print(error.localizedDescription)
+          }
+        case .failure(let err):
+          print(err.localizedDescription)
+>>>>>>> 2526bebe1a8d55f441f3ad68c686c05d5aaffbf4
         }
     }
   }
   
+<<<<<<< HEAD
   
   
+=======
+>>>>>>> 2526bebe1a8d55f441f3ad68c686c05d5aaffbf4
   static func getReservationData(_ urlStr: String, regionName: String, date: String, completion: @escaping (Swift.Result<[ReservationData], ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
     let parameters: [String: String] = ["theater": regionName, "date": date]
@@ -136,6 +151,54 @@ class NetworkService {
           }
         case .failure:
           completion(.failure(ErrorType.networkErr))
+        }
+    }
+  }
+  
+  static func pushSeatReservationData(_ urlStr: String, scheduleId: Int, seatNumber: [String], price: Int, seatCount: Int, compleition: @escaping (Swift.Result<String, ErrorType>) -> Void) {
+    
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let headers = [
+      "Content-Type": "application/json",
+      "Authorization": "JWT \(token)"
+    ]
+    
+    var seatNumberStr = ""
+    
+    for (idx, seat) in seatNumber.enumerated() {
+      let count = seatNumber.count
+      if (count - 1) == idx {
+        seatNumberStr.append("\(seat)")
+      } else {
+        seatNumberStr.append("\(seat), ")
+      }
+    }
+    
+    let body = """
+      {
+      "schedule_id": "\(scheduleId)",
+      "seat_number": [
+      "\(seatNumberStr)"
+      ],
+      "price": "\(price)",
+      "st_count": "\(seatCount)"
+      }
+      """.data(using: .utf8)
+    
+    guard let data = body else { return }
+    
+    let url = URL(string: urlStr)!
+    
+    let req = Alamofire.upload(data, to: url, method: .post, headers: headers)
+    
+    req.validate()
+      .responseData { response in
+        switch response.result {
+        case .success:
+          compleition(.success("OK"))
+        case .failure:
+          compleition(.failure(ErrorType.networkErr))
         }
     }
   }

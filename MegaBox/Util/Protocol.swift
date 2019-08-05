@@ -127,28 +127,43 @@ protocol selectPersonCountViewDelegate {
 }
 
 protocol ThreeSixMovieTheaterViewDelegate {
-  // 좌석 선택시
+  // 좌석 선택
   func touchUpThreeSixTheaterSeat(_ sender: UIButton)
+  
+  // 좌석 선택 완료
+  func touchUpThreeSixSelectOkButton(seatNumber: [String], seatCount: Int)
 }
 
 protocol EightTwoMovieTheaterViewDelegate {
-  // 좌석 선택시
+  // 좌석 선택
   func touchUpEightTwoTheaterSeat(_ sender: UIButton)
+  
+  // 좌석 선택 완료
+  func touchUpEightTwoSelectOkButton(seatNumber: [String], seatCount: Int)
 }
 
 protocol OneThreeZeroMovieTheaterViewDelegate {
-  // 좌석 선택시
+  // 좌석 선택
   func touchUpOneThreeZeroTheaterSeat(_ sender: UIButton)
+  
+  // 좌석 선택 완료
+  func touchUpOneThreeZeroSelectOkButton(seatNumber: [String], seatCount: Int)
 }
 
 protocol OneFourZeroMovieTheaterViewDelegate {
-  // 좌석 선택시
+  // 좌석 선택
   func touchUpOneFourZeroTheaterSeat(_ sender: UIButton)
+  
+  // 좌석 선택 완료
+  func touchUpOneFourZeroSelectOkButton(seatNumber: [String], seatCount: Int)
 }
 
 protocol OneFiveZeroMovieTheaterViewDelegate {
-  // 좌석 선택시
+  // 좌석 선택
   func touchUpOneFiveZeroTheaterSeat(_ sender: UIButton)
+  
+  // 좌석 선택 완료
+  func touchUpOneFiveZeroSelectOkButton(seatNumber: [String], seatCount: Int)
 }
 
 //마이페이지 버튼 클릭 (홈, 뒤로가기)

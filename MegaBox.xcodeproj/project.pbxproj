@@ -11,6 +11,9 @@
 		CF0847E122E6AD6E0070F4FD /* ReservationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0847E022E6AD6E0070F4FD /* ReservationData.swift */; };
 		CF09E8A622E71CC000B43066 /* TheaterCategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09E8A522E71CC000B43066 /* TheaterCategoryCollectionCell.swift */; };
 		CF09E8A822E7343C00B43066 /* BranchNewsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09E8A722E7343C00B43066 /* BranchNewsCollectionCell.swift */; };
+		CF55E5DB22F7EF9900290FED /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55E5DA22F7EF9900290FED /* PaymentViewController.swift */; };
+		CF55E5DE22F7EFDB00290FED /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55E5DD22F7EFDB00290FED /* PaymentView.swift */; };
+		CF55E5E022F7F84400290FED /* TheaterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55E5DF22F7F84400290FED /* TheaterData.swift */; };
 		CF7883BA22EF330800380C47 /* MainFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883B922EF330800380C47 /* MainFooterCell.swift */; };
 		CF7883C022EFEADA00380C47 /* NavigationDrawerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883BF22EFEADA00380C47 /* NavigationDrawerCell.swift */; };
 		CF7883C222F0503F00380C47 /* EightTwoMovieTheaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883C122F0503F00380C47 /* EightTwoMovieTheaterView.swift */; };
@@ -112,6 +115,9 @@
 		CF0847E022E6AD6E0070F4FD /* ReservationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationData.swift; sourceTree = "<group>"; };
 		CF09E8A522E71CC000B43066 /* TheaterCategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryCollectionCell.swift; sourceTree = "<group>"; };
 		CF09E8A722E7343C00B43066 /* BranchNewsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchNewsCollectionCell.swift; sourceTree = "<group>"; };
+		CF55E5DA22F7EF9900290FED /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		CF55E5DD22F7EFDB00290FED /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
+		CF55E5DF22F7F84400290FED /* TheaterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterData.swift; sourceTree = "<group>"; };
 		CF7883B922EF330800380C47 /* MainFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFooterCell.swift; sourceTree = "<group>"; };
 		CF7883BF22EFEADA00380C47 /* NavigationDrawerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDrawerCell.swift; sourceTree = "<group>"; };
 		CF7883C122F0503F00380C47 /* EightTwoMovieTheaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EightTwoMovieTheaterView.swift; sourceTree = "<group>"; };
@@ -239,6 +245,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CF55E5DC22F7EFB900290FED /* PaymentView */ = {
+			isa = PBXGroup;
+			children = (
+				CF55E5DD22F7EFDB00290FED /* PaymentView.swift */,
+			);
+			path = PaymentView;
+			sourceTree = "<group>";
+		};
 		CF7883C322F0508E00380C47 /* MovieTheaterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,7 +336,11 @@
 				CFBC1CA222E02B70006B6839 /* SelectPersonCountViewController.swift */,
 				CFBC1CA622E02B96006B6839 /* MyPageViewController.swift */,
 				E6094AE122F45483008407EA /* MyPageSettingViewController.swift */,
+<<<<<<< HEAD
 				E64CB84C22F701D8009EEF5C /* MovieDetailViewController.swift */,
+=======
+				CF55E5DA22F7EF9900290FED /* PaymentViewController.swift */,
+>>>>>>> 2526bebe1a8d55f441f3ad68c686c05d5aaffbf4
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -340,7 +358,11 @@
 				CFBC1CB422E02C17006B6839 /* MovieCategoryReservationView.swift */,
 				CFBC1CB622E02C2F006B6839 /* MovieCategorySelectTheaterView.swift */,
 				CFBC1CB822E02C60006B6839 /* SelectPersonCountView.swift */,
+<<<<<<< HEAD
 				E64CB82322F70185009EEF5C /* MovieDetailView */,
+=======
+				CF55E5DC22F7EFB900290FED /* PaymentView */,
+>>>>>>> 2526bebe1a8d55f441f3ad68c686c05d5aaffbf4
 				E6094AE022F45439008407EA /* MyPageView */,
 				CF7883C322F0508E00380C47 /* MovieTheaterView */,
 				CFBC1C8B22E029F6006B6839 /* Cells */,
@@ -420,6 +442,7 @@
 		CFBC1CEA22E1809F006B6839 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CF55E5DF22F7F84400290FED /* TheaterData.swift */,
 				CFBC1CEB22E180FD006B6839 /* MovieData.swift */,
 				E64CB86622F703BD009EEF5C /* MovieDetailData.swift */,
 				CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */,
@@ -611,6 +634,7 @@
 				CFBC1CB322E02C07006B6839 /* TheaterCategoryReservationHeaderView.swift in Sources */,
 				CFBC1CAD22E02BDC006B6839 /* MainTopView.swift in Sources */,
 				CFBC1CE522E02EC8006B6839 /* MyPageOneContentCell.swift in Sources */,
+				CF55E5DE22F7EFDB00290FED /* PaymentView.swift in Sources */,
 				CFC9724F22E5D36B00199FD0 /* SplashViewController.swift in Sources */,
 				E64CB86722F703BD009EEF5C /* MovieDetailData.swift in Sources */,
 				CFBC1C7822E0298F006B6839 /* MainViewController.swift in Sources */,
@@ -643,6 +667,7 @@
 				CFBC1CB922E02C60006B6839 /* SelectPersonCountView.swift in Sources */,
 				E64CB85E22F70264009EEF5C /* AdCell.swift in Sources */,
 				CFBC1CAB22E02BD2006B6839 /* NavigationDrawerView.swift in Sources */,
+				CF55E5DB22F7EF9900290FED /* PaymentViewController.swift in Sources */,
 				CFBC1CC522E02D62006B6839 /* MainMovieReservationCell.swift in Sources */,
 				CF7883C922F0515600380C47 /* OneFourZeroMovieTheaterView.swift in Sources */,
 				CF7883C522F0511C00380C47 /* ThreeSixMovieTheaterView.swift in Sources */,
@@ -659,6 +684,7 @@
 				CFBC1CB722E02C2F006B6839 /* MovieCategorySelectTheaterView.swift in Sources */,
 				E6094AE622F454D9008407EA /* MyPageSettingContentView.swift in Sources */,
 				CFBC1CE122E02EA8006B6839 /* MyPageFourContentCell.swift in Sources */,
+				CF55E5E022F7F84400290FED /* TheaterData.swift in Sources */,
 				CFBC1C9122E02A4A006B6839 /* Protocol.swift in Sources */,
 				CF7883BA22EF330800380C47 /* MainFooterCell.swift in Sources */,
 				CFBC1CD122E02DEE006B6839 /* MainMovieBoxCell.swift in Sources */,
