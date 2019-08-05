@@ -221,9 +221,7 @@ extension MainMovieReservationCell: UICollectionViewDataSource {
 
 extension MainMovieReservationCell: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    let movieDetailVC = MovieDetailViewController()
-//    movieDetailVC.id = "\(shared.allMovieData[indexPath.row].movieID)"
-//    let index = indexPath.row
+
     delegate?.touchUpItem(indexPath.row)
     
   }

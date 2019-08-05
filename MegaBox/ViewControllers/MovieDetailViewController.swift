@@ -10,10 +10,11 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
   
-  var id = ""
-  lazy var url = "http://megabox.hellocoding.shop//database/movieDetail/?movie=\(id)"
-  
-  let shared = MovieDataManager.shared
+  var movieDetailData: MovieDetailData?
+//  var id = ""
+//  lazy var url = "http://megabox.hellocoding.shop//database/movieDetail/?movie=\(id)"
+//  
+//  let shared = MovieDataManager.shared
   
   
 
@@ -38,20 +39,44 @@ class MovieDetailViewController: UIViewController {
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     setupDetailView()
     
-    
+    print("[Log] data :", movieDetailData)
   }
   
   func getMovieDetailData() {
     
-    NetworkService.getMovieDetailData(url) { (result) in
-      switch result {
-      case .success(let data):
-        self.shared.movieDetailData = data
-        print(self.shared.movieDetailData)
-      case .failure(let err):
-        print(err.localizedDescription)
-      }
-    }
+//    NetworkService.getMovieDetailData(url) { (result) in
+//      switch result {
+//      case .success(let data):
+//        self.shared.movieDetailData = data
+//        print(self.shared.movieDetailData)
+//        guard let title = self.shared.movieDetailData?.title,
+//              let genre = self.shared.movieDetailData?.genre,
+//              let age = self.shared.movieDetailData?.age
+//          else { return }
+//        self.detailContentView.headerView.titleLabelOfPreView.text = title
+//        self.detailContentView.headerView.title.text = title
+//        self.detailContentView.headerView.releaseDate.text = "\(self.shared.movieDetailData?.releaseDate) 개봉"
+//        self.detailContentView.headerView.genre.text = genre
+//        
+//        
+//        if age == "청소년 관람불가" {
+//          self.detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_18")
+//        } else if age == "12세 관람가" {
+//          self.detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_12")
+//        } else if age == "15세 관람가" {
+//          self.detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_15")
+//        } else if age == "전체 관람" {
+//          self.detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
+//        } else {
+//          self.detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_noage")
+//        }
+//        
+//        
+//      case .failure(let err):
+//        print(err.localizedDescription)
+//      }
+//    }
+    
   }
   
   func setupDetailView() {
