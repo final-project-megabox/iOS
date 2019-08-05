@@ -12,7 +12,7 @@ class TheaterCategorySelectTheaterView: UIView {
   
   var delegate: TheaterCategorySelectTheaterViewDelegate?
   
-  private let regionData = RegionData()
+  private let regionData = AllRegionData()
   lazy var regionNames: [String] = regionData.regionNames
   
   private var selectedRegionNumber: Int = 0
@@ -40,7 +40,7 @@ class TheaterCategorySelectTheaterView: UIView {
   private let menuTitleLabel: UILabel = {
     let label = UILabel()
     label.text = "영화관 선택"
-    label.font = UIFont.boldSystemFont(ofSize: 16)
+    label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
