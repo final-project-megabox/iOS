@@ -17,6 +17,8 @@ class MovieDetailHeaderView: UIView {
   let preView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = #imageLiteral(resourceName: "preview")
+    imageView.contentMode = .scaleAspectFill
+    imageView.clipsToBounds = true
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
@@ -151,6 +153,7 @@ class MovieDetailHeaderView: UIView {
     
     setupGradeImageView()
     setupHeaderView()
+    
   }
   
   @objc func didTapLikeButton(_ sender: UIButton) {

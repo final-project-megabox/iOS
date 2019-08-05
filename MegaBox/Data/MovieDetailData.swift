@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - MovieDetailData
 struct MovieDetailData: Codable {
-  let imgURL: String
+  let imgURL, thumbnailURL: String
   let title, age: String
   let bookingRate: Double
   let types: [[String]]
@@ -19,6 +19,7 @@ struct MovieDetailData: Codable {
   
   enum CodingKeys: String, CodingKey {
     case imgURL = "img_url"
+    case thumbnailURL = "thumbnail_url"
     case title, age
     case bookingRate = "booking_rate"
     case types
