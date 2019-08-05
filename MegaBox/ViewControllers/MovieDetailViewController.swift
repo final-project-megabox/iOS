@@ -10,6 +10,8 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
   
+  private let shared = MovieDataManager.shared
+  
   let topView: MovieDetailTopView = {
     let view = MovieDetailTopView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -31,41 +33,39 @@ class MovieDetailViewController: UIViewController {
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     setupDetailView()
   }
+
   
   func getMovieDetailData() {
+    guard let data = shared.movieDetailData else { return }
+    detailContentView.headerView.titleLabelOfPreView.text = data.title
+    detailContentView.headerView.title.text = data.title
+    detailContentView.headerView.releaseDate.text = "\(data.releaseDate) 개봉"
+    detailContentView.headerView.genre.text = data.genre
     
-//    NetworkService.getMovieDetailData(url) { (result) in
-//      switch result {
-//      case .success(let data):
-//        self.shared.movieDetailData = data
-//        print(self.shared.movieDetailData)
-//        guard let title = self.shared.movieDetailData?.title,
-//              let genre = self.shared.movieDetailData?.genre,
-//              let age = self.shared.movieDetailData?.age
-//          else { return }
-//        self.detailContentView.headerView.titleLabelOfPreView.text = title
-//        self.detailContentView.headerView.title.text = title
-//        self.detailContentView.headerView.releaseDate.text = "\(self.shared.movieDetailData?.releaseDate) 개봉"
-//        self.detailContentView.headerView.genre.text = genre
-//        
-//        
-//        if age == "청소년 관람불가" {
-//          self.detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_18")
-//        } else if age == "12세 관람가" {
-//          self.detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_12")
-//        } else if age == "15세 관람가" {
-//          self.detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_15")
-//        } else if age == "전체 관람" {
-//          self.detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
-//        } else {
-//          self.detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_noage")
-//        }
-//        
-//        
-//      case .failure(let err):
-//        print(err.localizedDescription)
-//      }
-//    }
+    if data.age == "청소년 관람불가" {
+      detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_18")
+    } else if data.age == "12세 관람가" {
+      detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_12")
+    } else if data.age == "15세 관람가" {
+      detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_15")
+    } else if data.age == "전체 관람"{
+      detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
+    } else {
+      detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_noage")
+    }
+    
+//    detailContentView.headerView.gradeImageView.image = UIImage(named: <#T##String#>)
+    
+    
+    let url = data.imgURL
+    let dataURL = URL(string: url)!
+    let task = URLSession.shared.dataTask(with: dataURL) { (data, response, error) in
+      DispatchQueue.main.async {
+        guard let data = data else { return }
+        self.detailContentView.headerView.thumbnailImageView.image = UIImage(data: data)
+      }
+    }
+    task.resume()
     
   }
   

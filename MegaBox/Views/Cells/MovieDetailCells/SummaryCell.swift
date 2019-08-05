@@ -66,6 +66,7 @@ class SummaryCell: UITableViewCell {
     addSubview(summaryLabel)
     summaryLabel.topAnchor.constraint(equalTo: summaryTitleLabel.bottomAnchor, constant: 20).isActive = true
     summaryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+    summaryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     
     
     addSubview(addButton)

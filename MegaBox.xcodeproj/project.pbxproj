@@ -474,10 +474,10 @@
 				E604C52022F822A300C57F5E /* StillCutCollectionCell.swift */,
 				E604C52122F822A300C57F5E /* StillCutCell.swift */,
 				E604C52222F822A300C57F5E /* CommentTitleCell.swift */,
+				E604C52622F822A300C57F5E /* MoviePostCell.swift */,
 				E604C52322F822A300C57F5E /* MoviePostCollectionCell.swift */,
 				E604C52422F822A300C57F5E /* StillCutImageCell.swift */,
 				E604C52522F822A300C57F5E /* CommentCell.swift */,
-				E604C52622F822A300C57F5E /* MoviePostCell.swift */,
 			);
 			path = MovieDetailCells;
 			sourceTree = "<group>";
