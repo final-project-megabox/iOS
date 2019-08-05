@@ -81,7 +81,6 @@ extension NavigationDrawerViewController: NavigationDrawerViewDelegate {
   //마이페이지 이동
   func touchUpUserNameButton() {
     
-    print("Hi")
     let myPageVC = MyPageViewController()
 
     let url = "http://megabox.hellocoding.shop//accounts/myPage/"

@@ -54,7 +54,6 @@ class MovieDetailViewController: UIViewController {
       detailContentView.headerView.gradeImageView.image = #imageLiteral(resourceName: "booking_middle_filrm_rating_noage")
     }
     
-//    detailContentView.headerView.gradeImageView.image = UIImage(named: <#T##String#>)
     
     
     let url = data.imgURL
@@ -66,6 +65,18 @@ class MovieDetailViewController: UIViewController {
       }
     }
     task.resume()
+    
+    let url2 = data.thumbnailURL
+    let dataURL2 = URL(string: url2)!
+    let task2 = URLSession.shared.dataTask(with: dataURL2) { (data, response, error) in
+      DispatchQueue.main.async {
+        guard let data = data else { return }
+        self.detailContentView.headerView.preView.image = UIImage(data: data)
+      }
+    }
+    task2.resume()
+    
+    
     
   }
   

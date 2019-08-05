@@ -108,10 +108,32 @@ extension MovieDetailView: UITableViewDataSource {
       case 5:
         let cell = PreViewCell()
         cell.selectionStyle = .none
+        
+        let url = shared.movieDetailData!.thumbnailURL
+        let dataURL = URL(string: url)!
+        let task = URLSession.shared.dataTask(with: dataURL) { (data, response, error) in
+          DispatchQueue.main.async {
+            guard let data = data else { return }
+            cell.preViewImageView.image = UIImage(data: data)
+          }
+        }
+        task.resume()
+        
         cell.preViewTitleLabel.text = "\(shared.movieDetailData!.title) 티저예고편"
         return cell
       default:
         let cell = PreViewCell()
+        
+        let url = shared.movieDetailData!.thumbnailURL
+        let dataURL = URL(string: url)!
+        let task = URLSession.shared.dataTask(with: dataURL) { (data, response, error) in
+          DispatchQueue.main.async {
+            guard let data = data else { return }
+            cell.preViewImageView.image = UIImage(data: data)
+          }
+        }
+        task.resume()
+        
         cell.preViewTitleLabel.text = "\(shared.movieDetailData!.title) 티저예고편"
         cell.selectionStyle = .none
         return cell

@@ -100,6 +100,7 @@
 		E604C53122F822A300C57F5E /* StillCutImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C52422F822A300C57F5E /* StillCutImageCell.swift */; };
 		E604C53222F822A300C57F5E /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C52522F822A300C57F5E /* CommentCell.swift */; };
 		E604C53322F822A300C57F5E /* MoviePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C52622F822A300C57F5E /* MoviePostCell.swift */; };
+		E604C53522F87B7A00C57F5E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C53422F87B7A00C57F5E /* String.swift */; };
 		E6094AB322F2D4E7008407EA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AB222F2D4E7008407EA /* UserData.swift */; };
 		E6094AB722F4053E008407EA /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AB622F4053E008407EA /* UserDataManager.swift */; };
 		E6094ADF22F433A8008407EA /* isLoginNavigationDrawerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094ADE22F433A8008407EA /* isLoginNavigationDrawerCell.swift */; };
@@ -208,6 +209,7 @@
 		E604C52422F822A300C57F5E /* StillCutImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StillCutImageCell.swift; sourceTree = "<group>"; };
 		E604C52522F822A300C57F5E /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		E604C52622F822A300C57F5E /* MoviePostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviePostCell.swift; sourceTree = "<group>"; };
+		E604C53422F87B7A00C57F5E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		E6094AB222F2D4E7008407EA /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		E6094AB622F4053E008407EA /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		E6094ADE22F433A8008407EA /* isLoginNavigationDrawerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isLoginNavigationDrawerCell.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				CFC9724A22E5A21600199FD0 /* Color.swift */,
 				E6D5693222E81B0B00C13F1E /* AlertController.swift */,
 				CF7883CC22F13B6A00380C47 /* Array.swift */,
+				E604C53422F87B7A00C57F5E /* String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				E604C53122F822A300C57F5E /* StillCutImageCell.swift in Sources */,
 				CFC9724F22E5D36B00199FD0 /* SplashViewController.swift in Sources */,
 				E64CB86722F703BD009EEF5C /* MovieDetailData.swift in Sources */,
+				E604C53522F87B7A00C57F5E /* String.swift in Sources */,
 				E604C53322F822A300C57F5E /* MoviePostCell.swift in Sources */,
 				CFBC1C7822E0298F006B6839 /* MainViewController.swift in Sources */,
 				CFBC1CC722E02D79006B6839 /* MovieReservationCollectionCell.swift in Sources */,
