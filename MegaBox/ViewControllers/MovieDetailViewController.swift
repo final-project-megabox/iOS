@@ -10,14 +10,6 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
   
-  var movieDetailData: MovieDetailData?
-//  var id = ""
-//  lazy var url = "http://megabox.hellocoding.shop//database/movieDetail/?movie=\(id)"
-//  
-//  let shared = MovieDataManager.shared
-  
-  
-
   let topView: MovieDetailTopView = {
     let view = MovieDetailTopView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -38,8 +30,6 @@ class MovieDetailViewController: UIViewController {
     topView.delegate = self
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     setupDetailView()
-    
-    print("[Log] data :", movieDetailData)
   }
   
   func getMovieDetailData() {
