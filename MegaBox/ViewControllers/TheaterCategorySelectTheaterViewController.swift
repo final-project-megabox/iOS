@@ -168,7 +168,7 @@ extension TheaterCategorySelectTheaterViewController: TheaterCategorySelectTheat
           self.shared.sortedTheaterMovieTitle = self.shared.sortedTheaterMovieTitle.removeDuplicates()
           
           let today = self.getDate(isOnlyNumber: false)
-          theaterCategoryReservationVC.menuView.headerView.dateButton.setTitle(today, for: .normal)
+          theaterCategoryReservationVC.menuView.dateButton.setTitle(today, for: .normal)
           self.present(theaterCategoryReservationVC, animated: false)
         case .failure(let err):
           print(err.localizedDescription)

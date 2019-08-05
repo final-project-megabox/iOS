@@ -5,7 +5,6 @@
 //  Created by Fury on 18/07/2019.
 //  Copyright © 2019 Fury. All rights reserved.
 //
-
 import UIKit
 
 class TheaterCategoryReservationViewController: UIViewController {
@@ -48,13 +47,13 @@ class TheaterCategoryReservationViewController: UIViewController {
         menuView.makeTableViewMovieData()
       }
     }
-
+    
     startAdAnimation()
   }
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
-    menuView.headerView.placeButton.setTitle(regionName, for: .normal)
+    menuView.placeButton.setTitle(regionName, for: .normal)
   }
   
   // MARK:- Methods
