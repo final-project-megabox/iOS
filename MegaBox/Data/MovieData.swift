@@ -10,16 +10,20 @@ struct MovieData: Codable {
   let releaseDate: String
   let bookingRate: Double
   let title, age: String
-//  let types: [[TypeElement]]
   let types: [[String]]
+  let runningTime: Int
   let selected: Bool
+  let isWished: Bool
   
   enum CodingKeys: String, CodingKey {
     case movieID = "movie_id"
     case imgURL = "img_url"
     case releaseDate = "release_date"
     case bookingRate = "booking_rate"
-    case title, age, types, selected
+    case title, age, types
+    case runningTime = "running_time"
+    case selected
+    case isWished = "is_wished"
   }
 }
 

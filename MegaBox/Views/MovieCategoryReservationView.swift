@@ -166,7 +166,7 @@ class MovieCategoryReservationView: UIView {
       let tempMovie = MovieList(
         title: movie.title,
         type: tempType,
-        duration: "000분",
+        duration: "\(movie.runningTime)분",
         checkImage: "ticket_img_check",
         ageImage: movie.age,
         isSelect: false
