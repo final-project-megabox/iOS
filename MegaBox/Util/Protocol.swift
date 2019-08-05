@@ -91,9 +91,13 @@ protocol MovieCategoryReservationViewDelegate {
   func touchUpButton(_ sender: UIButton)
 }
 
-// OwlStageOuter 버튼 클릭 (박스오피스, 상영예정, 큐레이션, 무대인사)
+
 protocol MainMovieReservationCellDelegate {
+  // OwlStageOuter 버튼 클릭 (박스오피스, 상영예정, 큐레이션, 무대인사)
   func touchUpReservationOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading: NSLayoutConstraint, _ stackViewWidth: CGFloat)
+  
+  // item 클릭 (영화 디테일)
+  func touchUpItem(_ indexPath: Int)
 }
 
 // OwlStageOuter 버튼 클릭 (전체, 메가박스, 영화, 제휴, 영화관)
@@ -162,7 +166,21 @@ protocol MyPageSettingTopViewDelegate {
   func touchUpDismissButton(_ sender: UIButton)
   
 }
-
+//환경설정 (로그아웃)
 protocol MyPageSettingContentViewDelegate: class {
   func touchUpLogoutButton(_ sender: UIButton)
+}
+
+//영화 디테일 (보고싶어)
+protocol MovieDetailHeaderViewDelegate {
+  func touchUpLikeButton(sender: UIButton)
+}
+
+
+protocol MovieDetailTopViewDelegate {
+  //뒤로가기
+  func touchUpMenuButton()
+  
+  //메뉴
+  func touchUpDismissButton()
 }

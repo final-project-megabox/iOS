@@ -10,6 +10,8 @@ import UIKit
 
 class MainViewController: UIViewController {
   
+  var movieDetailData: MovieDetailData?
+  private let shared = MovieDataManager.shared
   private var isTop: Bool = true
   
   private let mainTopView = MainTopView()
@@ -98,6 +100,32 @@ extension MainViewController: MainMovieReservationCellDelegate {
     leading.constant = sender.frame.minX + 20
     trailing.constant = -(stackViewWidth - sender.frame.maxX - 20)
     self.view.layoutIfNeeded()
+  }
+  
+  func touchUpItem(_ indexPath: Int) {
+    print("컬렉션뷰의 인텍스:", indexPath)
+    
+    
+    let id = "\(shared.allMovieData[indexPath].movieID)"
+    let url = "http://megabox.hellocoding.shop//database/movieDetail/?movie=\(id)"
+    
+    NetworkService.getMovieDetailData(url) { (result) in
+      switch result {
+      case .success(let data):
+        
+        DispatchQueue.main.async {
+          let movieDetailVC = MovieDetailViewController()
+          movieDetailVC.movieDetailData = data
+          self.present(movieDetailVC, animated: false)
+        }
+        
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
+    
+    
+    
   }
 }
 
