@@ -93,11 +93,18 @@ class TheaterCategoryReservationView: UIView {
     return button
   }()
   
-  let bgBottomView: UIView = {
+  private let bgBottomView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3527664812)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
+  }()
+  
+  private let dateTableView: UITableView = {
+    let tableView = UITableView()
+    tableView.register(DateListCell.self, forCellReuseIdentifier: DateListCell.identifier)
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    return tableView
   }()
   
   override init(frame: CGRect) {
@@ -122,7 +129,8 @@ class TheaterCategoryReservationView: UIView {
   }
   
   @objc private func touchUpDateButton() {
-    print("hello")
+    bgBottomView.isHidden.toggle()
+    dateTableView.isHidden.toggle()
   }
   
   func makeTableViewMovieData() {
@@ -217,6 +225,20 @@ class TheaterCategoryReservationView: UIView {
     dateButton.trailingAnchor.constraint(equalTo: buttonView.trailingAnchor).isActive = true
     dateButton.widthAnchor.constraint(equalTo: placeButton.widthAnchor).isActive = true
     dateButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    
+    self.addSubview(bgBottomView)
+    bgBottomView.topAnchor.constraint(equalTo: buttonView.bottomAnchor).isActive = true
+    bgBottomView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+    bgBottomView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    bgBottomView.heightAnchor.constraint(equalToConstant: 1000).isActive = true
+    bgBottomView.isHidden = true
+    
+    bgBottomView.addSubview(dateTableView)
+    dateTableView.topAnchor.constraint(equalTo: bgBottomView.topAnchor).isActive = true
+    dateTableView.trailingAnchor.constraint(equalTo: bgBottomView.trailingAnchor).isActive = true
+    dateTableView.widthAnchor.constraint(equalTo: dateButton.widthAnchor).isActive = true
+    dateTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    dateTableView.isHidden = true
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -226,46 +248,53 @@ class TheaterCategoryReservationView: UIView {
 
 extension TheaterCategoryReservationView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    let titleCount = shared.sortedTheaterMovieTitle.count
-    
-    return titleCount
+    if tableView == theaterTableView {
+      let titleCount = shared.sortedTheaterMovieTitle.count
+      return titleCount
+    } else {
+      return 5
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-    movie = shared.sortedTheaterMovieTitle[indexPath.row]
-    
-    if indexPath.row == 0 || screenArr.contains(indexPath.row) {
+    if tableView == theaterTableView {
+      movie = shared.sortedTheaterMovieTitle[indexPath.row]
       
-      let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySectionCell.identifier, for: indexPath) as! TheaterCategorySectionCell
-      
-      // 영화관별 예매 섹션 선택 Delegate
-      cell.delegate = self
-      
-      let grade = shared.theaterCategoryMovie[movie]![0].age
-      
-      var gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
-      if grade == "전체 관람" {
-        gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
-      } else if grade == "12세 관람가" {
-        gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_12")
-      } else if grade == "15세 관람가" {
-        gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_15")
+      if indexPath.row == 0 || screenArr.contains(indexPath.row) {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySectionCell.identifier, for: indexPath) as! TheaterCategorySectionCell
+        
+        // 영화관별 예매 섹션 선택 Delegate
+        cell.delegate = self
+        
+        let grade = shared.theaterCategoryMovie[movie]![0].age
+        
+        var gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
+        if grade == "전체 관람" {
+          gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_all")
+        } else if grade == "12세 관람가" {
+          gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_12")
+        } else if grade == "15세 관람가" {
+          gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_15")
+        } else {
+          gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_18")
+        }
+        
+        cell.cellConfigure(gradeImage, movie)
+        return cell
       } else {
-        gradeImage = #imageLiteral(resourceName: "booking_middle_filrm_rating_18")
+        let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryCell.identifier, for: indexPath) as! TheaterCategoryCell
+        // 영화관별 예매 Time 선택 Delegate
+        cell.delegate = self
+        
+        let sortedData = tableViewMovieData[indexPath.row]
+        let title = ("\(sortedData[0].screen)관 \(sortedData[0].totalSeat)석 | \(sortedData[0].types[0])")
+        
+        cell.cellConfigure(title: title, movieData: sortedData)
+        return cell
       }
-      
-      cell.cellConfigure(gradeImage, movie)
-      return cell
     } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategoryCell.identifier, for: indexPath) as! TheaterCategoryCell
-      // 영화관별 예매 Time 선택 Delegate
-      cell.delegate = self
-      
-      let sortedData = tableViewMovieData[indexPath.row]
-      let title = ("\(sortedData[0].screen)관 \(sortedData[0].totalSeat)석 | \(sortedData[0].types[0])")
-      
-      cell.cellConfigure(title: title, movieData: sortedData)
+      let cell = tableView.dequeueReusableCell(withIdentifier: DateListCell.identifier, for: indexPath) as! DateListCell
       return cell
     }
   }
@@ -280,23 +309,27 @@ extension TheaterCategoryReservationView: UITableViewDelegate {
     if scrollView.contentOffset.y <= scrollHeaderHeight {
       if scrollView.contentOffset.y >= 0 {
         scrollView.contentInset = UIEdgeInsets(top: -scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)
-        placeButton.frame.origin.y = -(scrollView.contentOffset.y)
-        dateButton.frame.origin.y = -(scrollView.contentOffset.y)
+        buttonView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 50)
+        bgBottomView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 100)
       } else {
         // 0보다 작으면
-        placeButton.frame.origin.y = -(scrollView.contentOffset.y)
-        dateButton.frame.origin.y = -(scrollView.contentOffset.y)
+        buttonView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 50)
+        bgBottomView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 100)
       }
     } else if scrollView.contentOffset.y > scrollHeaderHeight {
       scrollView.contentInset = UIEdgeInsets(top: -scrollHeaderHeight, left: 0, bottom: 0, right: 0)
-      placeButton.frame.origin.y = -(scrollHeaderHeight)
-      dateButton.frame.origin.y = -(scrollHeaderHeight)
+      buttonView.frame.origin.y = 50
+      bgBottomView.frame.origin.y = 100
     }
   }
   
   // Tableview Header
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    return headerView
+    if tableView == theaterTableView {
+      return headerView
+    } else {
+      return nil
+    }
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
