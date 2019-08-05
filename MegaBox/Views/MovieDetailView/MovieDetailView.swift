@@ -10,7 +10,6 @@ import UIKit
 
 class MovieDetailView: UIView {
   
-  var movieDetailData: MovieDetailData?
   let shared = MovieDataManager.shared
   let view = MovieDetailSectionView()
   var isStatus = true
@@ -42,14 +41,6 @@ class MovieDetailView: UIView {
     tableView.backgroundColor = #colorLiteral(red: 0.9563174175, green: 0.9563174175, blue: 0.9563174175, alpha: 1)
     tableView.tableHeaderView = headerView
     
-    headerView.titleLabelOfPreView.text = movieDetailData?.title
-    headerView.title.text = movieDetailData?.title
-    headerView.releaseDate.text = movieDetailData?.releaseDate
-    headerView.genre.text = movieDetailData?.genre
-    
-    print("Hi", movieDetailData)
-    
-    
     //    tableView.separatorInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
     
     tableView.dataSource = self
@@ -75,7 +66,7 @@ extension MovieDetailView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch isStatus {
     case true:
-      return 9
+      return 8
     case false:
       return 3
       
@@ -85,40 +76,43 @@ extension MovieDetailView: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    
     switch isStatus {
     case true:
       
       switch indexPath.row {
       case 0:
-        let cell = TotalAudienceCell()
-        cell.selectionStyle = .none
-        return cell
-      case 1:
         let cell = SummaryCell()
         cell.selectionStyle = .none
+        cell.summaryLabel.text = shared.movieDetailData?.movieDetailDataDescription
         return cell
-      case 2:
+      case 1:
         let cell = DirectorActorCell()
         cell.selectionStyle = .none
+        cell.directorLabel.text = shared.movieDetailData?.director
+        cell.actorLabel.text = shared.movieDetailData?.cast
         return cell
-      case 3:
+      case 2:
         let cell = AdCell()
         cell.selectionStyle = .none
         return cell
-      case 4:
+      case 3:
         let cell = StillCutCell()
         cell.selectionStyle = .none
         return cell
-      case 5:
+      case 4:
         let cell = PreViewTitleCell()
         cell.selectionStyle = .none
         return cell
-      case 6:
+      case 5:
         let cell = PreViewCell()
         cell.selectionStyle = .none
+        cell.preViewTitleLabel.text = "\(shared.movieDetailData!.title) 티저예고편"
         return cell
       default:
         let cell = PreViewCell()
+        cell.preViewTitleLabel.text = "\(shared.movieDetailData!.title) 티저예고편"
         cell.selectionStyle = .none
         return cell
       }

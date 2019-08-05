@@ -10,6 +10,8 @@ import UIKit
 
 class MoviePostCell: UITableViewCell {
   
+  let shared = MovieDataManager.shared
+  
   let titleLabel: UILabel = {
     let label = UILabel()
     label.text = "무비포스트(594개)"
@@ -90,6 +92,20 @@ extension MoviePostCell: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MoviePostCollectionCell.identifier, for: indexPath) as! MoviePostCollectionCell
+    cell.movieTitleLabel.text = shared.movieDetailData?.title
+    cell.commentLabel.text = "정말 재미있는 \(shared.movieDetailData!.title)!"
+    
+    let url = shared.movieDetailData!.imgURL
+    let dataURL = URL(string: url)!
+    let task = URLSession.shared.dataTask(with: dataURL) { (data, response, error) in
+      DispatchQueue.main.async {
+        guard let data = data else { return }
+        cell.postImageView.image = UIImage(data: data)
+      }
+    }
+    task.resume()
+    
+    
     return cell
   }
   

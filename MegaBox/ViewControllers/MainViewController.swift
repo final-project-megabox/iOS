@@ -9,8 +9,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-  
-  var movieDetailData: MovieDetailData?
+
   private let shared = MovieDataManager.shared
   private var isTop: Bool = true
   
@@ -103,13 +102,9 @@ extension MainViewController: MainMovieReservationCellDelegate {
   }
   
   func touchUpItem(_ indexPath: Int) {
-    print("컬렉션뷰의 인텍스:", indexPath)
-    
     
     let id = "\(shared.allMovieData[indexPath].movieID)"
     let url = "http://megabox.hellocoding.shop//database/movieDetail/?movie=\(id)"
-    
-    
     
     NetworkService.getMovieDetailData(url) { (result) in
       switch result {

@@ -10,6 +10,8 @@ import UIKit
 
 class StillCutCell: UITableViewCell {
   
+  let shared = MovieDataManager.shared
+  
   let titleLabel: UILabel = {
     let label = UILabel()
     label.text = "스틸컷"
@@ -68,6 +70,17 @@ extension StillCutCell: UICollectionViewDataSource {
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StillCutCollectionCell.identifier, for: indexPath) as! StillCutCollectionCell
+    
+    let url = shared.movieDetailData!.imgURL
+    let dataURL = URL(string: url)!
+    let task = URLSession.shared.dataTask(with: dataURL) { (data, response, error) in
+      DispatchQueue.main.async {
+        guard let data = data else { return }
+        cell.stillCutImageView.image = UIImage(data: data)
+      }
+    }
+    task.resume()
+    
     return cell
 
   }

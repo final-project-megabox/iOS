@@ -11,6 +11,7 @@ import UIKit
 class MovieDetailHeaderView: UIView {
   
   var delegate: MovieDetailHeaderViewDelegate?
+  let shared = MovieDataManager.shared
   
   //예고편
   let preView: UIImageView = {
@@ -49,7 +50,7 @@ class MovieDetailHeaderView: UIView {
     let imageView = UIImageView()
     imageView.layer.borderWidth = 1
     imageView.layer.borderColor = #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 0.9411764706, alpha: 1)
-    imageView.image = #imageLiteral(resourceName: "image1")
+    imageView.image = #imageLiteral(resourceName: "spiderman_thumbnail")
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
