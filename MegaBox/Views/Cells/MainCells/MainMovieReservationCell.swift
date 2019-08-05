@@ -219,6 +219,14 @@ extension MainMovieReservationCell: UICollectionViewDataSource {
   }
 }
 
+extension MainMovieReservationCell: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+    delegate?.touchUpItem(indexPath.row)
+    
+  }
+}
+
 extension MainMovieReservationCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let height = movieReservationCollection.frame.height
@@ -234,3 +242,5 @@ extension MainMovieReservationCell: UICollectionViewDelegateFlowLayout {
     return 10
   }
 }
+
+

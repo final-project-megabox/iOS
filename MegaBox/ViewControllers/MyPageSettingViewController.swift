@@ -31,8 +31,7 @@ class MyPageSettingViewController: UIViewController {
   }
   
   func getUserId() {
-    guard let userId = UserDefaults.standard.value(forKey: "UserId") else { return }
-    contentView.idLabel.text = "\(userId)"
+    contentView.idLabel.text = "\(UserDefaults.standard.value(forKey: "UserId")!)"
   }
   
   func settingView() {

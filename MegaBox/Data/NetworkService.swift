@@ -92,23 +92,20 @@ class NetworkService {
     }
   }
   
-  static func getRegionData() {
-    let urlStr = "http://megabox.hellocoding.shop//database/showregion/"
+
+  static func getMovieDetailData(_ urlStr: String, completion: @escaping (Swift.Result<MovieDetailData, ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
+  
     let req = Alamofire.request(url)
     
     req.validate()
       .responseData { response in
         switch response.result {
         case .success(let data):
-          do {
-            let regionData = try JSONDecoder().decode([RegionData].self, from: data)
-            print("[Log] regionData:", regionData)
-          } catch {
-            print(error.localizedDescription)
-          }
-        case .failure(let err):
-          print(err.localizedDescription)
+            let movieDetailData = try! JSONDecoder().decode(MovieDetailData.self, from: data)
+          completion(.success(movieDetailData))
+        case .failure:
+          completion(.failure(ErrorType.NoData))
         }
     }
   }
