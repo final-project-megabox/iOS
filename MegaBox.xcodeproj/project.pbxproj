@@ -88,6 +88,24 @@
 		E6094AE222F45483008407EA /* MyPageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AE122F45483008407EA /* MyPageSettingViewController.swift */; };
 		E6094AE422F454B1008407EA /* MyPageSettingTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AE322F454B1008407EA /* MyPageSettingTopView.swift */; };
 		E6094AE622F454D9008407EA /* MyPageSettingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AE522F454D9008407EA /* MyPageSettingContentView.swift */; };
+		E64CB82822F70185009EEF5C /* MovieDetailTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB82422F70185009EEF5C /* MovieDetailTopView.swift */; };
+		E64CB82922F70185009EEF5C /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB82522F70185009EEF5C /* MovieDetailView.swift */; };
+		E64CB82A22F70185009EEF5C /* MovieDetailSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB82622F70185009EEF5C /* MovieDetailSectionView.swift */; };
+		E64CB82B22F70185009EEF5C /* MovieDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB82722F70185009EEF5C /* MovieDetailHeaderView.swift */; };
+		E64CB84D22F701D8009EEF5C /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB84C22F701D8009EEF5C /* MovieDetailViewController.swift */; };
+		E64CB85A22F70264009EEF5C /* DirectorActorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB84E22F70264009EEF5C /* DirectorActorCell.swift */; };
+		E64CB85B22F70264009EEF5C /* CommentTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB84F22F70264009EEF5C /* CommentTitleCell.swift */; };
+		E64CB85C22F70264009EEF5C /* StillCutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB85022F70264009EEF5C /* StillCutCell.swift */; };
+		E64CB85D22F70264009EEF5C /* StillCutCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB85122F70264009EEF5C /* StillCutCollectionCell.swift */; };
+		E64CB85E22F70264009EEF5C /* AdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB85222F70264009EEF5C /* AdCell.swift */; };
+		E64CB85F22F70264009EEF5C /* PreViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB85322F70264009EEF5C /* PreViewCell.swift */; };
+		E64CB86022F70264009EEF5C /* PreViewTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB85422F70264009EEF5C /* PreViewTitleCell.swift */; };
+		E64CB86122F70264009EEF5C /* MoviePostCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB85522F70264009EEF5C /* MoviePostCollectionCell.swift */; };
+		E64CB86222F70264009EEF5C /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB85622F70264009EEF5C /* SummaryCell.swift */; };
+		E64CB86322F70264009EEF5C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB85722F70264009EEF5C /* CommentCell.swift */; };
+		E64CB86422F70264009EEF5C /* MoviePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB85822F70264009EEF5C /* MoviePostCell.swift */; };
+		E64CB86522F70264009EEF5C /* TotalAudienceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB85922F70264009EEF5C /* TotalAudienceCell.swift */; };
+		E64CB86722F703BD009EEF5C /* MovieDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64CB86622F703BD009EEF5C /* MovieDetailData.swift */; };
 		E6D5693322E81B0B00C13F1E /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D5693222E81B0B00C13F1E /* AlertController.swift */; };
 /* End PBXBuildFile section */
 
@@ -176,6 +194,24 @@
 		E6094AE122F45483008407EA /* MyPageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSettingViewController.swift; sourceTree = "<group>"; };
 		E6094AE322F454B1008407EA /* MyPageSettingTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSettingTopView.swift; sourceTree = "<group>"; };
 		E6094AE522F454D9008407EA /* MyPageSettingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSettingContentView.swift; sourceTree = "<group>"; };
+		E64CB82422F70185009EEF5C /* MovieDetailTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailTopView.swift; sourceTree = "<group>"; };
+		E64CB82522F70185009EEF5C /* MovieDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
+		E64CB82622F70185009EEF5C /* MovieDetailSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailSectionView.swift; sourceTree = "<group>"; };
+		E64CB82722F70185009EEF5C /* MovieDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailHeaderView.swift; sourceTree = "<group>"; };
+		E64CB84C22F701D8009EEF5C /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		E64CB84E22F70264009EEF5C /* DirectorActorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DirectorActorCell.swift; path = ../../MovieDetailCells/DirectorActorCell.swift; sourceTree = "<group>"; };
+		E64CB84F22F70264009EEF5C /* CommentTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentTitleCell.swift; path = ../../MovieDetailCells/CommentTitleCell.swift; sourceTree = "<group>"; };
+		E64CB85022F70264009EEF5C /* StillCutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StillCutCell.swift; path = ../../MovieDetailCells/StillCutCell.swift; sourceTree = "<group>"; };
+		E64CB85122F70264009EEF5C /* StillCutCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StillCutCollectionCell.swift; path = ../../MovieDetailCells/StillCutCollectionCell.swift; sourceTree = "<group>"; };
+		E64CB85222F70264009EEF5C /* AdCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AdCell.swift; path = ../../MovieDetailCells/AdCell.swift; sourceTree = "<group>"; };
+		E64CB85322F70264009EEF5C /* PreViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreViewCell.swift; path = ../../MovieDetailCells/PreViewCell.swift; sourceTree = "<group>"; };
+		E64CB85422F70264009EEF5C /* PreViewTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreViewTitleCell.swift; path = ../../MovieDetailCells/PreViewTitleCell.swift; sourceTree = "<group>"; };
+		E64CB85522F70264009EEF5C /* MoviePostCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoviePostCollectionCell.swift; path = ../../MovieDetailCells/MoviePostCollectionCell.swift; sourceTree = "<group>"; };
+		E64CB85622F70264009EEF5C /* SummaryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SummaryCell.swift; path = ../../MovieDetailCells/SummaryCell.swift; sourceTree = "<group>"; };
+		E64CB85722F70264009EEF5C /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentCell.swift; path = ../../MovieDetailCells/CommentCell.swift; sourceTree = "<group>"; };
+		E64CB85822F70264009EEF5C /* MoviePostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoviePostCell.swift; path = ../../MovieDetailCells/MoviePostCell.swift; sourceTree = "<group>"; };
+		E64CB85922F70264009EEF5C /* TotalAudienceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TotalAudienceCell.swift; path = ../../MovieDetailCells/TotalAudienceCell.swift; sourceTree = "<group>"; };
+		E64CB86622F703BD009EEF5C /* MovieDetailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailData.swift; sourceTree = "<group>"; };
 		E6D5693222E81B0B00C13F1E /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		F238FC7C9463514149694227 /* Pods-MegaBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaBox.release.xcconfig"; path = "Target Support Files/Pods-MegaBox/Pods-MegaBox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -300,7 +336,11 @@
 				CFBC1CA222E02B70006B6839 /* SelectPersonCountViewController.swift */,
 				CFBC1CA622E02B96006B6839 /* MyPageViewController.swift */,
 				E6094AE122F45483008407EA /* MyPageSettingViewController.swift */,
+<<<<<<< HEAD
+				E64CB84C22F701D8009EEF5C /* MovieDetailViewController.swift */,
+=======
 				CF55E5DA22F7EF9900290FED /* PaymentViewController.swift */,
+>>>>>>> 2526bebe1a8d55f441f3ad68c686c05d5aaffbf4
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -318,7 +358,11 @@
 				CFBC1CB422E02C17006B6839 /* MovieCategoryReservationView.swift */,
 				CFBC1CB622E02C2F006B6839 /* MovieCategorySelectTheaterView.swift */,
 				CFBC1CB822E02C60006B6839 /* SelectPersonCountView.swift */,
+<<<<<<< HEAD
+				E64CB82322F70185009EEF5C /* MovieDetailView */,
+=======
 				CF55E5DC22F7EFB900290FED /* PaymentView */,
+>>>>>>> 2526bebe1a8d55f441f3ad68c686c05d5aaffbf4
 				E6094AE022F45439008407EA /* MyPageView */,
 				CF7883C322F0508E00380C47 /* MovieTheaterView */,
 				CFBC1C8B22E029F6006B6839 /* Cells */,
@@ -329,6 +373,7 @@
 		CFBC1C8B22E029F6006B6839 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				E64CB80722F70158009EEF5C /* MovieDetailCells */,
 				E60C520722E5AE50004C6B4B /* MovieReservationCells */,
 				CFBC1C8C22E029FF006B6839 /* MainCells */,
 				CFBC1C8F22E02A12006B6839 /* ReservationCells */,
@@ -399,10 +444,11 @@
 			children = (
 				CF55E5DF22F7F84400290FED /* TheaterData.swift */,
 				CFBC1CEB22E180FD006B6839 /* MovieData.swift */,
+				E64CB86622F703BD009EEF5C /* MovieDetailData.swift */,
+				CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */,
 				CF0847E022E6AD6E0070F4FD /* ReservationData.swift */,
 				CFBC1CEF22E1829F006B6839 /* RegionData.swift */,
 				CFBC1CED22E1810B006B6839 /* NetworkService.swift */,
-				CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */,
 				E6094AB222F2D4E7008407EA /* UserData.swift */,
 				E6094AB622F4053E008407EA /* UserDataManager.swift */,
 			);
@@ -427,6 +473,38 @@
 			);
 			name = MovieReservationCells;
 			path = MainCells/MovieReservationCells;
+			sourceTree = "<group>";
+		};
+		E64CB80722F70158009EEF5C /* MovieDetailCells */ = {
+			isa = PBXGroup;
+			children = (
+				E64CB85222F70264009EEF5C /* AdCell.swift */,
+				E64CB85722F70264009EEF5C /* CommentCell.swift */,
+				E64CB84F22F70264009EEF5C /* CommentTitleCell.swift */,
+				E64CB84E22F70264009EEF5C /* DirectorActorCell.swift */,
+				E64CB85822F70264009EEF5C /* MoviePostCell.swift */,
+				E64CB85522F70264009EEF5C /* MoviePostCollectionCell.swift */,
+				E64CB85322F70264009EEF5C /* PreViewCell.swift */,
+				E64CB85422F70264009EEF5C /* PreViewTitleCell.swift */,
+				E64CB85022F70264009EEF5C /* StillCutCell.swift */,
+				E64CB85122F70264009EEF5C /* StillCutCollectionCell.swift */,
+				E64CB85622F70264009EEF5C /* SummaryCell.swift */,
+				E64CB85922F70264009EEF5C /* TotalAudienceCell.swift */,
+			);
+			name = MovieDetailCells;
+			path = "../../../../../iOS수업/xCode실습-자습/190727MegaboxMovieDetailExample/190727MegaboxMovieDetailExample/View/MovieDetailCells";
+			sourceTree = "<group>";
+		};
+		E64CB82322F70185009EEF5C /* MovieDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				E64CB82422F70185009EEF5C /* MovieDetailTopView.swift */,
+				E64CB82522F70185009EEF5C /* MovieDetailView.swift */,
+				E64CB82622F70185009EEF5C /* MovieDetailSectionView.swift */,
+				E64CB82722F70185009EEF5C /* MovieDetailHeaderView.swift */,
+			);
+			name = MovieDetailView;
+			path = "../../../../iOS수업/xCode실습-자습/190727MegaboxMovieDetailExample/190727MegaboxMovieDetailExample/MovieDetailView";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -552,30 +630,42 @@
 				CFBC1C9722E02AAA006B6839 /* LoginViewController.swift in Sources */,
 				CFBC1CA122E02B4C006B6839 /* MovieCategorySelectTheaterViewController.swift in Sources */,
 				CF7883C722F0514800380C47 /* OneThreeZeroMovieTheaterView.swift in Sources */,
+				E64CB86222F70264009EEF5C /* SummaryCell.swift in Sources */,
 				CFBC1CB322E02C07006B6839 /* TheaterCategoryReservationHeaderView.swift in Sources */,
 				CFBC1CAD22E02BDC006B6839 /* MainTopView.swift in Sources */,
 				CFBC1CE522E02EC8006B6839 /* MyPageOneContentCell.swift in Sources */,
 				CF55E5DE22F7EFDB00290FED /* PaymentView.swift in Sources */,
 				CFC9724F22E5D36B00199FD0 /* SplashViewController.swift in Sources */,
+				E64CB86722F703BD009EEF5C /* MovieDetailData.swift in Sources */,
 				CFBC1C7822E0298F006B6839 /* MainViewController.swift in Sources */,
 				CFBC1CC722E02D79006B6839 /* MovieReservationCollectionCell.swift in Sources */,
 				E6094ADF22F433A8008407EA /* isLoginNavigationDrawerCell.swift in Sources */,
 				CFBC1CD522E02E14006B6839 /* MainBranchNewsCell.swift in Sources */,
+				E64CB86322F70264009EEF5C /* CommentCell.swift in Sources */,
 				CFBC1CA922E02BBB006B6839 /* LoginView.swift in Sources */,
+				E64CB85A22F70264009EEF5C /* DirectorActorCell.swift in Sources */,
 				CFBC1CE322E02EB8006B6839 /* MyPageHeaderCell.swift in Sources */,
 				CFC9724B22E5A21600199FD0 /* Color.swift in Sources */,
 				CFBC1CBD22E02C7C006B6839 /* MyPageContentView.swift in Sources */,
+				E64CB85F22F70264009EEF5C /* PreViewCell.swift in Sources */,
+				E64CB86422F70264009EEF5C /* MoviePostCell.swift in Sources */,
+				E64CB86122F70264009EEF5C /* MoviePostCollectionCell.swift in Sources */,
+				E64CB85C22F70264009EEF5C /* StillCutCell.swift in Sources */,
+				E64CB82922F70185009EEF5C /* MovieDetailView.swift in Sources */,
+				E64CB84D22F701D8009EEF5C /* MovieDetailViewController.swift in Sources */,
 				CFBC1CC122E02D1F006B6839 /* MovieListCell.swift in Sources */,
 				CF9CCED322E6D40800021962 /* TheaterCategorySectionCell.swift in Sources */,
 				E6094AE422F454B1008407EA /* MyPageSettingTopView.swift in Sources */,
 				CF0847E122E6AD6E0070F4FD /* ReservationData.swift in Sources */,
 				CFBC1CF222E1947E006B6839 /* TheaterCategorySelectTheaterViewController.swift in Sources */,
 				CFBC1CEE22E1810B006B6839 /* NetworkService.swift in Sources */,
+				E64CB82B22F70185009EEF5C /* MovieDetailHeaderView.swift in Sources */,
 				E6094AB722F4053E008407EA /* UserDataManager.swift in Sources */,
 				CFBC1C9F22E02B38006B6839 /* MovieCategoryReservationViewController.swift in Sources */,
 				CFC9724922E5841A00199FD0 /* TheaterCategorySelectTheaterEmptyCell.swift in Sources */,
 				CFBC1CBB22E02C6E006B6839 /* MyPageTopView.swift in Sources */,
 				CFBC1CB922E02C60006B6839 /* SelectPersonCountView.swift in Sources */,
+				E64CB85E22F70264009EEF5C /* AdCell.swift in Sources */,
 				CFBC1CAB22E02BD2006B6839 /* NavigationDrawerView.swift in Sources */,
 				CF55E5DB22F7EF9900290FED /* PaymentViewController.swift in Sources */,
 				CFBC1CC522E02D62006B6839 /* MainMovieReservationCell.swift in Sources */,
@@ -586,6 +676,8 @@
 				E6094AE222F45483008407EA /* MyPageSettingViewController.swift in Sources */,
 				CFBC1CCF22E02DBE006B6839 /* EventCollectionCell.swift in Sources */,
 				CFBC1C7622E0298F006B6839 /* AppDelegate.swift in Sources */,
+				E64CB82822F70185009EEF5C /* MovieDetailTopView.swift in Sources */,
+				E64CB85B22F70264009EEF5C /* CommentTitleCell.swift in Sources */,
 				CFBC1CB122E02BFC006B6839 /* TheaterCategoryReservationView.swift in Sources */,
 				CFBC1CC922E02D8B006B6839 /* MainShortMenuCell.swift in Sources */,
 				CFBC1CF022E1829F006B6839 /* RegionData.swift in Sources */,
@@ -612,11 +704,15 @@
 				CFBC1CEC22E180FD006B6839 /* MovieData.swift in Sources */,
 				CFBC1CA722E02B96006B6839 /* MyPageViewController.swift in Sources */,
 				CFBC1CD922E02E41006B6839 /* TheaterCategoryAdCollectionCell.swift in Sources */,
+				E64CB82A22F70185009EEF5C /* MovieDetailSectionView.swift in Sources */,
+				E64CB85D22F70264009EEF5C /* StillCutCollectionCell.swift in Sources */,
 				CFBC1CD322E02E00006B6839 /* MainMoviePostCell.swift in Sources */,
 				CF7883CB22F0516300380C47 /* OneFiveZeroMovieTheaterView.swift in Sources */,
 				CFBC1CB522E02C17006B6839 /* MovieCategoryReservationView.swift in Sources */,
+				E64CB86522F70264009EEF5C /* TotalAudienceCell.swift in Sources */,
 				CFBC1CAF22E02BE8006B6839 /* QuickReservationView.swift in Sources */,
 				CFBC1CD722E02E22006B6839 /* MainNotificationCell.swift in Sources */,
+				E64CB86022F70264009EEF5C /* PreViewTitleCell.swift in Sources */,
 				CFC9724D22E5D1B400199FD0 /* MovieDataManager.swift in Sources */,
 				CFBC1CF622E19C90006B6839 /* TheaterCategorySelectTheaterRegionCell.swift in Sources */,
 				CF09E8A622E71CC000B43066 /* TheaterCategoryCollectionCell.swift in Sources */,

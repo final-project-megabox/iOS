@@ -159,7 +159,7 @@ class MyPageSettingContentView: UIView {
   
   let addButton: UIButton = {
     let button = UIButton()
-    button.setImage(#imageLiteral(resourceName: "common_btn_topbar_prev2"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "btn_slide_blut"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
