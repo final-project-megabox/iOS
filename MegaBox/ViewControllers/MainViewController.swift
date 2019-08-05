@@ -114,8 +114,8 @@ extension MainViewController: MainMovieReservationCellDelegate {
     NetworkService.getMovieDetailData(url) { (result) in
       switch result {
       case .success(let data):
+        self.shared.movieDetailData = data
         let movieDetailVC = MovieDetailViewController()
-        movieDetailVC.movieDetailData = data
         self.present(movieDetailVC, animated: false)
       case .failure(let err):
         print(err.localizedDescription)

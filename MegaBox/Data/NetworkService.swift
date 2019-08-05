@@ -103,6 +103,7 @@ class NetworkService {
         switch response.result {
         case .success(let data):
             let movieDetailData = try! JSONDecoder().decode(MovieDetailData.self, from: data)
+            print("[Log] serviceData:", movieDetailData)
           completion(.success(movieDetailData))
         case .failure:
           completion(.failure(ErrorType.NoData))
