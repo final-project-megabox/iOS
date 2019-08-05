@@ -18,6 +18,7 @@
 		CF55E60B22F8273E00290FED /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55E60A22F8273E00290FED /* MovieDetailView.swift */; };
 		CF55E60D22F8274700290FED /* MovieDetailSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55E60C22F8274700290FED /* MovieDetailSectionView.swift */; };
 		CF55E60F22F8275600290FED /* MovieDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55E60E22F8275600290FED /* MovieDetailHeaderView.swift */; };
+		CF55E61222F8787600290FED /* DateListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55E61122F8787600290FED /* DateListCell.swift */; };
 		CF7883BA22EF330800380C47 /* MainFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883B922EF330800380C47 /* MainFooterCell.swift */; };
 		CF7883C022EFEADA00380C47 /* NavigationDrawerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883BF22EFEADA00380C47 /* NavigationDrawerCell.swift */; };
 		CF7883C222F0503F00380C47 /* EightTwoMovieTheaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7883C122F0503F00380C47 /* EightTwoMovieTheaterView.swift */; };
@@ -124,6 +125,7 @@
 		CF55E60A22F8273E00290FED /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		CF55E60C22F8274700290FED /* MovieDetailSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailSectionView.swift; sourceTree = "<group>"; };
 		CF55E60E22F8275600290FED /* MovieDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailHeaderView.swift; sourceTree = "<group>"; };
+		CF55E61122F8787600290FED /* DateListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListCell.swift; sourceTree = "<group>"; };
 		CF7883B922EF330800380C47 /* MainFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFooterCell.swift; sourceTree = "<group>"; };
 		CF7883BF22EFEADA00380C47 /* NavigationDrawerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDrawerCell.swift; sourceTree = "<group>"; };
 		CF7883C122F0503F00380C47 /* EightTwoMovieTheaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EightTwoMovieTheaterView.swift; sourceTree = "<group>"; };
@@ -266,6 +268,14 @@
 				CF55E60E22F8275600290FED /* MovieDetailHeaderView.swift */,
 			);
 			path = MovieDetailView;
+			sourceTree = "<group>";
+		};
+		CF55E61022F8784900290FED /* ReservationDateCell */ = {
+			isa = PBXGroup;
+			children = (
+				CF55E61122F8787600290FED /* DateListCell.swift */,
+			);
+			path = ReservationDateCell;
 			sourceTree = "<group>";
 		};
 		CF7883C322F0508E00380C47 /* MovieTheaterView */ = {
@@ -445,6 +455,7 @@
 				CF9CCED222E6D40800021962 /* TheaterCategorySectionCell.swift */,
 				CFBC1CDA22E02E53006B6839 /* TheaterCategoryCell.swift */,
 				CF09E8A522E71CC000B43066 /* TheaterCategoryCollectionCell.swift */,
+				CF55E61022F8784900290FED /* ReservationDateCell */,
 			);
 			path = ReservationCells;
 			sourceTree = "<group>";
@@ -477,10 +488,10 @@
 				E604C52022F822A300C57F5E /* StillCutCollectionCell.swift */,
 				E604C52122F822A300C57F5E /* StillCutCell.swift */,
 				E604C52222F822A300C57F5E /* CommentTitleCell.swift */,
-				E604C52622F822A300C57F5E /* MoviePostCell.swift */,
 				E604C52322F822A300C57F5E /* MoviePostCollectionCell.swift */,
 				E604C52422F822A300C57F5E /* StillCutImageCell.swift */,
 				E604C52522F822A300C57F5E /* CommentCell.swift */,
+				E604C52622F822A300C57F5E /* MoviePostCell.swift */,
 			);
 			path = MovieDetailCells;
 			sourceTree = "<group>";
@@ -651,6 +662,7 @@
 				E64CB84D22F701D8009EEF5C /* MovieDetailViewController.swift in Sources */,
 				CFBC1CC122E02D1F006B6839 /* MovieListCell.swift in Sources */,
 				CF9CCED322E6D40800021962 /* TheaterCategorySectionCell.swift in Sources */,
+				CF55E61222F8787600290FED /* DateListCell.swift in Sources */,
 				E6094AE422F454B1008407EA /* MyPageSettingTopView.swift in Sources */,
 				CF0847E122E6AD6E0070F4FD /* ReservationData.swift in Sources */,
 				CFBC1CF222E1947E006B6839 /* TheaterCategorySelectTheaterViewController.swift in Sources */,

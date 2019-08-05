@@ -62,12 +62,14 @@ protocol TheaterCategoryReservationViewDelegate {
   func sendTitleData()
   
   func sendMovieData(_ data: ReservationData)
-}
-
-protocol TheaterCategoryReservationHeaderViewDelegate {
+  
   func touchUpPlaceButton()
   
   func touchUpDateButton()
+}
+
+protocol TheaterCategoryReservationHeaderViewDelegate {
+  
 }
 
 // 영화관별 예매 영화 타이틀 선택 시

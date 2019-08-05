@@ -9,8 +9,7 @@
 import UIKit
 
 class TheaterCategoryReservationHeaderView: UIView {
-  var stackViewTopConstraint: NSLayoutConstraint!
-  var stackViewBottomConstraint: NSLayoutConstraint!
+  
   
   var delegate: TheaterCategoryReservationHeaderViewDelegate?
   
@@ -36,61 +35,16 @@ class TheaterCategoryReservationHeaderView: UIView {
     return pageControl
   }()
   
-  var buttonStackView = UIStackView()
-  
-  let placeButton: UIButton = {
-    let button = UIButton()
-    button.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.2862745098, blue: 0.2901960784, alpha: 1)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-    button.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    button.setImage(#imageLiteral(resourceName: "android_drop_down_arrow"), for: .normal)
-    button.contentHorizontalAlignment = .left
-    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.maxX / 2) - 40, bottom: 0, right: 0)
-    button.addTarget(self, action: #selector(touchUpPlaceButton), for: .touchUpInside)
-    return button
-  }()
-  
-  let dateButton: UIButton = {
-    let button = UIButton()
-    button.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.2862745098, blue: 0.2901960784, alpha: 1)
-    button.setTitle("7월 17일(수)", for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-    button.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    button.setImage(#imageLiteral(resourceName: "android_drop_down_arrow"), for: .normal)
-    button.contentHorizontalAlignment = .left
-    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.maxX / 2) - 40, bottom: 0, right: 0)
-    button.addTarget(self, action: #selector(touchUpDateButton), for: .touchUpInside)
-    return button
-  }()
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    setupStackView()
+    
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
     
     setupProperties()
-  }
-  
-  @objc private func touchUpPlaceButton() {
-    delegate?.touchUpPlaceButton()
-  }
-  
-  @objc private func touchUpDateButton() {
-    delegate?.touchUpDateButton()
-  }
-  
-  private func setupStackView() {
-    buttonStackView = UIStackView(arrangedSubviews: [placeButton, dateButton])
-    buttonStackView.translatesAutoresizingMaskIntoConstraints = false
-    buttonStackView.axis = .horizontal
-    buttonStackView.alignment = .fill
-    buttonStackView.distribution = .fillEqually
-    buttonStackView.spacing = 1
-    buttonStackView.addBackground(color: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
   }
   
   private func setupProperties() {
@@ -111,13 +65,7 @@ class TheaterCategoryReservationHeaderView: UIView {
     pageControl.widthAnchor.constraint(equalToConstant: 100).isActive = true
     pageControl.heightAnchor.constraint(equalToConstant: 50).isActive = true
     
-    self.addSubview(buttonStackView)
-    buttonStackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    stackViewTopConstraint = buttonStackView.topAnchor.constraint(equalTo: adCollectionView.topAnchor)
-    buttonStackView.leadingAnchor.constraint(equalTo: adCollectionView.leadingAnchor).isActive = true
-    buttonStackView.trailingAnchor.constraint(equalTo: adCollectionView.trailingAnchor).isActive = true
-    stackViewBottomConstraint = buttonStackView.bottomAnchor.constraint(equalTo: adCollectionView.bottomAnchor)
-    stackViewBottomConstraint.isActive = true
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
