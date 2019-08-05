@@ -459,12 +459,18 @@ class OneFiveZeroMovieTheaterView: UIView {
   
   private func setUpProperties() {
     let margin: CGFloat = 10
+    
+    self.addSubview(bottomView)
+    bottomView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+    bottomView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    bottomView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    bottomView.heightAnchor.constraint(equalToConstant: 80).isActive = true
 
     self.addSubview(scrollView)
     scrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
     scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    scrollView.bottomAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
     
     scrollView.addSubview(screenImage)
     screenImage.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: margin * 15).isActive = true
@@ -483,6 +489,7 @@ class OneFiveZeroMovieTheaterView: UIView {
     secondView.topAnchor.constraint(equalTo: screenImage.bottomAnchor, constant: 80).isActive = true
     secondView.leadingAnchor.constraint(equalTo: firstView.trailingAnchor, constant: 40).isActive = true
     secondView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -40).isActive = true
+    secondView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -40).isActive = true
     secondView.widthAnchor.constraint(equalToConstant: 35 * 6).isActive = true
     secondView.heightAnchor.constraint(equalToConstant: 35 * 14).isActive = true
     
@@ -657,11 +664,6 @@ class OneFiveZeroMovieTheaterView: UIView {
     selectedSeatEightLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 10).isActive = true
     selectedSeatEightLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
     
-    self.addSubview(bottomView)
-    bottomView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-    bottomView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-    bottomView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    bottomView.heightAnchor.constraint(equalToConstant: 80).isActive = true
     
     bottomView.addSubview(normalView)
     normalView.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: margin).isActive = true
