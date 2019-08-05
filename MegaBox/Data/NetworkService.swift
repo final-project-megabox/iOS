@@ -92,47 +92,24 @@ class NetworkService {
     }
   }
   
-<<<<<<< HEAD
+
   static func getMovieDetailData(_ urlStr: String, completion: @escaping (Swift.Result<MovieDetailData, ErrorType>) -> Void) {
-=======
-  static func getRegionData() {
-    let urlStr = "http://megabox.hellocoding.shop//database/showregion/"
->>>>>>> 2526bebe1a8d55f441f3ad68c686c05d5aaffbf4
     let url = URL(string: urlStr)!
+  
     let req = Alamofire.request(url)
     
     req.validate()
       .responseData { response in
         switch response.result {
         case .success(let data):
-          do {
-<<<<<<< HEAD
-            let movieDetailData = try JSONDecoder().decode(MovieDetailData.self, from: data)
-            
-            completion(.success(movieDetailData))
-          } catch {
-            print(error.localizedDescription)
-          }
+            let movieDetailData = try! JSONDecoder().decode(MovieDetailData.self, from: data)
+          completion(.success(movieDetailData))
         case .failure:
-          completion(.failure(.NoData))
-=======
-            let regionData = try JSONDecoder().decode([RegionData].self, from: data)
-            print("[Log] regionData:", regionData)
-          } catch {
-            print(error.localizedDescription)
-          }
-        case .failure(let err):
-          print(err.localizedDescription)
->>>>>>> 2526bebe1a8d55f441f3ad68c686c05d5aaffbf4
+          completion(.failure(ErrorType.NoData))
         }
     }
   }
   
-<<<<<<< HEAD
-  
-  
-=======
->>>>>>> 2526bebe1a8d55f441f3ad68c686c05d5aaffbf4
   static func getReservationData(_ urlStr: String, regionName: String, date: String, completion: @escaping (Swift.Result<[ReservationData], ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
     let parameters: [String: String] = ["theater": regionName, "date": date]

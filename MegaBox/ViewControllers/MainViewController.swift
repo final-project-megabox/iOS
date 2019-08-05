@@ -109,23 +109,18 @@ extension MainViewController: MainMovieReservationCellDelegate {
     let id = "\(shared.allMovieData[indexPath].movieID)"
     let url = "http://megabox.hellocoding.shop//database/movieDetail/?movie=\(id)"
     
+    
+    
     NetworkService.getMovieDetailData(url) { (result) in
       switch result {
       case .success(let data):
-        
-        DispatchQueue.main.async {
-          let movieDetailVC = MovieDetailViewController()
-          movieDetailVC.movieDetailData = data
-          self.present(movieDetailVC, animated: false)
-        }
-        
+        let movieDetailVC = MovieDetailViewController()
+        movieDetailVC.movieDetailData = data
+        self.present(movieDetailVC, animated: false)
       case .failure(let err):
         print(err.localizedDescription)
       }
     }
-    
-    
-    
   }
 }
 
