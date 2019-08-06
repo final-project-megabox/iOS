@@ -59,10 +59,10 @@ class TheaterCategoryCollectionCell: UICollectionViewCell {
     endTimeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     
     contentView.addSubview(remainSeats)
-    remainSeats.topAnchor.constraint(equalTo: endTimeLabel.bottomAnchor).isActive = true
+    remainSeats.topAnchor.constraint(equalTo: endTimeLabel.bottomAnchor, constant: margin / 2).isActive = true
     remainSeats.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     remainSeats.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-    remainSeats.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
+    remainSeats.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin / 2).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {

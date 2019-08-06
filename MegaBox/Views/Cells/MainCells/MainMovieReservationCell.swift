@@ -10,6 +10,9 @@ import UIKit
 
 class MainMovieReservationCell: UITableViewCell {
   private let shared = MovieDataManager.shared
+  
+  var allMovieData: [MovieData]?
+  
   var indicatorBarLeadingConstraint: NSLayoutConstraint!
   var indicatorBarTrailingConstraint: NSLayoutConstraint!
   static let identifier = "MainMovieReservationCell"
@@ -199,18 +202,20 @@ class MainMovieReservationCell: UITableViewCell {
 
 extension MainMovieReservationCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return shared.allMovieData.count
+    guard let allMovieData = allMovieData else { return 0 }
+    return allMovieData.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieReservationCollectionCell.identifier, for: indexPath) as! MovieReservationCollectionCell
     
-    let url = shared.allMovieData[indexPath.row].imgURL
+    guard let movieData = allMovieData?[indexPath.row] else { return cell }
+    let url = movieData.imgURL
     let dataURL = URL(string: url)!
     let task = URLSession.shared.dataTask(with: dataURL) { (data, response, error) in
       DispatchQueue.main.async {
         guard let data = data else { return }
-        cell.cellConfigure(data, self.shared.allMovieData[indexPath.row], indexPath.row)
+        cell.cellConfigure(data, movieData, indexPath.row)
       }
     }
     task.resume()

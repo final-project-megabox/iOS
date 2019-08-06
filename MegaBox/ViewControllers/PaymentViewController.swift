@@ -21,6 +21,8 @@ class PaymentViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    paymentView.delegate = self
     setupPaymentView()
   }
   
@@ -31,5 +33,13 @@ class PaymentViewController: UIViewController {
     paymentView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
     paymentView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
     paymentView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
+  }
+  
+}
+
+extension PaymentViewController: PaymentViewDelegate {
+  func touchUpPaymentButton() {
+    UIAlertController.show(title: "", message: "결제가 완료되었습니다.", from: self)
+    self.dismiss(animated: false, completion: nil)
   }
 }

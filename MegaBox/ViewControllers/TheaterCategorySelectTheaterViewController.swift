@@ -17,6 +17,9 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
   private let shared = MovieDataManager.shared
   
   var dismissType: DismissType = .two
+  
+  var regionData: [RegionData]?
+  
   private let urlStr: String = "http://megabox.hellocoding.shop//database/reservationScheduleList/"
   
   private let selectTheaterView: TheaterCategorySelectTheaterView = {
@@ -29,11 +32,25 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
     super.viewDidLoad()
     
     selectTheaterView.delegate = self
+    checkRegionData()
   }
   
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     setupSelectTheaterView()
+  }
+  
+  private func checkRegionData() {
+    var regionList: [String] = []
+    var regionTheaterList: [String] = []
+    
+    guard let regionData = regionData else { return }
+    for (_, regionData) in regionData.enumerated() {
+      regionList.append(regionData.region)
+      regionTheaterList.append(regionData.theater)
+    }
+    selectTheaterView.regionData = regionList
+    selectTheaterView.regionTheaterData = regionTheaterList
   }
   
   private func getDate(isOnlyNumber: Bool) -> String {
