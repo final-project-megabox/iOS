@@ -90,9 +90,18 @@ extension TheaterCategoryCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TheaterCategoryCollectionCell.identifier, for: indexPath) as! TheaterCategoryCollectionCell
     
-    let startTime = movieData[0][indexPath.row].startTime
-    let endTime = "\(movieData[0][indexPath.row].runningTime)"
-    let remainSeat = "\(movieData[0][indexPath.row].stCount)"
+    let dateStr: String = movieData[0][indexPath.row].startTime
+    var dateInt: Int = 0
+    let endDateInt: Int = movieData[0][indexPath.row].runningTime
+    
+    let result = dateStr.split(separator: ":").map({ String($0) })
+    
+    dateInt = (Int(result[0])! * 60) + Int(result[1])!
+    dateInt += endDateInt
+    
+    let startTime: String = movieData[0][indexPath.row].startTime
+    let endTime: String = "~\(dateInt / 60):\(dateInt % 60)"
+    let remainSeat: String = "\(movieData[0][indexPath.row].stCount)석"
     
     cell.collectionCellConfigure(startTime: startTime, endTime: endTime, remainSeat: remainSeat)
     return cell

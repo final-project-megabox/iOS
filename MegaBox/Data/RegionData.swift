@@ -10,7 +10,8 @@ import Foundation
 
 struct RegionData: Codable {
   let id: Int
-  let name: String
+  let region, theater: String
+  let selected: Bool
 }
 
 struct AllRegionData {

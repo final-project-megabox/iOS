@@ -14,6 +14,7 @@ class TheaterCategorySelectTheaterRegionCell: UITableViewCell {
   let regionName: UILabel = {
     let label = UILabel()
     label.textAlignment = .left
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
     label.font = UIFont.systemFont(ofSize: 13, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label

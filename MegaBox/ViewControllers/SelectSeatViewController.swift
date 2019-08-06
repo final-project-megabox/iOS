@@ -145,10 +145,9 @@ class SelectSeatViewController: UIViewController {
       seatCount: seatCount) { result in
         switch result {
         case .success:
-//          let paymentVC = PaymentViewController()
-//          paymentVC.movieData = movieData
-//          self.present(paymentVC, animated: false)
-          print("dd")
+          let paymentVC = PaymentViewController()
+          paymentVC.movieData = movieData
+          self.present(paymentVC, animated: false)
         case .failure(let err):
           print(err.localizedDescription)
         }

@@ -12,8 +12,11 @@ class TheaterCategorySelectTheaterView: UIView {
   
   var delegate: TheaterCategorySelectTheaterViewDelegate?
   
-  private let regionData = AllRegionData()
-  lazy var regionNames: [String] = regionData.regionNames
+  var regionData: [String]?
+  var regionTheaterData: [String]?
+  
+  private let allRegionData = AllRegionData()
+  lazy var regionNames: [String] = allRegionData.regionNames
   
   private var selectedRegionNumber: Int = 0
   
@@ -30,7 +33,7 @@ class TheaterCategorySelectTheaterView: UIView {
   
   private let menuTitleDismissButton: UIButton = {
     let button = UIButton(type: .custom)
-        button.addTarget(self, action: #selector(touchUpDismissButton), for: .touchUpInside)
+    button.addTarget(self, action: #selector(touchUpDismissButton), for: .touchUpInside)
     button.setImage(#imageLiteral(resourceName: "purpleCancel_icon"), for: .normal)
     button.tintColor = UIColor.appColor(.megaBoxColor)
     button.translatesAutoresizingMaskIntoConstraints = false
@@ -202,7 +205,7 @@ extension TheaterCategorySelectTheaterView: UITableViewDataSource {
       if selectedRegionNumber == 0 {
         return 1
       } else {
-        guard let count = regionData.region[regionNames[selectedRegionNumber]]?.count else { return 0 }
+        guard let count = allRegionData.region[regionNames[selectedRegionNumber]]?.count else { return 0 }
         return count
       }
     }
@@ -218,6 +221,16 @@ extension TheaterCategorySelectTheaterView: UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionCell
       cell.selectedBackgroundView = regionTableViewBgColorView
       cell.regionName.text = regionNames[indexPath.row]
+      
+      if indexPath.row == 0 {
+        cell.regionName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+      } else {
+        guard let regionList = regionData,
+          let regionName = cell.regionName.text else { return cell }
+        if regionList.contains(regionName) {
+          cell.regionName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+      }
       return cell
     } else {
       if selectedRegionNumber == 0 {
@@ -227,7 +240,7 @@ extension TheaterCategorySelectTheaterView: UITableViewDataSource {
       } else {
         let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionListCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionListCell
         cell.selectedBackgroundView = regionListTableViewBgColorView
-        cell.regionListName.text = regionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
+        cell.regionListName.text = allRegionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
         if cell.regionListName.text == selectedTheater {
           tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
           cell.regionListName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -266,7 +279,7 @@ extension TheaterCategorySelectTheaterView: UITableViewDelegate {
     } else {
       let cell = tableView.cellForRow(at: indexPath) as! TheaterCategorySelectTheaterRegionListCell
       cell.regionListName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-      let theater = regionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
+      let theater = allRegionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
       movieTitleLabel.text = theater
       selectedTheater = theater ?? ""
       movieTitleLabel.textColor = UIColor.appColor(.selectedCellMintColor)

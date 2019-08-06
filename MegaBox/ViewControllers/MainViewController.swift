@@ -9,11 +9,18 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+  
   private let shared = MovieDataManager.shared
   private var isTop: Bool = true
   
+  var allMovieData: [MovieData]?
+  
+  var cellHeightDictionary: NSMutableDictionary = [:]
+  
   private let mainTopView = MainTopView()
+  
+  let mainRefreshControl = UIRefreshControl()
+  
   private let mainTableView: UITableView = {
     let tableView = UITableView()
     tableView.register(MainTopMediaPlayCell.self, forCellReuseIdentifier: MainTopMediaPlayCell.identifier)
@@ -29,7 +36,6 @@ class MainViewController: UIViewController {
     tableView.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8352941176, blue: 0.862745098, alpha: 1)
     tableView.showsVerticalScrollIndicator = false
     tableView.separatorColor = UIColor.clear
-//    tableView.allowsSelection = false
     return tableView
   }()
   
@@ -46,6 +52,7 @@ class MainViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     setupMainTopView()
+    initRefresh()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +64,22 @@ class MainViewController: UIViewController {
     print("로그인한 회원의 아이디: ", userId)
     
   }
-
+  
+  private func initRefresh() {
+    mainRefreshControl.addTarget(self, action: #selector(pullRefreshTableView), for: .valueChanged)
+    
+    if #available(iOS 10.0, *) {
+      mainTableView.refreshControl = mainRefreshControl
+    } else {
+      mainTableView.addSubview(mainRefreshControl)
+    }
+  }
+  
+  @objc private func pullRefreshTableView() {
+    mainRefreshControl.endRefreshing()
+    mainTableView.reloadData()
+  }
+  
   private func setupMainTopView() {
     mainTopView.translatesAutoresizingMaskIntoConstraints = false
     mainTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +120,40 @@ extension MainViewController: MainMovieReservationCellDelegate {
     // +-20은 StackView의 Spacing
     leading.constant = sender.frame.minX + 20
     trailing.constant = -(stackViewWidth - sender.frame.maxX - 20)
-    self.view.layoutIfNeeded()
+    
+    
+    let url = "http://megabox.hellocoding.shop//database/showMovies/"
+    
+    guard let title = sender.currentTitle else { return }
+    
+    if title == "상영예정" {
+      NetworkService.getAllMovieData(url) { (response) in
+        switch response {
+        case .success(let data):
+          self.allMovieData = data.filter({ $0.releaseDate > "2019-08-07" })
+
+          let cell = self.mainTableView.cellForRow(at: IndexPath(item: 1, section: 0)) as! MainMovieReservationCell
+          cell.movieReservationCollection.reloadData()
+          self.mainTableView.reloadData()
+        case .failure(let err):
+          print(err.localizedDescription)
+        }
+      }
+    } else if title == "박스오피스" {
+      NetworkService.getAllMovieData(url) { (response) in
+        switch response {
+        case .success(let data):
+          self.allMovieData = data
+    
+          let cell = self.mainTableView.cellForRow(at: IndexPath(item: 1, section: 0)) as! MainMovieReservationCell
+          
+          cell.movieReservationCollection.reloadData()
+          self.mainTableView.reloadData()
+        case .failure(let err):
+          print(err.localizedDescription)
+        }
+      }
+    }
   }
   
   func touchUpItem(_ indexPath: Int) {
@@ -139,6 +194,7 @@ extension MainViewController: UITableViewDataSource {
     cell.selectionStyle = .none
     if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainMovieReservationCell.identifier) as! MainMovieReservationCell
+      cell.allMovieData = allMovieData
       cell.selectionStyle = .none
       // Owl Stage Button Click Delegate
       cell.delegate = self
@@ -249,6 +305,19 @@ extension MainViewController: UITableViewDelegate {
     if indexPath.row == 11 {
       tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
     }
+  }
+  
+  // 현재 tableview Height 저장
+  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    cellHeightDictionary.setObject(cell.frame.size.height, forKey: indexPath as NSCopying)
+  }
+  
+  // 저장된 tableview height 적용
+  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    if let height = cellHeightDictionary.object(forKey: indexPath) as? Double {
+      return CGFloat(height)
+    }
+    return UITableView.automaticDimension
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

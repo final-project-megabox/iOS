@@ -80,9 +80,17 @@ extension QuickReservationViewController: QuickReservationViewDelegate {
   }
   
   func touchUpfaleftButton() {
-    let theaterCategoryVC = TheaterCategorySelectTheaterViewController()
-    theaterCategoryVC.dismissType = .two
-    self.present(theaterCategoryVC, animated: false)
+    NetworkService2.getRegionData { result in
+      switch result {
+      case .success(let data):
+        let theaterCategoryVC = TheaterCategorySelectTheaterViewController()
+        theaterCategoryVC.dismissType = .two
+        theaterCategoryVC.regionData = data
+        self.present(theaterCategoryVC, animated: false)
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
   }
   
   func touchUpCancelButton() {

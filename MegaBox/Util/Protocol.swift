@@ -168,6 +168,10 @@ protocol OneFiveZeroMovieTheaterViewDelegate {
   func touchUpOneFiveZeroSelectOkButton(seatNumber: [String], seatCount: Int)
 }
 
+protocol PaymentViewDelegate {
+  func touchUpPaymentButton()
+}
+
 //마이페이지 버튼 클릭 (홈, 뒤로가기)
 protocol MyPageTopViewDelegate {
   func touchUpMenuButton(_ sender: UIButton)

@@ -28,6 +28,7 @@ class SplashViewController: UIViewController {
         self.shared.allMovieData = data
         self.shared.sortedAllMovieTitle = data.map({ $0.title })
         let mainVC = MainViewController()
+        mainVC.allMovieData = data
         self.present(mainVC, animated: false)
       case .failure(let err):
         print(err)

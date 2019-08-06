@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9994DC02CF888F8371EC0186 /* Pods_MegaBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5938270819C4F9728D0770 /* Pods_MegaBox.framework */; };
+		CF006FA922F94AD400423A62 /* NetworkService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF006FA822F94AD400423A62 /* NetworkService2.swift */; };
 		CF0847E122E6AD6E0070F4FD /* ReservationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0847E022E6AD6E0070F4FD /* ReservationData.swift */; };
 		CF09E8A622E71CC000B43066 /* TheaterCategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09E8A522E71CC000B43066 /* TheaterCategoryCollectionCell.swift */; };
 		CF09E8A822E7343C00B43066 /* BranchNewsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09E8A722E7343C00B43066 /* BranchNewsCollectionCell.swift */; };
@@ -115,6 +116,7 @@
 /* Begin PBXFileReference section */
 		328D43D246D883E45A2C9055 /* Pods-MegaBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaBox.debug.xcconfig"; path = "Target Support Files/Pods-MegaBox/Pods-MegaBox.debug.xcconfig"; sourceTree = "<group>"; };
 		3D5938270819C4F9728D0770 /* Pods_MegaBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MegaBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF006FA822F94AD400423A62 /* NetworkService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService2.swift; sourceTree = "<group>"; };
 		CF0847E022E6AD6E0070F4FD /* ReservationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationData.swift; sourceTree = "<group>"; };
 		CF09E8A522E71CC000B43066 /* TheaterCategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryCollectionCell.swift; sourceTree = "<group>"; };
 		CF09E8A722E7343C00B43066 /* BranchNewsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchNewsCollectionCell.swift; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				CFBC1CED22E1810B006B6839 /* NetworkService.swift */,
 				E6094AB222F2D4E7008407EA /* UserData.swift */,
 				E6094AB622F4053E008407EA /* UserDataManager.swift */,
+				CF006FA822F94AD400423A62 /* NetworkService2.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				CFBC1C9722E02AAA006B6839 /* LoginViewController.swift in Sources */,
 				CFBC1CA122E02B4C006B6839 /* MovieCategorySelectTheaterViewController.swift in Sources */,
 				CF7883C722F0514800380C47 /* OneThreeZeroMovieTheaterView.swift in Sources */,
+				CF006FA922F94AD400423A62 /* NetworkService2.swift in Sources */,
 				CFBC1CB322E02C07006B6839 /* TheaterCategoryReservationHeaderView.swift in Sources */,
 				CFBC1CAD22E02BDC006B6839 /* MainTopView.swift in Sources */,
 				CFBC1CE522E02EC8006B6839 /* MyPageOneContentCell.swift in Sources */,
