@@ -16,6 +16,10 @@ enum MegaboxApi {
   case boxOfficeMovieDataApi
   // Region Data
   case regionDataApi
+  // MyPage
+  case myPageApi
+  // Movie Detail
+  case movieDetailApi
 }
 
 class ApiUrlData {
@@ -44,6 +48,14 @@ class ApiUrlData {
     case .regionDataApi:
       let regionURL: String = "http://megabox.hellocoding.shop//database/showregion/"
       return regionURL
+      
+    case .myPageApi:
+        let myPageURL: String = "http://megabox.hellocoding.shop//accounts/myPage/"
+      return myPageURL
+      
+    case .movieDetailApi:
+        let movieDetailURL: String = "http://megabox.hellocoding.shop//database/movieDetail/"
+      return movieDetailURL
     }
   }
 }

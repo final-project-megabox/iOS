@@ -268,4 +268,25 @@ class NetworkService {
     }
   }
   
+  static func getRegionData(completion: @escaping (Result<[RegionData]>) -> ()) {
+    let urlStr =  ApiUrlData.ApiUrl(.regionDataApi)
+    let url = URL(string: urlStr)!
+    
+    let req = Alamofire.request(url)
+    req.validate()
+      .responseData { response in
+        switch response.result {
+        case .success(let data):
+          do {
+            let regionData = try JSONDecoder().decode([RegionData].self, from: data)
+            completion(.success(regionData))
+          } catch {
+            completion(.failure(ErrorType.networkErr))
+          }
+        case .failure:
+          completion(.failure(ErrorType.NoData))
+        }
+    }
+  }
+  
 }

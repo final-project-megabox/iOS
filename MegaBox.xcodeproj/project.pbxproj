@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9994DC02CF888F8371EC0186 /* Pods_MegaBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5938270819C4F9728D0770 /* Pods_MegaBox.framework */; };
-		CF006FA922F94AD400423A62 /* NetworkService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF006FA822F94AD400423A62 /* NetworkService2.swift */; };
 		CF006FAB22F9B26100423A62 /* DateListHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF006FAA22F9B26100423A62 /* DateListHeaderCell.swift */; };
 		CF006FB122FAF20800423A62 /* MainMoviePostCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF006FB022FAF20800423A62 /* MainMoviePostCollectionCell.swift */; };
 		CF0847E122E6AD6E0070F4FD /* ReservationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0847E022E6AD6E0070F4FD /* ReservationData.swift */; };
@@ -91,6 +90,7 @@
 		CFC9724D22E5D1B400199FD0 /* MovieDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */; };
 		CFC9724F22E5D36B00199FD0 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */; };
 		CFF2E00322FB1D1400A85006 /* ApiUrlData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF2E00222FB1D1400A85006 /* ApiUrlData.swift */; };
+		CFF2E00522FB336000A85006 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF2E00422FB336000A85006 /* Date.swift */; };
 		E604C52722F822A300C57F5E /* PreViewTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C51A22F822A300C57F5E /* PreViewTitleCell.swift */; };
 		E604C52822F822A300C57F5E /* PreViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C51B22F822A300C57F5E /* PreViewCell.swift */; };
 		E604C52922F822A300C57F5E /* TotalAudienceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C51C22F822A300C57F5E /* TotalAudienceCell.swift */; };
@@ -123,7 +123,6 @@
 /* Begin PBXFileReference section */
 		328D43D246D883E45A2C9055 /* Pods-MegaBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MegaBox.debug.xcconfig"; path = "Target Support Files/Pods-MegaBox/Pods-MegaBox.debug.xcconfig"; sourceTree = "<group>"; };
 		3D5938270819C4F9728D0770 /* Pods_MegaBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MegaBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF006FA822F94AD400423A62 /* NetworkService2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService2.swift; sourceTree = "<group>"; };
 		CF006FAA22F9B26100423A62 /* DateListHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateListHeaderCell.swift; sourceTree = "<group>"; };
 		CF006FB022FAF20800423A62 /* MainMoviePostCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMoviePostCollectionCell.swift; sourceTree = "<group>"; };
 		CF0847E022E6AD6E0070F4FD /* ReservationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationData.swift; sourceTree = "<group>"; };
@@ -208,6 +207,7 @@
 		CFC9724C22E5D1B400199FD0 /* MovieDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDataManager.swift; sourceTree = "<group>"; };
 		CFC9724E22E5D36B00199FD0 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		CFF2E00222FB1D1400A85006 /* ApiUrlData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUrlData.swift; sourceTree = "<group>"; };
+		CFF2E00422FB336000A85006 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		E604C51A22F822A300C57F5E /* PreViewTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreViewTitleCell.swift; sourceTree = "<group>"; };
 		E604C51B22F822A300C57F5E /* PreViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreViewCell.swift; sourceTree = "<group>"; };
 		E604C51C22F822A300C57F5E /* TotalAudienceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalAudienceCell.swift; sourceTree = "<group>"; };
@@ -360,6 +360,7 @@
 				E6D5693222E81B0B00C13F1E /* AlertController.swift */,
 				CF7883CC22F13B6A00380C47 /* Array.swift */,
 				E604C53422F87B7A00C57F5E /* String.swift */,
+				CFF2E00422FB336000A85006 /* Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -493,7 +494,6 @@
 				CFBC1CED22E1810B006B6839 /* NetworkService.swift */,
 				E6094AB222F2D4E7008407EA /* UserData.swift */,
 				E6094AB622F4053E008407EA /* UserDataManager.swift */,
-				CF006FA822F94AD400423A62 /* NetworkService2.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -671,7 +671,6 @@
 				CFBC1C9722E02AAA006B6839 /* LoginViewController.swift in Sources */,
 				CFBC1CA122E02B4C006B6839 /* MovieCategorySelectTheaterViewController.swift in Sources */,
 				CF7883C722F0514800380C47 /* OneThreeZeroMovieTheaterView.swift in Sources */,
-				CF006FA922F94AD400423A62 /* NetworkService2.swift in Sources */,
 				CFBC1CB322E02C07006B6839 /* TheaterCategoryReservationHeaderView.swift in Sources */,
 				E604C56322FAFE1900C57F5E /* MyPageWishMovieCell.swift in Sources */,
 				CFBC1CAD22E02BDC006B6839 /* MainTopView.swift in Sources */,
@@ -688,6 +687,7 @@
 				CF006FB122FAF20800423A62 /* MainMoviePostCollectionCell.swift in Sources */,
 				CFBC1CC722E02D79006B6839 /* MovieReservationCollectionCell.swift in Sources */,
 				E6094ADF22F433A8008407EA /* isLoginNavigationDrawerCell.swift in Sources */,
+				CFF2E00522FB336000A85006 /* Date.swift in Sources */,
 				CFBC1CD522E02E14006B6839 /* MainBranchNewsCell.swift in Sources */,
 				CFBC1CA922E02BBB006B6839 /* LoginView.swift in Sources */,
 				CFBC1CE322E02EB8006B6839 /* MyPageHeaderCell.swift in Sources */,

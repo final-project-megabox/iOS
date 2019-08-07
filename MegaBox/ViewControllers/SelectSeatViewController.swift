@@ -393,7 +393,7 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
             }
           } else {
             // SelectedSeat가 1개 있는 것
-            for (idx, value) in selectedSeatArr.enumerated() {
+            for (idx, _) in selectedSeatArr.enumerated() {
               selectedSeatArr.remove(at: idx)
               threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
               button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)

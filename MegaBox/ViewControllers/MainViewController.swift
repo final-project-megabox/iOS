@@ -76,11 +76,13 @@ class MainViewController: UIViewController {
     }
   }
   
+  // MARK: pullRefreshTableView()
   @objc private func pullRefreshTableView() {
     mainRefreshControl.endRefreshing()
     mainTableView.reloadData()
   }
   
+  // MARK: setupMainTopView()
   private func setupMainTopView() {
     mainTopView.translatesAutoresizingMaskIntoConstraints = false
     mainTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -101,26 +103,24 @@ class MainViewController: UIViewController {
   }
 }
 
-// MARK:- 수정이 필요한 사항
-// 뷰 띄우는 행위 컨트롤러로 이동기킬 것
+// MARK:- Extension
+// MARK: MainTopViewDelegate
 extension MainViewController: MainTopViewDelegate {
   func openNavigationDrawerView() {
     let navigationDrawerVC = NavigationDrawerViewController()
     
-    let url = "http://megabox.hellocoding.shop//accounts/myPage/"
+    let url = ApiUrlData.ApiUrl(.myPageApi)
     guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
     
     NetworkService.getUserMyPageData(url, token: "JWT \(token)") { (result) in
       switch result {
       case .success(let value):
         self.userShared.myPageData = value
-        print(value)
         self.present(navigationDrawerVC, animated: false)
       case .failure(let err):
-        print("result: ", err)
+        print("[Error Log] :", err)
       }
     }
-    
   }
   
   func openQuickReservationView() {
@@ -130,14 +130,14 @@ extension MainViewController: MainTopViewDelegate {
   }
 }
 
+// MARK: MainMovieReservationCellDelegate
 extension MainViewController: MainMovieReservationCellDelegate {
   func touchUpReservationOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading: NSLayoutConstraint, _ stackViewWidth: CGFloat) {
     // +-20은 StackView의 Spacing
     leading.constant = sender.frame.minX + 20
     trailing.constant = -(stackViewWidth - sender.frame.maxX - 20)
     
-    
-    let url = "http://megabox.hellocoding.shop//database/showMovies/"
+    let url = ApiUrlData.ApiUrl(.boxOfficeMovieDataApi)
     
     guard let title = sender.currentTitle else { return }
     
@@ -145,8 +145,9 @@ extension MainViewController: MainMovieReservationCellDelegate {
       NetworkService.getAllMovieData(url) { (response) in
         switch response {
         case .success(let data):
-          self.allMovieData = data.filter({ $0.releaseDate > "2019-08-07" })
-
+          let currentDateStr = Date().geCurrenttDate(isOnlyNumber: true)
+          self.allMovieData = data.filter({ $0.releaseDate > currentDateStr })
+          
           let cell = self.mainTableView.cellForRow(at: IndexPath(item: 1, section: 0)) as! MainMovieReservationCell
           cell.movieReservationCollection.reloadData()
           self.mainTableView.reloadData()
@@ -173,9 +174,11 @@ extension MainViewController: MainMovieReservationCellDelegate {
   
   func touchUpItem(_ indexPath: Int) {
     let id = "\(shared.allMovieData[indexPath].movieID)"
-    let url = "http://megabox.hellocoding.shop//database/movieDetail/?movie=\(id)"
-    
-    NetworkService.getMovieDetailData(url) { (result) in
+    let url = ApiUrlData.ApiUrl(.movieDetailApi)
+    let query = "?movie=\(id)"
+    let fullUrl = url + query
+      
+    NetworkService.getMovieDetailData(fullUrl) { (result) in
       switch result {
       case .success(let data):
         self.shared.movieDetailData = data
@@ -191,6 +194,7 @@ extension MainViewController: MainMovieReservationCellDelegate {
   }
 }
 
+// MARK: MainEventCellDelegate
 extension MainViewController: MainEventCellDelegate {
   func touchUpEventOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading:
     NSLayoutConstraint, _ stackViewWidth: CGFloat) {
@@ -201,6 +205,7 @@ extension MainViewController: MainEventCellDelegate {
   }
 }
 
+// MARK: UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 12
@@ -292,6 +297,7 @@ extension MainViewController: UITableViewDataSource {
   }
 }
 
+// MARK: UITableViewDelegate
 extension MainViewController: UITableViewDelegate {  
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     // 해더뷰 고정 해제
