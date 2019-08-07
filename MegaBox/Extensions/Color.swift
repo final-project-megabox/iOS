@@ -15,6 +15,9 @@ enum AssetsColor {
   // Button Color
   case defaultGrayColor
   
+  // Division Line Color
+  case divisionLineColor
+  
   // Cell Color
   case selectedCellMintColor
   case selectedCellGrayColor
@@ -30,6 +33,8 @@ extension UIColor {
       return #colorLiteral(red: 0.2392156863, green: 0.1215686275, blue: 0.5568627451, alpha: 1)
     case .defaultGrayColor:
       return #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    case .divisionLineColor:
+      return #colorLiteral(red: 0.7744807005, green: 0.7698782086, blue: 0.7780196071, alpha: 1)
     case .selectedCellMintColor:
       return #colorLiteral(red: 0.3098039216, green: 0.7137254902, blue: 0.7607843137, alpha: 1)
     case .selectedCellGrayColor:

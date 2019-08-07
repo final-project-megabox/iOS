@@ -47,9 +47,9 @@ class MainTopView: UIView {
     button.setTitle("빠른예매", for: .normal)
     button.addTarget(self, action: #selector(quickReservationButtonDidTapped), for: .touchUpInside)
     button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 7, bottom: 5, right: 7)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
     button.layer.borderColor = UIColor.white.cgColor
-    button.layer.borderWidth = 2
+    button.layer.borderWidth = 1.5
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -81,10 +81,10 @@ class MainTopView: UIView {
     topMediaVisualTopView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     
     self.addSubview(hamburgerMenu)
-    hamburgerMenu.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin).isActive = true
+    hamburgerMenu.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin * 2).isActive = true
     hamburgerMenu.centerYAnchor.constraint(equalTo: topMediaVisualTopView.centerYAnchor).isActive = true
-    hamburgerMenu.heightAnchor.constraint(equalToConstant: 20).isActive = true
-    hamburgerMenu.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    hamburgerMenu.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    hamburgerMenu.widthAnchor.constraint(equalToConstant: 25).isActive = true
     
     self.addSubview(titleImage)
     titleImage.leadingAnchor.constraint(equalTo: hamburgerMenu.trailingAnchor, constant: margin * 2).isActive = true

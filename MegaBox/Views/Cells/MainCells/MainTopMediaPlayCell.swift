@@ -36,7 +36,6 @@ class MainTopMediaPlayCell: UITableViewCell {
   
   private let topMediaTitleText: UILabel = {
     let label = UILabel()
-    label.text = "스파이더맨: 파 프롬 홈"
     label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -45,9 +44,8 @@ class MainTopMediaPlayCell: UITableViewCell {
   
   private let topMediaSubTitleText: UILabel = {
     let label = UILabel()
-    label.text = "모든 것이 다시 시작된다!"
     label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -58,7 +56,7 @@ class MainTopMediaPlayCell: UITableViewCell {
     button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 7, bottom: 5, right: 7)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
     button.layer.borderColor = UIColor.white.cgColor
-    button.layer.borderWidth = 2
+    button.layer.borderWidth = 1.5
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -71,6 +69,12 @@ class MainTopMediaPlayCell: UITableViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
     setupProperties()
+  }
+  
+  func mainTopMediaPlayCellConfigure(imageData: Data, titleStr: String, subTitleStr: String) {
+    topMediaImageView.image = UIImage(data: imageData)
+    topMediaTitleText.text = titleStr
+    topMediaSubTitleText.text = subTitleStr
   }
   
   private func setupProperties() {
@@ -98,7 +102,7 @@ class MainTopMediaPlayCell: UITableViewCell {
     
     topMediaImageView.addSubview(topMediaTitleText)
     topMediaTitleText.leadingAnchor.constraint(equalTo: topMediaImageView.leadingAnchor, constant: margin * 3).isActive = true
-    topMediaTitleText.bottomAnchor.constraint(equalTo: topMediaSubTitleText.topAnchor).isActive = true
+    topMediaTitleText.bottomAnchor.constraint(equalTo: topMediaSubTitleText.topAnchor, constant: -margin / 2).isActive = true
     
     topMediaImageView.addSubview(viewDetailButton)
     viewDetailButton.trailingAnchor.constraint(equalTo: topMediaImageView.trailingAnchor, constant: -margin * 2).isActive = true

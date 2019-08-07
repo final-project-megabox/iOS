@@ -36,6 +36,8 @@ class MainMoviePostCell: UITableViewCell {
   private let moviePostCollectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    collectionView.register(MainMoviePostCollectionCell.self, forCellWithReuseIdentifier: MainMoviePostCollectionCell.identifier)
+    collectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     return collectionView
   }()
@@ -49,6 +51,8 @@ class MainMoviePostCell: UITableViewCell {
     super.layoutSubviews()
     
     setupProperties()
+    moviePostCollectionView.dataSource = self
+    moviePostCollectionView.delegate = self
   }
   
   private func setupProperties() {
@@ -68,9 +72,45 @@ class MainMoviePostCell: UITableViewCell {
     plusButton.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -margin * 2).isActive = true
     plusButton.widthAnchor.constraint(equalToConstant: 15).isActive = true
     plusButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    
+    guideBGView.addSubview(moviePostCollectionView)
+    moviePostCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin * 2).isActive = true
+    moviePostCollectionView.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin).isActive = true
+    moviePostCollectionView.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -margin).isActive = true
+    moviePostCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+}
+
+extension MainMoviePostCell: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 4
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainMoviePostCollectionCell.identifier, for: indexPath) as! MainMoviePostCollectionCell
+    
+    return cell
+  }
+  
+  
+}
+
+extension MainMoviePostCell: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let width = UIScreen.main.bounds.width - 50
+    
+    return CGSize(width: width / 2, height: width / 2)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 10
   }
 }

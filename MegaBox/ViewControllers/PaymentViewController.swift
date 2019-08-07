@@ -40,6 +40,5 @@ class PaymentViewController: UIViewController {
 extension PaymentViewController: PaymentViewDelegate {
   func touchUpPaymentButton() {
     UIAlertController.show(title: "", message: "결제가 완료되었습니다.", from: self)
-    self.dismiss(animated: false, completion: nil)
   }
 }
