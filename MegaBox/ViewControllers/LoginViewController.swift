@@ -10,6 +10,9 @@ import UIKit
 
 class LoginViewController: UIViewController {
   
+  private let shared = MovieDataManager.shared
+  private let movieReservationURLStr = "http://megabox.hellocoding.shop//database/showMovies/"
+  
   let loginView: LoginView = {
     let view = LoginView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -54,16 +57,29 @@ extension LoginViewController: LoginViewDelegate {
         switch result {
         case .success(let value):
           print("token: ", value.token)
-          print("userName: ", value.user.name)
-          print("userId: ", value.user.username)
+          print("userName: ", value.name)
+          print("userId: ", value.user)
           let token = value.token
-          let userName = value.user.name
-          let userId = value.user.username
+          let userName = value.name
+          let userId = value.user
+          
           
           //로그인후 토큰, 이름, 아이디 UserDefaults에 저장
           UserDefaults.standard.set(token, forKey: "Token")
           UserDefaults.standard.set(userName, forKey: "UserName")
           UserDefaults.standard.set(userId, forKey: "UserId")
+          
+          
+          NetworkService.getAllMovieData(self.movieReservationURLStr) { result in
+            switch result {
+            case .success(let data):
+              self.shared.allMovieData = data
+              print("[Log2]: ", data)
+            case .failure(let err):
+              print(err)
+            }
+          }
+          
           
           //UserDefaults에 저장후 dismiss
           self.presentingViewController?.dismiss(animated: false)

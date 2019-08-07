@@ -10,12 +10,8 @@ import Foundation
 // MARK: - Token
 struct Token: Codable {
   let token: String
-  let user: User
-}
-
-// MARK: - User
-struct User: Codable {
-  let username, name: String
+  let user: String
+  let name: String
 }
 
 // MARK: - MyPage
@@ -52,4 +48,14 @@ struct PreferTheater: Codable {
   let id: Int
 }
 
+
+
+// MARK: - WishedMovie
+struct WishedMovie: Codable {
+  let isWished: Bool
+  
+  enum CodingKeys: String, CodingKey {
+    case isWished = "is_wished"
+  }
+}
 

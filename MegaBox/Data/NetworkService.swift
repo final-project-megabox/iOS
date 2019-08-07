@@ -27,7 +27,7 @@ class NetworkService {
       "Content-Type": "application/json"
     ]
     
-    let url = "http://megabox.hellocoding.shop//api/token/"
+    let url = "http://megabox.hellocoding.shop//accounts/login/"
     
     guard let data = body else { return }
     
@@ -71,25 +71,87 @@ class NetworkService {
     }
   }
   
-  static func getAllMovieData(_ urlStr: String, completion: @escaping (Swift.Result<[MovieData], ErrorType>) -> Void) {
+  static func getIsWishedMovie(_ urlStr: String, token: String, completion: @escaping (Swift.Result<[WishedMovie], ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
-    let req = Alamofire.request(url)
+    
+    let headers = [
+      "Content-Type": "application/json",
+      "Authorization": token
+    ]
+    
+    let req = Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
+    
     
     req.validate()
       .responseData { response in
         switch response.result {
         case .success(let data):
           do {
-            let allMovieData = try JSONDecoder().decode([MovieData].self, from: data)
-            
-            completion(.success(allMovieData))
+            let wishedMovie = try JSONDecoder().decode([WishedMovie].self, from: data)
+            completion(.success(wishedMovie))
           } catch {
             print(error.localizedDescription)
           }
         case .failure:
-          completion(.failure(.NoData))
+          completion(.failure(ErrorType.networkErr))
         }
     }
+  }
+  
+  static func getAllMovieData(_ urlStr: String, completion: @escaping (Swift.Result<[MovieData], ErrorType>) -> Void) {
+    let url = URL(string: urlStr)!
+    
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    if token != nil {
+      let headers: HTTPHeaders = [
+        "Content-Type": "application/json",
+        "Authorization": "JWT \(token)"
+      ]
+      
+      let req = Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
+      
+      req.validate()
+        .responseData { response in
+          switch response.result {
+          case .success(let data):
+            do {
+              let allMovieData = try JSONDecoder().decode([MovieData].self, from: data)
+              
+              completion(.success(allMovieData))
+            } catch {
+              print(error.localizedDescription)
+            }
+          case .failure:
+            completion(.failure(.NoData))
+          }
+      }
+      
+      
+      
+      
+      
+    } else {
+      let req = Alamofire.request(url)
+      
+      req.validate()
+        .responseData { response in
+          switch response.result {
+          case .success(let data):
+            do {
+              let allMovieData = try JSONDecoder().decode([MovieData].self, from: data)
+              
+              completion(.success(allMovieData))
+            } catch {
+              print(error.localizedDescription)
+            }
+          case .failure:
+            completion(.failure(.NoData))
+          }
+      }
+      
+    }
+    
   }
   
 

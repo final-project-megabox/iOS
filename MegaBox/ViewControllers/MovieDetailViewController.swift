@@ -11,6 +11,7 @@ import UIKit
 class MovieDetailViewController: UIViewController {
   
   private let shared = MovieDataManager.shared
+  var movieId: Int = 0
   
   let topView: MovieDetailTopView = {
     let view = MovieDetailTopView()
@@ -26,6 +27,8 @@ class MovieDetailViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    print("###", movieId)
+    print("@@@@", UserDataManager.shared.wishedMovie)
     
     getMovieDetailData()
     detailContentView.headerView.delegate = self
