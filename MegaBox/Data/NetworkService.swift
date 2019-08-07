@@ -236,14 +236,7 @@ class NetworkService {
     
     
     req.validate()
-      .responseData { response in
-        switch response.result {
-        case .success:
-          print("testtest")
-        case .failure:
-          print("")
-        }
-    }
+  
   }
   
   static func getUserWishMovie(_ urlStr: String, completion: @escaping (Swift.Result<[WishMovie], ErrorType>) -> Void) {

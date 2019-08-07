@@ -95,17 +95,7 @@ extension MyPageWishMovieView: UITableViewDataSource {
     }
     task.resume()
     
-    let movieData = movieShared.movieDetailData.filter({
-      if $0.title == shared.wishMovieData[indexPath.row].title {
-        print($0.title)
-        print(shared.wishMovieData[indexPath.row].title)
-        
-        
-        return true
-      } else {
-        return false
-      }
-    })
+    
     
     
     
