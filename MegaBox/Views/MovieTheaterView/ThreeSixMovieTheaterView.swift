@@ -107,7 +107,7 @@ class ThreeSixMovieTheaterView: UIView {
   // 버튼 선택 시, 왼쪽의 title == "" 이면 제일 왼쪽임을 확인
   private func makeSeatButtons() {
     for i in 0..<4 {
-      for j in 0..<13 {
+      for j in 0..<14 {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("\(alphbetArr[alphbetIndex])\(j - i)", for: .normal)
@@ -117,22 +117,21 @@ class ThreeSixMovieTheaterView: UIView {
         button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         button.layer.borderWidth = 0.5
         button.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-//        button.accessibilityIdentifier = "\(alphbetArr[alphbetIndex])\((j - i))"
         button.accessibilityIdentifier = "\((j - i))"
         button.addTarget(self, action: #selector(touchUpButton(_:)), for: .touchUpInside)
-        if i == 0 && (j == 0 || j == 10 || j == 11 || j == 12) {
+        if i == 0 && (j == 0 || j == 10 || j == 11 || j == 12 || j == 13) {
           button.setTitle("", for: .normal)
           button.accessibilityIdentifier = ""
           button.isHidden = true
-        } else if i == 1 && (j == 0 || j == 1 || j == 11 || j == 12) {
+        } else if i == 1 && (j == 0 || j == 1 || j == 11 || j == 12 || j == 13) {
           button.setTitle("", for: .normal)
           button.accessibilityIdentifier = ""
           button.isHidden = true
-        } else if i == 2 && (j == 0 || j == 1 || j == 2 || j == 12) {
+        } else if i == 2 && (j == 0 || j == 1 || j == 2 || j == 12 || j == 13) {
           button.setTitle("", for: .normal)
           button.accessibilityIdentifier = ""
           button.isHidden = true
-        } else if i == 3 && (j == 0 || j == 1 || j == 2 || j == 3) {
+        } else if i == 3 && (j == 0 || j == 1 || j == 2 || j == 3 || j == 13) {
           button.setTitle("", for: .normal)
           button.accessibilityIdentifier = ""
           button.isHidden = true
@@ -142,7 +141,7 @@ class ThreeSixMovieTheaterView: UIView {
           button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         }
         
-        if j == 12 {
+        if j == 13 {
           alphbetIndex += 1
         }
         
@@ -171,11 +170,11 @@ class ThreeSixMovieTheaterView: UIView {
     scrollView.addSubview(firstView)
     firstView.topAnchor.constraint(equalTo: screenImage.bottomAnchor, constant: 80).isActive = true
     firstView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-    firstView.widthAnchor.constraint(equalToConstant: 35 * 12).isActive = true
+    firstView.widthAnchor.constraint(equalToConstant: 35 * 14).isActive = true
     firstView.heightAnchor.constraint(equalToConstant: 35 * 4).isActive = true
     
     for i in 0..<seatButtonArr.count {
-      if i < 13 {
+      if i < 14 {
         if i == 0 {
           seatButtonArr[i].topAnchor.constraint(equalTo: firstView.topAnchor).isActive = true
           seatButtonArr[i].leadingAnchor.constraint(equalTo: firstView.leadingAnchor).isActive = true
@@ -188,13 +187,13 @@ class ThreeSixMovieTheaterView: UIView {
           seatButtonArr[i].heightAnchor.constraint(equalToConstant: 35).isActive = true
         }
       } else {
-        if i % 13 == 0 {
-          seatButtonArr[i].topAnchor.constraint(equalTo: seatButtonArr[i - 13].bottomAnchor).isActive = true
+        if i % 14 == 0 {
+          seatButtonArr[i].topAnchor.constraint(equalTo: seatButtonArr[i - 14].bottomAnchor).isActive = true
           seatButtonArr[i].leadingAnchor.constraint(equalTo: firstView.leadingAnchor).isActive = true
           seatButtonArr[i].widthAnchor.constraint(equalToConstant: 35).isActive = true
           seatButtonArr[i].heightAnchor.constraint(equalToConstant: 35).isActive = true
         } else {
-          seatButtonArr[i].topAnchor.constraint(equalTo: seatButtonArr[i - 13].bottomAnchor).isActive = true
+          seatButtonArr[i].topAnchor.constraint(equalTo: seatButtonArr[i - 14].bottomAnchor).isActive = true
           seatButtonArr[i].leadingAnchor.constraint(equalTo: seatButtonArr[i - 1].trailingAnchor).isActive = true
           seatButtonArr[i].widthAnchor.constraint(equalToConstant: 35).isActive = true
           seatButtonArr[i].heightAnchor.constraint(equalToConstant: 35).isActive = true
