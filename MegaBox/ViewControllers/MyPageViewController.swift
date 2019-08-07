@@ -78,7 +78,6 @@ extension MyPageViewController: MyPageContentViewDelegate {
       switch result {
       case .success(let data):
         self.shared.wishMovieData = data
-        print(data)
         self.present(wishMovieVC, animated: false)
       case .failure(let err):
         print(err.localizedDescription)

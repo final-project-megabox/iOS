@@ -53,12 +53,12 @@ class MyPageContentView: UIView {
   }
   
   @objc func didTapSecondViewButton(_ sender: UIButton) {
-    print("didTapSecondViewButton")
+
     delegate?.touchUpWishMovieButton(sender: sender)
   }
   
   @objc func didTapThirdViewButton(_ sender: UIButton) {
-    print("didTapThirdViewButton")
+    
     delegate?.touchUpWatchedMovieButton(sender: sender)
   }
   
