@@ -103,7 +103,6 @@ class TheaterCategorySelectTheaterView: UIView {
     tableView.separatorStyle = .none
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
-    
   }()
   
   override init(frame: CGRect) {

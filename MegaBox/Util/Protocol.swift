@@ -66,6 +66,8 @@ protocol TheaterCategoryReservationViewDelegate {
   func touchUpPlaceButton()
   
   func touchUpDateButton()
+  
+  func touchUpDateTableView(_ dateStr: String, _ region: String)
 }
 
 protocol TheaterCategoryReservationHeaderViewDelegate {
@@ -130,7 +132,7 @@ protocol selectPersonCountViewDelegate {
 
 protocol ThreeSixMovieTheaterViewDelegate {
   // 좌석 선택
-  func touchUpThreeSixTheaterSeat(_ sender: UIButton)
+  func touchUpThreeSixTheaterSeat(_ sender: UIButton, totalCount: Int)
   
   // 좌석 선택 완료
   func touchUpThreeSixSelectOkButton(seatNumber: [String], seatCount: Int)

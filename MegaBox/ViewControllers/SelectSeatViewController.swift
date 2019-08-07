@@ -79,11 +79,26 @@ class SelectSeatViewController: UIViewController {
     case 36:
       guard let movieData = self.movieData else { return }
       for (_, data) in movieData.seatNumber.enumerated() {
-        let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 12)
+        let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 13)
         if seatIdx == -1 {
         } else {
-          threeSixMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
-          threeSixMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
+          if seatIdx < 13 {
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 1].accessibilityIdentifier = ""
+            threeSixMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
+            threeSixMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
+          } else if seatIdx < 26 {
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 2].accessibilityIdentifier = ""
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 2].setTitle("", for: .normal)
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 2].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
+          } else if seatIdx < 39 {
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 3].accessibilityIdentifier = ""
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 3].setTitle("", for: .normal)
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 3].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
+          } else {
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 4].accessibilityIdentifier = ""
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 4].setTitle("", for: .normal)
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 4].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
+          }
         }
       }
     case 82:
@@ -92,6 +107,7 @@ class SelectSeatViewController: UIViewController {
         let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 8)
         if seatIdx == -1 {
         } else {
+          eightTwoMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
           eightTwoMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
           eightTwoMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
         }
@@ -102,6 +118,7 @@ class SelectSeatViewController: UIViewController {
         let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 15)
         if seatIdx == -1 {
         } else {
+          oneThreeZeroMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
           oneThreeZeroMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
           oneThreeZeroMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
         }
@@ -112,6 +129,7 @@ class SelectSeatViewController: UIViewController {
         let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 16)
         if seatIdx == -1 {
         } else {
+          oneFourZeroMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
           oneFourZeroMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
           oneFourZeroMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
         }
@@ -122,6 +140,7 @@ class SelectSeatViewController: UIViewController {
         let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 12)
         if seatIdx == -1 {
         } else {
+          oneFiveZeroMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
           oneFiveZeroMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
           oneFiveZeroMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
         }
@@ -166,7 +185,7 @@ class SelectSeatViewController: UIViewController {
     }
     
     guard let resultValue = Int(resultStr) else { return -1 }
- 
+    
     if seatString.contains("A") {
       resultIdx = resultValue - 1
     } else if seatString.contains("B") {
@@ -241,57 +260,204 @@ class SelectSeatViewController: UIViewController {
 }
 
 extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
-  func touchUpThreeSixSelectOkButton(seatNumber: [String], seatCount: Int) {
-    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
-  }
-  
-  func touchUpThreeSixTheaterSeat(_ sender: UIButton) {
+  func touchUpThreeSixTheaterSeat(_ sender: UIButton, totalCount: Int) {
     guard let buttonTitle = sender.currentTitle else { return }
     if buttonTitle == "" {
       // 이미 예약된 좌석입니다. (Alert)
     } else {
       // 선택 좌석 표시(보라색 반전 + 상단에 좌석 번호 추가)
-      var seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 12)
-      if seatIdx < 12 {
-      } else if seatIdx < 24 {
+      var seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 13)
+      if seatIdx < 13 {
         seatIdx += 1
-      } else if seatIdx < 36 {
+      } else if seatIdx < 26 {
         seatIdx += 2
-      } else {
+      } else if seatIdx < 39 {
         seatIdx += 3
+      } else {
+        seatIdx += 4
       }
       
       let button = threeSixMovieTheaterView.seatButtonArr[seatIdx]
       
-      if button.isSelected {
-        if button.currentTitle == "A1" || button.currentTitle == "A2" {
-          button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-          button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        } else {
-          button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-          button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-        }
+      if seatIdx == 0 || threeSixMovieTheaterView.seatButtonArr[seatIdx - 1].currentTitle == "" {
+        // A1, B1, C1, D1 (가장 왼쪽 라인)
+        let seatNumTwoButton = threeSixMovieTheaterView.seatButtonArr[seatIdx + 1]
         
-        for i in 0..<threeSixMovieTheaterView.selectedSeatArr.count {
-          if threeSixMovieTheaterView.selectedSeatArr[i] == button.currentTitle! {
-            selectedSeatArr.remove(at: i)
+        if button.isSelected {
+          if button.currentTitle == "A1" {
+            button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+            button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+            seatNumTwoButton.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+            seatNumTwoButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+          } else {
+            button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+            seatNumTwoButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            seatNumTwoButton.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+          }
+          
+          for i in 0..<threeSixMovieTheaterView.selectedSeatArr.count {
+            if threeSixMovieTheaterView.selectedSeatArr[i] == button.currentTitle! {
+              selectedSeatArr.remove(at: i + 1)
+              selectedSeatArr.remove(at: i)
+              threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+              break
+            }
+          }
+        } else {
+          if totalCount - selectedSeatArr.count > 1 {
+            // 버튼이 선택되어 있지 않으면
+            button.backgroundColor = UIColor.appColor(.megaBoxColor)
+            button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+            seatNumTwoButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+            seatNumTwoButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+            selectedSeatArr.append(button.currentTitle!)
+            selectedSeatArr.append(seatNumTwoButton.currentTitle!)
             threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-            break
+          } else {
+            // 버튼이 선택되어 있지 않으면 (1좌석 선택 남았을 때)
+            button.backgroundColor = UIColor.appColor(.megaBoxColor)
+            button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+            selectedSeatArr.append(button.currentTitle!)
+            threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+            
+            for i in 0..<threeSixMovieTheaterView.selectedSeatArr.count {
+              if threeSixMovieTheaterView.selectedSeatArr[i] == button.currentTitle! {
+                selectedSeatArr.remove(at: i)
+                threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+                break
+              }
+            }
           }
         }
       } else {
-        if selectedSeatArr.count == 8 {
-          // 최대 8명까지 선택하실 수 있습니다.
-          return
+        if button.isSelected {
+          if button.currentTitle == "A2" {
+            button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+            button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+          } else {
+            button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+          }
+        } else {
+          
         }
         
-        button.backgroundColor = UIColor.appColor(.megaBoxColor)
-        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        selectedSeatArr.append(button.currentTitle!)
-        threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+        if totalCount - selectedSeatArr.count > 1 {
+          guard let buttonIdentifierStr = button.accessibilityIdentifier else { return }
+          let buttonIdentifierInt = Int(buttonIdentifierStr) ?? 0
+          if buttonIdentifierInt % 2 == 0 {
+            // 짝수 좌석 선택
+            let seatNumLeftButton = threeSixMovieTheaterView.seatButtonArr[seatIdx - 1]
+          } else {
+            // 홀수 좌석 선택
+            let seatNumRightButton = threeSixMovieTheaterView.seatButtonArr[seatIdx + 1]
+          }
+        } else {
+          // 버튼이 선택되어 있지 않으면 (1좌석 선택 남았을 때)
+          button.backgroundColor = UIColor.appColor(.megaBoxColor)
+          button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+          selectedSeatArr.append(button.currentTitle!)
+          threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+          
+          for i in 0..<threeSixMovieTheaterView.selectedSeatArr.count {
+            if threeSixMovieTheaterView.selectedSeatArr[i] == button.currentTitle! {
+              selectedSeatArr.remove(at: i)
+              threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+              break
+            }
+          }
+        }
       }
-      button.isSelected.toggle()
+      
+      
+      
+      
+      
+      
+      
+      if totalCount - selectedSeatArr.count > 1 {
+        let button = threeSixMovieTheaterView.seatButtonArr[seatIdx]
+        guard let buttonTitle = button.currentTitle else { return }
+        
+        if buttonTitle == "A1" || buttonTitle == "B1" || buttonTitle == "C1" || buttonTitle == "D1" {
+          let button2 = threeSixMovieTheaterView.seatButtonArr[seatIdx + 1]
+          
+          if button.isSelected {
+            if button.currentTitle == "A1" || button.currentTitle == "A2" {
+              button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+              button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+              button2.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+              button2.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+            } else {
+              button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+              button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+              button2.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+              button2.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+            }
+            
+            for i in 0..<threeSixMovieTheaterView.selectedSeatArr.count {
+              if threeSixMovieTheaterView.selectedSeatArr[i] == button.currentTitle! {
+                selectedSeatArr.remove(at: i + 1)
+                selectedSeatArr.remove(at: i)
+                threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+                break
+              }
+            }
+          } else {
+            if selectedSeatArr.count == 8 {
+              // 최대 8명까지 선택하실 수 있습니다.
+              return
+            }
+            
+            
+            
+            
+          }
+          button.isSelected.toggle()
+          button2.isSelected.toggle()
+        }
+      } else {
+        
+      }
+      
+      //      let button = threeSixMovieTheaterView.seatButtonArr[seatIdx]
+      
+      //      if button.isSelected {
+      //        if button.currentTitle == "A1" || button.currentTitle == "A2" {
+      //          button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+      //          button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+      //        } else {
+      //          button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+      //          button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+      //        }
+      //
+      //        for i in 0..<threeSixMovieTheaterView.selectedSeatArr.count {
+      //          if threeSixMovieTheaterView.selectedSeatArr[i] == button.currentTitle! {
+      //            selectedSeatArr.remove(at: i)
+      //            threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      //            break
+      //          }
+      //        }
+      //      } else {
+      //        if selectedSeatArr.count == 8 {
+      //          // 최대 8명까지 선택하실 수 있습니다.
+      //          return
+      //        }
+      //
+      //        button.backgroundColor = UIColor.appColor(.megaBoxColor)
+      //        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+      //        selectedSeatArr.append(button.currentTitle!)
+      //        threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      //
+      //
+      //      }
+      //      button.isSelected.toggle()
     }
+  }
+  
+  func touchUpThreeSixSelectOkButton(seatNumber: [String], seatCount: Int) {
+    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
   }
 }
 

@@ -22,7 +22,8 @@ class TheaterCategorySectionCell: UITableViewCell {
   
   private let movieTitle: UILabel = {
     let label = UILabel()
-    label.text = "라이온 킹"
+    label.labelSetup(text: "", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 13, alignment: .left)
+    label.font = UIFont.systemFont(ofSize: 13, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -61,8 +62,8 @@ class TheaterCategorySectionCell: UITableViewCell {
     contentView.addSubview(movieGradeImage)
     movieGradeImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     movieGradeImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
-    movieGradeImage.widthAnchor.constraint(equalToConstant: 20).isActive = true
-    movieGradeImage.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    movieGradeImage.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    movieGradeImage.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
     contentView.addSubview(movieTitle)
     movieTitle.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
