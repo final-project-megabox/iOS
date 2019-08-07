@@ -71,82 +71,47 @@ class NetworkService {
     }
   }
   
-  static func getIsWishedMovie(_ urlStr: String, token: String, completion: @escaping (Swift.Result<[WishedMovie], ErrorType>) -> Void) {
-    let url = URL(string: urlStr)!
-    
-    let headers = [
-      "Content-Type": "application/json",
-      "Authorization": token
-    ]
-    
-    let req = Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
-    
-    
-    req.validate()
-      .responseData { response in
-        switch response.result {
-        case .success(let data):
-          do {
-            let wishedMovie = try JSONDecoder().decode([WishedMovie].self, from: data)
-            completion(.success(wishedMovie))
-          } catch {
-            print(error.localizedDescription)
-          }
-        case .failure:
-          completion(.failure(ErrorType.networkErr))
-        }
-    }
-  }
   
   static func getAllMovieData(_ urlStr: String, completion: @escaping (Swift.Result<[MovieData], ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
     
-    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
-    
+    let token = UserDefaults.standard.string(forKey: "Token")
+  
     if token != nil {
-      let headers: HTTPHeaders = [
+      let headers = [
         "Content-Type": "application/json",
-        "Authorization": "JWT \(token)"
+        "Authorization": "JWT \(token!)"
       ]
       
-      let req = Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
+      let req = Alamofire.request(url, method: .get, headers: headers)
       
-      req.validate()
+      req.validate(statusCode: 200...299)
         .responseData { response in
           switch response.result {
           case .success(let data):
-            do {
-              let allMovieData = try JSONDecoder().decode([MovieData].self, from: data)
-              
+              guard let allMovieData = try? JSONDecoder().decode([MovieData].self, from: data) else {
+                completion(.failure(.NoData))
+                return }
               completion(.success(allMovieData))
-            } catch {
-              print(error.localizedDescription)
-            }
           case .failure:
-            completion(.failure(.NoData))
+            completion(.failure(.networkErr))
           }
       }
-      
-      
-      
-      
-      
-    } else {
+    } else if token == nil {
       let req = Alamofire.request(url)
       
-      req.validate()
+      req.validate(statusCode: 200...299)
         .responseData { response in
           switch response.result {
           case .success(let data):
-            do {
-              let allMovieData = try JSONDecoder().decode([MovieData].self, from: data)
-              
-              completion(.success(allMovieData))
-            } catch {
-              print(error.localizedDescription)
-            }
+            guard let allMovieData = try? JSONDecoder().decode([MovieData].self, from: data) else {
+              completion(.failure(.NoData))
+              return }
+            print("log2 noToken success")
+            print("log2 NoTokenData: ", allMovieData)
+            completion(.success(allMovieData))
           case .failure:
-            completion(.failure(.NoData))
+            completion(.failure(.networkErr))
           }
       }
       
@@ -246,4 +211,41 @@ class NetworkService {
         }
     }
   }
+  
+  static func pushIsWished(_ urlStr: String, movieId: Int) {
+    
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let headers = [
+      "Content-Type": "application/json",
+      "Authorization": "JWT \(token)"
+    ]
+    
+    let body = """
+      {
+      "movie_id": "\(movieId)"
+      }
+      """.data(using: .utf8)
+    
+    guard let data = body else { return }
+    
+    let url = URL(string: urlStr)!
+    
+    let req = Alamofire.upload(data, to: url, method: .post, headers: headers)
+    
+    
+    
+    req.validate()
+      .responseData { response in
+        switch response.result {
+        case .success:
+          print("testtest")
+        case .failure:
+          print("")
+        }
+    }
+  }
+  
+  
+  
 }

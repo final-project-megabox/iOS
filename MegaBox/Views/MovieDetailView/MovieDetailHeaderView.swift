@@ -13,6 +13,7 @@ class MovieDetailHeaderView: UIView {
   var delegate: MovieDetailHeaderViewDelegate?
   let shared = MovieDataManager.shared
   
+  
   //예고편
   let preView: UIImageView = {
     let imageView = UIImageView()
@@ -118,9 +119,8 @@ class MovieDetailHeaderView: UIView {
     let button = UIButton()
     button.setTitle("보고싶어", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-    button.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
+//    button.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
     button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: -30, right: 0)
-    button.isSelected = false
     button.addTarget(self, action: #selector(didTapLikeButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button

@@ -48,14 +48,3 @@ struct PreferTheater: Codable {
   let id: Int
 }
 
-
-
-// MARK: - WishedMovie
-struct WishedMovie: Codable {
-  let isWished: Bool
-  
-  enum CodingKeys: String, CodingKey {
-    case isWished = "is_wished"
-  }
-}
-

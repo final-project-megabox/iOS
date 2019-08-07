@@ -65,18 +65,19 @@ extension LoginViewController: LoginViewDelegate {
           
           
           //로그인후 토큰, 이름, 아이디 UserDefaults에 저장
-          UserDefaults.standard.set(token, forKey: "Token")
-          UserDefaults.standard.set(userName, forKey: "UserName")
-          UserDefaults.standard.set(userId, forKey: "UserId")
+//          UserDefaults.standard.set(token, forKey: "Token")
+          UserDefaults.standard.setValue(token, forKey: "Token")
+          UserDefaults.standard.setValue(userName, forKey: "UserName")
+          UserDefaults.standard.setValue(userId, forKey: "UserId")
           
-          
+          print("log2 success")
           NetworkService.getAllMovieData(self.movieReservationURLStr) { result in
             switch result {
             case .success(let data):
               self.shared.allMovieData = data
-              print("[Log2]: ", data)
+              print("[Log2]: success ", data)
             case .failure(let err):
-              print(err)
+              print("[Log2]: fail ", err)
             }
           }
           

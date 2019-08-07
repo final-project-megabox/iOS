@@ -157,9 +157,6 @@ extension MainViewController: MainMovieReservationCellDelegate {
   }
   
   func touchUpItem(_ indexPath: Int) {
-    let wishURL = "http://megabox.hellocoding.shop//database/showMovies/"
-    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
-    
     let id = "\(shared.allMovieData[indexPath].movieID)"
     let url = "http://megabox.hellocoding.shop//database/movieDetail/?movie=\(id)"
     
@@ -167,19 +164,10 @@ extension MainViewController: MainMovieReservationCellDelegate {
       switch result {
       case .success(let data):
         self.shared.movieDetailData = data
-        
-        //isWishedMovie
-        NetworkService.getIsWishedMovie(wishURL, token: "JWT \(token)") { (result) in
-          switch result {
-          case .success(let data):
-            UserDataManager.shared.wishedMovie = data
-          case .failure(let err):
-            print(err.localizedDescription)
-          }
-        }
-        
         let movieDetailVC = MovieDetailViewController()
         movieDetailVC.movieId = Int(id)!
+        movieDetailVC.isWished = self.shared.allMovieData[indexPath].isWished
+        print("알라딘 isWished: ", movieDetailVC.isWished!)
         self.present(movieDetailVC, animated: false)
       case .failure(let err):
         print(err.localizedDescription)
