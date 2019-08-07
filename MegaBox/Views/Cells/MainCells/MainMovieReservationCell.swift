@@ -9,14 +9,15 @@
 import UIKit
 
 class MainMovieReservationCell: UITableViewCell {
-  private let shared = MovieDataManager.shared
-  
-  var allMovieData: [MovieData]?
-  
+  static let identifier = "MainMovieReservationCell"
   var indicatorBarLeadingConstraint: NSLayoutConstraint!
   var indicatorBarTrailingConstraint: NSLayoutConstraint!
-  static let identifier = "MainMovieReservationCell"
+  
+  private let shared = MovieDataManager.shared
+  
   private var fontSize: CGFloat = 0
+  
+  var allMovieData: [MovieData]?
   
   var delegate: MainMovieReservationCellDelegate?
   
@@ -37,14 +38,14 @@ class MainMovieReservationCell: UITableViewCell {
   
   private let plusButton: UIButton = {
     let button = UIButton()
-    button.setImage(UIImage(named: "main_more_btn"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "main_more_btn"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
   
   private let divisionLine: UIView = {
     let view = UIView()
-    view.backgroundColor = #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
+    view.backgroundColor = UIColor.appColor(.divisionLineColor)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -127,6 +128,10 @@ class MainMovieReservationCell: UITableViewCell {
     delegate?.touchUpReservationOwlStageButton(sender, indicatorBarTrailingConstraint, indicatorBarLeadingConstraint, stackViewWidth)
   }
   
+  private func getFontSize() {
+    fontSize = ("가" as NSString).size(withAttributes: [NSAttributedString.Key.font : boxOfficeButton.titleLabel?.font ?? "가"]).width
+  }
+  
   private func setupProperties() {
     boxOfficeButton.addTarget(self, action: #selector(touchUpOwlStageButton(_:)), for: .touchUpInside)
     showingScheduleButton.addTarget(self, action: #selector(touchUpOwlStageButton(_:)), for: .touchUpInside)
@@ -137,10 +142,6 @@ class MainMovieReservationCell: UITableViewCell {
     movieReservationCollection.delegate = self
     
     setupStackView()
-  }
-  
-  private func getFontSize() {
-    fontSize = ("가" as NSString).size(withAttributes: [NSAttributedString.Key.font : boxOfficeButton.titleLabel?.font ?? "가"]).width
   }
   
   private func setupStackView() {
@@ -171,7 +172,7 @@ class MainMovieReservationCell: UITableViewCell {
     plusButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
     guideBGView.addSubview(divisionLine)
-    divisionLine.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin).isActive = true
+    divisionLine.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin - 2).isActive = true
     divisionLine.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2).isActive = true
     divisionLine.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -margin * 2).isActive = true
     divisionLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
@@ -184,12 +185,12 @@ class MainMovieReservationCell: UITableViewCell {
     indicatorBar.topAnchor.constraint(equalTo: movieReservationStack.bottomAnchor, constant: -3).isActive = true
     indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2)
     indicatorBarLeadingConstraint.isActive = true
-    indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
+    indicatorBar.heightAnchor.constraint(equalToConstant: 1.5).isActive = true
     indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -(UIScreen.main.bounds.width - 40) + (fontSize * 5))
     indicatorBarTrailingConstraint.isActive = true
     
     guideBGView.addSubview(movieReservationCollection)
-    movieReservationCollection.topAnchor.constraint(equalTo: indicatorBar.bottomAnchor, constant: margin).isActive = true
+    movieReservationCollection.topAnchor.constraint(equalTo: indicatorBar.bottomAnchor, constant: margin + 5).isActive = true
     movieReservationCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     movieReservationCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     movieReservationCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin * 2).isActive = true
@@ -215,7 +216,7 @@ extension MainMovieReservationCell: UICollectionViewDataSource {
     let task = URLSession.shared.dataTask(with: dataURL) { (data, response, error) in
       DispatchQueue.main.async {
         guard let data = data else { return }
-        cell.cellConfigure(data, movieData, indexPath.row)
+        cell.movieReservationCollectionCellConfigure(data, movieData, indexPath.row)
       }
     }
     task.resume()
@@ -228,7 +229,6 @@ extension MainMovieReservationCell: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
     delegate?.touchUpItem(indexPath.row)
-    
   }
 }
 

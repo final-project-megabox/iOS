@@ -68,13 +68,15 @@ class SelectSeatViewController: UIViewController {
   }
   
   private func changeSelectButtonColor(baseButton: UIButton, relatedButton: UIButton?, _ buttonArr: [UIButton], totalCount: Int) {
+    var willSortButtonArr: [String] = []
     baseButton.backgroundColor = UIColor.appColor(.megaBoxColor)
     baseButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
     baseButton.isSelected.toggle()
-    selectedSeatArr.append(baseButton.currentTitle!)
+    willSortButtonArr.append(baseButton.currentTitle!)
     
     guard let relatedButton = relatedButton else {
       makeSingleChoiceScreen(totalCount, buttonArr)
+      self.selectedSeatArr.append(baseButton.currentTitle!)
       threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
       return
     }
@@ -82,7 +84,13 @@ class SelectSeatViewController: UIViewController {
     relatedButton.backgroundColor = UIColor.appColor(.megaBoxColor)
     relatedButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
     relatedButton.isSelected.toggle()
-    selectedSeatArr.append(relatedButton.currentTitle!)
+    willSortButtonArr.append(relatedButton.currentTitle!)
+    
+    willSortButtonArr.sort(by: {arg0, arg1 in arg0 < arg1 })
+    
+    for i in willSortButtonArr {
+      self.selectedSeatArr.append(i)
+    }
     
     threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
   }
@@ -95,6 +103,7 @@ class SelectSeatViewController: UIViewController {
         if selectedSeatArr.contains(seat.currentTitle!) {
         } else {
           if exceptButtonArr.contains(seat) {
+            // ExceptButtonArr = 장애인 좌석
             seat.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
           } else {
             seat.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -132,18 +141,18 @@ class SelectSeatViewController: UIViewController {
     case 36:
       guard let movieData = self.movieData else { return }
       for (_, data) in movieData.seatNumber.enumerated() {
-        let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 13)
+        let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 14)
         if seatIdx == -1 {
         } else {
-          if seatIdx < 13 {
+          if seatIdx < 14 {
             threeSixMovieTheaterView.seatButtonArr[seatIdx + 1].accessibilityIdentifier = ""
-            threeSixMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
-            threeSixMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
-          } else if seatIdx < 26 {
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 1].setTitle("", for: .normal)
+            threeSixMovieTheaterView.seatButtonArr[seatIdx + 1].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
+          } else if seatIdx < 28 {
             threeSixMovieTheaterView.seatButtonArr[seatIdx + 2].accessibilityIdentifier = ""
             threeSixMovieTheaterView.seatButtonArr[seatIdx + 2].setTitle("", for: .normal)
             threeSixMovieTheaterView.seatButtonArr[seatIdx + 2].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
-          } else if seatIdx < 39 {
+          } else if seatIdx < 42 {
             threeSixMovieTheaterView.seatButtonArr[seatIdx + 3].accessibilityIdentifier = ""
             threeSixMovieTheaterView.seatButtonArr[seatIdx + 3].setTitle("", for: .normal)
             threeSixMovieTheaterView.seatButtonArr[seatIdx + 3].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
@@ -319,12 +328,12 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
       // 이미 예약된 좌석입니다. (Alert)
     } else {
       // 선택 좌석 표시(보라색 반전 + 상단에 좌석 번호 추가)
-      var seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 13)
-      if seatIdx < 13 {
+      var seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 14)
+      if seatIdx < 14 {
         seatIdx += 1
-      } else if seatIdx < 26 {
+      } else if seatIdx < 28 {
         seatIdx += 2
-      } else if seatIdx < 39 {
+      } else if seatIdx < 42 {
         seatIdx += 3
       } else {
         seatIdx += 4
@@ -338,6 +347,62 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
         // 클릭한 좌석의 identifier를 획득 (Int)
         guard let buttonIdentifierStr = button.accessibilityIdentifier else { return }
         let buttonIdentifierInt = Int(buttonIdentifierStr) ?? 0
+        
+        if button.currentTitle == "A1" || button.currentTitle == "A2" {
+          
+        } else {
+          let selectedSeatCount = selectedSeatArr.count
+          if selectedSeatCount > 1 {
+            // SelectedSeat가 2개 이상이 있는 것
+            for (idx, value) in selectedSeatArr.enumerated() {
+              if value == button.currentTitle {
+                
+                
+                if idx % 2 == 0 {
+                  let rightButton = threeSixMovieTheaterView.seatButtonArr[seatIdx + 1]
+                  if rightButton.isSelected {
+                    selectedSeatArr.remove(at: idx + 1)
+                    selectedSeatArr.remove(at: idx)
+                    threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+                    button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+                    button.isSelected.toggle()
+                    rightButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    rightButton.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+                    rightButton.isSelected.toggle()
+                  } else {
+                    selectedSeatArr.remove(at: idx)
+                    threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+                    button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+                    button.isSelected.toggle()
+                  }
+                } else {
+                  let leftButton = threeSixMovieTheaterView.seatButtonArr[seatIdx - 1]
+                  selectedSeatArr.remove(at: idx)
+                  selectedSeatArr.remove(at: idx - 1)
+                  threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+                  button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                  button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+                  button.isSelected.toggle()
+                  leftButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                  leftButton.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+                  leftButton.isSelected.toggle()
+                }
+              }
+            }
+          } else {
+            // SelectedSeat가 1개 있는 것
+            for (idx, value) in selectedSeatArr.enumerated() {
+              selectedSeatArr.remove(at: idx)
+              threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+              button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+              button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+              button.isSelected.toggle()
+            }
+          }
+        }
+        
         
         if threeSixMovieTheaterView.seatButtonArr[seatIdx - 1].currentTitle == "" {
           // A1, B1, C1, D1 (가장 왼쪽 라인)
@@ -381,6 +446,19 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
             let rightButton = threeSixMovieTheaterView.seatButtonArr[seatIdx + 1]
             
             changeSelectButtonColor(baseButton: button, relatedButton: rightButton, buttonArr, totalCount: totalCount)
+            makeSingleChoiceScreen(totalCount, buttonArr)
+          } else {
+            // 남은 좌석 선택 인원이 1명일 때
+            changeSelectButtonColor(baseButton: button, relatedButton: nil, buttonArr, totalCount: totalCount)
+            finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: [buttonArr[1], buttonArr[2]])
+          }
+        } else if threeSixMovieTheaterView.seatButtonArr[seatIdx + 1].currentTitle == "" {
+          // A9, B9, C9, D9 (가장 오른쪽 라인)
+          if totalCount - selectedSeatArr.count > 1 {
+            // 남은 좌석 선택 인원이 2명 이상일 때
+            let leftButton = threeSixMovieTheaterView.seatButtonArr[seatIdx - 1]
+            
+            changeSelectButtonColor(baseButton: button, relatedButton: leftButton, buttonArr, totalCount: totalCount)
             makeSingleChoiceScreen(totalCount, buttonArr)
           } else {
             // 남은 좌석 선택 인원이 1명일 때

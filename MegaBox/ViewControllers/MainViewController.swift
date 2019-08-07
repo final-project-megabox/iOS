@@ -10,9 +10,14 @@ import UIKit
 
 class MainViewController: UIViewController {
   
+  // MARK:- Properties
   private let shared = MovieDataManager.shared
   private let userShared = UserDataManager.shared
   private var isTop: Bool = true
+  
+  var mainPosterImageData: Data?
+  var mainPosterTitleStr: String?
+  var mainPosterSubTitleStr: String?
   
   var allMovieData: [MovieData]?
   
@@ -40,6 +45,8 @@ class MainViewController: UIViewController {
     return tableView
   }()
   
+  // MARK:- Life Cycles
+  // MARK: viewDidLoad()
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -50,22 +57,15 @@ class MainViewController: UIViewController {
     self.mainTopView.delegate = self
   }
   
+  // MARK: viewDidLayoutSubviews()
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     setupMainTopView()
     initRefresh()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
-    guard let userName = UserDefaults.standard.value(forKey: "UserName") else { return }
-    guard let userId = UserDefaults.standard.value(forKey: "UserId") else { return }
-    print("로그인한 회원의 토큰:", token)
-    print("로그인한 회원의 이름: ", userName)
-    print("로그인한 회원의 아이디: ", userId)
-    
-  }
-  
+  // MARK:- Methods
+  // MARK: initRefresh()
   private func initRefresh() {
     mainRefreshControl.addTarget(self, action: #selector(pullRefreshTableView), for: .valueChanged)
     
@@ -208,7 +208,14 @@ extension MainViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: MainTopMediaPlayCell.identifier) as! MainTopMediaPlayCell
+    
+    cell.mainTopMediaPlayCellConfigure(
+      imageData: mainPosterImageData!,
+      titleStr: mainPosterTitleStr ?? "",
+      subTitleStr: mainPosterSubTitleStr ?? ""
+    )
     cell.selectionStyle = .none
+    
     if indexPath.row == 1 {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainMovieReservationCell.identifier) as! MainMovieReservationCell
       cell.allMovieData = allMovieData
@@ -360,7 +367,9 @@ extension MainViewController: UITableViewDelegate {
       return 90
     } else if indexPath.row == 7 {
       // 무비포스트
-      return 430
+      let width = UIScreen.main.bounds.width
+      let height: CGFloat = width + 50
+      return height
     } else if indexPath.row == 8 {
       // 지점소식
       return ((UIScreen.main.bounds.width) * 460) / 750
