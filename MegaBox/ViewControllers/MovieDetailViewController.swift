@@ -11,6 +11,10 @@ import UIKit
 class MovieDetailViewController: UIViewController {
   
   private let shared = MovieDataManager.shared
+  private let movieReservationURLStr = "http://megabox.hellocoding.shop//database/showMovies/"
+  private let url = "http://megabox.hellocoding.shop/database/checkwish/"
+  var movieId: Int = 0
+  var isWished: Bool?
   
   let topView: MovieDetailTopView = {
     let view = MovieDetailTopView()
@@ -26,7 +30,7 @@ class MovieDetailViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    print("해당 영화의 isWished: ", isWished!)
     getMovieDetailData()
     detailContentView.headerView.delegate = self
     topView.delegate = self
@@ -76,7 +80,13 @@ class MovieDetailViewController: UIViewController {
     }
     task2.resume()
     
-    
+    //보고싶어 button Color
+    self.detailContentView.headerView.likeButton.isSelected = self.isWished!
+    if self.isWished! == true {
+      self.detailContentView.headerView.likeButton.setTitleColor(UIColor.appColor(.selectedCellMintColor), for: .normal)
+    } else if self.isWished! == false {
+      self.detailContentView.headerView.likeButton.setTitleColor(#colorLiteral(red: 0.2199999988, green: 0.2199999988, blue: 0.2199999988, alpha: 1), for: .normal)
+    }
     
   }
   
@@ -102,11 +112,16 @@ class MovieDetailViewController: UIViewController {
 
 extension MovieDetailViewController: MovieDetailHeaderViewDelegate {
   func touchUpLikeButton(sender: UIButton) {
+    
+    
+    NetworkService.pushIsWished(url, movieId: movieId) 
+    
+    
     sender.isSelected.toggle()
-    if sender.isSelected {
+    if sender.isSelected == true {
       UIAlertController.show(title: "", message: "보고싶은 영화가 등록되었습니다.", from: self)
       sender.setTitleColor(UIColor.appColor(.selectedCellMintColor), for: .normal)
-    } else {
+    } else if sender.isSelected == false {
       UIAlertController.show(title: "", message: "보고싶은 영화가 해제되었습니다.", from: self)
       sender.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
     }
@@ -122,7 +137,18 @@ extension MovieDetailViewController: MovieDetailTopViewDelegate {
   }
   
   func touchUpDismissButton() {
-    self.presentingViewController?.dismiss(animated: false)
+    
+    NetworkService.getAllMovieData(movieReservationURLStr) { result in
+      switch result {
+      case .success(let data):
+        print("[Log] :", data)
+        self.shared.allMovieData = data
+        self.presentingViewController?.dismiss(animated: false)
+      case .failure(let err):
+        print(err)
+      }
+    }
+    
   }
   
   

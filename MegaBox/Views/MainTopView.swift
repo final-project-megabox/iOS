@@ -84,7 +84,7 @@ class MainTopView: UIView {
     hamburgerMenu.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin).isActive = true
     hamburgerMenu.centerYAnchor.constraint(equalTo: topMediaVisualTopView.centerYAnchor).isActive = true
     hamburgerMenu.heightAnchor.constraint(equalToConstant: 20).isActive = true
-    hamburgerMenu.widthAnchor.constraint(equalToConstant: 20).isActive = true
+    hamburgerMenu.widthAnchor.constraint(equalToConstant: 30).isActive = true
     
     self.addSubview(titleImage)
     titleImage.leadingAnchor.constraint(equalTo: hamburgerMenu.trailingAnchor, constant: margin * 2).isActive = true

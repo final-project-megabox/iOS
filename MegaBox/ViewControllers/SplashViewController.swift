@@ -26,6 +26,7 @@ class SplashViewController: UIViewController {
       switch result {
       case .success(let data):
         self.shared.allMovieData = data
+        print("[Log1]: ", data)
         self.shared.sortedAllMovieTitle = data.map({ $0.title })
         let mainVC = MainViewController()
         mainVC.allMovieData = data
@@ -34,5 +35,6 @@ class SplashViewController: UIViewController {
         print(err)
       }
     }
+    
   }
 }

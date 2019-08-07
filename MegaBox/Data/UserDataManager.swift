@@ -14,7 +14,6 @@ class UserDataManager {
   private init() {}
   
   var myPageData: MyPage?
-  
 }
 
 

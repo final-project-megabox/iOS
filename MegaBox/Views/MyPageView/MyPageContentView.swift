@@ -120,10 +120,9 @@ extension MyPageContentView: UITableViewDataSource {
       four.firstContentLabel.text = "내가 남긴 한줄평"
       four.firstCountLabel.text = "0"
       four.secondContentLabel.text = "보고싶은 영화"
-      four.secondCountLabel.text = "0"
+      let number1 = shared.myPageData?.wishMovieNumber ?? 0
+      four.secondCountLabel.text = "\(number1)"
       four.thirdContentLabel.text = "내가 본 영화"
-//      guard let number = shared.myPageData?.watchedMovieNumber else { return four }
-//      four.thirdCountLabel.text = "\(number)"
       let number2 = shared.myPageData?.watchedMovieNumber ?? 0
 //      if let number = shared.myPageData?.watchedMovieNumber {
         four.thirdCountLabel.text = "\(number2)"
