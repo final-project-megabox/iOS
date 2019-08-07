@@ -243,8 +243,19 @@ class MovieCategorySelectTheatherView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    
+    setupDate()
     setupMyPageTopView()
+  }
+  
+  private func setupDate() {
+    let date = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "ko")
+    dateFormatter.dateFormat = "M월 d일(E)"
+    let stringDate = dateFormatter.string(from: date)
+    
+    secondDateLabel.text = stringDate
+    
   }
   
   

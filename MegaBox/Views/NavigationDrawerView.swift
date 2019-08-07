@@ -10,6 +10,9 @@ import UIKit
 class NavigationDrawerView: UIView {
   
   var delegate: NavigationDrawerViewDelegate?
+  let shared = UserDataManager.shared
+  
+  let now = Date()
   
   var lastContentOffset: CGFloat = 0.0
   
@@ -90,6 +93,8 @@ extension NavigationDrawerView: UICollectionViewDataSource {
         
         guard let userName = UserDefaults.standard.value(forKey: "UserName") else { return cell }
         cell.userNameButton.setTitle("\(userName)", for: .normal)
+        
+        cell.lastLoginLabel.text = "마지막 로그인 \(shared.myPageData!.lastLogin)"
         return cell
         
       } else {

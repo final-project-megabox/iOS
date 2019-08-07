@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
   
   // MARK:- Properties
   private let shared = MovieDataManager.shared
+  private let userShared = UserDataManager.shared
   private var isTop: Bool = true
   
   var mainPosterImageData: Data?
@@ -105,7 +106,21 @@ class MainViewController: UIViewController {
 extension MainViewController: MainTopViewDelegate {
   func openNavigationDrawerView() {
     let navigationDrawerVC = NavigationDrawerViewController()
-    self.present(navigationDrawerVC, animated: false)
+    
+    let url = "http://megabox.hellocoding.shop//accounts/myPage/"
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    NetworkService.getUserMyPageData(url, token: "JWT \(token)") { (result) in
+      switch result {
+      case .success(let value):
+        self.userShared.myPageData = value
+        print(value)
+        self.present(navigationDrawerVC, animated: false)
+      case .failure(let err):
+        print("result: ", err)
+      }
+    }
+    
   }
   
   func openQuickReservationView() {

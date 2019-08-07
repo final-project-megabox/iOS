@@ -82,20 +82,22 @@ extension NavigationDrawerViewController: NavigationDrawerViewDelegate {
   func touchUpUserNameButton() {
     
     let myPageVC = MyPageViewController()
-
-    let url = "http://megabox.hellocoding.shop//accounts/myPage/"
-    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
     
-    NetworkService.getUserMyPageData(url, token: "JWT \(token)") { (result) in
-      switch result {
-      case .success(let value):
-        self.shared.myPageData = value
-        print(value)
-        self.present(myPageVC, animated: false)
-      case .failure(let err):
-        print("result: ", err)
-      }
-    }
+    self.present(myPageVC, animated: false)
+
+//    let url = "http://megabox.hellocoding.shop//accounts/myPage/"
+//    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+//
+//    NetworkService.getUserMyPageData(url, token: "JWT \(token)") { (result) in
+//      switch result {
+//      case .success(let value):
+//        self.shared.myPageData = value
+//        print(value)
+//        self.present(myPageVC, animated: false)
+//      case .failure(let err):
+//        print("result: ", err)
+//      }
+//    }
     
   }
   

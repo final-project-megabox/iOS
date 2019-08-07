@@ -404,6 +404,17 @@ class isLoginNavigationDrawerCell: UICollectionViewCell {
     return button
   }()
   
+  let lastLoginLabel: UILabel = {
+    let label = UILabel()
+    label.text = "마지막 로그인 2019-08-07 14:56:45"
+    label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    label.textAlignment = .center
+    label.font = UIFont.systemFont(ofSize: 12)
+    label.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     self.backgroundColor = UIColor.appColor(.defaultGrayColor)
@@ -666,6 +677,14 @@ class isLoginNavigationDrawerCell: UICollectionViewCell {
     noticeButton.topAnchor.constraint(equalTo: discountButton.bottomAnchor, constant: margin * 2).isActive = true
     noticeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     noticeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+    
+    guideBottomView.addSubview(lastLoginLabel)
+    lastLoginLabel.topAnchor.constraint(equalTo: noticeButton.bottomAnchor).isActive = true
+    lastLoginLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    lastLoginLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+    lastLoginLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
