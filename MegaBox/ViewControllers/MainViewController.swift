@@ -76,11 +76,13 @@ class MainViewController: UIViewController {
     }
   }
   
+  // MARK: pullRefreshTableView()
   @objc private func pullRefreshTableView() {
     mainRefreshControl.endRefreshing()
     mainTableView.reloadData()
   }
   
+  // MARK: setupMainTopView()
   private func setupMainTopView() {
     mainTopView.translatesAutoresizingMaskIntoConstraints = false
     mainTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -101,8 +103,8 @@ class MainViewController: UIViewController {
   }
 }
 
-// MARK:- 수정이 필요한 사항
-// 뷰 띄우는 행위 컨트롤러로 이동기킬 것
+// MARK:- Extension
+// MARK: MainTopViewDelegate
 extension MainViewController: MainTopViewDelegate {
   func openNavigationDrawerView() {
     let navigationDrawerVC = NavigationDrawerViewController()
@@ -130,6 +132,7 @@ extension MainViewController: MainTopViewDelegate {
   }
 }
 
+// MARK: MainMovieReservationCellDelegate
 extension MainViewController: MainMovieReservationCellDelegate {
   func touchUpReservationOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading: NSLayoutConstraint, _ stackViewWidth: CGFloat) {
     // +-20은 StackView의 Spacing
@@ -191,6 +194,7 @@ extension MainViewController: MainMovieReservationCellDelegate {
   }
 }
 
+// MARK: MainEventCellDelegate
 extension MainViewController: MainEventCellDelegate {
   func touchUpEventOwlStageButton(_ sender: UIButton, _ trailing: NSLayoutConstraint, _ leading:
     NSLayoutConstraint, _ stackViewWidth: CGFloat) {
@@ -201,6 +205,7 @@ extension MainViewController: MainEventCellDelegate {
   }
 }
 
+// MARK: UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 12
@@ -292,6 +297,7 @@ extension MainViewController: UITableViewDataSource {
   }
 }
 
+// MARK: UITableViewDelegate
 extension MainViewController: UITableViewDelegate {  
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     // 해더뷰 고정 해제
