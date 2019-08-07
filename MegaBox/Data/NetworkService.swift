@@ -27,7 +27,7 @@ class NetworkService {
       "Content-Type": "application/json"
     ]
     
-    let url = "http://megabox.hellocoding.shop//api/token/"
+    let url = "http://megabox.hellocoding.shop//accounts/login/"
     
     guard let data = body else { return }
     
@@ -71,25 +71,52 @@ class NetworkService {
     }
   }
   
+  
   static func getAllMovieData(_ urlStr: String, completion: @escaping (Swift.Result<[MovieData], ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
-    let req = Alamofire.request(url)
     
-    req.validate()
-      .responseData { response in
-        switch response.result {
-        case .success(let data):
-          do {
-            let allMovieData = try JSONDecoder().decode([MovieData].self, from: data)
-            
-            completion(.success(allMovieData))
-          } catch {
-            print(error.localizedDescription)
+    let token = UserDefaults.standard.string(forKey: "Token")
+  
+    if token != nil {
+      let headers = [
+        "Content-Type": "application/json",
+        "Authorization": "JWT \(token!)"
+      ]
+      
+      let req = Alamofire.request(url, method: .get, headers: headers)
+      
+      req.validate(statusCode: 200...299)
+        .responseData { response in
+          switch response.result {
+          case .success(let data):
+              guard let allMovieData = try? JSONDecoder().decode([MovieData].self, from: data) else {
+                completion(.failure(.NoData))
+                return }
+              completion(.success(allMovieData))
+          case .failure:
+            completion(.failure(.networkErr))
           }
-        case .failure:
-          completion(.failure(.NoData))
-        }
+      }
+    } else if token == nil {
+      let req = Alamofire.request(url)
+      
+      req.validate(statusCode: 200...299)
+        .responseData { response in
+          switch response.result {
+          case .success(let data):
+            guard let allMovieData = try? JSONDecoder().decode([MovieData].self, from: data) else {
+              completion(.failure(.NoData))
+              return }
+            print("log2 noToken success")
+            print("log2 NoTokenData: ", allMovieData)
+            completion(.success(allMovieData))
+          case .failure:
+            completion(.failure(.networkErr))
+          }
+      }
+      
     }
+    
   }
   
 
@@ -184,4 +211,41 @@ class NetworkService {
         }
     }
   }
+  
+  static func pushIsWished(_ urlStr: String, movieId: Int) {
+    
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let headers = [
+      "Content-Type": "application/json",
+      "Authorization": "JWT \(token)"
+    ]
+    
+    let body = """
+      {
+      "movie_id": "\(movieId)"
+      }
+      """.data(using: .utf8)
+    
+    guard let data = body else { return }
+    
+    let url = URL(string: urlStr)!
+    
+    let req = Alamofire.upload(data, to: url, method: .post, headers: headers)
+    
+    
+    
+    req.validate()
+      .responseData { response in
+        switch response.result {
+        case .success:
+          print("testtest")
+        case .failure:
+          print("")
+        }
+    }
+  }
+  
+  
+  
 }

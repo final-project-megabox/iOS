@@ -157,7 +157,6 @@ extension MainViewController: MainMovieReservationCellDelegate {
   }
   
   func touchUpItem(_ indexPath: Int) {
-    
     let id = "\(shared.allMovieData[indexPath].movieID)"
     let url = "http://megabox.hellocoding.shop//database/movieDetail/?movie=\(id)"
     
@@ -166,6 +165,9 @@ extension MainViewController: MainMovieReservationCellDelegate {
       case .success(let data):
         self.shared.movieDetailData = data
         let movieDetailVC = MovieDetailViewController()
+        movieDetailVC.movieId = Int(id)!
+        movieDetailVC.isWished = self.shared.allMovieData[indexPath].isWished
+        print("알라딘 isWished: ", movieDetailVC.isWished!)
         self.present(movieDetailVC, animated: false)
       case .failure(let err):
         print(err.localizedDescription)
