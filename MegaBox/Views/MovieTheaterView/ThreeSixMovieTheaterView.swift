@@ -88,7 +88,7 @@ class ThreeSixMovieTheaterView: UIView {
   }
   
   @objc private func touchUpButton(_ sender: UIButton) {
-    delegate?.touchUpThreeSixTheaterSeat(sender, totalCount: totalCount)
+    delegate?.touchUpThreeSixTheaterSeat(sender, seatButtonArr, totalCount: totalCount)
   }
   
   private func appendLabels() {
