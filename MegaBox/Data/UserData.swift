@@ -20,11 +20,13 @@ struct MyPage: Codable {
   let preferTheater: [PreferTheater]
   let bookingHistory: [BookingHistory]
   let watchedMovieNumber, wishMovieNumber: Int
+  let lastLogin: String
   
   enum CodingKeys: String, CodingKey {
     case phoneNumber, preferTheater
     case bookingHistory = "booking_history"
     case watchedMovieNumber, wishMovieNumber
+    case lastLogin = "last_login"
   }
 }
 
