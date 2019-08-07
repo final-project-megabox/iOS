@@ -17,7 +17,16 @@ class TheaterCategoryCell: UITableViewCell {
   
   private let titleLabel: UILabel = {
     let label = UILabel()
-    label.text = "2관 총 103석 | 디지털"
+    label.labelSetup(text: "", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 12, alignment: .left)
+    label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
+  private let titleSubLabel: UILabel = {
+    let label = UILabel()
+    label.labelSetup(text: "", color: #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1), fontSize: 11, alignment: .left)
+    label.font = UIFont.systemFont(ofSize: 11, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -47,8 +56,9 @@ class TheaterCategoryCell: UITableViewCell {
 //    print(titleLabel.frame.height)
   }
   
-  func cellConfigure(title: String, movieData: [ReservationData]) {
+  func cellConfigure(title: String, subTitle: String, movieData: [ReservationData]) {
     self.titleLabel.text = title
+    self.titleSubLabel.text = subTitle
     self.movieData = [movieData]
     
     self.movieData = [movieData.sorted(by: { arg0, arg1 in
@@ -65,7 +75,10 @@ class TheaterCategoryCell: UITableViewCell {
     contentView.addSubview(titleLabel)
     titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin).isActive = true
     titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin).isActive = true
-    titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+    
+    contentView.addSubview(titleSubLabel)
+    titleSubLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: margin).isActive = true
+    titleSubLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: margin / 2).isActive = true
     
     contentView.addSubview(timeCollectionView)
     timeCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: margin).isActive = true

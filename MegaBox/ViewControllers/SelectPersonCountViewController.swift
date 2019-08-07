@@ -23,7 +23,6 @@ class SelectPersonCountViewController: UIViewController {
     
     selectPersonCountView.delegate = self
     setupSelectPeopleCountView()
-    
   }
   
   func setupSelectPeopleCountView() {
@@ -48,29 +47,25 @@ extension SelectPersonCountViewController: selectPersonCountViewDelegate {
     
     switch movieTheaterNumber {
     case 36:
+      presentingVC.threeSixMovieTheaterView.totalCount = reservationPersonCount.adultCount + reservationPersonCount.teenagerCount + reservationPersonCount.seniorCount
       presentingVC.threeSixMovieTheaterView.adultCount = reservationPersonCount.adultCount
       presentingVC.threeSixMovieTheaterView.teenagerCount = reservationPersonCount.teenagerCount
-      presentingVC.threeSixMovieTheaterView.childCount = reservationPersonCount.childCount
       presentingVC.threeSixMovieTheaterView.seniorCount = reservationPersonCount.seniorCount
     case 82:
       presentingVC.eightTwoMovieTheaterView.adultCount = reservationPersonCount.adultCount
       presentingVC.eightTwoMovieTheaterView.teenagerCount = reservationPersonCount.teenagerCount
-      presentingVC.eightTwoMovieTheaterView.childCount = reservationPersonCount.childCount
       presentingVC.eightTwoMovieTheaterView.seniorCount = reservationPersonCount.seniorCount
     case 130:
       presentingVC.oneThreeZeroMovieTheaterView.adultCount = reservationPersonCount.adultCount
       presentingVC.oneThreeZeroMovieTheaterView.teenagerCount = reservationPersonCount.teenagerCount
-      presentingVC.oneThreeZeroMovieTheaterView.childCount = reservationPersonCount.childCount
       presentingVC.oneThreeZeroMovieTheaterView.seniorCount = reservationPersonCount.seniorCount
     case 140:
       presentingVC.oneFourZeroMovieTheaterView.adultCount = reservationPersonCount.adultCount
       presentingVC.oneFourZeroMovieTheaterView.teenagerCount = reservationPersonCount.teenagerCount
-      presentingVC.oneFourZeroMovieTheaterView.childCount = reservationPersonCount.childCount
       presentingVC.oneFourZeroMovieTheaterView.seniorCount = reservationPersonCount.seniorCount
     case 150:
       presentingVC.oneFiveZeroMovieTheaterView.adultCount = reservationPersonCount.adultCount
       presentingVC.oneFiveZeroMovieTheaterView.teenagerCount = reservationPersonCount.teenagerCount
-      presentingVC.oneFiveZeroMovieTheaterView.childCount = reservationPersonCount.childCount
       presentingVC.oneFiveZeroMovieTheaterView.seniorCount = reservationPersonCount.seniorCount
     default:
       break

@@ -16,7 +16,11 @@ class TheaterCategoryReservationView: UIView {
   private var tableViewMovieData = [[ReservationData]]()
   
   let headerView = TheaterCategoryReservationHeaderView()
-
+  
+  var dateTableData: [String]?
+  var fullDate: [String]?
+  var fullAllDate: [String]?
+  
   private var movieTitleIdx: Int = 0
   private var screenArr: [Int] = []
   
@@ -55,6 +59,10 @@ class TheaterCategoryReservationView: UIView {
     let tableView = UITableView()
     tableView.register(TheaterCategorySectionCell.self, forCellReuseIdentifier: TheaterCategorySectionCell.identifier)
     tableView.register(TheaterCategoryCell.self, forCellReuseIdentifier: TheaterCategoryCell.identifier)
+    tableView.cellLayoutMarginsFollowReadableWidth = false
+    tableView.separatorInset.left = 10
+    tableView.separatorInset.right = 10
+    tableView.accessibilityIdentifier = "theaterTableView"
     tableView.translatesAutoresizingMaskIntoConstraints = false
     tableView.allowsSelection = false
     return tableView
@@ -71,7 +79,7 @@ class TheaterCategoryReservationView: UIView {
     button.backgroundColor = #colorLiteral(red: 0.2745098039, green: 0.2862745098, blue: 0.2901960784, alpha: 1)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
     button.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    button.setImage(#imageLiteral(resourceName: "android_drop_down_arrow"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "booking_theater_drop_down_icon"), for: .normal)
     button.contentHorizontalAlignment = .left
     button.imageEdgeInsets = UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.maxX / 2) - 40, bottom: 0, right: 0)
     button.addTarget(self, action: #selector(touchUpPlaceButton), for: .touchUpInside)
@@ -85,7 +93,8 @@ class TheaterCategoryReservationView: UIView {
     button.setTitle("7월 17일(수)", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
     button.titleLabel?.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    button.setImage(#imageLiteral(resourceName: "android_drop_down_arrow"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "booking_theater_drop_down_icon"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "booking_theater_drop_up_icon"), for: .selected)
     button.contentHorizontalAlignment = .left
     button.imageEdgeInsets = UIEdgeInsets(top: 0, left: (UIScreen.main.bounds.maxX / 2) - 40, bottom: 0, right: 0)
     button.addTarget(self, action: #selector(touchUpDateButton), for: .touchUpInside)
@@ -93,16 +102,22 @@ class TheaterCategoryReservationView: UIView {
     return button
   }()
   
-  private let bgBottomView: UIView = {
+  let bgBottomView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.3527664812)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
   
-  private let dateTableView: UITableView = {
+  let dateTableView: UITableView = {
     let tableView = UITableView()
+    tableView.rowHeight = 40
+    tableView.register(DateListHeaderCell.self, forCellReuseIdentifier: DateListHeaderCell.identifier)
     tableView.register(DateListCell.self, forCellReuseIdentifier: DateListCell.identifier)
+    tableView.tableFooterView = UIView()
+    tableView.cellLayoutMarginsFollowReadableWidth = false
+    tableView.separatorInset.left = 0
+    tableView.accessibilityIdentifier = "dateTableView"
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
   }()
@@ -112,7 +127,10 @@ class TheaterCategoryReservationView: UIView {
     
     theaterTableView.dataSource = self
     theaterTableView.delegate = self
+    dateTableView.dataSource = self
+    dateTableView.delegate = self
     
+    dateTableView.separatorStyle = .singleLine
     setupProperties()
   }
   
@@ -129,8 +147,8 @@ class TheaterCategoryReservationView: UIView {
   }
   
   @objc private func touchUpDateButton() {
-    bgBottomView.isHidden.toggle()
-    dateTableView.isHidden.toggle()
+    dateButton.isSelected.toggle()
+    delegate?.touchUpDateButton()
   }
   
   func makeTableViewMovieData() {
@@ -252,7 +270,7 @@ extension TheaterCategoryReservationView: UITableViewDataSource {
       let titleCount = shared.sortedTheaterMovieTitle.count
       return titleCount
     } else {
-      return 5
+      return dateTableData?.count ?? 0
     }
   }
   
@@ -288,38 +306,72 @@ extension TheaterCategoryReservationView: UITableViewDataSource {
         cell.delegate = self
         
         let sortedData = tableViewMovieData[indexPath.row]
-        let title = ("\(sortedData[0].screen)관 \(sortedData[0].totalSeat)석 | \(sortedData[0].types[0])")
+        let title = "\(sortedData[0].screen)관"
+        let subTitle = "\(sortedData[0].totalSeat)석 | \(sortedData[0].types[0])"
         
-        cell.cellConfigure(title: title, movieData: sortedData)
+        cell.cellConfigure(title: title, subTitle: subTitle, movieData: sortedData)
         return cell
       }
     } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: DateListCell.identifier, for: indexPath) as! DateListCell
-      return cell
+      if indexPath.row == 0 {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DateListHeaderCell.identifier, for: indexPath) as! DateListHeaderCell
+        guard let dateDataArr = dateTableData else { return cell }
+        cell.cellCongire(dateDataArr[indexPath.row])
+        return cell
+      } else {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DateListCell.identifier, for: indexPath) as! DateListCell
+        guard let dateDataArr = dateTableData else { return cell }
+        cell.cellCongire(dateDataArr[indexPath.row])
+        return cell
+      }
     }
   }
 }
 
 extension TheaterCategoryReservationView: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if tableView == theaterTableView {
+      
+    } else {
+      if indexPath.row == 0 {
+        let cell = tableView.cellForRow(at: indexPath) as! DateListHeaderCell
+        cell.selectionStyle = .none
+      } else {
+        guard let dateStr = fullDate?[indexPath.row] else { return }
+        guard let allFullDateStr = fullAllDate?[indexPath.row] else { return }
+        
+        dateButton.setTitle(dateStr, for: .normal)
+        dateButton.accessibilityIdentifier = allFullDateStr
+        bgBottomView.isHidden.toggle()
+        dateTableView.isHidden.toggle()
+        dateButton.isSelected.toggle()
+        delegate?.touchUpDateTableView(allFullDateStr, placeButton.currentTitle!)
+      }
+    }
+  }
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     // 해더뷰 고정 해제
-    
-    let scrollHeaderHeight = ((UIScreen.main.bounds.width * 495) / 844) - 50
-    if scrollView.contentOffset.y <= scrollHeaderHeight {
-      if scrollView.contentOffset.y >= 0 {
-        scrollView.contentInset = UIEdgeInsets(top: -scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)
-        buttonView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 50)
-        bgBottomView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 100)
-      } else {
-        // 0보다 작으면
-        buttonView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 50)
-        bgBottomView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 100)
+    guard let scrollViewIdentifier = scrollView.accessibilityIdentifier else { return }
+    if scrollViewIdentifier == "theaterTableView" {
+      let scrollHeaderHeight = ((UIScreen.main.bounds.width * 495) / 844) - 50
+      if scrollView.contentOffset.y <= scrollHeaderHeight {
+        if scrollView.contentOffset.y >= 0 {
+          scrollView.contentInset = UIEdgeInsets(top: -scrollView.contentOffset.y, left: 0, bottom: 0, right: 0)
+          buttonView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 50)
+          bgBottomView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 100)
+        } else {
+          // 0보다 작으면
+          buttonView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 50)
+          bgBottomView.frame.origin.y = -(scrollView.contentOffset.y) + (scrollHeaderHeight + 100)
+        }
+      } else if scrollView.contentOffset.y > scrollHeaderHeight {
+        scrollView.contentInset = UIEdgeInsets(top: -scrollHeaderHeight, left: 0, bottom: 0, right: 0)
+        buttonView.frame.origin.y = 50
+        bgBottomView.frame.origin.y = 100
       }
-    } else if scrollView.contentOffset.y > scrollHeaderHeight {
-      scrollView.contentInset = UIEdgeInsets(top: -scrollHeaderHeight, left: 0, bottom: 0, right: 0)
-      buttonView.frame.origin.y = 50
-      bgBottomView.frame.origin.y = 100
+    } else {
+      
     }
   }
   
@@ -333,7 +385,10 @@ extension TheaterCategoryReservationView: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return (UIScreen.main.bounds.width * 495) / 844
+    if tableView == theaterTableView {
+      return (UIScreen.main.bounds.width * 495) / 844
+    }
+    return 0
   }
 }
 
@@ -345,7 +400,7 @@ extension TheaterCategoryReservationView: TheaterCategorySectionCellDelegate {
 
 extension TheaterCategoryReservationView: TheaterCategoryCellDelegate {
   func touchUpMovieTime(_ data: ReservationData) {
-   delegate?.sendMovieData(data)
+    delegate?.sendMovieData(data)
   }
 }
 

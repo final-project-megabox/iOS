@@ -30,12 +30,6 @@ class EightTwoMovieTheaterView: UIView {
     }
   }
   
-  var childCount: Int = 0 {
-    didSet {
-      totalChildCountLabel.text = "\(childCount)"
-    }
-  }
-  
   var seniorCount: Int = 0 {
     didSet {
       totalSeniorCountLabel.text = "\(seniorCount)"
@@ -149,27 +143,6 @@ class EightTwoMovieTheaterView: UIView {
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
-  
-  private let totalChildCountLabel: UILabel = {
-    let label = UILabel()
-    label.text = "0"
-    label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
-  private let childTitleLabel: UILabel = {
-    let label = UILabel()
-    label.text = "어린이"
-    label.textColor = #colorLiteral(red: 0.2199999988, green: 0.2199999988, blue: 0.2199999988, alpha: 1)
-    label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 13)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
   
   private let totalSeniorCountLabel: UILabel = {
     let label = UILabel()
@@ -649,28 +622,16 @@ class EightTwoMovieTheaterView: UIView {
     teenagerTitleLabel.bottomAnchor.constraint(equalTo: adultTitleLabel.bottomAnchor).isActive = true
     teenagerTitleLabel.widthAnchor.constraint(equalTo: adultTitleLabel.widthAnchor).isActive = true
     
-    totalCountView.addSubview(totalChildCountLabel)
-    totalChildCountLabel.topAnchor.constraint(equalTo: totalCountView.topAnchor).isActive = true
-    totalChildCountLabel.leadingAnchor.constraint(equalTo: totalTeenagerCountLabel.trailingAnchor).isActive = true
-    totalChildCountLabel.widthAnchor.constraint(equalTo: totalAdultCountLabel.widthAnchor).isActive = true
-    totalChildCountLabel.heightAnchor.constraint(equalTo: totalAdultCountLabel.heightAnchor).isActive = true
-    
-    totalCountView.addSubview(childTitleLabel)
-    childTitleLabel.topAnchor.constraint(equalTo: totalTeenagerCountLabel.bottomAnchor).isActive = true
-    childTitleLabel.leadingAnchor.constraint(equalTo: teenagerTitleLabel.trailingAnchor).isActive = true
-    childTitleLabel.bottomAnchor.constraint(equalTo: adultTitleLabel.bottomAnchor).isActive = true
-    childTitleLabel.widthAnchor.constraint(equalTo: adultTitleLabel.widthAnchor).isActive = true
-    
     totalCountView.addSubview(totalSeniorCountLabel)
     totalSeniorCountLabel.topAnchor.constraint(equalTo: totalCountView.topAnchor).isActive = true
-    totalSeniorCountLabel.leadingAnchor.constraint(equalTo: totalChildCountLabel.trailingAnchor).isActive = true
+    totalSeniorCountLabel.leadingAnchor.constraint(equalTo: totalTeenagerCountLabel.trailingAnchor).isActive = true
     totalSeniorCountLabel.trailingAnchor.constraint(equalTo: dismissButton.leadingAnchor).isActive = true
     totalSeniorCountLabel.widthAnchor.constraint(equalTo: totalAdultCountLabel.widthAnchor).isActive = true
     totalSeniorCountLabel.heightAnchor.constraint(equalTo: totalAdultCountLabel.heightAnchor).isActive = true
     
     totalCountView.addSubview(seniorTitleLabel)
     seniorTitleLabel.topAnchor.constraint(equalTo: totalSeniorCountLabel.bottomAnchor).isActive = true
-    seniorTitleLabel.leadingAnchor.constraint(equalTo: childTitleLabel.trailingAnchor).isActive = true
+    seniorTitleLabel.leadingAnchor.constraint(equalTo: teenagerTitleLabel.trailingAnchor).isActive = true
     seniorTitleLabel.trailingAnchor.constraint(equalTo: totalSeniorCountLabel.trailingAnchor).isActive = true
     seniorTitleLabel.bottomAnchor.constraint(equalTo: adultTitleLabel.bottomAnchor).isActive = true
     seniorTitleLabel.widthAnchor.constraint(equalTo: adultTitleLabel.widthAnchor).isActive = true
