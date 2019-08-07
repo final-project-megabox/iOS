@@ -9,6 +9,9 @@ import UIKit
 
 class TheaterCategoryReservationViewController: UIViewController {
   // MARK:- Properties
+  private let urlStr: String = "http://megabox.hellocoding.shop//database/reservationScheduleList/"
+  
+  private var timer: Timer!
   private var isFirst = true
   var isCancel = false
   
@@ -32,7 +35,6 @@ class TheaterCategoryReservationViewController: UIViewController {
     menuView.delegate = self
     menuView.headerView.delegate = self
     
-    
     setupMenuView()
   }
   
@@ -47,8 +49,14 @@ class TheaterCategoryReservationViewController: UIViewController {
         menuView.makeTableViewMovieData()
       }
     }
-    
+    numPages = 0
     startAdAnimation()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    
+    endAdAnimation()
   }
   
   override func viewWillLayoutSubviews() {
@@ -57,9 +65,60 @@ class TheaterCategoryReservationViewController: UIViewController {
   }
   
   // MARK:- Methods
+  func getReservationDataAndSort(_ selectedRegionName: String, _ date: String, vc: UIViewController?) {
+    NetworkService.getReservationData(urlStr, regionName: selectedRegionName, date: date) { result in
+      switch result {
+      case .success(let data):
+        var reservationMovieDatas = data
+        self.shared.theaterCategoryMovie = [:]
+        self.shared.theaterCategoryDetailMovie = [:]
+        
+        // 예매율 영화명으로 영화관별 예매 영화 정보를 소팅
+        for (_, title) in self.shared.sortedAllMovieTitle.enumerated() {
+          reservationMovieDatas = reservationMovieDatas.sorted(by: { title == $1.movie
+          })
+        }
+        self.shared.reservationMovieData = reservationMovieDatas
+        
+        // 해당 영화관의 영화 정보 하나의 모델에 저장
+        for (_, data) in reservationMovieDatas.enumerated() {
+          if self.shared.theaterCategoryMovie[data.movie] == nil {
+            self.shared.theaterCategoryMovie[data.movie] = [data]
+          } else {
+            self.shared.theaterCategoryMovie[data.movie]?.append(data)
+          }
+        }
+        
+        // 해당 영화관의 영화 디테일 정보 하나의 모델에 저장
+        for (_, data) in reservationMovieDatas.enumerated() {
+          if self.shared.theaterCategoryDetailMovie[data.movie] == nil {
+            self.shared.theaterCategoryDetailMovie[data.movie] = [data.screen: [data.startTime: data]]
+          } else {
+            if self.shared.theaterCategoryDetailMovie[data.movie]![data.screen] == nil {
+              self.shared.theaterCategoryDetailMovie[data.movie]![data.screen] = [data.startTime: data]
+              
+            } else {
+              self.shared.theaterCategoryDetailMovie[data.movie]![data.screen]![data.startTime] = data
+            }
+          }
+        }
+        
+        // 영화 타이틀만 저장 및 중복 제거(예매율 소팅)
+        self.shared.sortedTheaterMovieTitle = reservationMovieDatas.map({ $0.movie })
+        self.shared.sortedTheaterMovieTitle = self.shared.sortedTheaterMovieTitle.removeDuplicates()
+        
+        self.menuView.calculateMoviesData()
+        self.menuView.makeTableViewMovieData()
+        self.menuView.theaterTableView.reloadData()
+      case .failure(let err):
+        print("[Log] :", err.localizedDescription)
+      }
+    }
+  }
+  
   // MARK: startAdAnimation
   private func startAdAnimation() {
-    let timer: Timer = Timer.scheduledTimer(
+    timer = Timer.scheduledTimer(
       timeInterval: 3,
       target: self,
       selector: #selector(adAnimation),
@@ -67,6 +126,10 @@ class TheaterCategoryReservationViewController: UIViewController {
       repeats: true
     )
     timer.fire()
+  }
+  
+  private func endAdAnimation() {
+    timer.invalidate()
   }
   
   // MARK: adAnimation
@@ -91,6 +154,10 @@ class TheaterCategoryReservationViewController: UIViewController {
 }
 
 extension TheaterCategoryReservationViewController: TheaterCategoryReservationViewDelegate {
+  func touchUpDateTableView(_ dateStr: String, _ region: String) {
+    getReservationDataAndSort(region, dateStr, vc: nil)
+  }
+  
   func sendTitleData() {
     print("TheaterCategoryReservationViewController[96Line] - titleDelegate")
   }
@@ -122,6 +189,46 @@ extension TheaterCategoryReservationViewController: TheaterCategoryReservationHe
   }
   
   func touchUpDateButton() {
+    menuView.bgBottomView.isHidden.toggle()
+    menuView.dateTableView.isHidden.toggle()
     
+    var dateArr: [String] = []
+    var fullDateArr: [String] = []
+    var allFullDateArr: [String] = []
+    
+    let formatter = DateFormatter()
+    let formatter2 = DateFormatter()
+    let formatter3 = DateFormatter()
+    formatter.locale = Locale(identifier: "ko_KR")
+    formatter2.locale = Locale(identifier: "ko_KR")
+    formatter3.locale = Locale(identifier: "ko_KR")
+    formatter.dateFormat = "yyyy-MM"
+    
+    let date = Date()
+    
+    let yearAndMonth = formatter.string(from: date)
+    dateArr.append(yearAndMonth)
+    fullDateArr.append(yearAndMonth)
+    allFullDateArr.append(yearAndMonth)
+    
+    for i in 0..<5 {
+      formatter.dateFormat = "E dd"
+      formatter2.dateFormat = "M월 d일(E)"
+      formatter3.dateFormat = "yyyy-MM-dd"
+      let dataStr = formatter.string(from: Calendar.current.date(byAdding: .day, value: i, to: date)!)
+      
+      let fullDateStr = formatter2.string(from: Calendar.current.date(byAdding: .day, value: i, to: date)!)
+      
+      let allFullDateStr = formatter3.string(from: Calendar.current.date(byAdding: .day, value: i, to: date)!)
+      
+      dateArr.append(dataStr)
+      fullDateArr.append(fullDateStr)
+      allFullDateArr.append(allFullDateStr)
+    }
+    
+    menuView.dateTableData = dateArr
+    menuView.fullDate = fullDateArr
+    menuView.fullAllDate = allFullDateArr
+    menuView.dateTableView.reloadData()
   }
 }

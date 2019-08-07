@@ -13,14 +13,16 @@ class TheaterCategoryCollectionCell: UICollectionViewCell {
   
   private let startTimeLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "10:15", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 15, alignment: .center)
+    label.labelSetup(text: "10:15", color: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), fontSize: 14, alignment: .center)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
   private let endTimeLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "~12:08", color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), fontSize: 12, alignment: .center)
+    label.labelSetup(text: "~12:08", color: #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), fontSize: 11, alignment: .center)
+    label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -28,6 +30,7 @@ class TheaterCategoryCollectionCell: UICollectionViewCell {
   private let remainSeats: UILabel = {
     let label = UILabel()
     label.labelSetup(text: "14석", color: UIColor.appColor(.megaBoxColor), fontSize: 10, alignment: .center)
+    label.font = UIFont.systemFont(ofSize: 10, weight: .regular)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -54,7 +57,7 @@ class TheaterCategoryCollectionCell: UICollectionViewCell {
     startTimeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     
     contentView.addSubview(endTimeLabel)
-    endTimeLabel.topAnchor.constraint(equalTo: startTimeLabel.bottomAnchor, constant: margin / 2).isActive = true
+    endTimeLabel.topAnchor.constraint(equalTo: startTimeLabel.bottomAnchor, constant: margin / 3).isActive = true
     endTimeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     endTimeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     
@@ -62,7 +65,7 @@ class TheaterCategoryCollectionCell: UICollectionViewCell {
     remainSeats.topAnchor.constraint(equalTo: endTimeLabel.bottomAnchor, constant: margin / 2).isActive = true
     remainSeats.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
     remainSeats.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-    remainSeats.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin / 2).isActive = true
+    remainSeats.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {

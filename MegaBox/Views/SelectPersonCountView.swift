@@ -29,13 +29,6 @@ class SelectPersonCountView: UIView {
     }
   }
   
-  var childCount: Int = 0 {
-    didSet {
-      totalChildCountLabel.text = "\(childCount)"
-      childCountLabel.text = "\(childCount)"
-    }
-  }
-  
   var seniorCount: Int = 0 {
     didSet {
       totalSeniorCountLabel.text = "\(seniorCount)"
@@ -120,26 +113,6 @@ class SelectPersonCountView: UIView {
     return label
   }()
   
-  private let totalChildCountLabel: UILabel = {
-    let label = UILabel()
-    label.text = "0"
-    label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-    label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 19, weight: .bold)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
-  private let childTitleLabel: UILabel = {
-    let label = UILabel()
-    label.text = "어린이"
-    label.textColor = #colorLiteral(red: 0.2199999988, green: 0.2199999988, blue: 0.2199999988, alpha: 1)
-    label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 13)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
   private let totalSeniorCountLabel: UILabel = {
     let label = UILabel()
     label.text = "0"
@@ -159,10 +132,6 @@ class SelectPersonCountView: UIView {
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
-  
-  
-  
-  
   
   private let adultView: UIView = {
     let view = UIView()
@@ -261,55 +230,6 @@ class SelectPersonCountView: UIView {
     return label
   }()
   
-  //어린이
-  private let childView: UIView = {
-    let view = UIView()
-    view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-  
-  private let childLabel: UILabel = {
-    let label = UILabel()
-    label.text = "어린이"
-    label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
-  private let childCountLabel: UILabel = {
-    let label = UILabel()
-    label.text = "0"
-    label.textColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
-  private let childPlusButton: UIButton = {
-    let button = UIButton(type: .custom)
-    button.setImage(#imageLiteral(resourceName: "seatselect_plus"), for: .normal)
-    button.tag = 4
-    button.addTarget(self, action: #selector(didTapPlusButton(_:)), for: .touchUpInside)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
-  
-  private let childMinus: UIButton = {
-    let button = UIButton(type: .custom)
-    button.setImage(#imageLiteral(resourceName: "seatselect_minus"), for: .normal)
-    button.tag = 5
-    button.addTarget(self, action: #selector(didTapMinusButton(_:)), for: .touchUpInside)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
-  
-  private let childViewBottomLabel: UILabel = {
-    let label = UILabel()
-    label.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
   //우대
   private let seniorView: UIView = {
     let view = UIView()
@@ -337,7 +257,7 @@ class SelectPersonCountView: UIView {
   private let seniorPlusButton: UIButton = {
     let button = UIButton(type: .custom)
     button.setImage(#imageLiteral(resourceName: "seatselect_plus"), for: .normal)
-    button.tag = 6
+    button.tag = 4
     button.addTarget(self, action: #selector(didTapPlusButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
@@ -346,7 +266,7 @@ class SelectPersonCountView: UIView {
   private let seniorMinus: UIButton = {
     let button = UIButton(type: .custom)
     button.setImage(#imageLiteral(resourceName: "seatselect_minus"), for: .normal)
-    button.tag = 7
+    button.tag = 5
     button.addTarget(self, action: #selector(didTapMinusButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
@@ -382,11 +302,11 @@ class SelectPersonCountView: UIView {
       delegate?.touchUpFinishButton(sender, reservationPersonCount: nil)
       return
     }
+    
     let data = ReservationPersonCount(
       theaterNumber: movieTheaterNumber,
       adultCount: adultCount,
       teenagerCount: teenagerCount,
-      childCount: childCount,
       seniorCount: seniorCount
     )
     
@@ -406,13 +326,8 @@ class SelectPersonCountView: UIView {
       guard totalCount < 8 else { delegate?.touchUpPlusButton(sender); return }
       teenagerCount += 1
       totalCount += 1
-    //어린이
-    case 4:
-      guard totalCount < 8 else { delegate?.touchUpPlusButton(sender); return }
-      childCount += 1
-      totalCount += 1
     //우대
-    case 6:
+    case 4:
       guard totalCount < 8 else { delegate?.touchUpPlusButton(sender); return }
       seniorCount += 1
       totalCount += 1
@@ -434,13 +349,8 @@ class SelectPersonCountView: UIView {
       guard teenagerCount > 0 else { return }
       teenagerCount -= 1
       totalCount -= 1
-    //어린이
-    case 5:
-      guard childCount > 0 else { return }
-      childCount -= 1
-      totalCount -= 1
     //우대
-    case 7:
+    case 5:
       guard seniorCount > 0 else { return }
       seniorCount -= 1
       totalCount -= 1
@@ -497,28 +407,16 @@ class SelectPersonCountView: UIView {
     teenagerTitleLabel.bottomAnchor.constraint(equalTo: adultTitleLabel.bottomAnchor).isActive = true
     teenagerTitleLabel.widthAnchor.constraint(equalTo: adultTitleLabel.widthAnchor).isActive = true
     
-    totalCountView.addSubview(totalChildCountLabel)
-    totalChildCountLabel.topAnchor.constraint(equalTo: totalCountView.topAnchor).isActive = true
-    totalChildCountLabel.leadingAnchor.constraint(equalTo: totalTeenagerCountLabel.trailingAnchor).isActive = true
-    totalChildCountLabel.widthAnchor.constraint(equalTo: totalAdultCountLabel.widthAnchor).isActive = true
-    totalChildCountLabel.heightAnchor.constraint(equalTo: totalAdultCountLabel.heightAnchor).isActive = true
-    
-    totalCountView.addSubview(childTitleLabel)
-    childTitleLabel.topAnchor.constraint(equalTo: totalTeenagerCountLabel.bottomAnchor).isActive = true
-    childTitleLabel.leadingAnchor.constraint(equalTo: teenagerTitleLabel.trailingAnchor).isActive = true
-    childTitleLabel.bottomAnchor.constraint(equalTo: adultTitleLabel.bottomAnchor).isActive = true
-    childTitleLabel.widthAnchor.constraint(equalTo: adultTitleLabel.widthAnchor).isActive = true
-    
     totalCountView.addSubview(totalSeniorCountLabel)
     totalSeniorCountLabel.topAnchor.constraint(equalTo: totalCountView.topAnchor).isActive = true
-    totalSeniorCountLabel.leadingAnchor.constraint(equalTo: totalChildCountLabel.trailingAnchor).isActive = true
+    totalSeniorCountLabel.leadingAnchor.constraint(equalTo: totalTeenagerCountLabel.trailingAnchor).isActive = true
     totalSeniorCountLabel.trailingAnchor.constraint(equalTo: dismissButton.leadingAnchor).isActive = true
     totalSeniorCountLabel.widthAnchor.constraint(equalTo: totalAdultCountLabel.widthAnchor).isActive = true
     totalSeniorCountLabel.heightAnchor.constraint(equalTo: totalAdultCountLabel.heightAnchor).isActive = true
     
     totalCountView.addSubview(seniorTitleLabel)
     seniorTitleLabel.topAnchor.constraint(equalTo: totalSeniorCountLabel.bottomAnchor).isActive = true
-    seniorTitleLabel.leadingAnchor.constraint(equalTo: childTitleLabel.trailingAnchor).isActive = true
+    seniorTitleLabel.leadingAnchor.constraint(equalTo: teenagerTitleLabel.trailingAnchor).isActive = true
     seniorTitleLabel.trailingAnchor.constraint(equalTo: totalSeniorCountLabel.trailingAnchor).isActive = true
     seniorTitleLabel.bottomAnchor.constraint(equalTo: adultTitleLabel.bottomAnchor).isActive = true
     seniorTitleLabel.widthAnchor.constraint(equalTo: adultTitleLabel.widthAnchor).isActive = true
@@ -591,43 +489,9 @@ class SelectPersonCountView: UIView {
     teenagerCountLabel.trailingAnchor.constraint(equalTo: teenagerMinus.leadingAnchor, constant: -15).isActive = true
     teenagerCountLabel.centerYAnchor.constraint(equalTo: teenagerMinus.centerYAnchor).isActive = true
     
-    //어린이
-    addSubview(childView)
-    childView.topAnchor.constraint(equalTo: teenagerViewBottomLabel.bottomAnchor).isActive = true
-    childView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-    childView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-    childView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-    
-    childView.addSubview(childViewBottomLabel)
-    childViewBottomLabel.leadingAnchor.constraint(equalTo: childView.leadingAnchor).isActive = true
-    childViewBottomLabel.trailingAnchor.constraint(equalTo: childView.trailingAnchor).isActive = true
-    childViewBottomLabel.bottomAnchor.constraint(equalTo: childView.bottomAnchor).isActive = true
-    childViewBottomLabel.heightAnchor.constraint(equalToConstant: 1).isActive = true
-    
-    childView.addSubview(childLabel)
-    childLabel.topAnchor.constraint(equalTo: childView.topAnchor, constant: 15).isActive = true
-    childLabel.leadingAnchor.constraint(equalTo: childView.leadingAnchor, constant: 15).isActive = true
-    childLabel.centerYAnchor.constraint(equalTo: childView.centerYAnchor).isActive = true
-    
-    childView.addSubview(childPlusButton)
-    childPlusButton.trailingAnchor.constraint(equalTo: childView.trailingAnchor, constant: -10).isActive = true
-    childPlusButton.centerYAnchor.constraint(equalTo: childView.centerYAnchor).isActive = true
-    childPlusButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-    childPlusButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    
-    childView.addSubview(childMinus)
-    childMinus.trailingAnchor.constraint(equalTo: childPlusButton.leadingAnchor, constant: -3).isActive = true
-    childMinus.centerYAnchor.constraint(equalTo: childView.centerYAnchor).isActive = true
-    childMinus.widthAnchor.constraint(equalToConstant: 40).isActive = true
-    childMinus.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    
-    childView.addSubview(childCountLabel)
-    childCountLabel.trailingAnchor.constraint(equalTo: childMinus.leadingAnchor, constant: -15).isActive = true
-    childCountLabel.centerYAnchor.constraint(equalTo: childMinus.centerYAnchor).isActive = true
-    
     //우대
     addSubview(seniorView)
-    seniorView.topAnchor.constraint(equalTo: childViewBottomLabel.bottomAnchor).isActive = true
+    seniorView.topAnchor.constraint(equalTo: teenagerViewBottomLabel.bottomAnchor).isActive = true
     seniorView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     seniorView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     seniorView.heightAnchor.constraint(equalToConstant: 50).isActive = true
