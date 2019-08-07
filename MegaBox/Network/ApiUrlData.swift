@@ -53,7 +53,7 @@ class ApiUrlData {
         let myPageURL: String = "http://megabox.hellocoding.shop//accounts/myPage/"
       return myPageURL
       
-      case .movieDetailApi
+    case .movieDetailApi:
         let movieDetailURL: String = "http://megabox.hellocoding.shop//database/movieDetail/"
       return movieDetailURL
     }

@@ -80,7 +80,7 @@ extension QuickReservationViewController: QuickReservationViewDelegate {
   }
   
   func touchUpfaleftButton() {
-    NetworkService2.getRegionData { result in
+    NetworkService.getRegionData { result in
       switch result {
       case .success(let data):
         let theaterCategoryVC = TheaterCategorySelectTheaterViewController()
