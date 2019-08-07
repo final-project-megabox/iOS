@@ -10,6 +10,9 @@ import UIKit
 
 class MyPageViewController: UIViewController {
   
+  let url = "http://megabox.hellocoding.shop//database/showWishMovies/"
+  let shared = UserDataManager.shared
+  
   let myPageTopView: MyPageTopView = {
     let view = MyPageTopView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -25,6 +28,8 @@ class MyPageViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     myPageTopView.delegate = self
+    myPageView.delegate = self
+    
     getUserData()
     setupMaPageView()
   }
@@ -59,6 +64,31 @@ extension MyPageViewController: MyPageTopViewDelegate {
   
   func touchUpDismissButton(_ sender: UIButton) {
     self.presentingViewController?.dismiss(animated: false)
+  }
+  
+  
+}
+
+
+extension MyPageViewController: MyPageContentViewDelegate {
+  func touchUpWishMovieButton(sender: UIButton) {
+    let wishMovieVC = MyPageWishViewController()
+    
+    NetworkService.getUserWishMovie(url) { (result) in
+      switch result {
+      case .success(let data):
+        self.shared.wishMovieData = data
+        print(data)
+        self.present(wishMovieVC, animated: false)
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
+   
+  }
+  
+  func touchUpWatchedMovieButton(sender: UIButton) {
+    
   }
   
   

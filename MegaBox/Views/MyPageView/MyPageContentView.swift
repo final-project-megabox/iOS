@@ -10,8 +10,9 @@ import UIKit
 
 class MyPageContentView: UIView {
   
+  var delegate: MyPageContentViewDelegate?
   private let shared = UserDataManager.shared
-
+  
   
   let myPageTableView: UITableView = {
     let tableView = UITableView()
@@ -43,6 +44,7 @@ class MyPageContentView: UIView {
   
   private func setupTableView() {
     myPageTableView.dataSource = self
+    
   }
   
   
@@ -50,7 +52,15 @@ class MyPageContentView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  @objc func didTapSecondViewButton(_ sender: UIButton) {
+    print("didTapSecondViewButton")
+    delegate?.touchUpWishMovieButton(sender: sender)
+  }
   
+  @objc func didTapThirdViewButton(_ sender: UIButton) {
+    print("didTapThirdViewButton")
+    delegate?.touchUpWatchedMovieButton(sender: sender)
+  }
   
 }
 
@@ -122,12 +132,11 @@ extension MyPageContentView: UITableViewDataSource {
       four.secondContentLabel.text = "보고싶은 영화"
       let number1 = shared.myPageData?.wishMovieNumber ?? 0
       four.secondCountLabel.text = "\(number1)"
+      four.secondView.addTarget(self, action: #selector(didTapSecondViewButton(_:)), for: .touchUpInside)
       four.thirdContentLabel.text = "내가 본 영화"
       let number2 = shared.myPageData?.watchedMovieNumber ?? 0
-//      if let number = shared.myPageData?.watchedMovieNumber {
-        four.thirdCountLabel.text = "\(number2)"
-//      }
-      
+      four.thirdCountLabel.text = "\(number2)"
+      four.thirdView.addTarget(self, action: #selector(didTapThirdViewButton(_:)), for: .touchUpInside)
       four.fourthContentLabel.text = "나의 무비포스트"
       four.fourthCountLabel.text = "0"
       return four
@@ -139,6 +148,5 @@ extension MyPageContentView: UITableViewDataSource {
 
     
   }
-  
-  
+
 }

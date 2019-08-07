@@ -59,8 +59,8 @@ class MyPageFourContentCell: UITableViewCell {
   }()
   //
   
-  let secondView: UIView = {
-    let view = UIView()
+  let secondView: UIButton = {
+    let view = UIButton()
     view.backgroundColor = .white
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
@@ -100,8 +100,8 @@ class MyPageFourContentCell: UITableViewCell {
   }()
   
   //third
-  let thirdView: UIView = {
-    let view = UIView()
+  let thirdView: UIButton = {
+    let view = UIButton()
     view.backgroundColor = .white
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
@@ -184,7 +184,7 @@ class MyPageFourContentCell: UITableViewCell {
   
   
   
-  //////////
+  
   let separatView: UIView = {
     let view = UIView()
     view.backgroundColor = UIColor.appColor(.selectedCellGrayColor)

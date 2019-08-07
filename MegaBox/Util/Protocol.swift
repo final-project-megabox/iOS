@@ -207,3 +207,12 @@ protocol MovieDetailTopViewDelegate {
   //메뉴
   func touchUpDismissButton()
 }
+
+protocol MyPageContentViewDelegate {
+  
+  //보고싶은 영화
+  func touchUpWishMovieButton(sender: UIButton)
+  
+  //내가 본 영화
+  func touchUpWatchedMovieButton(sender: UIButton)
+}

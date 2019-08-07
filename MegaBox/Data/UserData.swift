@@ -50,3 +50,16 @@ struct PreferTheater: Codable {
   let id: Int
 }
 
+// MARK: - WishMovie
+struct WishMovie: Codable {
+  let imgURL: String
+  let age: String
+  let title: String
+  let bookingRate: Double
+  
+  enum CodingKeys: String, CodingKey {
+    case imgURL = "img_url"
+    case age, title
+    case bookingRate = "booking_rate"
+  }
+}

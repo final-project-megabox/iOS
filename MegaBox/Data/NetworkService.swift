@@ -246,6 +246,33 @@ class NetworkService {
     }
   }
   
-  
+  static func getUserWishMovie(_ urlStr: String, completion: @escaping (Swift.Result<[WishMovie], ErrorType>) -> Void) {
+    let url = URL(string: urlStr)!
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let headers: HTTPHeaders = [
+      "Content-Type": "application/json",
+      "Authorization": "JWT \(token)"
+    ]
+    
+    let req = Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
+    
+    
+    req.validate()
+      .responseData { response in
+        switch response.result {
+        case .success(let data):
+          do {
+            print(data)
+            let userWishMovie = try JSONDecoder().decode([WishMovie].self, from: data)
+            completion(.success(userWishMovie))
+          } catch {
+            print(error.localizedDescription)
+          }
+        case .failure:
+          completion(.failure(ErrorType.networkErr))
+        }
+    }
+  }
   
 }
