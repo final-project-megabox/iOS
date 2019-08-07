@@ -68,6 +68,8 @@ extension MyPageWishMovieView: UITableViewDataSource {
     
     let wishListCell = tableView.dequeueReusableCell(withIdentifier: MyPageWishMovieCell.identifier, for: indexPath) as! MyPageWishMovieCell
     
+    wishListCell.selectionStyle = .none
+    
     //제목
     wishListCell.movieTitleLabel.text = shared.wishMovieData[indexPath.row].title
     

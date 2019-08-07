@@ -87,7 +87,7 @@ class MyPageWishMovieCell: UITableViewCell {
   func setupWishMovieCell() {
     addSubview(gradeImageView)
     gradeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-    gradeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+    gradeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
     gradeImageView.widthAnchor.constraint(equalToConstant: 18).isActive = true
     gradeImageView.heightAnchor.constraint(equalToConstant: 18).isActive = true
     
@@ -97,7 +97,7 @@ class MyPageWishMovieCell: UITableViewCell {
     
     addSubview(thumnailImageView)
     thumnailImageView.topAnchor.constraint(equalTo: gradeImageView.bottomAnchor, constant: 2).isActive = true
-    thumnailImageView.leadingAnchor.constraint(equalTo: gradeImageView.leadingAnchor, constant: 5).isActive = true
+    thumnailImageView.leadingAnchor.constraint(equalTo: gradeImageView.leadingAnchor, constant: 2).isActive = true
     thumnailImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
     thumnailImageView.heightAnchor.constraint(equalToConstant: 85).isActive = true
     thumnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
