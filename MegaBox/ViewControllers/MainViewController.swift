@@ -160,17 +160,25 @@ extension MainViewController: MainTopViewDelegate {
   func openNavigationDrawerView() {
     let navigationDrawerVC = NavigationDrawerViewController()
     
-    let url = ApiUrlData.ApiUrl(.myPageApi)
-   
-    NetworkService.getUserMyPageData(url) { (result) in
-      switch result {
-      case .success(let value):
-        self.userShared.myPageData = value
-        self.present(navigationDrawerVC, animated: false)
-      case .failure(let err):
-        print("[Error Log] :", err)
+    if UserDefaults.standard.value(forKey: "Token") != nil { //로그인 되어있을때
+      //사용자의 myPage를 가져오기 위함
+      let url = ApiUrlData.ApiUrl(.myPageApi)
+      
+      NetworkService.getUserMyPageData(url) { (result) in
+        switch result {
+        case .success(let value):
+          self.userShared.myPageData = value
+          print(value)
+          self.present(navigationDrawerVC, animated: false)
+        case .failure(let err):
+          print("result: ", err)
+        }
       }
+    } else {
+      self.present(navigationDrawerVC, animated: false)
     }
+    
+    
   }
   
   func openQuickReservationView() {

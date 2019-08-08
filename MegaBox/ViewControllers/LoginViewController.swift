@@ -11,6 +11,7 @@ import UIKit
 class LoginViewController: UIViewController {
   
   private let shared = MovieDataManager.shared
+  private let userShared = UserDataManager.shared
   private let movieReservationURLStr = "http://megabox.hellocoding.shop//database/showMovies/"
   
   let loginView: LoginView = {
@@ -69,6 +70,7 @@ extension LoginViewController: LoginViewDelegate {
           UserDefaults.standard.setValue(userName, forKey: "UserName")
           UserDefaults.standard.setValue(userId, forKey: "UserId")
           
+          //사용자의 isWhised를 가져오기 위함
           NetworkService.getAllMovieData(self.movieReservationURLStr) { result in
             switch result {
             case .success(let data):

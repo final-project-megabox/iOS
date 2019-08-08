@@ -24,6 +24,7 @@ class MyPageSettingViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     topView.delegate = self
     contentView.delegate = self
     settingView()
