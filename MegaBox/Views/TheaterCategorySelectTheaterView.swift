@@ -15,6 +15,9 @@ class TheaterCategorySelectTheaterView: UIView {
   var regionData: [String]?
   var regionTheaterData: [String]?
   
+  private var regionDataColor: [UIColor] = []
+  private var regionTheaterDataColor: [String: [UIColor]] = [:]
+  
   private let allRegionData = AllRegionData()
   lazy var regionNames: [String] = allRegionData.regionNames
   
@@ -107,21 +110,57 @@ class TheaterCategorySelectTheaterView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    
+    
+    setupProperties()
+    
     regionTableView.dataSource = self
     regionTableView.delegate = self
     regionListTableView.dataSource = self
     regionListTableView.delegate = self
-    
-    setupProperties()
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
     
+    makeTableCellColor()
+    
     regionButton.touchUpButton(isTouched: true, width: regionButton.frame.width)
     regionListButton.touchUpButton(isTouched: false, width: regionListButton.frame.width)
   }
   
+  private func makeTableCellColor() {
+    guard let regionList = regionData else { return }
+    guard let theaterList = regionTheaterData else { return }
+    
+    for region in regionNames {
+      if regionList.contains(region) {
+        regionDataColor.append(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+      } else {
+        regionDataColor.append(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
+      }
+    }
+    
+    for region in regionNames {
+      for theater in allRegionData.region[region]! {
+        if theaterList.contains(theater) {
+          if regionTheaterDataColor[region] == nil {
+            regionTheaterDataColor[region] = [#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)]
+          } else {
+            regionTheaterDataColor[region]?.append(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+          }
+        } else {
+          if regionTheaterDataColor[region] == nil {
+            regionTheaterDataColor[region] = [#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)]
+          } else {
+            regionTheaterDataColor[region]?.append(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1))
+          }
+        }
+      }
+    }
+    
+    regionDataColor[0] = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+  }
   
   @objc private func touchUpmenuTitleSelectbutton(_ sender: UIButton) {
     delegate?.touchUpmenuTitleSelectbutton()
@@ -216,18 +255,24 @@ extension TheaterCategorySelectTheaterView: UITableViewDataSource {
     regionTableViewBgColorView.backgroundColor = UIColor.appColor(.selectedCellGrayColor)
     regionListTableViewBgColorView.backgroundColor = UIColor.appColor(.selectedCellMintColor)
     
+    
+    let regionName = regionNames[selectedRegionNumber]
+    
     if tableView == regionTableView {
       let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionCell
+      cell.isUserInteractionEnabled = true
       cell.selectedBackgroundView = regionTableViewBgColorView
       cell.regionName.text = regionNames[indexPath.row]
       
       if indexPath.row == 0 {
-        cell.regionName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        cell.regionName.textColor = regionDataColor[indexPath.row]
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
       } else {
-        guard let regionList = regionData,
-          let regionName = cell.regionName.text else { return cell }
-        if regionList.contains(regionName) {
-          cell.regionName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        guard let regionList = regionData else { return cell }
+        if regionList.contains(regionNames[indexPath.row]) {
+          cell.regionName.textColor = regionDataColor[indexPath.row]
+        } else {
+          cell.isUserInteractionEnabled = false
         }
       }
       return cell
@@ -235,17 +280,28 @@ extension TheaterCategorySelectTheaterView: UITableViewDataSource {
       if selectedRegionNumber == 0 {
         let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterEmptyCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterEmptyCell
         cell.selectedBackgroundView = regionTableViewBgColorView
+        
         return cell
       } else {
         let cell = tableView.dequeueReusableCell(withIdentifier: TheaterCategorySelectTheaterRegionListCell.identifier, for: indexPath) as! TheaterCategorySelectTheaterRegionListCell
         cell.selectedBackgroundView = regionListTableViewBgColorView
-        cell.regionListName.text = allRegionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
+        cell.regionListName.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        cell.isUserInteractionEnabled = true
+        let theaterName = allRegionData.region[regionNames[selectedRegionNumber]]?[indexPath.row]
+        cell.regionListName.text = theaterName
+
+        guard let regionTheaterList = regionTheaterData else { return cell }
+        if regionTheaterList.contains(theaterName!) {
+          cell.regionListName.textColor = regionTheaterDataColor[regionName]![indexPath.row]
+        } else {
+          cell.isUserInteractionEnabled = false
+        }
+        
         if cell.regionListName.text == selectedTheater {
           tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
           cell.regionListName.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        } else {
-          cell.regionListName.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         }
+        
         return cell
       }
     }

@@ -60,18 +60,22 @@ extension SelectPersonCountViewController: selectPersonCountViewDelegate {
       presentingVC.threeSixMovieTheaterView.teenagerCount = reservationPersonCount.teenagerCount
       presentingVC.threeSixMovieTheaterView.seniorCount = reservationPersonCount.seniorCount
     case 82:
+      presentingVC.eightTwoMovieTheaterView.totalCount = reservationPersonCount.adultCount + reservationPersonCount.teenagerCount + reservationPersonCount.seniorCount
       presentingVC.eightTwoMovieTheaterView.adultCount = reservationPersonCount.adultCount
       presentingVC.eightTwoMovieTheaterView.teenagerCount = reservationPersonCount.teenagerCount
       presentingVC.eightTwoMovieTheaterView.seniorCount = reservationPersonCount.seniorCount
     case 130:
+      presentingVC.oneThreeZeroMovieTheaterView.totalCount = reservationPersonCount.adultCount + reservationPersonCount.teenagerCount + reservationPersonCount.seniorCount
       presentingVC.oneThreeZeroMovieTheaterView.adultCount = reservationPersonCount.adultCount
       presentingVC.oneThreeZeroMovieTheaterView.teenagerCount = reservationPersonCount.teenagerCount
       presentingVC.oneThreeZeroMovieTheaterView.seniorCount = reservationPersonCount.seniorCount
     case 140:
+      presentingVC.oneFourZeroMovieTheaterView.totalCount = reservationPersonCount.adultCount + reservationPersonCount.teenagerCount + reservationPersonCount.seniorCount
       presentingVC.oneFourZeroMovieTheaterView.adultCount = reservationPersonCount.adultCount
       presentingVC.oneFourZeroMovieTheaterView.teenagerCount = reservationPersonCount.teenagerCount
       presentingVC.oneFourZeroMovieTheaterView.seniorCount = reservationPersonCount.seniorCount
     case 150:
+      presentingVC.oneFiveZeroMovieTheaterView.totalCount = reservationPersonCount.adultCount + reservationPersonCount.teenagerCount + reservationPersonCount.seniorCount
       presentingVC.oneFiveZeroMovieTheaterView.adultCount = reservationPersonCount.adultCount
       presentingVC.oneFiveZeroMovieTheaterView.teenagerCount = reservationPersonCount.teenagerCount
       presentingVC.oneFiveZeroMovieTheaterView.seniorCount = reservationPersonCount.seniorCount

@@ -83,7 +83,54 @@ class MainViewController: UIViewController {
   // MARK: pullRefreshTableView()
   @objc private func pullRefreshTableView() {
     mainRefreshControl.endRefreshing()
+    getNewMainData()
     mainTableView.reloadData()
+  }
+  
+  private func getNewMainData() {
+    let boxOfficeMovieDataUrl = ApiUrlData.ApiUrl(.boxOfficeMovieDataApi)
+    
+    NetworkService.getAllMovieData(boxOfficeMovieDataUrl) { result in
+      switch result {
+      case .success(let data):
+        self.shared.allMovieData = data
+        self.shared.sortedAllMovieTitle = data.map({ $0.title })
+        
+        let moviePosterData = ApiUrlData.ApiUrl(.movieMainPosterApi).split(separator: "|")
+        let moviePosterUrl = String(moviePosterData[0])
+        let moviePosterTitle = String(moviePosterData[1])
+        let moviePosterSubTitle = String(moviePosterData[2])
+        
+        let eventData = ApiUrlData.ApiUrl(.eventApi).split(separator: "|")
+        let eventDataUrl = String(eventData[0])
+        let eventDataTitle = String(eventData[1])
+        let eventDataSubTitle = String(eventData[2])
+        
+        let moviePosterURL = URL(string: moviePosterUrl)!
+        let eventDataURL = URL(string: eventDataUrl)!
+        
+        do {
+          let moviePosterData = try Data(contentsOf: moviePosterURL)
+          self.allMovieData = data
+          self.mainPosterImageData = moviePosterData
+          self.mainPosterTitleStr = moviePosterTitle
+          self.mainPosterSubTitleStr = moviePosterSubTitle
+        } catch {
+          print("[Error Log] :", error.localizedDescription)
+        }
+        
+        do {
+          let eventData = try Data(contentsOf: eventDataURL)
+          self.eventImageData = eventData
+          self.eventTitleStr = eventDataTitle
+          self.eventSubTitleStr = eventDataSubTitle
+        } catch {
+          print("[Error Log] :", error.localizedDescription)
+        }
+      case .failure(let err):
+        print(err)
+      }
+    }
   }
   
   // MARK: setupMainTopView()
