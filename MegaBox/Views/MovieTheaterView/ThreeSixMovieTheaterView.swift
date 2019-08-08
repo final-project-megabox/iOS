@@ -83,6 +83,14 @@ class ThreeSixMovieTheaterView: UIView {
     setUpProperties()
   }
   
+  @objc private func touchUpPreviousButton() {
+    delegate?.touchUpThreeSixPreviousButton()
+  }
+  
+  @objc private func touchUpDismissButton() {
+    delegate?.touchUpThreeSixDismissButton()
+  }
+  
   @objc private func touchUpSelectOkButton() {
     delegate?.touchUpThreeSixSelectOkButton(seatNumber: selectedSeatArr, seatCount: selectedSeatArr.count)
   }
@@ -173,6 +181,18 @@ class ThreeSixMovieTheaterView: UIView {
     firstView.widthAnchor.constraint(equalToConstant: 35 * 14).isActive = true
     firstView.heightAnchor.constraint(equalToConstant: 35 * 4).isActive = true
     
+    scrollView.addSubview(enterImage)
+    enterImage.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+    enterImage.bottomAnchor.constraint(equalTo: firstView.topAnchor).isActive = true
+    enterImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    enterImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    
+    scrollView.addSubview(exitImage)
+    exitImage.topAnchor.constraint(equalTo: firstView.bottomAnchor).isActive = true
+    exitImage.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+    exitImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
+    exitImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    
     for i in 0..<seatButtonArr.count {
       if i < 14 {
         if i == 0 {
@@ -214,16 +234,16 @@ class ThreeSixMovieTheaterView: UIView {
     topViewBottomLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
     
     totalCountView.addSubview(previousButton)
+    previousButton.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
     previousButton.centerYAnchor.constraint(equalTo: totalCountView.centerYAnchor).isActive = true
-    previousButton.leadingAnchor.constraint(equalTo: totalCountView.leadingAnchor).isActive = true
-    previousButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    previousButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    previousButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+    previousButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     
     totalCountView.addSubview(dismissButton)
+    dismissButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     dismissButton.centerYAnchor.constraint(equalTo: totalCountView.centerYAnchor).isActive = true
-    dismissButton.trailingAnchor.constraint(equalTo: totalCountView.trailingAnchor).isActive = true
-    dismissButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     dismissButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    dismissButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     
     totalCountView.addSubview(totalAdultCountLabel)
     totalAdultCountLabel.topAnchor.constraint(equalTo: totalCountView.topAnchor).isActive = true
@@ -384,9 +404,10 @@ class ThreeSixMovieTheaterView: UIView {
   }()
   
   private let previousButton: UIButton = {
-    let button = UIButton()
+    let button = UIButton(type: .custom)
     button.setImage(#imageLiteral(resourceName: "common_btn_topbar_prev2"), for: .normal)
     button.contentMode = .scaleAspectFit
+    button.addTarget(self, action: #selector(touchUpPreviousButton), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -395,6 +416,7 @@ class ThreeSixMovieTheaterView: UIView {
     let button = UIButton()
     button.setImage(#imageLiteral(resourceName: "purpleCancel_icon"), for: .normal)
     button.contentMode = .scaleAspectFit
+    button.addTarget(self, action: #selector(touchUpDismissButton), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -559,6 +581,22 @@ class ThreeSixMovieTheaterView: UIView {
   private let screenImage: UIImageView = {
     let imageView = UIImageView()
     imageView.image = #imageLiteral(resourceName: "seat_select_image_screen")
+    imageView.contentMode = .scaleAspectFit
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  private let enterImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "seatselect_icon_exit_inout.9")
+    imageView.contentMode = .scaleAspectFit
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  private let exitImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "seatselect_icon_exit_r.9")
     imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView

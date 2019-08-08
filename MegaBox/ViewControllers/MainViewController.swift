@@ -19,6 +19,10 @@ class MainViewController: UIViewController {
   var mainPosterTitleStr: String?
   var mainPosterSubTitleStr: String?
   
+  var eventImageData: Data?
+  var eventTitleStr: String?
+  var eventSubTitleStr: String?
+  
   var allMovieData: [MovieData]?
   
   var cellHeightDictionary: NSMutableDictionary = [:]
@@ -149,6 +153,7 @@ extension MainViewController: MainMovieReservationCellDelegate {
           self.allMovieData = data.filter({ $0.releaseDate > currentDateStr })
           
           let cell = self.mainTableView.cellForRow(at: IndexPath(item: 1, section: 0)) as! MainMovieReservationCell
+          
           cell.movieReservationCollection.reloadData()
           self.mainTableView.reloadData()
         case .failure(let err):
@@ -177,6 +182,8 @@ extension MainViewController: MainMovieReservationCellDelegate {
     let url = ApiUrlData.ApiUrl(.movieDetailApi)
     let query = "?movie=\(id)"
     let fullUrl = url + query
+    
+    print(fullUrl)
       
     NetworkService.getMovieDetailData(fullUrl) { (result) in
       switch result {
@@ -250,6 +257,9 @@ extension MainViewController: UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: MainEventCell.identifier) as! MainEventCell
       // Owl Stage Button Click Delegate
       cell.delegate = self
+      cell.eventImageData = eventImageData
+      cell.eventTitleText = eventTitleStr
+      cell.eventSubTitleText = eventSubTitleStr
       cell.selectionStyle = .none
       return cell
     } else if indexPath.row == 5 {
@@ -364,7 +374,7 @@ extension MainViewController: UITableViewDelegate {
       return 90
     } else if indexPath.row == 4 {
       // 이벤트
-      return 380
+      return (((UIScreen.main.bounds.width) * 495) / 845) + 160
     } else if indexPath.row == 5 {
       // 무비박스
       return ((UIScreen.main.bounds.width - 20) * 460) / 708

@@ -33,24 +33,42 @@ class SplashViewController: UIViewController {
       case .success(let data):
         self.shared.allMovieData = data
         self.shared.sortedAllMovieTitle = data.map({ $0.title })
+        
         let moviePosterData = ApiUrlData.ApiUrl(.movieMainPosterApi).split(separator: "|")
         let moviePosterUrl = String(moviePosterData[0])
         let moviePosterTitle = String(moviePosterData[1])
         let moviePosterSubTitle = String(moviePosterData[2])
         
-        let url = URL(string: moviePosterUrl)!
+        let eventData = ApiUrlData.ApiUrl(.eventApi).split(separator: "|")
+        let eventDataUrl = String(eventData[0])
+        let eventDataTitle = String(eventData[1])
+        let eventDataSubTitle = String(eventData[2])
+        
+        let moviePosterURL = URL(string: moviePosterUrl)!
+        let eventDataURL = URL(string: eventDataUrl)!
+        
+        let mainVC = MainViewController()
         
         do {
-          let moviePosterData = try Data(contentsOf: url)
-          let mainVC = MainViewController()
+          let moviePosterData = try Data(contentsOf: moviePosterURL)
           mainVC.allMovieData = data
           mainVC.mainPosterImageData = moviePosterData
           mainVC.mainPosterTitleStr = moviePosterTitle
           mainVC.mainPosterSubTitleStr = moviePosterSubTitle
-          self.present(mainVC, animated: false)
         } catch {
           print("[Error Log] :", error.localizedDescription)
         }
+        
+        do {
+          let eventData = try Data(contentsOf: eventDataURL)
+          mainVC.eventImageData = eventData
+          mainVC.eventTitleStr = eventDataTitle
+          mainVC.eventSubTitleStr = eventDataSubTitle
+        } catch {
+          print("[Error Log] :", error.localizedDescription)
+        }
+        
+        self.present(mainVC, animated: false)
       case .failure(let err):
         print(err)
       }

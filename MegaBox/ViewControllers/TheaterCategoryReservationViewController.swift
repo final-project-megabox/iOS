@@ -9,7 +9,6 @@ import UIKit
 
 class TheaterCategoryReservationViewController: UIViewController {
   // MARK:- Properties
-  private let urlStr: String = "http://megabox.hellocoding.shop//database/reservationScheduleList/"
   
   private var timer: Timer!
   private var isFirst = true
@@ -66,7 +65,8 @@ class TheaterCategoryReservationViewController: UIViewController {
   
   // MARK:- Methods
   func getReservationDataAndSort(_ selectedRegionName: String, _ date: String, vc: UIViewController?) {
-    NetworkService.getReservationData(urlStr, regionName: selectedRegionName, date: date) { result in
+    let url = ApiUrlData.ApiUrl(.secondReservationDataApi)
+    NetworkService.getReservationData(url, regionName: selectedRegionName, date: date) { result in
       switch result {
       case .success(let data):
         var reservationMovieDatas = data

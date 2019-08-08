@@ -322,6 +322,14 @@ class SelectSeatViewController: UIViewController {
 }
 
 extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
+  func touchUpThreeSixPreviousButton() {
+    self.dismiss(animated: false)
+  }
+  
+  func touchUpThreeSixDismissButton() {
+    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)
+  }
+  
   func touchUpThreeSixTheaterSeat(_ sender: UIButton, _ buttonArr: [UIButton], totalCount: Int) {
     guard let buttonTitle = sender.currentTitle else { return }
     if buttonTitle == "" {
@@ -497,6 +505,14 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
 }
 
 extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
+  func touchUpEightTwoPreviousButton() {
+    self.dismiss(animated: false)
+  }
+  
+  func touchUpEightTwoDismissButton() {
+    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)
+  }
+  
   func touchUpEightTwoSelectOkButton(seatNumber: [String], seatCount: Int) {
     pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
   }
@@ -543,6 +559,14 @@ extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
 }
 
 extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
+  func touchUpOneThreeZeroPreviousButton() {
+    self.dismiss(animated: false)
+  }
+  
+  func touchUpOneThreeZeroDismissButton() {
+    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)
+  }
+  
   func touchUpOneThreeZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
     pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
   }
@@ -589,6 +613,14 @@ extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
 }
 
 extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
+  func touchUpOneFourZeroPreviousButton() {
+    self.dismiss(animated: false)
+  }
+  
+  func touchUpOneFourZeroDismissButton() {
+    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)
+  }
+  
   func touchUpOneFourZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
     pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
   }
@@ -636,6 +668,14 @@ extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
 }
 
 extension SelectSeatViewController: OneFiveZeroMovieTheaterViewDelegate {
+  func touchUpOneFiveZeroPreviousButton() {
+    self.dismiss(animated: false)
+  }
+  
+  func touchUpOneFiveZeroDismissButton() {
+    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)
+  }
+  
   func touchUpOneFiveZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
     pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
   }

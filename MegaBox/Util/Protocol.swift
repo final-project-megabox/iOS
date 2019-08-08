@@ -128,6 +128,11 @@ protocol selectPersonCountViewDelegate {
   func touchUpPlusButton(_ sender: UIButton)
   
   func touchUpFinishButton(_ sender: UIButton, reservationPersonCount: ReservationPersonCount?)
+  
+  // 뒤로가기 버튼
+  func touchUpPersonCountPreviousButton()
+  // 메인으로가기 버튼
+  func touchUpPersonCountDismissButton()
 }
 
 protocol ThreeSixMovieTheaterViewDelegate {
@@ -136,6 +141,11 @@ protocol ThreeSixMovieTheaterViewDelegate {
   
   // 좌석 선택 완료
   func touchUpThreeSixSelectOkButton(seatNumber: [String], seatCount: Int)
+  
+  // 뒤로가기 버튼
+  func touchUpThreeSixPreviousButton()
+  // 메인으로가기 버튼
+  func touchUpThreeSixDismissButton()
 }
 
 protocol EightTwoMovieTheaterViewDelegate {
@@ -144,6 +154,11 @@ protocol EightTwoMovieTheaterViewDelegate {
   
   // 좌석 선택 완료
   func touchUpEightTwoSelectOkButton(seatNumber: [String], seatCount: Int)
+  
+  // 뒤로가기 버튼
+  func touchUpEightTwoPreviousButton()
+  // 메인으로가기 버튼
+  func touchUpEightTwoDismissButton()
 }
 
 protocol OneThreeZeroMovieTheaterViewDelegate {
@@ -152,6 +167,11 @@ protocol OneThreeZeroMovieTheaterViewDelegate {
   
   // 좌석 선택 완료
   func touchUpOneThreeZeroSelectOkButton(seatNumber: [String], seatCount: Int)
+  
+  // 뒤로가기 버튼
+  func touchUpOneThreeZeroPreviousButton()
+  // 메인으로가기 버튼
+  func touchUpOneThreeZeroDismissButton()
 }
 
 protocol OneFourZeroMovieTheaterViewDelegate {
@@ -160,6 +180,11 @@ protocol OneFourZeroMovieTheaterViewDelegate {
   
   // 좌석 선택 완료
   func touchUpOneFourZeroSelectOkButton(seatNumber: [String], seatCount: Int)
+  
+  // 뒤로가기 버튼
+  func touchUpOneFourZeroPreviousButton()
+  // 메인으로가기 버튼
+  func touchUpOneFourZeroDismissButton()
 }
 
 protocol OneFiveZeroMovieTheaterViewDelegate {
@@ -168,6 +193,11 @@ protocol OneFiveZeroMovieTheaterViewDelegate {
   
   // 좌석 선택 완료
   func touchUpOneFiveZeroSelectOkButton(seatNumber: [String], seatCount: Int)
+  
+  // 뒤로가기 버튼
+  func touchUpOneFiveZeroPreviousButton()
+  // 메인으로가기 버튼
+  func touchUpOneFiveZeroDismissButton()
 }
 
 protocol PaymentViewDelegate {

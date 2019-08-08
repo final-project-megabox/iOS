@@ -11,16 +11,16 @@ import UIKit
 class EventCollectionCell: UICollectionViewCell {
   static let identifier = "EventCollectionCell"
   
-  let thumbnailImage: UIImageView = {
+  private let thumbnailImage: UIImageView = {
     let imageView = UIImageView()
     imageView.contentMode = .scaleAspectFit
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
   
-  let thumbnailTextLabel: UILabel = {
+  private let thumbnailTextLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "메가박스이벤트", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 13, alignment: .center)
+    label.labelSetup(text: "영화이벤트", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 11, alignment: .center)
     label.backgroundColor = UIColor.appColor(.selectedCellMintColor)
     label.alpha = 0.95
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +59,12 @@ class EventCollectionCell: UICollectionViewCell {
   override func layoutSubviews() {
     super.layoutSubviews()
     setupProperties()
+  }
+  
+  func eventCollectionCellConfigure(imageData: Data, titleText: String, subTitleText: String) {
+    thumbnailImage.image = UIImage(data: imageData)
+    titleNameLabel.text = titleText
+    subLabel.text = subTitleText
   }
   
   private func setupProperties() {

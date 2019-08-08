@@ -16,6 +16,10 @@ class MainEventCell: UITableViewCell {
   
   var delegate: MainEventCellDelegate?
   
+  var eventImageData: Data?
+  var eventTitleText: String?
+  var eventSubTitleText: String?
+  
   private let guideBGView: UIView = {
     let view = UIView()
     view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
@@ -190,7 +194,7 @@ class MainEventCell: UITableViewCell {
     indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2)
     indicatorBarLeadingConstraint.isActive = true
     indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
-    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -(UIScreen.main.bounds.width - 40) + (fontSize * 2))
+    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -(UIScreen.main.bounds.width - 50) + (fontSize * 2))
     indicatorBarTrailingConstraint.isActive = true
     
     guideBGView.addSubview(eventCollection)
@@ -212,7 +216,13 @@ extension MainEventCell: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCollectionCell.identifier, for: indexPath) as! EventCollectionCell
-    cell.thumbnailImage.image = #imageLiteral(resourceName: "ad_event1")
+    
+    cell.eventCollectionCellConfigure(
+      imageData: eventImageData!,
+      titleText: eventTitleText ?? "",
+      subTitleText: eventSubTitleText ?? ""
+    )
+    
     return cell
   }
 }
