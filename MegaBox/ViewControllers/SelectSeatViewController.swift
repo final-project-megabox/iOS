@@ -338,8 +338,12 @@ class SelectSeatViewController: UIViewController {
         if selectedSeatArr.contains(seat.currentTitle!) {
         } else {
           if exceptButtonArr.contains(seat) {
-            // ExceptButtonArr = 장애인 좌석
-            seat.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+            if seat.currentTitle == "" {
+              
+            } else {
+              // ExceptButtonArr = 장애인 좌석
+              seat.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
+            }
           } else {
             seat.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
           }
@@ -451,7 +455,6 @@ class SelectSeatViewController: UIViewController {
   private func presentPaymentVC(seatNumber: [String], seatCount: Int) {
     
     guard let movieData = self.movieData else { return }
-    let scheduleId = movieData.scheduleID
     let price = moneyCount * 11000
     
     let paymentVC = PaymentViewController()
@@ -878,7 +881,7 @@ extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
     guard let buttonTitle = sender.currentTitle else { return }
     let seatIdx = returnSeatIndex(seatString: buttonTitle, buttonArr: buttonArr)
     let selectedSeatCount = selectedSeatArr.count
-    let disabledPerson: [UIButton] = [buttonArr[8], buttonArr[9], buttonArr[10]]
+    let disabledPerson: [UIButton] = [buttonArr[178], buttonArr[179]]
     
     if sender.isSelected {
       // 클릭한 좌석이 이미 선택되어 있다면

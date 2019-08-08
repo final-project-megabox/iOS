@@ -19,6 +19,7 @@ struct ReservationData: Codable {
   let types: [String]
   let stCount, totalSeat: Int
   let seatNumber: [String]
+  let imgURL: String
   let price: [String: Int]
 
   enum CodingKeys: String, CodingKey {
@@ -32,6 +33,7 @@ struct ReservationData: Codable {
     case stCount = "st_count"
     case totalSeat = "total_seat"
     case seatNumber = "seat_number"
+    case imgURL = "img_url"
     case price
   }
 }

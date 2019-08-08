@@ -155,7 +155,7 @@ class TheaterCategoryReservationView: UIView {
     tableViewMovieData = []
     let movieTitle = shared.sortedTheaterMovieTitle.removeDuplicates()
     for (_, title) in movieTitle.enumerated() {
-      let fakeData = ReservationData(scheduleID: 0, theater: "fake", screen: 0, age: "fake", runningTime: 0, date: "fake", startTime: "fake", movie: "fake", types: ["fake"], stCount: 0, totalSeat: 0, seatNumber: ["fake"], price: ["nomal": 11000])
+      let fakeData = ReservationData(scheduleID: 0, theater: "fake", screen: 0, age: "fake", runningTime: 0, date: "fake", startTime: "fake", movie: "fake", types: ["fake"], stCount: 0, totalSeat: 0, seatNumber: ["fake"], imgURL: "123", price: ["nomal": 11000])
       tableViewMovieData.append([fakeData])
       
       let movieData = shared.theaterCategoryDetailMovie[title]!.sorted(by: { arg0, arg1 in
