@@ -79,10 +79,10 @@ class PaymentView: UIView {
     topView.heightAnchor.constraint(equalToConstant: 150).isActive = true
     
     topView.addSubview(movieGradeImage)
-    movieGradeImage.topAnchor.constraint(equalTo: topView.topAnchor, constant: margin).isActive = true
+    movieGradeImage.topAnchor.constraint(equalTo: topView.topAnchor, constant: margin * 2).isActive = true
     movieGradeImage.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: margin).isActive = true
-    movieGradeImage.widthAnchor.constraint(equalToConstant: 25).isActive = true
-    movieGradeImage.heightAnchor.constraint(equalToConstant: 25).isActive = true
+    movieGradeImage.widthAnchor.constraint(equalToConstant: 20).isActive = true
+    movieGradeImage.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
     topView.addSubview(movieTitleLabel)
     movieTitleLabel.topAnchor.constraint(equalTo: topView.topAnchor, constant: margin).isActive = true
@@ -103,19 +103,19 @@ class PaymentView: UIView {
     
     topView.addSubview(dateLabel)
     dateLabel.topAnchor.constraint(equalTo: movieThumbnailImage.topAnchor, constant: margin).isActive = true
-    dateLabel.leadingAnchor.constraint(equalTo: movieThumbnailImage.trailingAnchor, constant: margin).isActive = true
+    dateLabel.leadingAnchor.constraint(equalTo: movieThumbnailImage.trailingAnchor, constant: margin * 2).isActive = true
     
     topView.addSubview(screenLabel)
     screenLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: margin / 2).isActive = true
-    screenLabel.leadingAnchor.constraint(equalTo: movieThumbnailImage.trailingAnchor, constant: margin).isActive = true
+    screenLabel.leadingAnchor.constraint(equalTo: movieThumbnailImage.trailingAnchor, constant: margin * 2).isActive = true
     
     topView.addSubview(personLabel)
     personLabel.topAnchor.constraint(equalTo: screenLabel.bottomAnchor, constant: margin / 2).isActive = true
-    personLabel.leadingAnchor.constraint(equalTo: movieThumbnailImage.trailingAnchor, constant: margin).isActive = true
+    personLabel.leadingAnchor.constraint(equalTo: movieThumbnailImage.trailingAnchor, constant: margin * 2).isActive = true
     
     topView.addSubview(seatLabel)
     seatLabel.topAnchor.constraint(equalTo: personLabel.bottomAnchor, constant: margin / 2).isActive = true
-    seatLabel.leadingAnchor.constraint(equalTo: movieThumbnailImage.trailingAnchor, constant: margin).isActive = true
+    seatLabel.leadingAnchor.constraint(equalTo: movieThumbnailImage.trailingAnchor, constant: margin * 2).isActive = true
     
     paymentScrollView.addSubview(bottomView)
     bottomView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
@@ -270,7 +270,7 @@ class PaymentView: UIView {
     adImageView.topAnchor.constraint(equalTo: okCashbagView.bottomAnchor, constant: margin).isActive = true
     adImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     adImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-    adImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    adImageView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width * 160) / 640).isActive = true
     
     bottomView.addSubview(paymentButton)
     paymentButton.topAnchor.constraint(equalTo: adImageView.bottomAnchor).isActive = true
@@ -310,7 +310,8 @@ class PaymentView: UIView {
   
   private let menuTitleDismissButton: UIButton = {
     let button = UIButton()
-    button.setImage(#imageLiteral(resourceName: "common_btn_topbar_prev"), for: .normal)
+    button.setImage(#imageLiteral(resourceName: "ico_back_violet"), for: .normal)
+    button.contentMode = .scaleAspectFit
     button.addTarget(self, action: #selector(touchUpDismissButton), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
@@ -319,6 +320,7 @@ class PaymentView: UIView {
   private let menuTitleRefreshButton: UIButton = {
     let button = UIButton()
     button.setImage(#imageLiteral(resourceName: "booking_button_refresh"), for: .normal)
+    button.contentMode = .scaleAspectFit
     button.addTarget(self, action: #selector(touchUpRefreshButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
@@ -337,59 +339,57 @@ class PaymentView: UIView {
     return view
   }()
   
-  private let movieGradeImage: UIImageView = {
+  let movieGradeImage: UIImageView = {
     let imageView = UIImageView()
-    imageView.backgroundColor = #colorLiteral(red: 0, green: 0.01932368055, blue: 1, alpha: 1)
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
   
-  private let movieTitleLabel: UILabel = {
+  let movieTitleLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "movieTitleLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 13, alignment: .left)
-    label.font = UIFont.systemFont(ofSize: 13, weight: .heavy)
+    label.labelSetup(text: "movieTitleLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14, alignment: .left)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .heavy)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
-  private let movieTypeLabel: UILabel = {
+  let movieTypeLabel: UILabel = {
     let label = UILabel()
     label.labelSetup(text: "movieTypeLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 11, alignment: .left)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
-  private let movieThumbnailImage: UIImageView = {
+  let movieThumbnailImage: UIImageView = {
     let imageView = UIImageView()
-    imageView.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()
   
-  private let dateLabel: UILabel = {
+  let dateLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "dateLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 10, alignment: .left)
+    label.labelSetup(text: "dateLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 11, alignment: .left)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
-  private let screenLabel: UILabel = {
+  let screenLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "screenLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 10, alignment: .left)
+    label.labelSetup(text: "screenLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 11, alignment: .left)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
-  private let personLabel: UILabel = {
+  let personLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "personLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 10, alignment: .left)
+    label.labelSetup(text: "personLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 11, alignment: .left)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
-  private let seatLabel: UILabel = {
+  let seatLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "seatLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 10, alignment: .left)
+    label.labelSetup(text: "seatLabel", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 11, alignment: .left)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -532,7 +532,7 @@ class PaymentView: UIView {
     return label
   }()
   
-  private let totalMoneyRightLabel: UILabel = {
+  let totalMoneyRightLabel: UILabel = {
     let label = UILabel()
     label.text = "0원"
     label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -597,7 +597,7 @@ class PaymentView: UIView {
     return label
   }()
   
-  private let remainMoneyRightLabel: UILabel = {
+  let remainMoneyRightLabel: UILabel = {
     let label = UILabel()
     label.text = "0원"
     label.textColor = UIColor.appColor(.megaBoxColor)
@@ -624,7 +624,7 @@ class PaymentView: UIView {
     return label
   }()
   
-  private let okCashbagRightLabel: UILabel = {
+  let okCashbagRightLabel: UILabel = {
     let label = UILabel()
     label.text = "적립대상금 : 0 원"
     label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -683,7 +683,7 @@ class PaymentView: UIView {
   
   private let adImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.backgroundColor = #colorLiteral(red: 0, green: 0.5628422499, blue: 0.3188166618, alpha: 1)
+    imageView.image = #imageLiteral(resourceName: "ad_payment")
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()

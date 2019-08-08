@@ -13,6 +13,7 @@
 		CF0847E122E6AD6E0070F4FD /* ReservationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0847E022E6AD6E0070F4FD /* ReservationData.swift */; };
 		CF09E8A622E71CC000B43066 /* TheaterCategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09E8A522E71CC000B43066 /* TheaterCategoryCollectionCell.swift */; };
 		CF09E8A822E7343C00B43066 /* BranchNewsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF09E8A722E7343C00B43066 /* BranchNewsCollectionCell.swift */; };
+		CF0A222222FC697A00B519ED /* Trade.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0A222122FC697A00B519ED /* Trade.swift */; };
 		CF55E5DB22F7EF9900290FED /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55E5DA22F7EF9900290FED /* PaymentViewController.swift */; };
 		CF55E5DE22F7EFDB00290FED /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55E5DD22F7EFDB00290FED /* PaymentView.swift */; };
 		CF55E5E022F7F84400290FED /* TheaterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF55E5DF22F7F84400290FED /* TheaterData.swift */; };
@@ -138,6 +139,7 @@
 		CF0847E022E6AD6E0070F4FD /* ReservationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationData.swift; sourceTree = "<group>"; };
 		CF09E8A522E71CC000B43066 /* TheaterCategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterCategoryCollectionCell.swift; sourceTree = "<group>"; };
 		CF09E8A722E7343C00B43066 /* BranchNewsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchNewsCollectionCell.swift; sourceTree = "<group>"; };
+		CF0A222122FC697A00B519ED /* Trade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trade.swift; sourceTree = "<group>"; };
 		CF55E5DA22F7EF9900290FED /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		CF55E5DD22F7EFDB00290FED /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		CF55E5DF22F7F84400290FED /* TheaterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterData.swift; sourceTree = "<group>"; };
@@ -517,6 +519,7 @@
 				CFBC1CED22E1810B006B6839 /* NetworkService.swift */,
 				E6094AB222F2D4E7008407EA /* UserData.swift */,
 				E6094AB622F4053E008407EA /* UserDataManager.swift */,
+				CF0A222122FC697A00B519ED /* Trade.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 				TargetAttributes = {
 					CFBC1C7122E0298F006B6839 = {
 						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1030;
 					};
 				};
 			};
@@ -722,6 +726,7 @@
 				CFBC1CD522E02E14006B6839 /* MainBranchNewsCell.swift in Sources */,
 				CFBC1CA922E02BBB006B6839 /* LoginView.swift in Sources */,
 				CFBC1CE322E02EB8006B6839 /* MyPageHeaderCell.swift in Sources */,
+				CF0A222222FC697A00B519ED /* Trade.swift in Sources */,
 				CFC9724B22E5A21600199FD0 /* Color.swift in Sources */,
 				E604C52822F822A300C57F5E /* PreViewCell.swift in Sources */,
 				CF55E60922F8273600290FED /* MovieDetailTopView.swift in Sources */,
@@ -963,7 +968,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.fury.MegaBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -983,7 +988,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.fury.MegaBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

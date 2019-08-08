@@ -20,6 +20,17 @@ class ThreeSixMovieTheaterView: UIView {
   
   var totalCount: Int = 0
   
+  var changeMoneyCount: Int = 0 {
+    didSet {
+      let formatter = NumberFormatter()
+      formatter.locale = Locale(identifier: "ko_KR")
+      formatter.numberStyle = .decimal
+      if let formattedTipAmount = formatter.string(from: changeMoneyCount as NSNumber) {
+        paymentTotalLabel.text = "\(formattedTipAmount) 원"
+      }
+    }
+  }
+  
   var adultCount: Int = 0 {
     didSet {
       totalAdultCountLabel.text = "\(adultCount)"
@@ -118,15 +129,15 @@ class ThreeSixMovieTheaterView: UIView {
       for j in 0..<14 {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("\(alphbetArr[alphbetIndex])\(j - i)", for: .normal)
+        
         button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
         button.contentMode = .scaleAspectFit
         button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         button.layer.borderWidth = 0.5
         button.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        button.accessibilityIdentifier = "\(j - i)"
         button.addTarget(self, action: #selector(touchUpButton(_:)), for: .touchUpInside)
+        
         if i == 0 && (j == 0 || j == 10 || j == 11 || j == 12 || j == 13) {
           button.setTitle("space", for: .normal)
           button.accessibilityIdentifier = "space"
@@ -145,8 +156,13 @@ class ThreeSixMovieTheaterView: UIView {
           button.isHidden = true
         } else if i == 0 && (j == 1 || j == 2) {
           // 장애인석
+          button.setTitle("\(alphbetArr[alphbetIndex])\(j - i)", for: .normal)
+          button.accessibilityIdentifier = "\(j - i)"
           button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
           button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+        } else {
+          button.setTitle("\(alphbetArr[alphbetIndex])\(j - i)", for: .normal)
+          button.accessibilityIdentifier = "\(j - i)"
         }
         
         if j == 13 {
@@ -382,10 +398,6 @@ class ThreeSixMovieTheaterView: UIView {
     selectOkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     selectOkButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     selectOkButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 3).isActive = true
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
   }
   
   // 영화관 탑(인원수)
@@ -679,13 +691,18 @@ class ThreeSixMovieTheaterView: UIView {
     return label
   }()
   
-  private let selectOkButton: UIButton = {
-    let button = UIButton()
+  let selectOkButton: UIButton = {
+    let button = UIButton(type: .custom)
     button.setTitle("선택완료", for: .normal)
     button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-    button.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+    button.contentHorizontalAlignment = .center
+    button.backgroundColor = UIColor.appColor(.defaultGrayColor)
     button.addTarget(self, action: #selector(touchUpSelectOkButton), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 }

@@ -19,6 +19,17 @@ class EightTwoMovieTheaterView: UIView {
   
   var totalCount: Int = 0
   
+  var changeMoneyCount: Int = 0 {
+    didSet {
+      let formatter = NumberFormatter()
+      formatter.locale = Locale(identifier: "ko_KR")
+      formatter.numberStyle = .decimal
+      if let formattedTipAmount = formatter.string(from: changeMoneyCount as NSNumber) {
+        paymentTotalLabel.text = "\(formattedTipAmount) 원"
+      }
+    }
+  }
+  
   var adultCount: Int = 0 {
     didSet {
       totalAdultCountLabel.text = "\(adultCount)"
@@ -726,11 +737,12 @@ class EightTwoMovieTheaterView: UIView {
     return label
   }()
   
-  private let selectOkButton: UIButton = {
-    let button = UIButton()
+  let selectOkButton: UIButton = {
+    let button = UIButton(type: .custom)
     button.setTitle("선택완료", for: .normal)
     button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-    button.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+    button.contentHorizontalAlignment = .center
+    button.backgroundColor = UIColor.appColor(.defaultGrayColor)
     button.addTarget(self, action: #selector(touchUpSelectOkButton), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button

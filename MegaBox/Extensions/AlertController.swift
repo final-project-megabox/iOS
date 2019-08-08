@@ -15,6 +15,12 @@ extension UIAlertController {
     controller.show(alert, sender: nil)
   }
   
+  class func completionShow(title: String?, message: String, from controller: UIViewController, completion: @escaping (UIAlertAction) -> Void) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "확인", style: .default))
+    controller.show(alert, sender: nil)
+  }
+  
   class func cancelShow(title:String?, message: String, from controller: UIViewController, action: @escaping (UIAlertAction) -> Void) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 //    alert.addAction(UIAlertAction(title: "확인", style: .default))
