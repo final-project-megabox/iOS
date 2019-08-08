@@ -26,6 +26,8 @@ enum MegaboxApi {
   case theaterMovieDataApi
   // Second Reservation Screen (Push reservation Seat Data)
   case secondReservationDataApi
+  // Push Reservation Data
+  case movieReservationDataApi
 }
 
 class ApiUrlData {
@@ -82,6 +84,11 @@ class ApiUrlData {
       let secondReservationDataURL: String = "http://megabox.hellocoding.shop//database/reservationScheduleList/"
       
       return secondReservationDataURL
+      
+    case .movieReservationDataApi:
+      let movieReservationDataURL: String = "http://megabox.hellocoding.shop//database/reservationSecond/"
+      
+      return movieReservationDataURL
     }
   }
 }
