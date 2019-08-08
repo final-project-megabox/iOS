@@ -37,6 +37,14 @@ class SelectPersonCountViewController: UIViewController {
 }
 
 extension SelectPersonCountViewController: selectPersonCountViewDelegate {
+  func touchUpPersonCountPreviousButton() {
+    presentingViewController?.presentingViewController?.dismiss(animated: false, completion: nil)
+  }
+  
+  func touchUpPersonCountDismissButton() {
+    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false)
+  }
+  
   func touchUpFinishButton(_ sender: UIButton, reservationPersonCount: ReservationPersonCount?) {
     guard let reservationPersonCount = reservationPersonCount else {
       UIAlertController.show(title: "", message: "관람하실 인원을 선택해주세요.", from: self)
