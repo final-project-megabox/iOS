@@ -168,7 +168,7 @@ extension MainViewController: MainTopViewDelegate {
         switch result {
         case .success(let value):
           self.userShared.myPageData = value
-          print(value)
+          print("[Log]", value)
           self.present(navigationDrawerVC, animated: false)
         case .failure(let err):
           print("result: ", err)

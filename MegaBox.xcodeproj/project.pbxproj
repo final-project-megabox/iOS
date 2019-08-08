@@ -119,6 +119,7 @@
 		E604C5B622FC394200C57F5E /* MyPagePreferTheaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C5B522FC394100C57F5E /* MyPagePreferTheaterViewController.swift */; };
 		E604C5B822FC396D00C57F5E /* MyPagePreferTheaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C5B722FC396D00C57F5E /* MyPagePreferTheaterView.swift */; };
 		E604C5BA22FC398A00C57F5E /* MyPagePreferTheaterTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C5B922FC398A00C57F5E /* MyPagePreferTheaterTopView.swift */; };
+		E604C5BC22FC4D5500C57F5E /* MyPageFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C5BB22FC4D5500C57F5E /* MyPageFooterView.swift */; };
 		E6094AB322F2D4E7008407EA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AB222F2D4E7008407EA /* UserData.swift */; };
 		E6094AB722F4053E008407EA /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AB622F4053E008407EA /* UserDataManager.swift */; };
 		E6094ADF22F433A8008407EA /* isLoginNavigationDrawerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094ADE22F433A8008407EA /* isLoginNavigationDrawerCell.swift */; };
@@ -246,6 +247,7 @@
 		E604C5B522FC394100C57F5E /* MyPagePreferTheaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPagePreferTheaterViewController.swift; sourceTree = "<group>"; };
 		E604C5B722FC396D00C57F5E /* MyPagePreferTheaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPagePreferTheaterView.swift; sourceTree = "<group>"; };
 		E604C5B922FC398A00C57F5E /* MyPagePreferTheaterTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPagePreferTheaterTopView.swift; sourceTree = "<group>"; };
+		E604C5BB22FC4D5500C57F5E /* MyPageFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageFooterView.swift; sourceTree = "<group>"; };
 		E6094AB222F2D4E7008407EA /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		E6094AB622F4053E008407EA /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		E6094ADE22F433A8008407EA /* isLoginNavigationDrawerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isLoginNavigationDrawerCell.swift; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				E604C59122FBEF4700C57F5E /* MyPageWatchedHeaderView.swift */,
 				E604C5B722FC396D00C57F5E /* MyPagePreferTheaterView.swift */,
 				E604C5B922FC398A00C57F5E /* MyPagePreferTheaterTopView.swift */,
+				E604C5BB22FC4D5500C57F5E /* MyPageFooterView.swift */,
 			);
 			path = MyPageView;
 			sourceTree = "<group>";
@@ -697,6 +700,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E604C5BC22FC4D5500C57F5E /* MyPageFooterView.swift in Sources */,
 				CF09E8A822E7343C00B43066 /* BranchNewsCollectionCell.swift in Sources */,
 				CFBC1C9722E02AAA006B6839 /* LoginViewController.swift in Sources */,
 				CFBC1CA122E02B4C006B6839 /* MovieCategorySelectTheaterViewController.swift in Sources */,

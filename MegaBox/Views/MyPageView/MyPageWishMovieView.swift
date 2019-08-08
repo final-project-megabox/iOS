@@ -21,6 +21,12 @@ class MyPageWishMovieView: UIView {
     return tableView
   }()
   
+  let footerView: MyPageFooterView = {
+    let view = MyPageFooterView()
+    view.backgroundColor = UIColor.appColor(.selectedCellGrayColor)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -33,6 +39,7 @@ class MyPageWishMovieView: UIView {
   func setupTableView() {
     wishMovieListTableView.separatorInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
     wishMovieListTableView.separatorColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    wishMovieListTableView.tableFooterView = footerView
     
     wishMovieListTableView.dataSource = self
     
@@ -53,11 +60,14 @@ class MyPageWishMovieView: UIView {
   }
   
   @objc func didTapDeleteButton(_ sender: UIButton) {
-    delegate?.touchUpDeleteButton(sender: sender)
+    delegate?.touchUpDeleteButton(sender: sender, movieId: shared.wishMovieData[sender.tag].movieID)
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+    
+    
     
   }
   
@@ -77,6 +87,9 @@ extension MyPageWishMovieView: UITableViewDataSource {
     wishListCell.selectionStyle = .none
     
     wishListCell.deleteButton.addTarget(self, action: #selector(didTapDeleteButton(_:)), for: .touchUpInside)
+    //tag
+    wishListCell.tag = shared.wishMovieData[indexPath.row].movieID
+    print("[tag]", wishListCell.tag)
     
     //제목
     wishListCell.movieTitleLabel.text = shared.wishMovieData[indexPath.row].title

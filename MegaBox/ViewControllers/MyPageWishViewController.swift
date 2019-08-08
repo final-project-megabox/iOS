@@ -36,6 +36,7 @@ class MyPageWishViewController: UIViewController {
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     
     topView.delegate = self
+    contentView.delegate = self
     getWishMovieCount()
     setupWishMovieView()
   
@@ -89,9 +90,17 @@ extension MyPageWishViewController: MyPageWishMovieTopViewDelegate {
 }
 
 extension MyPageWishViewController: MyPageWishMovieViewDelegate {
-  func touchUpDeleteButton(sender: UIButton) {
-//    NetworkService.pushIsWished(<#T##urlStr: String##String#>, movieId: <#T##Int#>)
+  func touchUpDeleteButton(sender: UIButton, movieId: Int) {
+//    let url = "http://megabox.hellocoding.shop/database/checkwish/"
+//    NetworkService.pushIsWished(url, movieId: movieId)
+//    print(movieId)
+//
+//    self.contentView.wishMovieListTableView.reloadData()
+    
+    
   }
+  
+  
   
   
 }
