@@ -42,17 +42,17 @@ class MyPageNoWishMovieView: UIView {
   
   func setupView() {
     addSubview(wishedImageView)
-    wishedImageView.topAnchor.constraint(equalTo: topAnchor, constant: 300).isActive = true
+    wishedImageView.topAnchor.constraint(equalTo: topAnchor, constant: 150).isActive = true
     wishedImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     wishedImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
     wishedImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     
     addSubview(titleLabel)
-    titleLabel.topAnchor.constraint(equalTo: wishedImageView.bottomAnchor, constant: 50).isActive = true
+    titleLabel.topAnchor.constraint(equalTo: wishedImageView.bottomAnchor, constant: 30).isActive = true
     titleLabel.centerXAnchor.constraint(equalTo: wishedImageView.centerXAnchor).isActive = true
     
     addSubview(subTitleLabel)
-    subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
+    subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
     subTitleLabel.centerXAnchor.constraint(equalTo: wishedImageView.centerXAnchor).isActive = true
     
   }

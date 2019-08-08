@@ -105,8 +105,29 @@ extension MyPageWishMovieView: UITableViewDataSource {
     }
     task.resume()
     
+    let id = shared.wishMovieData[indexPath.row].movieID
+    let detailUrl = ApiUrlData.ApiUrl(.movieDetailApi)
+    let query = "?movie=\(id)"
+    let fullUrl = detailUrl + query
     
     
+    NetworkService.getMovieDetailData(fullUrl) { (result) in
+      switch result {
+      case .success(let data):
+        print("[Log] :", data)
+        wishListCell.typeLabel.text = "기타/\(data.genre)"
+        wishListCell.dateLabel.text = "\(data.releaseDate)"
+        wishListCell.directorLabel.text = "감독 \(data.director)"
+        wishListCell.actorLabel.text = "출연 \(data.cast)"
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
+    
+    
+    
+    
+    wishListCell.typeLabel.text = movieShared.movieDetailData?.genre
     
     
     

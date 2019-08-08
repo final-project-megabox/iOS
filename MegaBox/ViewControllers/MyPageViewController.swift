@@ -10,7 +10,7 @@ import UIKit
 
 class MyPageViewController: UIViewController {
   
-  let url = "http://megabox.hellocoding.shop//database/showWishMovies/"
+  
   let shared = UserDataManager.shared
   
   let myPageTopView: MyPageTopView = {
@@ -73,6 +73,8 @@ extension MyPageViewController: MyPageTopViewDelegate {
 extension MyPageViewController: MyPageContentViewDelegate {
   func touchUpWishMovieButton(sender: UIButton) {
     let wishMovieVC = MyPageWishViewController()
+    
+    let url = "http://megabox.hellocoding.shop//database/showWishMovies/"
     
     NetworkService.getUserWishMovie(url) { (result) in
       switch result {

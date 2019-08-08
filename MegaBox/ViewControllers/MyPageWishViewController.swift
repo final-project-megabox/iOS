@@ -14,7 +14,7 @@ class MyPageWishViewController: UIViewController {
   
   let noWishMovieView: MyPageNoWishMovieView = {
     let view = MyPageNoWishMovieView()
-    view.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+    view.backgroundColor = #colorLiteral(red: 0.9179489213, green: 0.9179489213, blue: 0.9179489213, alpha: 1)
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
