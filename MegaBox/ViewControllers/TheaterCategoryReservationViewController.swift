@@ -183,9 +183,17 @@ extension TheaterCategoryReservationViewController: TheaterCategoryReservationVi
 extension TheaterCategoryReservationViewController: TheaterCategoryReservationHeaderViewDelegate {
   
   func touchUpPlaceButton() {
-    let theaterCategorySelectTheaterVC = TheaterCategorySelectTheaterViewController()
-    theaterCategorySelectTheaterVC.dismissType = .one
-    self.present(theaterCategorySelectTheaterVC, animated: false)
+    NetworkService.getRegionData { result in
+      switch result {
+      case .success(let data):
+        let theaterCategoryVC = TheaterCategorySelectTheaterViewController()
+        theaterCategoryVC.dismissType = .one
+        theaterCategoryVC.regionData = data
+        self.present(theaterCategoryVC, animated: false)
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
   }
   
   func touchUpDateButton() {

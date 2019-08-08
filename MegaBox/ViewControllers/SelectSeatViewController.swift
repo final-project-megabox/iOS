@@ -67,6 +67,10 @@ class SelectSeatViewController: UIViewController {
     timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(startSplash), userInfo: nil, repeats: false)
   }
   
+  private func isNullLeftSeat() {
+    
+  }
+  
   private func changeSelectButtonColor(baseButton: UIButton, relatedButton: UIButton?, _ buttonArr: [UIButton], totalCount: Int) {
     var willSortButtonArr: [String] = []
     baseButton.backgroundColor = UIColor.appColor(.megaBoxColor)
@@ -438,6 +442,7 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
         // 클릭한 좌석이 선택되어 있지 않다면
         if totalCount == selectedSeatArr.count {
           // 최대 선택 인원 초과
+          print("[Log] :", totalCount)
           return
         }
         
@@ -505,6 +510,12 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
 }
 
 extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
+  func touchUpEightTwoTheaterSeat(_ sender: UIButton, _ buttonArr: [UIButton], totalCount: Int) {
+    guard let buttonTitle = sender.currentTitle else { return }
+    let seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 8)
+    let button = eightTwoMovieTheaterView.seatButtonArr[seatIdx]
+  }
+  
   func touchUpEightTwoPreviousButton() {
     self.dismiss(animated: false)
   }
@@ -516,49 +527,15 @@ extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
   func touchUpEightTwoSelectOkButton(seatNumber: [String], seatCount: Int) {
     pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
   }
-  
-  func touchUpEightTwoTheaterSeat(_ sender: UIButton) {
-    guard let buttonTitle = sender.currentTitle else { return }
-    if buttonTitle == "" {
-      // 이미 예약된 좌석입니다. (Alert)
-    } else {
-      // 선택 좌석 표시(보라색 반전 + 상단에 좌석 번호 추가)
-      let seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 8)
-      let button = eightTwoMovieTheaterView.seatButtonArr[seatIdx]
-      
-      if button.isSelected {
-        if button.currentTitle == "A3" || button.currentTitle == "A4" {
-          button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-          button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        } else {
-          button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-          button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-        }
-        
-        for i in 0..<eightTwoMovieTheaterView.selectedSeatArr.count {
-          if eightTwoMovieTheaterView.selectedSeatArr[i] == button.currentTitle! {
-            selectedSeatArr.remove(at: i)
-            eightTwoMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-            break
-          }
-        }
-      } else {
-        if selectedSeatArr.count == 8 {
-          // 최대 8명까지 선택하실 수 있습니다.
-          return
-        }
-        
-        button.backgroundColor = UIColor.appColor(.megaBoxColor)
-        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        selectedSeatArr.append(button.currentTitle!)
-        eightTwoMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-      }
-      button.isSelected.toggle()
-    }
-  }
 }
 
 extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
+  func touchUpOneThreeZeroTheaterSeat(_ sender: UIButton, _ buttonArr: [UIButton], totalCount: Int) {
+    guard let buttonTitle = sender.currentTitle else { return }
+    let seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 8)
+    let button = eightTwoMovieTheaterView.seatButtonArr[seatIdx]
+  }
+  
   func touchUpOneThreeZeroPreviousButton() {
     self.dismiss(animated: false)
   }
@@ -570,49 +547,15 @@ extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
   func touchUpOneThreeZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
     pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
   }
-  
-  func touchUpOneThreeZeroTheaterSeat(_ sender: UIButton) {
-    guard let buttonTitle = sender.currentTitle else { return }
-    if buttonTitle == "" {
-      // 이미 예약된 좌석입니다. (Alert)
-    } else {
-      // 선택 좌석 표시(보라색 반전 + 상단에 좌석 번호 추가)
-      let seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 8)
-      let button = oneThreeZeroMovieTheaterView.seatButtonArr[seatIdx]
-      
-      if button.isSelected {
-        if button.currentTitle == "A3" || button.currentTitle == "A4" {
-          button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-          button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        } else {
-          button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-          button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-        }
-        
-        for i in 0..<oneThreeZeroMovieTheaterView.selectedSeatArr.count {
-          if oneThreeZeroMovieTheaterView.selectedSeatArr[i] == button.currentTitle! {
-            selectedSeatArr.remove(at: i)
-            oneThreeZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-            break
-          }
-        }
-      } else {
-        if selectedSeatArr.count == 8 {
-          // 최대 8명까지 선택하실 수 있습니다.
-          return
-        }
-        
-        button.backgroundColor = UIColor.appColor(.megaBoxColor)
-        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        selectedSeatArr.append(button.currentTitle!)
-        oneThreeZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-      }
-      button.isSelected.toggle()
-    }
-  }
 }
 
 extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
+  func touchUpOneFourZeroTheaterSeat(_ sender: UIButton, _ buttonArr: [UIButton], totalCount: Int) {
+    guard let buttonTitle = sender.currentTitle else { return }
+    let seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 16)
+    let button = eightTwoMovieTheaterView.seatButtonArr[seatIdx]
+  }
+  
   func touchUpOneFourZeroPreviousButton() {
     self.dismiss(animated: false)
   }
@@ -624,50 +567,17 @@ extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
   func touchUpOneFourZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
     pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
   }
-  
-  func touchUpOneFourZeroTheaterSeat(_ sender: UIButton) {
-    guard let buttonTitle = sender.currentTitle else { return }
-    if buttonTitle == "" {
-      // 이미 예약된 좌석입니다. (Alert)
-    } else {
-      // 선택 좌석 표시(보라색 반전 + 상단에 좌석 번호 추가)
-      let seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 16)
-      
-      let button = oneFourZeroMovieTheaterView.seatButtonArr[seatIdx]
-      
-      if button.isSelected {
-        if button.currentTitle == "A5" || button.currentTitle == "A6" {
-          button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-          button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        } else {
-          button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-          button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-        }
-        
-        for i in 0..<oneFourZeroMovieTheaterView.selectedSeatArr.count {
-          if oneFourZeroMovieTheaterView.selectedSeatArr[i] == button.currentTitle! {
-            selectedSeatArr.remove(at: i)
-            oneFourZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-            break
-          }
-        }
-      } else {
-        if selectedSeatArr.count == 8 {
-          // 최대 8명까지 선택하실 수 있습니다.
-          return
-        }
-        
-        button.backgroundColor = UIColor.appColor(.megaBoxColor)
-        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        selectedSeatArr.append(button.currentTitle!)
-        oneFourZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-      }
-      button.isSelected.toggle()
-    }
-  }
 }
 
 extension SelectSeatViewController: OneFiveZeroMovieTheaterViewDelegate {
+  func touchUpOneFiveZeroTheaterSeat(_ sender: UIButton, _ buttonArr: [UIButton], totalCount: Int) {
+    guard let buttonTitle = sender.currentTitle else { return }
+    var seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 12)
+    let selectedSeatCount = selectedSeatArr.count
+    
+    isNullLeftSeat()
+  }
+  
   func touchUpOneFiveZeroPreviousButton() {
     self.dismiss(animated: false)
   }
@@ -678,45 +588,5 @@ extension SelectSeatViewController: OneFiveZeroMovieTheaterViewDelegate {
   
   func touchUpOneFiveZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
     pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
-  }
-  
-  func touchUpOneFiveZeroTheaterSeat(_ sender: UIButton) {
-    guard let buttonTitle = sender.currentTitle else { return }
-    if buttonTitle == "" {
-      // 이미 예약된 좌석입니다. (Alert)
-    } else {
-      // 선택 좌석 표시(보라색 반전 + 상단에 좌석 번호 추가)
-      let seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 12)
-      let button = oneFiveZeroMovieTheaterView.seatButtonArr[seatIdx]
-      
-      if button.isSelected {
-        if button.currentTitle == "A7" || button.currentTitle == "A8" || button.currentTitle == "A9" {
-          button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-          button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        } else {
-          button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-          button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-        }
-        
-        for i in 0..<oneFiveZeroMovieTheaterView.selectedSeatArr.count {
-          if oneFiveZeroMovieTheaterView.selectedSeatArr[i] == button.currentTitle! {
-            selectedSeatArr.remove(at: i)
-            oneFiveZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-            break
-          }
-        }
-      } else {
-        if selectedSeatArr.count == 8 {
-          // 최대 8명까지 선택하실 수 있습니다.
-          return
-        }
-        
-        button.backgroundColor = UIColor.appColor(.megaBoxColor)
-        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-        selectedSeatArr.append(button.currentTitle!)
-        oneFiveZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-      }
-      button.isSelected.toggle()
-    }
   }
 }

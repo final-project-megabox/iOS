@@ -18,6 +18,8 @@ class OneFiveZeroMovieTheaterView: UIView {
   
   let alphbetArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"]
   
+  var totalCount: Int = 0
+  
   var adultCount: Int = 0 {
     didSet {
       totalAdultCountLabel.text = "\(adultCount)"
@@ -94,7 +96,7 @@ class OneFiveZeroMovieTheaterView: UIView {
   }
   
   @objc private func touchUpButton(_ sender: UIButton) {
-    delegate?.touchUpOneFiveZeroTheaterSeat(sender)
+    delegate?.touchUpOneFiveZeroTheaterSeat(sender, seatButtonArr, totalCount: totalCount)
   }
   
   private func appendLabels() {

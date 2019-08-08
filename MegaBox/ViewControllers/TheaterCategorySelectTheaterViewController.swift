@@ -30,14 +30,7 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
     super.viewDidLoad()
     
     selectTheaterView.delegate = self
-    
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    selectTheaterView.regionTableView.reloadData()
-    selectTheaterView.regionListTableView.reloadData()
+    checkRegionData()
   }
   
   override func viewWillLayoutSubviews() {

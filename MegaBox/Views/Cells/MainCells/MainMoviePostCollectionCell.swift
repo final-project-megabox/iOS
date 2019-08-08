@@ -20,7 +20,7 @@ class MainMoviePostCollectionCell: UICollectionViewCell {
   
   let idLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "bora83**", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 11, alignment: .center)
+    label.labelSetup(text: "furysecu**", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 11, alignment: .center)
     label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
     label.backgroundColor = .clear
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ class MainMoviePostCollectionCell: UICollectionViewCell {
   
   let contentLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "asdfasdfasdflaaskfdnmlaksdmnflkasdf", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14, alignment: .center)
+    label.labelSetup(text: "아니 너무 재밌는거 아니에요? 진심 꿀잼!!!! 꼭 보시길....", color: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), fontSize: 14, alignment: .center)
     label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
     label.backgroundColor = .clear
     label.numberOfLines = 0
@@ -48,7 +48,7 @@ class MainMoviePostCollectionCell: UICollectionViewCell {
   
   let hashtagLabel: UILabel = {
     let label = UILabel()
-    label.labelSetup(text: "꿀잼예상", color: #colorLiteral(red: 0.028782757, green: 0.6807617545, blue: 0.899825871, alpha: 1), fontSize: 12, alignment: .center)
+    label.labelSetup(text: "사자", color: #colorLiteral(red: 0.028782757, green: 0.6807617545, blue: 0.899825871, alpha: 1), fontSize: 12, alignment: .center)
     label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
     label.backgroundColor = .clear
     label.translatesAutoresizingMaskIntoConstraints = false
