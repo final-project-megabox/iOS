@@ -270,7 +270,7 @@ class PaymentView: UIView {
     adImageView.topAnchor.constraint(equalTo: okCashbagView.bottomAnchor, constant: margin).isActive = true
     adImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     adImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-    adImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    adImageView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width * 160) / 640).isActive = true
     
     bottomView.addSubview(paymentButton)
     paymentButton.topAnchor.constraint(equalTo: adImageView.bottomAnchor).isActive = true
@@ -532,7 +532,7 @@ class PaymentView: UIView {
     return label
   }()
   
-  private let totalMoneyRightLabel: UILabel = {
+  let totalMoneyRightLabel: UILabel = {
     let label = UILabel()
     label.text = "0원"
     label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -597,7 +597,7 @@ class PaymentView: UIView {
     return label
   }()
   
-  private let remainMoneyRightLabel: UILabel = {
+  let remainMoneyRightLabel: UILabel = {
     let label = UILabel()
     label.text = "0원"
     label.textColor = UIColor.appColor(.megaBoxColor)
@@ -624,7 +624,7 @@ class PaymentView: UIView {
     return label
   }()
   
-  private let okCashbagRightLabel: UILabel = {
+  let okCashbagRightLabel: UILabel = {
     let label = UILabel()
     label.text = "적립대상금 : 0 원"
     label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -683,7 +683,7 @@ class PaymentView: UIView {
   
   private let adImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.backgroundColor = #colorLiteral(red: 0, green: 0.5628422499, blue: 0.3188166618, alpha: 1)
+    imageView.image = #imageLiteral(resourceName: "ad_payment")
     imageView.translatesAutoresizingMaskIntoConstraints = false
     return imageView
   }()

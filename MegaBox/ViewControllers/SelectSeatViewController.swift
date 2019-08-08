@@ -18,12 +18,13 @@ enum TheaterType: Int {
 
 class SelectSeatViewController: UIViewController {
   
-  let urlStr = "http://megabox.hellocoding.shop//database/reservationSecond/"
   var timer: Timer!
   
   var movieTheaterNumber = 0
   
   var movieData: ReservationData? = nil
+  
+  var moneyCount: Int = 0
   
   var selectedSeatArr: [String] = []
   var selectedSeatButtonArr: [UIButton] = []
@@ -76,11 +77,51 @@ class SelectSeatViewController: UIViewController {
     timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(startSplash), userInfo: nil, repeats: false)
   }
   
-  private func isPossibleReservationLeftSeat(buttonArr: [UIButton], baseButton: UIButton, buttonIdx: Int) -> Bool {
-    if buttonIdx == 1 {
-      // Null (제일 첫번째)
-      return false
+  private func calculateTotalMoney(sign: String, amount: Int, theaterType: TheaterType) {
+    
+    switch theaterType {
+    case .ThreeSixTheater:
+      if sign == "+" {
+        moneyCount += amount
+      } else {
+        moneyCount -= amount
+      }
+      threeSixMovieTheaterView.changeMoneyCount = moneyCount * 11000
+    case .EightTwoTheater:
+      if sign == "+" {
+        moneyCount += amount
+        
+      } else {
+        moneyCount -= amount
+      }
+      eightTwoMovieTheaterView.changeMoneyCount = moneyCount * 11000
+    case .OneThreeZero:
+      if sign == "+" {
+        moneyCount += amount
+        
+      } else {
+        moneyCount -= amount
+      }
+      oneThreeZeroMovieTheaterView.changeMoneyCount = moneyCount * 11000
+    case .OneFourZero:
+      if sign == "+" {
+        moneyCount += amount
+      } else {
+        moneyCount -= amount
+      }
+      oneFourZeroMovieTheaterView.changeMoneyCount = moneyCount * 11000
+    case .OneFiveZero:
+      if sign == "+" {
+        moneyCount += amount
+      } else {
+        moneyCount -= amount
+      }
+      oneFiveZeroMovieTheaterView.changeMoneyCount = moneyCount * 11000
     }
+  }
+  
+  private func isPossibleReservationLeftSeat(buttonArr: [UIButton], baseButton: UIButton, buttonIdx: Int) -> Bool {
+    if buttonIdx == 1 { return false }
     
     let leftButton = buttonArr[buttonIdx - 1]
     
@@ -89,10 +130,7 @@ class SelectSeatViewController: UIViewController {
   }
   
   private func isPossibleReservationRightSeat(buttonArr: [UIButton], baseButton: UIButton, buttonIdx: Int) -> Bool {
-    if buttonIdx == buttonArr.count - 2 {
-      // Null (제일 구석)
-      return false
-    }
+    if buttonIdx == buttonArr.count - 2 { return false }
     
     let rightButton = buttonArr[buttonIdx + 1]
     
@@ -110,6 +148,7 @@ class SelectSeatViewController: UIViewController {
           baseButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
           baseButton.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
           baseButton.isSelected.toggle()
+          calculateTotalMoney(sign: "-", amount: 1, theaterType: whatTheater)
         }
       }
       
@@ -120,6 +159,7 @@ class SelectSeatViewController: UIViewController {
           relatedButton!.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
           relatedButton!.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
           relatedButton!.isSelected.toggle()
+          calculateTotalMoney(sign: "-", amount: 1, theaterType: whatTheater)
         }
       }
       
@@ -138,6 +178,34 @@ class SelectSeatViewController: UIViewController {
         oneFourZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
       case .OneFiveZero:
         oneFiveZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      }
+      
+      if totalCount - selectedSeatArr.count == 0 {
+        switch whatTheater {
+        case .ThreeSixTheater:
+          threeSixMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+        case .EightTwoTheater:
+          eightTwoMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+        case .OneThreeZero:
+          oneThreeZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+        case .OneFourZero:
+          oneFourZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+        case .OneFiveZero:
+          oneFiveZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+        }
+      } else {
+        switch whatTheater {
+        case .ThreeSixTheater:
+          threeSixMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+        case .EightTwoTheater:
+          eightTwoMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+        case .OneThreeZero:
+          oneThreeZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+        case .OneFourZero:
+          oneFourZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+        case .OneFiveZero:
+          oneFiveZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+        }
       }
       
       return
@@ -167,6 +235,36 @@ class SelectSeatViewController: UIViewController {
       }
       selectedSeatCoupleArr[baseButton] = nil
       
+      calculateTotalMoney(sign: "+", amount: 1, theaterType: whatTheater)
+      
+      if totalCount - selectedSeatArr.count == 0 {
+        switch whatTheater {
+        case .ThreeSixTheater:
+          threeSixMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+        case .EightTwoTheater:
+          eightTwoMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+        case .OneThreeZero:
+          oneThreeZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+        case .OneFourZero:
+          oneFourZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+        case .OneFiveZero:
+          oneFiveZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+        }
+      } else {
+        switch whatTheater {
+        case .ThreeSixTheater:
+          threeSixMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+        case .EightTwoTheater:
+          eightTwoMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+        case .OneThreeZero:
+          oneThreeZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+        case .OneFourZero:
+          oneFourZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+        case .OneFiveZero:
+          oneFiveZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+        }
+      }
+      
       return
     }
     
@@ -176,7 +274,6 @@ class SelectSeatViewController: UIViewController {
     willSortButtonArr.append(relatedButton.currentTitle!)
     selectedSeatButtonArr.append(relatedButton)
     willSortButtonArr.sort(by: {arg0, arg1 in arg0 < arg1 })
-    
     
     for i in willSortButtonArr {
       self.selectedSeatArr.append(i)
@@ -198,6 +295,36 @@ class SelectSeatViewController: UIViewController {
     case .OneFiveZero:
       oneFiveZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
     }
+    
+    if totalCount - selectedSeatArr.count == 0 {
+      switch whatTheater {
+      case .ThreeSixTheater:
+        threeSixMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+      case .EightTwoTheater:
+        eightTwoMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+      case .OneThreeZero:
+        oneThreeZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+      case .OneFourZero:
+        oneFourZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+      case .OneFiveZero:
+        oneFiveZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.megaBoxColor)
+      }
+    } else {
+      switch whatTheater {
+      case .ThreeSixTheater:
+        threeSixMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+      case .EightTwoTheater:
+        eightTwoMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+      case .OneThreeZero:
+        oneThreeZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+      case .OneFourZero:
+        oneFourZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+      case .OneFiveZero:
+        oneFiveZeroMovieTheaterView.selectOkButton.backgroundColor = UIColor.appColor(.defaultGrayColor)
+      }
+    }
+    
+    calculateTotalMoney(sign: "+", amount: 2, theaterType: whatTheater)
     
     selectedSeatCoupleArr[baseButton] = relatedButton
     selectedSeatCoupleArr[relatedButton] = baseButton
@@ -230,8 +357,12 @@ class SelectSeatViewController: UIViewController {
       if seatIdentifierInt % 2 == 0 {
         if selectedSeatArr.contains(seat.currentTitle!) {
         } else {
-          seat.isEnabled = false
-          seat.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+          if seat.currentTitle == "" {
+            seat.isEnabled = false
+          } else {
+            seat.isEnabled = false
+            seat.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+          }
         }
       }
     }
@@ -254,23 +385,10 @@ class SelectSeatViewController: UIViewController {
         let seatIdx = returnSeatIndex(seatString: data, buttonArr: allSeatButtonArr)
         if seatIdx == -1 {
         } else {
-          if seatIdx < 14 {
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 1].accessibilityIdentifier = ""
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 1].setTitle("", for: .normal)
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 1].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
-          } else if seatIdx < 28 {
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 2].accessibilityIdentifier = ""
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 2].setTitle("", for: .normal)
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 2].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
-          } else if seatIdx < 42 {
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 3].accessibilityIdentifier = ""
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 3].setTitle("", for: .normal)
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 3].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
-          } else {
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 4].accessibilityIdentifier = ""
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 4].setTitle("", for: .normal)
-            threeSixMovieTheaterView.seatButtonArr[seatIdx + 4].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
-          }
+          threeSixMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
+          threeSixMovieTheaterView.seatButtonArr[seatIdx].isEnabled = false
+          threeSixMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
+          threeSixMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
         }
       }
     case 82:
@@ -281,6 +399,7 @@ class SelectSeatViewController: UIViewController {
         if seatIdx == -1 {
         } else {
           eightTwoMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
+          eightTwoMovieTheaterView.seatButtonArr[seatIdx].isEnabled = false
           eightTwoMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
           eightTwoMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
         }
@@ -293,6 +412,7 @@ class SelectSeatViewController: UIViewController {
         if seatIdx == -1 {
         } else {
           oneThreeZeroMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
+          oneThreeZeroMovieTheaterView.seatButtonArr[seatIdx].isEnabled = false
           oneThreeZeroMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
           oneThreeZeroMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
         }
@@ -305,6 +425,7 @@ class SelectSeatViewController: UIViewController {
         if seatIdx == -1 {
         } else {
           oneFourZeroMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
+          oneFourZeroMovieTheaterView.seatButtonArr[seatIdx].isEnabled = false
           oneFourZeroMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
           oneFourZeroMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
         }
@@ -317,6 +438,7 @@ class SelectSeatViewController: UIViewController {
         if seatIdx == -1 {
         } else {
           oneFiveZeroMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
+          oneFiveZeroMovieTheaterView.seatButtonArr[seatIdx].isEnabled = false
           oneFiveZeroMovieTheaterView.seatButtonArr[seatIdx].setTitle("", for: .normal)
           oneFiveZeroMovieTheaterView.seatButtonArr[seatIdx].setImage(#imageLiteral(resourceName: "booking_seat_select_complete"), for: .normal)
         }
@@ -326,27 +448,17 @@ class SelectSeatViewController: UIViewController {
     }
   }
   
-  private func pushReservationSeatData(seatNumber: [String], seatCount: Int) {
+  private func presentPaymentVC(seatNumber: [String], seatCount: Int) {
     
     guard let movieData = self.movieData else { return }
     let scheduleId = movieData.scheduleID
-    let price = seatCount * 10000
+    let price = moneyCount * 11000
     
-    NetworkService.pushSeatReservationData(
-      urlStr,
-      scheduleId: scheduleId,
-      seatNumber: seatNumber,
-      price: price,
-      seatCount: seatCount) { result in
-        switch result {
-        case .success:
-          let paymentVC = PaymentViewController()
-          paymentVC.movieData = movieData
-          self.present(paymentVC, animated: false)
-        case .failure(let err):
-          print(err.localizedDescription)
-        }
-    }
+    let paymentVC = PaymentViewController()
+    paymentVC.movieData = movieData
+    paymentVC.paymentTotalMoney = price
+    paymentVC.reservationSeatNumber = seatNumber
+    self.present(paymentVC, animated: false)
   }
   
   private func returnSeatIndex(seatString: String, buttonArr: [UIButton]) -> Int {
@@ -446,6 +558,9 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
           totalCount: totalCount,
           whatTheater: .ThreeSixTheater
         )
+        if totalCount - selectedSeatArr.count > 1 {
+          finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+        }
       } else if let selectedButton = selectedSeatCoupleArr[sender] {
         // 두자리 선택
         guard let relatedButton = selectedSeatCoupleArr[selectedButton!] else { return }
@@ -458,7 +573,9 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
           totalCount: totalCount,
           whatTheater: .ThreeSixTheater
         )
-        
+        if totalCount - selectedSeatArr.count > 1 {
+          finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+        }
         selectedSeatCoupleArr[selectedButton!] = nil
         selectedSeatCoupleArr[relatedButton!] = nil
       }
@@ -517,7 +634,7 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
                 whatTheater: .ThreeSixTheater
               )
               
-              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: buttonArr)
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
             }
           }
         } else {
@@ -581,7 +698,7 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
   }
   
   func touchUpThreeSixSelectOkButton(seatNumber: [String], seatCount: Int) {
-    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
+    presentPaymentVC(seatNumber: seatNumber, seatCount: seatCount)
   }
 }
 
@@ -605,6 +722,9 @@ extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
           totalCount: totalCount,
           whatTheater: .EightTwoTheater
         )
+        if totalCount - selectedSeatArr.count > 1 {
+          finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+        }
       } else if let selectedButton = selectedSeatCoupleArr[sender] {
         // 두자리 선택
         guard let relatedButton = selectedSeatCoupleArr[selectedButton!] else { return }
@@ -617,7 +737,9 @@ extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
           totalCount: totalCount,
           whatTheater: .EightTwoTheater
         )
-        
+        if totalCount - selectedSeatArr.count > 1 {
+          finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+        }
         selectedSeatCoupleArr[selectedButton!] = nil
         selectedSeatCoupleArr[relatedButton!] = nil
       }
@@ -676,7 +798,7 @@ extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
                 whatTheater: .EightTwoTheater
               )
               
-              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: buttonArr)
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
             }
           }
         } else {
@@ -747,7 +869,7 @@ extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
   }
   
   func touchUpEightTwoSelectOkButton(seatNumber: [String], seatCount: Int) {
-    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
+    presentPaymentVC(seatNumber: seatNumber, seatCount: seatCount)
   }
 }
 
@@ -771,6 +893,9 @@ extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
           totalCount: totalCount,
           whatTheater: .OneThreeZero
         )
+        if totalCount - selectedSeatArr.count > 1 {
+          finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+        }
       } else if let selectedButton = selectedSeatCoupleArr[sender] {
         // 두자리 선택
         guard let relatedButton = selectedSeatCoupleArr[selectedButton!] else { return }
@@ -783,7 +908,9 @@ extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
           totalCount: totalCount,
           whatTheater: .OneThreeZero
         )
-        
+        if totalCount - selectedSeatArr.count > 1 {
+          finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+        }
         selectedSeatCoupleArr[selectedButton!] = nil
         selectedSeatCoupleArr[relatedButton!] = nil
       }
@@ -842,7 +969,7 @@ extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
                 whatTheater: .OneThreeZero
               )
               
-              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: buttonArr)
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
             }
           }
         } else {
@@ -913,7 +1040,7 @@ extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
   }
   
   func touchUpOneThreeZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
-    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
+    presentPaymentVC(seatNumber: seatNumber, seatCount: seatCount)
   }
 }
 
@@ -937,6 +1064,9 @@ extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
           totalCount: totalCount,
           whatTheater: .OneFourZero
         )
+        if totalCount - selectedSeatArr.count > 1 {
+          finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+        }
       } else if let selectedButton = selectedSeatCoupleArr[sender] {
         // 두자리 선택
         guard let relatedButton = selectedSeatCoupleArr[selectedButton!] else { return }
@@ -949,7 +1079,9 @@ extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
           totalCount: totalCount,
           whatTheater: .OneFourZero
         )
-        
+        if totalCount - selectedSeatArr.count > 1 {
+          finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+        }
         selectedSeatCoupleArr[selectedButton!] = nil
         selectedSeatCoupleArr[relatedButton!] = nil
       }
@@ -1008,7 +1140,7 @@ extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
                 whatTheater: .OneFourZero
               )
               
-              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: buttonArr)
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
             }
           }
         } else {
@@ -1079,7 +1211,7 @@ extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
   }
   
   func touchUpOneFourZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
-    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
+    presentPaymentVC(seatNumber: seatNumber, seatCount: seatCount)
   }
 }
 
@@ -1103,6 +1235,9 @@ extension SelectSeatViewController: OneFiveZeroMovieTheaterViewDelegate {
           totalCount: totalCount,
           whatTheater: .OneFiveZero
         )
+        if totalCount - selectedSeatArr.count > 1 {
+          finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+        }
       } else if let selectedButton = selectedSeatCoupleArr[sender] {
         // 두자리 선택
         guard let relatedButton = selectedSeatCoupleArr[selectedButton!] else { return }
@@ -1115,7 +1250,9 @@ extension SelectSeatViewController: OneFiveZeroMovieTheaterViewDelegate {
           totalCount: totalCount,
           whatTheater: .OneFiveZero
         )
-        
+        if totalCount - selectedSeatArr.count > 1 {
+          finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+        }
         selectedSeatCoupleArr[selectedButton!] = nil
         selectedSeatCoupleArr[relatedButton!] = nil
       }
@@ -1171,10 +1308,10 @@ extension SelectSeatViewController: OneFiveZeroMovieTheaterViewDelegate {
                 relatedButton: nil,
                 allButton: buttonArr,
                 totalCount: totalCount,
-                whatTheater: TheaterType.OneFiveZero
+                whatTheater: .OneFiveZero
               )
               
-              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: buttonArr)
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
             }
           }
         } else {
@@ -1245,6 +1382,6 @@ extension SelectSeatViewController: OneFiveZeroMovieTheaterViewDelegate {
   }
   
   func touchUpOneFiveZeroSelectOkButton(seatNumber: [String], seatCount: Int) {
-    pushReservationSeatData(seatNumber: seatNumber, seatCount: seatCount)
+    presentPaymentVC(seatNumber: seatNumber, seatCount: seatCount)
   }
 }

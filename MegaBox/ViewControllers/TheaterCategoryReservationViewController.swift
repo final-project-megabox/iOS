@@ -65,7 +65,7 @@ class TheaterCategoryReservationViewController: UIViewController {
   
   // MARK:- Methods
   func getReservationDataAndSort(_ selectedRegionName: String, _ date: String, vc: UIViewController?) {
-    let url = ApiUrlData.ApiUrl(.secondReservationDataApi)
+    let url = ApiUrlData.ApiUrl(.theaterMovieDataApi)
     NetworkService.getReservationData(url, regionName: selectedRegionName, date: date) { result in
       switch result {
       case .success(let data):
