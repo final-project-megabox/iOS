@@ -27,7 +27,7 @@ class PreViewCell: UITableViewCell {
   let preViewTitleLabel: UILabel = {
     let label = UILabel()
     label.text = "스파이더맨: 파 프로 홈 티저예고편"
-    label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()

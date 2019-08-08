@@ -148,6 +148,34 @@ class MovieDetailHeaderView: UIView {
     return button
   }()
   
+  let sharedImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "shared")
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  let likeImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "heart")
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  let writeImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "comment")
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
+  let reservationImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "reservation")
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     
@@ -225,11 +253,18 @@ class MovieDetailHeaderView: UIView {
     separateLine.trailingAnchor.constraint(equalTo: firstView.trailingAnchor, constant: -20).isActive = true
     separateLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
     
+    
     firstView.addSubview(shardButton)
     shardButton.topAnchor.constraint(equalTo: separateLine.bottomAnchor).isActive = true
     shardButton.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
     shardButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     shardButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 4).isActive = true
+    
+    shardButton.addSubview(sharedImageView)
+    sharedImageView.centerXAnchor.constraint(equalTo: shardButton.centerXAnchor).isActive = true
+    sharedImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50).isActive = true
+    sharedImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    sharedImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
     firstView.addSubview(likeButton)
     likeButton.topAnchor.constraint(equalTo: separateLine.bottomAnchor).isActive = true
@@ -237,11 +272,23 @@ class MovieDetailHeaderView: UIView {
     likeButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     likeButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 4).isActive = true
     
+    shardButton.addSubview(likeImageView)
+    likeImageView.centerXAnchor.constraint(equalTo: likeButton.centerXAnchor).isActive = true
+    likeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50).isActive = true
+    likeImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    likeImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    
     firstView.addSubview(commentWriteButton)
     commentWriteButton.topAnchor.constraint(equalTo: separateLine.bottomAnchor).isActive = true
     commentWriteButton.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor).isActive = true
     commentWriteButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     commentWriteButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 4).isActive = true
+    
+    shardButton.addSubview(writeImageView)
+    writeImageView.centerXAnchor.constraint(equalTo: commentWriteButton.centerXAnchor).isActive = true
+    writeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50).isActive = true
+    writeImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    writeImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
     
     //바로예매버튼
@@ -250,6 +297,12 @@ class MovieDetailHeaderView: UIView {
     reservationButton.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     reservationButton.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     reservationButton.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 4).isActive = true
+    
+    shardButton.addSubview(reservationImageView)
+    reservationImageView.centerXAnchor.constraint(equalTo: reservationButton.centerXAnchor).isActive = true
+    reservationImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50).isActive = true
+    reservationImageView.widthAnchor.constraint(equalToConstant: 15).isActive = true
+    reservationImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {

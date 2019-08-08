@@ -38,19 +38,19 @@ class CommentCell: UITableViewCell {
     return label
   }()
   
-  let starImageView: UIImageView = {
-    let imageView = UIImageView()
-    imageView.backgroundColor = .red
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    return imageView
-  }()
-
-  let firstSeparateImageView: UIImageView = {
-    let imageView = UIImageView()
-    imageView.image = #imageLiteral(resourceName: "abc_list_selector_disabled_holo_light.9")
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    return imageView
-  }()
+//  let starImageView: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.backgroundColor = .red
+//    imageView.translatesAutoresizingMaskIntoConstraints = false
+//    return imageView
+//  }()
+//
+//  let firstSeparateImageView: UIImageView = {
+//    let imageView = UIImageView()
+//    imageView.image = #imageLiteral(resourceName: "abc_list_selector_disabled_holo_light.9")
+//    imageView.translatesAutoresizingMaskIntoConstraints = false
+//    return imageView
+//  }()
   
   let commentLabel: UILabel = {
     let label = UILabel()
@@ -86,9 +86,9 @@ class CommentCell: UITableViewCell {
     button.setTitle("신고하기", for: .normal)
     button.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-    button.setImage(#imageLiteral(resourceName: "lock"), for: .normal)
-    button.contentHorizontalAlignment = .right
-    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+//    button.setImage(#imageLiteral(resourceName: "lock"), for: .normal)
+//    button.contentHorizontalAlignment = .right
+//    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -127,17 +127,17 @@ class CommentCell: UITableViewCell {
     timeLabel.topAnchor.constraint(equalTo: userIdLable.bottomAnchor, constant: 10).isActive = true
     timeLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 10).isActive = true
     
-    addSubview(starImageView)
-    starImageView.topAnchor.constraint(equalTo: timeLabel.topAnchor).isActive = true
-    starImageView.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor).isActive = true
-    starImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-    starImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
-    
-    addSubview(firstSeparateImageView)
-    firstSeparateImageView.topAnchor.constraint(equalTo: timeLabel.topAnchor).isActive = true
-    firstSeparateImageView.leadingAnchor.constraint(equalTo: starImageView.trailingAnchor).isActive = true
-    firstSeparateImageView.widthAnchor.constraint(equalToConstant: 3).isActive = true
-    firstSeparateImageView.heightAnchor.constraint(equalToConstant: 10).isActive = true
+//    addSubview(starImageView)
+//    starImageView.topAnchor.constraint(equalTo: timeLabel.topAnchor).isActive = true
+//    starImageView.leadingAnchor.constraint(equalTo: timeLabel.trailingAnchor).isActive = true
+//    starImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
+//    starImageView.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//
+//    addSubview(firstSeparateImageView)
+//    firstSeparateImageView.topAnchor.constraint(equalTo: timeLabel.topAnchor).isActive = true
+//    firstSeparateImageView.leadingAnchor.constraint(equalTo: starImageView.trailingAnchor).isActive = true
+//    firstSeparateImageView.widthAnchor.constraint(equalToConstant: 3).isActive = true
+//    firstSeparateImageView.heightAnchor.constraint(equalToConstant: 10).isActive = true
     
     addSubview(commentLabel)
     commentLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 10).isActive = true
@@ -158,7 +158,7 @@ class CommentCell: UITableViewCell {
     
     addSubview(badButton)
     badButton.topAnchor.constraint(equalTo: commentLabel.bottomAnchor, constant: 10).isActive = true
-    badButton.leadingAnchor.constraint(equalTo: secondSeparateImageView.trailingAnchor).isActive = true
+    badButton.leadingAnchor.constraint(equalTo: secondSeparateImageView.trailingAnchor, constant: -10).isActive = true
     badButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
     badButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
     

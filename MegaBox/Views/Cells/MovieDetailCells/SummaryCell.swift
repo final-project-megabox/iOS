@@ -15,7 +15,7 @@ class SummaryCell: UITableViewCell {
   let summaryTitleLabel: UILabel = {
     let label = UILabel()
     label.text = "줄거리"
-    label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+    label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -32,20 +32,21 @@ class SummaryCell: UITableViewCell {
     맞서야만 하는 상황에 놓이게 되는데…\n
     """
     label.numberOfLines = 0
-    label.font = UIFont.systemFont(ofSize: 11)
+    label.font = UIFont.systemFont(ofSize: 13)
+    label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
   
-  let addButton: UIButton = {
-    let button = UIButton()
-    button.setTitle("더보기", for: .normal)
-    button.setTitleColor(#colorLiteral(red: 0.2199999988, green: 0.2199999988, blue: 0.2199999988, alpha: 1), for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 11)
-    button.addTarget(self, action: #selector(didTapAddButton(_:)), for: .touchUpInside)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
+//  let addButton: UIButton = {
+//    let button = UIButton()
+//    button.setTitle("더보기", for: .normal)
+//    button.setTitleColor(#colorLiteral(red: 0.2199999988, green: 0.2199999988, blue: 0.2199999988, alpha: 1), for: .normal)
+//    button.titleLabel?.font = UIFont.systemFont(ofSize: 11)
+//    button.addTarget(self, action: #selector(didTapAddButton(_:)), for: .touchUpInside)
+//    button.translatesAutoresizingMaskIntoConstraints = false
+//    return button
+//  }()
 
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -67,12 +68,12 @@ class SummaryCell: UITableViewCell {
     summaryLabel.topAnchor.constraint(equalTo: summaryTitleLabel.bottomAnchor, constant: 20).isActive = true
     summaryLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
     summaryLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    
-    
-    addSubview(addButton)
-    addButton.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 30).isActive = true
-    addButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    addButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+    summaryLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+//    
+//    addSubview(addButton)
+//    addButton.topAnchor.constraint(equalTo: summaryLabel.bottomAnchor, constant: 30).isActive = true
+//    addButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+//    addButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
   }
   
   

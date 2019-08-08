@@ -257,7 +257,7 @@ protocol MyPageWishMovieTopViewDelegate {
 
 //보고싶은 영화 삭제
 protocol MyPageWishMovieViewDelegate {
-  func touchUpDeleteButton(sender: UIButton)
+  func touchUpDeleteButton(sender: UIButton, movieId: Int)
 }
 
 
