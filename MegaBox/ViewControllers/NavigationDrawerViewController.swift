@@ -85,10 +85,9 @@ extension NavigationDrawerViewController: NavigationDrawerViewDelegate {
     
     self.present(myPageVC, animated: false)
 
-//    let url = "http://megabox.hellocoding.shop//accounts/myPage/"
-//    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+//    let url = ApiUrlData.ApiUrl(.myPageApi)
 //
-//    NetworkService.getUserMyPageData(url, token: "JWT \(token)") { (result) in
+//    NetworkService.getUserMyPageData(url) { (result) in
 //      switch result {
 //      case .success(let value):
 //        self.shared.myPageData = value

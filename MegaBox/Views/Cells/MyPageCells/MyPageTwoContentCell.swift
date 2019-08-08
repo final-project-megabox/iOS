@@ -18,8 +18,8 @@ class MyPageTwoContentCell: UITableViewCell {
   }()
   
   //
-  let firstView: UIView = {
-    let view = UIView()
+  let firstView: UIButton = {
+    let view = UIButton()
     view.backgroundColor = .white
     view.translatesAutoresizingMaskIntoConstraints = false
     return view

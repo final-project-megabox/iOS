@@ -299,4 +299,33 @@ class NetworkService {
     }
   }
   
+  static func getUserWatchedMovieData(_ urlStr: String, completion: @escaping (Swift.Result<[WatchedMovie], ErrorType>) -> Void) {
+    let url = URL(string: urlStr)!
+    
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let headers: HTTPHeaders = [
+      "Content-Type": "application/json",
+      "Authorization": "JWT \(token)"
+    ]
+    
+    let req = Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
+    
+    
+    req.validate()
+      .responseData { response in
+        switch response.result {
+        case .success(let data):
+          do {
+            let userWatchedMovieData = try JSONDecoder().decode([WatchedMovie].self, from: data)
+            completion(.success(userWatchedMovieData))
+          } catch {
+            print(error.localizedDescription)
+          }
+        case .failure:
+          completion(.failure(ErrorType.networkErr))
+        }
+    }
+  }
+  
 }

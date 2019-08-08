@@ -240,6 +240,9 @@ protocol MovieDetailTopViewDelegate {
 
 protocol MyPageContentViewDelegate {
   
+  //선호 영화관 설정
+  func touchUpPreferButton(sender: UIButton)
+  
   //보고싶은 영화
   func touchUpWishMovieButton(sender: UIButton)
   
@@ -255,4 +258,14 @@ protocol MyPageWishMovieTopViewDelegate {
 //보고싶은 영화 삭제
 protocol MyPageWishMovieViewDelegate {
   func touchUpDeleteButton(sender: UIButton)
+}
+
+
+protocol MyPageWatchedTopViewDelegate {
+  func touchUpDismissButton(sender: UIButton)
+}
+
+
+protocol MyPagePreferTheaterTopViewDelegate {
+  func touchUpDismissButton(sender: UIButton)
 }

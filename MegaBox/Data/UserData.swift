@@ -41,6 +41,7 @@ struct BookingHistory: Codable {
     case theater
   }
 }
+
 // MARK: - PreferTheater
 struct PreferTheater: Codable {
   let theater, region: String
@@ -61,5 +62,22 @@ struct WishMovie: Codable {
     case imgURL = "img_url"
     case age, title
     case bookingRate = "booking_rate"
+  }
+}
+
+
+// MARK: - WatchedMovie
+struct WatchedMovie: Codable {
+  let imgURL: String
+  let age: String
+  let title: String
+  let scheduleDate: String
+  let theaterHeadcount: String
+  
+  enum CodingKeys: String, CodingKey {
+    case imgURL = "img_url"
+    case age, title
+    case scheduleDate = "schedule_date"
+    case theaterHeadcount = "theater_headcount"
   }
 }

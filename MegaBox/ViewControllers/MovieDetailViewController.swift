@@ -30,7 +30,6 @@ class MovieDetailViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    print("해당 영화의 isWished: ", isWished!)
     getMovieDetailData()
     detailContentView.headerView.delegate = self
     topView.delegate = self
@@ -43,7 +42,11 @@ class MovieDetailViewController: UIViewController {
     guard let data = shared.movieDetailData else { return }
     detailContentView.headerView.titleLabelOfPreView.text = data.title
     detailContentView.headerView.title.text = data.title
-    detailContentView.headerView.releaseDate.text = "\(data.releaseDate) 개봉"
+    
+    let date = data.releaseDate.replace(target: "-", withString: ".")
+    
+    
+    detailContentView.headerView.releaseDate.text = "\(date) 개봉"
     detailContentView.headerView.genre.text = data.genre
     
     if data.age == "청소년 관람불가" {
@@ -141,7 +144,6 @@ extension MovieDetailViewController: MovieDetailTopViewDelegate {
     NetworkService.getAllMovieData(movieReservationURLStr) { result in
       switch result {
       case .success(let data):
-        print("[Log] :", data)
         self.shared.allMovieData = data
         self.presentingViewController?.dismiss(animated: false)
       case .failure(let err):
