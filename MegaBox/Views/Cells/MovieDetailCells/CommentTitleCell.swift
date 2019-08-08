@@ -12,8 +12,8 @@ class CommentTitleCell: UITableViewCell {
   
   let titleLabel: UILabel = {
     let label = UILabel()
-    label.text = "한줄평(1,594개)"
-    label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+    label.text = "한줄평"
+    label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()

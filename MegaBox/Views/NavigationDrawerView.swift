@@ -98,6 +98,10 @@ extension NavigationDrawerView: UICollectionViewDataSource {
         guard let mileage = shared.myPageData?.mileage else { return cell }
         cell.pointLabel.text = "\(mileage)P"
         
+        //예매내역 -> 본영화
+        guard let watchedMovieCount = shared.myPageData?.watchedMovieNumber else { return cell }
+        cell.reservationLabel.text = "\(watchedMovieCount)장"
+        
 //        cell.lastLoginLabel.text = "마지막 로그인 \(shared.myPageData!.lastLogin)"
         return cell
         

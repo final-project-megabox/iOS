@@ -14,8 +14,8 @@ class MoviePostCell: UITableViewCell {
   
   let titleLabel: UILabel = {
     let label = UILabel()
-    label.text = "무비포스트(594개)"
-    label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+    label.text = "무비포스트"
+    label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()

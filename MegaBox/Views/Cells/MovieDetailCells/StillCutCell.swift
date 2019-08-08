@@ -15,7 +15,7 @@ class StillCutCell: UITableViewCell {
   let titleLabel: UILabel = {
     let label = UILabel()
     label.text = "스틸컷"
-    label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+    label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()

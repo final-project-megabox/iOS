@@ -13,7 +13,7 @@ class DirectorActorCell: UITableViewCell {
   let titleLabel: UILabel = {
     let label = UILabel()
     label.text = "감독/출연"
-    label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+    label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -21,7 +21,7 @@ class DirectorActorCell: UITableViewCell {
   let directorTitleLabel: UILabel = {
     let label = UILabel()
     label.text = "감독"
-    label.font = UIFont.systemFont(ofSize: 11, weight: .semibold)
+    label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -29,7 +29,7 @@ class DirectorActorCell: UITableViewCell {
   let directorLabel: UILabel = {
     let label = UILabel()
     label.text = "존 왓츠"
-    label.font = UIFont.systemFont(ofSize: 11)
+    label.font = UIFont.systemFont(ofSize: 13)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -37,7 +37,7 @@ class DirectorActorCell: UITableViewCell {
   let actorTitleLabel: UILabel = {
     let label = UILabel()
     label.text = "출연"
-    label.font = UIFont.systemFont(ofSize: 11, weight: .semibold)
+    label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -46,7 +46,7 @@ class DirectorActorCell: UITableViewCell {
     let label = UILabel()
     label.text = "톰 홀랜드, 사무엘 L. 잭슨, 젠다야 콜맨, 코비 스멀더스, 존 파브로, 마리사 토메이, 제이크 질렌할, 제이콥 배덜런"
     label.numberOfLines = 0
-    label.font = UIFont.systemFont(ofSize: 11)
+    label.font = UIFont.systemFont(ofSize: 13)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
