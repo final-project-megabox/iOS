@@ -9,6 +9,8 @@
 import UIKit
 
 class MyPageWishMovieView: UIView {
+  
+  var delegate: MyPageWishMovieViewDelegate?
 
   let shared = UserDataManager.shared
   let movieShared = MovieDataManager.shared
@@ -50,6 +52,10 @@ class MyPageWishMovieView: UIView {
     
   }
   
+  @objc func didTapDeleteButton(_ sender: UIButton) {
+    delegate?.touchUpDeleteButton(sender: sender)
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
     
@@ -67,6 +73,10 @@ extension MyPageWishMovieView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let wishListCell = tableView.dequeueReusableCell(withIdentifier: MyPageWishMovieCell.identifier, for: indexPath) as! MyPageWishMovieCell
+    
+    wishListCell.selectionStyle = .none
+    
+    wishListCell.deleteButton.addTarget(self, action: #selector(didTapDeleteButton(_:)), for: .touchUpInside)
     
     //제목
     wishListCell.movieTitleLabel.text = shared.wishMovieData[indexPath.row].title
@@ -95,8 +105,29 @@ extension MyPageWishMovieView: UITableViewDataSource {
     }
     task.resume()
     
+    let id = shared.wishMovieData[indexPath.row].movieID
+    let detailUrl = ApiUrlData.ApiUrl(.movieDetailApi)
+    let query = "?movie=\(id)"
+    let fullUrl = detailUrl + query
     
     
+    NetworkService.getMovieDetailData(fullUrl) { (result) in
+      switch result {
+      case .success(let data):
+        print("[Log] :", data)
+        wishListCell.typeLabel.text = "기타/\(data.genre)"
+        wishListCell.dateLabel.text = "\(data.releaseDate)"
+        wishListCell.directorLabel.text = "감독 \(data.director)"
+        wishListCell.actorLabel.text = "출연 \(data.cast)"
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
+    
+    
+    
+    
+    wishListCell.typeLabel.text = movieShared.movieDetailData?.genre
     
     
     
