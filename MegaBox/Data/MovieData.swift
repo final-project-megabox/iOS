@@ -8,7 +8,7 @@ struct MovieData: Codable {
   let movieID: Int
   let imgURL: String
   let releaseDate: String
-  let bookingRate: Double
+  var bookingRate: Double
   let title, age: String
   let types: [[String]]
   let runningTime: Int

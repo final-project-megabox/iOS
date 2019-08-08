@@ -117,6 +117,7 @@ class TheaterCategoryReservationView: UIView {
     tableView.tableFooterView = UIView()
     tableView.cellLayoutMarginsFollowReadableWidth = false
     tableView.separatorInset.left = 0
+    tableView.separatorStyle = .singleLine
     tableView.accessibilityIdentifier = "dateTableView"
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
@@ -130,7 +131,6 @@ class TheaterCategoryReservationView: UIView {
     dateTableView.dataSource = self
     dateTableView.delegate = self
     
-    dateTableView.separatorStyle = .singleLine
     setupProperties()
   }
   
@@ -175,13 +175,13 @@ class TheaterCategoryReservationView: UIView {
   
   func calculateMoviesData() {
     screenArr = []
-    for (_, data) in shared.sortedTheaterMovieTitle.enumerated() {
-      screenArr.append(shared.theaterCategoryDetailMovie[data]!.count)
-    }
-    
     // 영화 타이틀만 저장 및 중복 제거(예매율 소팅)
     self.shared.sortedTheaterMovieTitle = self.shared.reservationMovieData.map({ $0.movie })
     self.shared.sortedTheaterMovieTitle = self.shared.sortedTheaterMovieTitle.removeDuplicates()
+    
+    for (_, data) in shared.sortedTheaterMovieTitle.enumerated() {
+      screenArr.append(shared.theaterCategoryDetailMovie[data]!.count)
+    }
     
     var sumIdx = 0
     

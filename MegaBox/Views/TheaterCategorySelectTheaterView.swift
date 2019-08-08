@@ -88,7 +88,7 @@ class TheaterCategorySelectTheaterView: UIView {
     return button
   }()
   
-  private let regionTableView: UITableView = {
+  let regionTableView: UITableView = {
     let tableView = UITableView()
     tableView.register(TheaterCategorySelectTheaterRegionCell.self, forCellReuseIdentifier: TheaterCategorySelectTheaterRegionCell.identifier)
     tableView.separatorStyle = .none
@@ -96,7 +96,7 @@ class TheaterCategorySelectTheaterView: UIView {
     return tableView
   }()
   
-  private let regionListTableView: UITableView = {
+  let regionListTableView: UITableView = {
     let tableView = UITableView()
     tableView.register(TheaterCategorySelectTheaterEmptyCell.self, forCellReuseIdentifier: TheaterCategorySelectTheaterEmptyCell.identifier)
     tableView.register(TheaterCategorySelectTheaterRegionListCell.self, forCellReuseIdentifier: TheaterCategorySelectTheaterRegionListCell.identifier)

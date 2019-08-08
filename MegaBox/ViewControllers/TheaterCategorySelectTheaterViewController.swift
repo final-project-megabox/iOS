@@ -20,8 +20,6 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
   
   var regionData: [RegionData]?
   
-  private let urlStr: String = "http://megabox.hellocoding.shop//database/reservationScheduleList/"
-  
   private let selectTheaterView: TheaterCategorySelectTheaterView = {
     let view = TheaterCategorySelectTheaterView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +30,14 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
     super.viewDidLoad()
     
     selectTheaterView.delegate = self
-    checkRegionData()
+    
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    selectTheaterView.regionTableView.reloadData()
+    selectTheaterView.regionListTableView.reloadData()
   }
   
   override func viewWillLayoutSubviews() {
@@ -41,7 +46,8 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
   }
   
   func getReservationDataAndSort(isOne: Bool, _ selectedRegionName: String, _ date: String, vc: UIViewController?) {
-    NetworkService.getReservationData(urlStr, regionName: selectedRegionName, date: date) { result in
+    let url = ApiUrlData.ApiUrl(.theaterMovieDataApi)
+    NetworkService.getReservationData(url, regionName: selectedRegionName, date: date) { result in
       switch result {
       case .success(let data):
         var reservationMovieDatas = data
@@ -105,6 +111,7 @@ class TheaterCategorySelectTheaterViewController: UIViewController {
       regionList.append(regionData.region)
       regionTheaterList.append(regionData.theater)
     }
+    
     selectTheaterView.regionData = regionList
     selectTheaterView.regionTheaterData = regionTheaterList
   }
