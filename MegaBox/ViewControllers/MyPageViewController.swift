@@ -27,9 +27,10 @@ class MyPageViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     myPageTopView.delegate = self
     myPageView.delegate = self
-    
+
     getUserData()
     setupMaPageView()
   }
@@ -71,6 +72,12 @@ extension MyPageViewController: MyPageTopViewDelegate {
 
 
 extension MyPageViewController: MyPageContentViewDelegate {
+  func touchUpPreferButton(sender: UIButton) {
+    let preferVC = MyPagePreferTheaterViewController()
+    self.present(preferVC, animated: false)
+  }
+  
+  
   func touchUpWishMovieButton(sender: UIButton) {
     let wishMovieVC = MyPageWishViewController()
     
@@ -89,6 +96,19 @@ extension MyPageViewController: MyPageContentViewDelegate {
   }
   
   func touchUpWatchedMovieButton(sender: UIButton) {
+    let url = "http://megabox.hellocoding.shop//accounts/showWatchedMovies/"
+    let watchedVC = MypageWatchedViewController()
+    
+    NetworkService.getUserWatchedMovieData(url) { (result) in
+      switch result {
+      case .success(let data):
+        self.shared.watchedMovieData = data
+        self.present(watchedVC, animated: false)
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
+    
     
   }
   

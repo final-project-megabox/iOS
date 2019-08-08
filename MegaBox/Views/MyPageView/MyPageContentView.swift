@@ -52,13 +52,15 @@ class MyPageContentView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  @objc func didTapPreferViewButton(_ sender: UIButton) {
+    delegate?.touchUpPreferButton(sender: sender)
+  }
+  
   @objc func didTapSecondViewButton(_ sender: UIButton) {
-
     delegate?.touchUpWishMovieButton(sender: sender)
   }
   
   @objc func didTapThirdViewButton(_ sender: UIButton) {
-    
     delegate?.touchUpWatchedMovieButton(sender: sender)
   }
   
@@ -112,6 +114,8 @@ extension MyPageContentView: UITableViewDataSource {
     case 5:
       two.selectionStyle = .none
       two.firstContentLabel.text = "선호영화관 설정"
+      //선호영화관
+      two.firstView.addTarget(self, action: #selector(didTapPreferViewButton(_:)), for: .touchUpInside)
       two.firstCountLabel.isHidden = true
       two.secondContentLabel.text = "자주쓰는 신용카드"
       two.secondCountLabel.isHidden = true

@@ -114,9 +114,9 @@ extension MyPageWishMovieView: UITableViewDataSource {
     NetworkService.getMovieDetailData(fullUrl) { (result) in
       switch result {
       case .success(let data):
-        print("[Log] :", data)
         wishListCell.typeLabel.text = "기타/\(data.genre)"
-        wishListCell.dateLabel.text = "\(data.releaseDate)"
+        let date = data.releaseDate.replace(target: "-", withString: ".")
+        wishListCell.dateLabel.text = "\(date)"
         wishListCell.directorLabel.text = "감독 \(data.director)"
         wishListCell.actorLabel.text = "출연 \(data.cast)"
       case .failure(let err):

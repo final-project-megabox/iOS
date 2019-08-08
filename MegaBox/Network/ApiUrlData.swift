@@ -64,6 +64,7 @@ class ApiUrlData {
     case .movieDetailApi:
       let movieDetailURL: String = "http://megabox.hellocoding.shop//database/movieDetail/"
       return movieDetailURL
+    
       
     case .eventApi:
       let randomNum = (0...2).randomElement() ?? 0

@@ -94,6 +94,10 @@ extension NavigationDrawerView: UICollectionViewDataSource {
         guard let userName = UserDefaults.standard.value(forKey: "UserName") else { return cell }
         cell.userNameButton.setTitle("\(userName)", for: .normal)
         
+        //보유포인트
+        guard let mileage = shared.myPageData?.mileage else { return cell }
+        cell.pointLabel.text = "\(mileage)P"
+        
 //        cell.lastLoginLabel.text = "마지막 로그인 \(shared.myPageData!.lastLogin)"
         return cell
         

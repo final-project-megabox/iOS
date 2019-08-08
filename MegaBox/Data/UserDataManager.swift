@@ -16,6 +16,7 @@ class UserDataManager {
   var myPageData: MyPage?
   
   var wishMovieData: [WishMovie] = []
+  var watchedMovieData: [WatchedMovie] = []
 }
 
 

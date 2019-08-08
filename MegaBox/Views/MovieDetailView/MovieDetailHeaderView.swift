@@ -78,7 +78,7 @@ class MovieDetailHeaderView: UIView {
   //개봉일
   let releaseDate: UILabel = {
     let label = UILabel()
-    label.text = "2019.07.02 개봉"
+    label.text = "2019-07-02"
     label.textColor = #colorLiteral(red: 0.4227316228, green: 0.4227316228, blue: 0.4227316228, alpha: 1)
     label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -150,6 +150,7 @@ class MovieDetailHeaderView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    
     
     setupGradeImageView()
     setupHeaderView()
