@@ -112,40 +112,62 @@ class OneFiveZeroMovieTheaterView: UIView {
   
   private func makeSeatButtons() {
     for i in 0..<14 {
-      for j in 0..<12 {
+      for j in 0..<15 {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("\(alphbetArr[alphbetIndex])\(j + 1)", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
         button.contentMode = .scaleAspectFit
         button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         button.layer.borderWidth = 0.5
         button.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        button.accessibilityIdentifier = "\(alphbetArr[alphbetIndex])\((j + 1))"
         button.addTarget(self, action: #selector(touchUpButton(_:)), for: .touchUpInside)
         
-        if i == 0 && (j == 9 || j == 10 || j == 11) {
+        if j == 0 {
+        } else if j < 7 {
+          button.setTitle("\(alphbetArr[alphbetIndex])\(j)", for: .normal)
+          button.accessibilityIdentifier = "\(j)"
+        } else if j == 7 {
+        } else if j < 14 {
+          button.setTitle("\(alphbetArr[alphbetIndex])\(j - 1)", for: .normal)
+          button.accessibilityIdentifier = "\(j - 1)"
+        } else if j == 14 {
+        }
+        
+        if j == 0 {
+          button.setTitle("space", for: .normal)
+          button.accessibilityIdentifier = "space"
           button.isHidden = true
-        } else if i == 8 && (j == 0 || j == 1 || j == 2 || j == 3 || j == 4 || j == 5) {
+        } else if j == 7 {
+          button.setTitle("space", for: .normal)
+          button.accessibilityIdentifier = "space"
           button.isHidden = true
-        } else if (i == 9 || i == 10 || i == 11) && (j == 0 || j == 1 || j == 2) {
+        } else if j == 14 {
+          button.setTitle("space", for: .normal)
+          button.accessibilityIdentifier = "space"
           button.isHidden = true
-        } else if i == 0 && (j == 6 || j == 7 || j == 8) {
+        } else if i == 0 && (j == 11 || j == 12 || j == 13) {
+          button.setTitle("space", for: .normal)
+          button.accessibilityIdentifier = "space"
+          button.isHidden = true
+        } else if i == 8 && (j == 0 || j == 1 || j == 2 || j == 3 || j == 4 || j == 5 || j == 6) {
+          button.setTitle("space", for: .normal)
+          button.accessibilityIdentifier = "space"
+          button.isHidden = true
+        } else if (i == 9 || i == 10 || i == 11) && (j == 0 || j == 1 || j == 2 || j == 3) {
+          button.setTitle("space", for: .normal)
+          button.accessibilityIdentifier = "space"
+          button.isHidden = true
+        } else if i == 0 && (j == 8 || j == 9 || j == 10) {
           button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
           button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         }
         
-        if j == 11 {
+        if j == 14 {
           alphbetIndex += 1
         }
-        
-        if j < 6 {
-          firstView.addSubview(button)
-        } else {
-          secondView.addSubview(button)
-        }
-        
+       
+        firstView.addSubview(button)
         seatButtonArr.append(button)
       }
     }
@@ -175,68 +197,45 @@ class OneFiveZeroMovieTheaterView: UIView {
     
     scrollView.addSubview(firstView)
     firstView.topAnchor.constraint(equalTo: screenImage.bottomAnchor, constant: 80).isActive = true
-    firstView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 40).isActive = true
-    firstView.widthAnchor.constraint(equalToConstant: 35 * 6).isActive = true
+    firstView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+    firstView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+    firstView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -40).isActive = true
+    firstView.widthAnchor.constraint(equalToConstant: 35 * 15).isActive = true
     firstView.heightAnchor.constraint(equalToConstant: 35 * 14).isActive = true
     
-    scrollView.addSubview(secondView)
-    secondView.topAnchor.constraint(equalTo: screenImage.bottomAnchor, constant: 80).isActive = true
-    secondView.leadingAnchor.constraint(equalTo: firstView.trailingAnchor, constant: 40).isActive = true
-    secondView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -40).isActive = true
-    secondView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -40).isActive = true
-    secondView.widthAnchor.constraint(equalToConstant: 35 * 6).isActive = true
-    secondView.heightAnchor.constraint(equalToConstant: 35 * 14).isActive = true
-    
     scrollView.addSubview(enterImage)
-    enterImage.centerYAnchor.constraint(equalTo: seatButtonArr[121].centerYAnchor).isActive = true
-    enterImage.centerXAnchor.constraint(equalTo: seatButtonArr[121].centerXAnchor).isActive = true
+    enterImage.centerYAnchor.constraint(equalTo: seatButtonArr[152].centerYAnchor).isActive = true
+    enterImage.centerXAnchor.constraint(equalTo: seatButtonArr[152].centerXAnchor).isActive = true
     enterImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
     enterImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
     
     scrollView.addSubview(exitImage)
-    exitImage.leadingAnchor.constraint(equalTo: secondView.trailingAnchor).isActive = true
-    exitImage.bottomAnchor.constraint(equalTo: secondView.topAnchor).isActive = true
+    exitImage.leadingAnchor.constraint(equalTo: firstView.trailingAnchor).isActive = true
+    exitImage.bottomAnchor.constraint(equalTo: firstView.topAnchor).isActive = true
     exitImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
     exitImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
     
     for i in 0..<seatButtonArr.count {
-      if i < 12 {
+      if i < 15 {
         if i == 0 {
           seatButtonArr[i].topAnchor.constraint(equalTo: firstView.topAnchor).isActive = true
           seatButtonArr[i].leadingAnchor.constraint(equalTo: firstView.leadingAnchor).isActive = true
           seatButtonArr[i].widthAnchor.constraint(equalToConstant: 35).isActive = true
           seatButtonArr[i].heightAnchor.constraint(equalToConstant: 35).isActive = true
-        } else if i == 6 {
-          seatButtonArr[i].topAnchor.constraint(equalTo: secondView.topAnchor).isActive = true
-          seatButtonArr[i].leadingAnchor.constraint(equalTo: secondView.leadingAnchor).isActive = true
+        } else {
+          seatButtonArr[i].topAnchor.constraint(equalTo: firstView.topAnchor).isActive = true
+          seatButtonArr[i].leadingAnchor.constraint(equalTo: seatButtonArr[i - 1].trailingAnchor).isActive = true
           seatButtonArr[i].widthAnchor.constraint(equalToConstant: 35).isActive = true
           seatButtonArr[i].heightAnchor.constraint(equalToConstant: 35).isActive = true
-        } else {
-          if i < 6 {
-            seatButtonArr[i].topAnchor.constraint(equalTo: firstView.topAnchor).isActive = true
-            seatButtonArr[i].leadingAnchor.constraint(equalTo: seatButtonArr[i - 1].trailingAnchor).isActive = true
-            seatButtonArr[i].widthAnchor.constraint(equalToConstant: 35).isActive = true
-            seatButtonArr[i].heightAnchor.constraint(equalToConstant: 35).isActive = true
-          } else {
-            seatButtonArr[i].topAnchor.constraint(equalTo: secondView.topAnchor).isActive = true
-            seatButtonArr[i].leadingAnchor.constraint(equalTo: seatButtonArr[i - 1].trailingAnchor).isActive = true
-            seatButtonArr[i].widthAnchor.constraint(equalToConstant: 35).isActive = true
-            seatButtonArr[i].heightAnchor.constraint(equalToConstant: 35).isActive = true
-          }
         }
       } else {
-        if i % 12 == 0 {
-          seatButtonArr[i].topAnchor.constraint(equalTo: seatButtonArr[i - 12].bottomAnchor).isActive = true
+        if i % 15 == 0 {
+          seatButtonArr[i].topAnchor.constraint(equalTo: seatButtonArr[i - 15].bottomAnchor).isActive = true
           seatButtonArr[i].leadingAnchor.constraint(equalTo: firstView.leadingAnchor).isActive = true
           seatButtonArr[i].widthAnchor.constraint(equalToConstant: 35).isActive = true
           seatButtonArr[i].heightAnchor.constraint(equalToConstant: 35).isActive = true
-        } else if (i - 6) % 12 == 0 {
-          seatButtonArr[i].topAnchor.constraint(equalTo: seatButtonArr[i - 12].bottomAnchor).isActive = true
-          seatButtonArr[i].leadingAnchor.constraint(equalTo: secondView.leadingAnchor).isActive = true
-          seatButtonArr[i].widthAnchor.constraint(equalToConstant: 35).isActive = true
-          seatButtonArr[i].heightAnchor.constraint(equalToConstant: 35).isActive = true
         } else {
-          seatButtonArr[i].topAnchor.constraint(equalTo: seatButtonArr[i - 12].bottomAnchor).isActive = true
+          seatButtonArr[i].topAnchor.constraint(equalTo: seatButtonArr[i - 15].bottomAnchor).isActive = true
           seatButtonArr[i].leadingAnchor.constraint(equalTo: seatButtonArr[i - 1].trailingAnchor).isActive = true
           seatButtonArr[i].widthAnchor.constraint(equalToConstant: 35).isActive = true
           seatButtonArr[i].heightAnchor.constraint(equalToConstant: 35).isActive = true
@@ -617,12 +616,6 @@ class OneFiveZeroMovieTheaterView: UIView {
   }()
   
   private let firstView: UIView = {
-    let view = UIView()
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-  
-  private let secondView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     return view

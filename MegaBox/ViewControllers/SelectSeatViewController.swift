@@ -8,6 +8,14 @@
 
 import UIKit
 
+enum TheaterType: Int {
+  case ThreeSixTheater = 36
+  case EightTwoTheater = 82
+  case OneThreeZero = 130
+  case OneFourZero = 140
+  case OneFiveZero = 150
+}
+
 class SelectSeatViewController: UIViewController {
   
   let urlStr = "http://megabox.hellocoding.shop//database/reservationSecond/"
@@ -18,7 +26,8 @@ class SelectSeatViewController: UIViewController {
   var movieData: ReservationData? = nil
   
   var selectedSeatArr: [String] = []
-  var selectedSeatCoupleArr: [Int: [String]] = [:]
+  var selectedSeatButtonArr: [UIButton] = []
+  var selectedSeatCoupleArr: [UIButton: UIButton?] = [:]
   
   let threeSixMovieTheaterView: ThreeSixMovieTheaterView = {
     let view = ThreeSixMovieTheaterView()
@@ -67,21 +76,97 @@ class SelectSeatViewController: UIViewController {
     timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(startSplash), userInfo: nil, repeats: false)
   }
   
-  private func isNullLeftSeat() {
+  private func isPossibleReservationLeftSeat(buttonArr: [UIButton], baseButton: UIButton, buttonIdx: Int) -> Bool {
+    if buttonIdx == 1 {
+      // Null (제일 첫번째)
+      return false
+    }
     
+    let leftButton = buttonArr[buttonIdx - 1]
+    
+    guard let _ = Int(leftButton.accessibilityIdentifier!) else { return false }
+    return true
   }
   
-  private func changeSelectButtonColor(baseButton: UIButton, relatedButton: UIButton?, _ buttonArr: [UIButton], totalCount: Int) {
+  private func isPossibleReservationRightSeat(buttonArr: [UIButton], baseButton: UIButton, buttonIdx: Int) -> Bool {
+    if buttonIdx == buttonArr.count - 2 {
+      // Null (제일 구석)
+      return false
+    }
+    
+    let rightButton = buttonArr[buttonIdx + 1]
+    
+    guard let _ = Int(rightButton.accessibilityIdentifier!) else { return false }
+    return true
+  }
+  
+  private func changeSelectButtonColor(isUnselected: Bool, baseButton: UIButton, relatedButton: UIButton?, allButton: [UIButton], totalCount: Int, whatTheater: TheaterType) {
+    
+    if isUnselected {
+      for (idx, value) in selectedSeatArr.enumerated() {
+        if value == baseButton.currentTitle {
+          
+          selectedSeatArr.remove(at: idx)
+          baseButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+          baseButton.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+          baseButton.isSelected.toggle()
+        }
+      }
+      
+      for (idx, value) in selectedSeatArr.enumerated() {
+        if value == relatedButton?.currentTitle {
+          
+          selectedSeatArr.remove(at: idx)
+          relatedButton!.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+          relatedButton!.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
+          relatedButton!.isSelected.toggle()
+        }
+      }
+      
+      if totalCount - selectedSeatArr.count == 1 {
+        makeSingleChoiceScreen(totalCount, allButton)
+      }
+      
+      switch whatTheater {
+      case .ThreeSixTheater:
+        threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      case .EightTwoTheater:
+        eightTwoMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      case .OneThreeZero:
+        oneThreeZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      case .OneFourZero:
+        oneFourZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      case .OneFiveZero:
+        oneFiveZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      }
+      
+      return
+    }
+    
     var willSortButtonArr: [String] = []
     baseButton.backgroundColor = UIColor.appColor(.megaBoxColor)
     baseButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
     baseButton.isSelected.toggle()
     willSortButtonArr.append(baseButton.currentTitle!)
-    
+    selectedSeatButtonArr.append(baseButton)
     guard let relatedButton = relatedButton else {
-      makeSingleChoiceScreen(totalCount, buttonArr)
       self.selectedSeatArr.append(baseButton.currentTitle!)
-      threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      self.selectedSeatButtonArr.append(baseButton)
+      
+      switch whatTheater {
+      case .ThreeSixTheater:
+        threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      case .EightTwoTheater:
+        eightTwoMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      case .OneThreeZero:
+        oneThreeZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      case .OneFourZero:
+        oneFourZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      case .OneFiveZero:
+        oneFiveZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+      }
+      selectedSeatCoupleArr[baseButton] = nil
+      
       return
     }
     
@@ -89,14 +174,33 @@ class SelectSeatViewController: UIViewController {
     relatedButton.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
     relatedButton.isSelected.toggle()
     willSortButtonArr.append(relatedButton.currentTitle!)
-    
+    selectedSeatButtonArr.append(relatedButton)
     willSortButtonArr.sort(by: {arg0, arg1 in arg0 < arg1 })
+    
     
     for i in willSortButtonArr {
       self.selectedSeatArr.append(i)
     }
     
-    threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+    if totalCount - selectedSeatArr.count == 1 {
+      makeSingleChoiceScreen(totalCount, allButton)
+    }
+    
+    switch whatTheater {
+    case .ThreeSixTheater:
+      threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+    case .EightTwoTheater:
+      eightTwoMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+    case .OneThreeZero:
+      oneThreeZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+    case .OneFourZero:
+      oneFourZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+    case .OneFiveZero:
+      oneFiveZeroMovieTheaterView.selectedSeatArr = self.selectedSeatArr
+    }
+    
+    selectedSeatCoupleArr[baseButton] = relatedButton
+    selectedSeatCoupleArr[relatedButton] = baseButton
   }
   
   private func finishSingleChoiceScreen(buttonArr: [UIButton], exceptButtonArr: [UIButton]) {
@@ -112,21 +216,22 @@ class SelectSeatViewController: UIViewController {
           } else {
             seat.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
           }
+          
+          seat.isEnabled = true
         }
       }
     }
   }
   
   private func makeSingleChoiceScreen(_ totalCount: Int, _ buttonArr: [UIButton]) {
-    if totalCount - selectedSeatArr.count == 1 {
-      for (_, seat) in buttonArr.enumerated() {
-        guard let seatIdentifierStr = seat.accessibilityIdentifier else { return }
-        let seatIdentifierInt = Int(seatIdentifierStr) ?? 0
-        if seatIdentifierInt % 2 == 0 {
-          if selectedSeatArr.contains(seat.currentTitle!) {
-          } else {
-            seat.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-          }
+    for (_, seat) in buttonArr.enumerated() {
+      guard let seatIdentifierStr = seat.accessibilityIdentifier else { return }
+      let seatIdentifierInt = Int(seatIdentifierStr) ?? 0
+      if seatIdentifierInt % 2 == 0 {
+        if selectedSeatArr.contains(seat.currentTitle!) {
+        } else {
+          seat.isEnabled = false
+          seat.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         }
       }
     }
@@ -144,8 +249,9 @@ class SelectSeatViewController: UIViewController {
     switch movieTheaterNumber {
     case 36:
       guard let movieData = self.movieData else { return }
+      let allSeatButtonArr = threeSixMovieTheaterView.seatButtonArr
       for (_, data) in movieData.seatNumber.enumerated() {
-        let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 14)
+        let seatIdx = returnSeatIndex(seatString: data, buttonArr: allSeatButtonArr)
         if seatIdx == -1 {
         } else {
           if seatIdx < 14 {
@@ -169,8 +275,9 @@ class SelectSeatViewController: UIViewController {
       }
     case 82:
       guard let movieData = self.movieData else { return }
+      let allSeatButtonArr = eightTwoMovieTheaterView.seatButtonArr
       for (_, data) in movieData.seatNumber.enumerated() {
-        let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 8)
+        let seatIdx = returnSeatIndex(seatString: data, buttonArr: allSeatButtonArr)
         if seatIdx == -1 {
         } else {
           eightTwoMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
@@ -180,8 +287,9 @@ class SelectSeatViewController: UIViewController {
       }
     case 130:
       guard let movieData = self.movieData else { return }
+      let allSeatButtonArr = oneThreeZeroMovieTheaterView.seatButtonArr
       for (_, data) in movieData.seatNumber.enumerated() {
-        let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 15)
+        let seatIdx = returnSeatIndex(seatString: data, buttonArr: allSeatButtonArr)
         if seatIdx == -1 {
         } else {
           oneThreeZeroMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
@@ -191,8 +299,9 @@ class SelectSeatViewController: UIViewController {
       }
     case 140:
       guard let movieData = self.movieData else { return }
+      let allSeatButtonArr = oneFourZeroMovieTheaterView.seatButtonArr
       for (_, data) in movieData.seatNumber.enumerated() {
-        let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 16)
+        let seatIdx = returnSeatIndex(seatString: data, buttonArr: allSeatButtonArr)
         if seatIdx == -1 {
         } else {
           oneFourZeroMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
@@ -202,8 +311,9 @@ class SelectSeatViewController: UIViewController {
       }
     case 150:
       guard let movieData = self.movieData else { return }
+      let allSeatButtonArr = oneFiveZeroMovieTheaterView.seatButtonArr
       for (_, data) in movieData.seatNumber.enumerated() {
-        let seatIdx = returnSeatIndex(seatString: data, basePlusNum: 12)
+        let seatIdx = returnSeatIndex(seatString: data, buttonArr: allSeatButtonArr)
         if seatIdx == -1 {
         } else {
           oneFiveZeroMovieTheaterView.seatButtonArr[seatIdx].accessibilityIdentifier = ""
@@ -239,47 +349,14 @@ class SelectSeatViewController: UIViewController {
     }
   }
   
-  private func returnSeatIndex(seatString: String, basePlusNum: Int) -> Int {
+  private func returnSeatIndex(seatString: String, buttonArr: [UIButton]) -> Int {
     var resultIdx: Int = -1
-    var resultStr: String = ""
-    let digiSet = CharacterSet.decimalDigits
     
-    for (_, ch) in seatString.unicodeScalars.enumerated() {
-      if digiSet.contains(ch) {
-        resultStr.append(String(ch))
+    for (idx, value) in buttonArr.enumerated() {
+      if seatString == value.currentTitle {
+        resultIdx = idx
+        break
       }
-    }
-    
-    guard let resultValue = Int(resultStr) else { return -1 }
-    
-    if seatString.contains("A") {
-      resultIdx = resultValue - 1
-    } else if seatString.contains("B") {
-      resultIdx = resultValue + (basePlusNum * 1) - 1
-    } else if seatString.contains("C") {
-      resultIdx = resultValue + (basePlusNum * 2) - 1
-    } else if seatString.contains("D") {
-      resultIdx = resultValue + (basePlusNum * 3) - 1
-    } else if seatString.contains("E") {
-      resultIdx = resultValue + (basePlusNum * 4) - 1
-    } else if seatString.contains("F") {
-      resultIdx = resultValue + (basePlusNum * 5) - 1
-    } else if seatString.contains("G") {
-      resultIdx = resultValue + (basePlusNum * 6) - 1
-    } else if seatString.contains("H") {
-      resultIdx = resultValue + (basePlusNum * 7) - 1
-    } else if seatString.contains("I") {
-      resultIdx = resultValue + (basePlusNum * 8) - 1
-    } else if seatString.contains("J") {
-      resultIdx = resultValue + (basePlusNum * 9) - 1
-    } else if seatString.contains("K") {
-      resultIdx = resultValue + (basePlusNum * 10) - 1
-    } else if seatString.contains("L") {
-      resultIdx = resultValue + (basePlusNum * 11) - 1
-    } else if seatString.contains("M") {
-      resultIdx = resultValue + (basePlusNum * 12) - 1
-    } else {
-      resultIdx = resultValue + (basePlusNum * 13) - 1
     }
     
     return resultIdx
@@ -340,7 +417,7 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
       // 이미 예약된 좌석입니다. (Alert)
     } else {
       // 선택 좌석 표시(보라색 반전 + 상단에 좌석 번호 추가)
-      var seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 14)
+      var seatIdx = returnSeatIndex(seatString: buttonTitle, buttonArr: buttonArr)
       if seatIdx < 14 {
         seatIdx += 1
       } else if seatIdx < 28 {
@@ -350,158 +427,157 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
       } else {
         seatIdx += 4
       }
+    }
+    
+    let seatIdx = returnSeatIndex(seatString: buttonTitle, buttonArr: buttonArr)
+    let selectedSeatCount = selectedSeatArr.count
+    let disabledPerson: [UIButton] = [buttonArr[8], buttonArr[9], buttonArr[10]]
+    
+    if sender.isSelected {
+      // 클릭한 좌석이 이미 선택되어 있다면
+      // 클릭한 좌석의 identifier를 획득 (Int)
+      if selectedSeatCoupleArr[sender] == nil {
+        // 한자리 선택
+        changeSelectButtonColor(
+          isUnselected: true,
+          baseButton: sender,
+          relatedButton: nil,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .ThreeSixTheater
+        )
+      } else if let selectedButton = selectedSeatCoupleArr[sender] {
+        // 두자리 선택
+        guard let relatedButton = selectedSeatCoupleArr[selectedButton!] else { return }
+        
+        changeSelectButtonColor(
+          isUnselected: true,
+          baseButton: selectedButton!,
+          relatedButton: relatedButton!,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .ThreeSixTheater
+        )
+        
+        selectedSeatCoupleArr[selectedButton!] = nil
+        selectedSeatCoupleArr[relatedButton!] = nil
+      }
+    } else {
+      // 클릭한 좌석이 선택되어 있지 않다면
+      if totalCount == selectedSeatCount {
+        // 최대 선택 인원 초과
+        UIAlertController.show(
+          title: "",
+          message: "좌석 선택이 완료되었습니다.",
+          from: self
+        )
+        return
+      }
       
-      // 내가 현재 누른 버튼
-      let button = threeSixMovieTheaterView.seatButtonArr[seatIdx]
+      guard let buttonIdentifierStr = sender.accessibilityIdentifier else { return }
+      let buttonIdentifierInt = Int(buttonIdentifierStr) ?? 0
       
-      if button.isSelected {
-        // 클릭한 좌석이 이미 선택되어 있다면
-        // 클릭한 좌석의 identifier를 획득 (Int)
-        guard let buttonIdentifierStr = button.accessibilityIdentifier else { return }
-        let buttonIdentifierInt = Int(buttonIdentifierStr) ?? 0
-        
-        if button.currentTitle == "A1" || button.currentTitle == "A2" {
-          
-        } else {
-          let selectedSeatCount = selectedSeatArr.count
-          if selectedSeatCount > 1 {
-            // SelectedSeat가 2개 이상이 있는 것
-            for (idx, value) in selectedSeatArr.enumerated() {
-              if value == button.currentTitle {
-                
-                
-                if idx % 2 == 0 {
-                  let rightButton = threeSixMovieTheaterView.seatButtonArr[seatIdx + 1]
-                  if rightButton.isSelected {
-                    selectedSeatArr.remove(at: idx + 1)
-                    selectedSeatArr.remove(at: idx)
-                    threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-                    button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                    button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-                    button.isSelected.toggle()
-                    rightButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                    rightButton.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-                    rightButton.isSelected.toggle()
-                  } else {
-                    selectedSeatArr.remove(at: idx)
-                    threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-                    button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                    button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-                    button.isSelected.toggle()
-                  }
-                } else {
-                  let leftButton = threeSixMovieTheaterView.seatButtonArr[seatIdx - 1]
-                  selectedSeatArr.remove(at: idx)
-                  selectedSeatArr.remove(at: idx - 1)
-                  threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-                  button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                  button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-                  button.isSelected.toggle()
-                  leftButton.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-                  leftButton.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-                  leftButton.isSelected.toggle()
-                }
-              }
-            }
-          } else {
-            // SelectedSeat가 1개 있는 것
-            for (idx, _) in selectedSeatArr.enumerated() {
-              selectedSeatArr.remove(at: idx)
-              threeSixMovieTheaterView.selectedSeatArr = self.selectedSeatArr
-              button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-              button.setTitleColor(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1), for: .normal)
-              button.isSelected.toggle()
-            }
-          }
-        }
-        
-        
-        if threeSixMovieTheaterView.seatButtonArr[seatIdx - 1].currentTitle == "" {
-          // A1, B1, C1, D1 (가장 왼쪽 라인)
-          if button.currentTitle! == "A1" {
-            // 장애인석 반전을 위한 조건
-            button.backgroundColor = #colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1)
-            button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
-          } else {
-            
-          }
-        } else {
-          
-        }
-        
-        
-        
+      if totalCount - selectedSeatCount > 1 {
+        // 남은 좌석 선택 인원이 2명 이상
         if buttonIdentifierInt % 2 == 0 {
-          // 클릭한 좌석이 짝수면
-          
-        } else {
-          
-        }
-        
-      } else {
-        // 클릭한 좌석이 선택되어 있지 않다면
-        if totalCount == selectedSeatArr.count {
-          // 최대 선택 인원 초과
-          print("[Log] :", totalCount)
-          return
-        }
-        
-        makeSingleChoiceScreen(totalCount, buttonArr)
-        
-        // 클릭한 좌석의 identifier를 획득 (Int)
-        guard let buttonIdentifierStr = button.accessibilityIdentifier else { return }
-        let buttonIdentifierInt = Int(buttonIdentifierStr) ?? 0
-        
-        if threeSixMovieTheaterView.seatButtonArr[seatIdx - 1].currentTitle == "" {
-          // A1, B1, C1, D1 (가장 왼쪽 라인)
-          if totalCount - selectedSeatArr.count > 1 {
-            // 남은 좌석 선택 인원이 2명 이상일 때
-            let rightButton = threeSixMovieTheaterView.seatButtonArr[seatIdx + 1]
-            
-            changeSelectButtonColor(baseButton: button, relatedButton: rightButton, buttonArr, totalCount: totalCount)
-            makeSingleChoiceScreen(totalCount, buttonArr)
+          // 짝수
+          if isPossibleReservationLeftSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+            // 왼쪽 좌석 여유 있음
+            let leftSeatButton: UIButton = buttonArr[seatIdx - 1]
+            changeSelectButtonColor(
+              isUnselected: false,
+              baseButton: sender,
+              relatedButton: leftSeatButton,
+              allButton: buttonArr,
+              totalCount: totalCount,
+              whatTheater: .ThreeSixTheater
+            )
           } else {
-            // 남은 좌석 선택 인원이 1명일 때
-            changeSelectButtonColor(baseButton: button, relatedButton: nil, buttonArr, totalCount: totalCount)
-            finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: [buttonArr[1], buttonArr[2]])
-          }
-        } else if threeSixMovieTheaterView.seatButtonArr[seatIdx + 1].currentTitle == "" {
-          // A9, B9, C9, D9 (가장 오른쪽 라인)
-          if totalCount - selectedSeatArr.count > 1 {
-            // 남은 좌석 선택 인원이 2명 이상일 때
-            let leftButton = threeSixMovieTheaterView.seatButtonArr[seatIdx - 1]
-            
-            changeSelectButtonColor(baseButton: button, relatedButton: leftButton, buttonArr, totalCount: totalCount)
-            makeSingleChoiceScreen(totalCount, buttonArr)
-          } else {
-            // 남은 좌석 선택 인원이 1명일 때
-            changeSelectButtonColor(baseButton: button, relatedButton: nil, buttonArr, totalCount: totalCount)
-            finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: [buttonArr[1], buttonArr[2]])
-          }
-        } else {
-          if totalCount - selectedSeatArr.count > 1 {
-            // 남은 좌석 선택 인원이 2명 이상일 때
-            if buttonIdentifierInt % 2 == 0 {
-              // 클릭한 좌석이 짝수
-              let leftButton = threeSixMovieTheaterView.seatButtonArr[seatIdx - 1]
-              
-              changeSelectButtonColor(baseButton: button, relatedButton: leftButton, buttonArr, totalCount: totalCount)
+            // 왼쪽 좌석이 불가능 한 경우
+            // 오른쪽 좌석 확인
+            if isPossibleReservationRightSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+              let rightSeatButton: UIButton = buttonArr[seatIdx + 1]
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: rightSeatButton,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .ThreeSixTheater
+              )
             } else {
-              // 클릭한 좌석이 홀수
-              let rightButton = threeSixMovieTheaterView.seatButtonArr[seatIdx + 1]
+              // 오른쪽 좌석도 불가능 한 경우
+              // 한 자리 예약
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: nil,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .ThreeSixTheater
+              )
               
-              changeSelectButtonColor(baseButton: button, relatedButton: rightButton, buttonArr, totalCount: totalCount)
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: buttonArr)
             }
-            
-            makeSingleChoiceScreen(totalCount, buttonArr)
+          }
+        } else {
+          // 홀수
+          if isPossibleReservationRightSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+            // 오른쪽 좌석 여유 있음
+            let rightSeatButton: UIButton = buttonArr[seatIdx + 1]
+            changeSelectButtonColor(
+              isUnselected: false,
+              baseButton: sender,
+              relatedButton: rightSeatButton,
+              allButton: buttonArr,
+              totalCount: totalCount,
+              whatTheater: .ThreeSixTheater
+            )
           } else {
-            // 남은 좌석 선택 인원이 1명일 때
-            changeSelectButtonColor(baseButton: button, relatedButton: nil, buttonArr, totalCount: totalCount)
-            finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: [buttonArr[1], buttonArr[2]])
+            // 오른쪽에 좌석 여유 없음
+            // 왼쪽 확인
+            if isPossibleReservationLeftSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+              let leftSeatButton: UIButton = buttonArr[seatIdx - 1]
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: leftSeatButton,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .ThreeSixTheater
+              )
+            } else {
+              // 왼쪽도 불가능
+              // 한 자리 예약
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: nil,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .ThreeSixTheater
+              )
+              
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+            }
           }
         }
+      } else {
+        // 남은 좌석 선택 인원이 1명
+        // 한 자리 예약
+        changeSelectButtonColor(
+          isUnselected: false,
+          baseButton: sender,
+          relatedButton: nil,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .ThreeSixTheater
+        )
+        
+        finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
       }
     }
+    
   }
   
   func touchUpThreeSixSelectOkButton(seatNumber: [String], seatCount: Int) {
@@ -512,8 +588,154 @@ extension SelectSeatViewController: ThreeSixMovieTheaterViewDelegate {
 extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
   func touchUpEightTwoTheaterSeat(_ sender: UIButton, _ buttonArr: [UIButton], totalCount: Int) {
     guard let buttonTitle = sender.currentTitle else { return }
-    let seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 8)
-    let button = eightTwoMovieTheaterView.seatButtonArr[seatIdx]
+    let seatIdx = returnSeatIndex(seatString: buttonTitle, buttonArr: buttonArr)
+    let selectedSeatCount = selectedSeatArr.count
+    let disabledPerson: [UIButton] = [buttonArr[8], buttonArr[9], buttonArr[10]]
+    
+    if sender.isSelected {
+      // 클릭한 좌석이 이미 선택되어 있다면
+      // 클릭한 좌석의 identifier를 획득 (Int)
+      if selectedSeatCoupleArr[sender] == nil {
+        // 한자리 선택
+        changeSelectButtonColor(
+          isUnselected: true,
+          baseButton: sender,
+          relatedButton: nil,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .EightTwoTheater
+        )
+      } else if let selectedButton = selectedSeatCoupleArr[sender] {
+        // 두자리 선택
+        guard let relatedButton = selectedSeatCoupleArr[selectedButton!] else { return }
+        
+        changeSelectButtonColor(
+          isUnselected: true,
+          baseButton: selectedButton!,
+          relatedButton: relatedButton!,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .EightTwoTheater
+        )
+        
+        selectedSeatCoupleArr[selectedButton!] = nil
+        selectedSeatCoupleArr[relatedButton!] = nil
+      }
+    } else {
+      // 클릭한 좌석이 선택되어 있지 않다면
+      if totalCount == selectedSeatCount {
+        // 최대 선택 인원 초과
+        UIAlertController.show(
+          title: "",
+          message: "좌석 선택이 완료되었습니다.",
+          from: self
+        )
+        return
+      }
+      
+      guard let buttonIdentifierStr = sender.accessibilityIdentifier else { return }
+      let buttonIdentifierInt = Int(buttonIdentifierStr) ?? 0
+      
+      if totalCount - selectedSeatCount > 1 {
+        // 남은 좌석 선택 인원이 2명 이상
+        if buttonIdentifierInt % 2 == 0 {
+          // 짝수
+          if isPossibleReservationLeftSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+            // 왼쪽 좌석 여유 있음
+            let leftSeatButton: UIButton = buttonArr[seatIdx - 1]
+            changeSelectButtonColor(
+              isUnselected: false,
+              baseButton: sender,
+              relatedButton: leftSeatButton,
+              allButton: buttonArr,
+              totalCount: totalCount,
+              whatTheater: .EightTwoTheater
+            )
+          } else {
+            // 왼쪽 좌석이 불가능 한 경우
+            // 오른쪽 좌석 확인
+            if isPossibleReservationRightSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+              let rightSeatButton: UIButton = buttonArr[seatIdx + 1]
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: rightSeatButton,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .EightTwoTheater
+              )
+            } else {
+              // 오른쪽 좌석도 불가능 한 경우
+              // 한 자리 예약
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: nil,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .EightTwoTheater
+              )
+              
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: buttonArr)
+            }
+          }
+        } else {
+          // 홀수
+          if isPossibleReservationRightSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+            // 오른쪽 좌석 여유 있음
+            let rightSeatButton: UIButton = buttonArr[seatIdx + 1]
+            changeSelectButtonColor(
+              isUnselected: false,
+              baseButton: sender,
+              relatedButton: rightSeatButton,
+              allButton: buttonArr,
+              totalCount: totalCount,
+              whatTheater: .EightTwoTheater
+            )
+          } else {
+            // 오른쪽에 좌석 여유 없음
+            // 왼쪽 확인
+            if isPossibleReservationLeftSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+              let leftSeatButton: UIButton = buttonArr[seatIdx - 1]
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: leftSeatButton,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .EightTwoTheater
+              )
+            } else {
+              // 왼쪽도 불가능
+              // 한 자리 예약
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: nil,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .EightTwoTheater
+              )
+              
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+            }
+          }
+        }
+      } else {
+        // 남은 좌석 선택 인원이 1명
+        // 한 자리 예약
+        changeSelectButtonColor(
+          isUnselected: false,
+          baseButton: sender,
+          relatedButton: nil,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .EightTwoTheater
+        )
+        
+        finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+      }
+    }
   }
   
   func touchUpEightTwoPreviousButton() {
@@ -532,8 +754,154 @@ extension SelectSeatViewController: EightTwoMovieTheaterViewDelegate {
 extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
   func touchUpOneThreeZeroTheaterSeat(_ sender: UIButton, _ buttonArr: [UIButton], totalCount: Int) {
     guard let buttonTitle = sender.currentTitle else { return }
-    let seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 8)
-    let button = eightTwoMovieTheaterView.seatButtonArr[seatIdx]
+    let seatIdx = returnSeatIndex(seatString: buttonTitle, buttonArr: buttonArr)
+    let selectedSeatCount = selectedSeatArr.count
+    let disabledPerson: [UIButton] = [buttonArr[8], buttonArr[9], buttonArr[10]]
+    
+    if sender.isSelected {
+      // 클릭한 좌석이 이미 선택되어 있다면
+      // 클릭한 좌석의 identifier를 획득 (Int)
+      if selectedSeatCoupleArr[sender] == nil {
+        // 한자리 선택
+        changeSelectButtonColor(
+          isUnselected: true,
+          baseButton: sender,
+          relatedButton: nil,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .OneThreeZero
+        )
+      } else if let selectedButton = selectedSeatCoupleArr[sender] {
+        // 두자리 선택
+        guard let relatedButton = selectedSeatCoupleArr[selectedButton!] else { return }
+        
+        changeSelectButtonColor(
+          isUnselected: true,
+          baseButton: selectedButton!,
+          relatedButton: relatedButton!,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .OneThreeZero
+        )
+        
+        selectedSeatCoupleArr[selectedButton!] = nil
+        selectedSeatCoupleArr[relatedButton!] = nil
+      }
+    } else {
+      // 클릭한 좌석이 선택되어 있지 않다면
+      if totalCount == selectedSeatCount {
+        // 최대 선택 인원 초과
+        UIAlertController.show(
+          title: "",
+          message: "좌석 선택이 완료되었습니다.",
+          from: self
+        )
+        return
+      }
+      
+      guard let buttonIdentifierStr = sender.accessibilityIdentifier else { return }
+      let buttonIdentifierInt = Int(buttonIdentifierStr) ?? 0
+      
+      if totalCount - selectedSeatCount > 1 {
+        // 남은 좌석 선택 인원이 2명 이상
+        if buttonIdentifierInt % 2 == 0 {
+          // 짝수
+          if isPossibleReservationLeftSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+            // 왼쪽 좌석 여유 있음
+            let leftSeatButton: UIButton = buttonArr[seatIdx - 1]
+            changeSelectButtonColor(
+              isUnselected: false,
+              baseButton: sender,
+              relatedButton: leftSeatButton,
+              allButton: buttonArr,
+              totalCount: totalCount,
+              whatTheater: .OneThreeZero
+            )
+          } else {
+            // 왼쪽 좌석이 불가능 한 경우
+            // 오른쪽 좌석 확인
+            if isPossibleReservationRightSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+              let rightSeatButton: UIButton = buttonArr[seatIdx + 1]
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: rightSeatButton,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneThreeZero
+              )
+            } else {
+              // 오른쪽 좌석도 불가능 한 경우
+              // 한 자리 예약
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: nil,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneThreeZero
+              )
+              
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: buttonArr)
+            }
+          }
+        } else {
+          // 홀수
+          if isPossibleReservationRightSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+            // 오른쪽 좌석 여유 있음
+            let rightSeatButton: UIButton = buttonArr[seatIdx + 1]
+            changeSelectButtonColor(
+              isUnselected: false,
+              baseButton: sender,
+              relatedButton: rightSeatButton,
+              allButton: buttonArr,
+              totalCount: totalCount,
+              whatTheater: .OneThreeZero
+            )
+          } else {
+            // 오른쪽에 좌석 여유 없음
+            // 왼쪽 확인
+            if isPossibleReservationLeftSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+              let leftSeatButton: UIButton = buttonArr[seatIdx - 1]
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: leftSeatButton,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneThreeZero
+              )
+            } else {
+              // 왼쪽도 불가능
+              // 한 자리 예약
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: nil,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneThreeZero
+              )
+              
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+            }
+          }
+        }
+      } else {
+        // 남은 좌석 선택 인원이 1명
+        // 한 자리 예약
+        changeSelectButtonColor(
+          isUnselected: false,
+          baseButton: sender,
+          relatedButton: nil,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .OneThreeZero
+        )
+        
+        finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+      }
+    }
   }
   
   func touchUpOneThreeZeroPreviousButton() {
@@ -552,8 +920,154 @@ extension SelectSeatViewController: OneThreeZeroMovieTheaterViewDelegate {
 extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
   func touchUpOneFourZeroTheaterSeat(_ sender: UIButton, _ buttonArr: [UIButton], totalCount: Int) {
     guard let buttonTitle = sender.currentTitle else { return }
-    let seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 16)
-    let button = eightTwoMovieTheaterView.seatButtonArr[seatIdx]
+    let seatIdx = returnSeatIndex(seatString: buttonTitle, buttonArr: buttonArr)
+    let selectedSeatCount = selectedSeatArr.count
+    let disabledPerson: [UIButton] = [buttonArr[8], buttonArr[9], buttonArr[10]]
+    
+    if sender.isSelected {
+      // 클릭한 좌석이 이미 선택되어 있다면
+      // 클릭한 좌석의 identifier를 획득 (Int)
+      if selectedSeatCoupleArr[sender] == nil {
+        // 한자리 선택
+        changeSelectButtonColor(
+          isUnselected: true,
+          baseButton: sender,
+          relatedButton: nil,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .OneFourZero
+        )
+      } else if let selectedButton = selectedSeatCoupleArr[sender] {
+        // 두자리 선택
+        guard let relatedButton = selectedSeatCoupleArr[selectedButton!] else { return }
+        
+        changeSelectButtonColor(
+          isUnselected: true,
+          baseButton: selectedButton!,
+          relatedButton: relatedButton!,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .OneFourZero
+        )
+        
+        selectedSeatCoupleArr[selectedButton!] = nil
+        selectedSeatCoupleArr[relatedButton!] = nil
+      }
+    } else {
+      // 클릭한 좌석이 선택되어 있지 않다면
+      if totalCount == selectedSeatCount {
+        // 최대 선택 인원 초과
+        UIAlertController.show(
+          title: "",
+          message: "좌석 선택이 완료되었습니다.",
+          from: self
+        )
+        return
+      }
+      
+      guard let buttonIdentifierStr = sender.accessibilityIdentifier else { return }
+      let buttonIdentifierInt = Int(buttonIdentifierStr) ?? 0
+      
+      if totalCount - selectedSeatCount > 1 {
+        // 남은 좌석 선택 인원이 2명 이상
+        if buttonIdentifierInt % 2 == 0 {
+          // 짝수
+          if isPossibleReservationLeftSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+            // 왼쪽 좌석 여유 있음
+            let leftSeatButton: UIButton = buttonArr[seatIdx - 1]
+            changeSelectButtonColor(
+              isUnselected: false,
+              baseButton: sender,
+              relatedButton: leftSeatButton,
+              allButton: buttonArr,
+              totalCount: totalCount,
+              whatTheater: .OneFourZero
+            )
+          } else {
+            // 왼쪽 좌석이 불가능 한 경우
+            // 오른쪽 좌석 확인
+            if isPossibleReservationRightSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+              let rightSeatButton: UIButton = buttonArr[seatIdx + 1]
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: rightSeatButton,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneFourZero
+              )
+            } else {
+              // 오른쪽 좌석도 불가능 한 경우
+              // 한 자리 예약
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: nil,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneFourZero
+              )
+              
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: buttonArr)
+            }
+          }
+        } else {
+          // 홀수
+          if isPossibleReservationRightSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+            // 오른쪽 좌석 여유 있음
+            let rightSeatButton: UIButton = buttonArr[seatIdx + 1]
+            changeSelectButtonColor(
+              isUnselected: false,
+              baseButton: sender,
+              relatedButton: rightSeatButton,
+              allButton: buttonArr,
+              totalCount: totalCount,
+              whatTheater: .OneFourZero
+            )
+          } else {
+            // 오른쪽에 좌석 여유 없음
+            // 왼쪽 확인
+            if isPossibleReservationLeftSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+              let leftSeatButton: UIButton = buttonArr[seatIdx - 1]
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: leftSeatButton,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneFourZero
+              )
+            } else {
+              // 왼쪽도 불가능
+              // 한 자리 예약
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: nil,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneFourZero
+              )
+              
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+            }
+          }
+        }
+      } else {
+        // 남은 좌석 선택 인원이 1명
+        // 한 자리 예약
+        changeSelectButtonColor(
+          isUnselected: false,
+          baseButton: sender,
+          relatedButton: nil,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .OneFourZero
+        )
+        
+        finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+      }
+    }
   }
   
   func touchUpOneFourZeroPreviousButton() {
@@ -572,10 +1086,154 @@ extension SelectSeatViewController: OneFourZeroMovieTheaterViewDelegate {
 extension SelectSeatViewController: OneFiveZeroMovieTheaterViewDelegate {
   func touchUpOneFiveZeroTheaterSeat(_ sender: UIButton, _ buttonArr: [UIButton], totalCount: Int) {
     guard let buttonTitle = sender.currentTitle else { return }
-    var seatIdx = returnSeatIndex(seatString: buttonTitle, basePlusNum: 12)
+    let seatIdx = returnSeatIndex(seatString: buttonTitle, buttonArr: buttonArr)
     let selectedSeatCount = selectedSeatArr.count
+    let disabledPerson: [UIButton] = [buttonArr[8], buttonArr[9], buttonArr[10]]
     
-    isNullLeftSeat()
+    if sender.isSelected {
+      // 클릭한 좌석이 이미 선택되어 있다면
+      // 클릭한 좌석의 identifier를 획득 (Int)
+      if selectedSeatCoupleArr[sender] == nil {
+        // 한자리 선택
+        changeSelectButtonColor(
+          isUnselected: true,
+          baseButton: sender,
+          relatedButton: nil,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .OneFiveZero
+        )
+      } else if let selectedButton = selectedSeatCoupleArr[sender] {
+        // 두자리 선택
+        guard let relatedButton = selectedSeatCoupleArr[selectedButton!] else { return }
+        
+        changeSelectButtonColor(
+          isUnselected: true,
+          baseButton: selectedButton!,
+          relatedButton: relatedButton!,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .OneFiveZero
+        )
+        
+        selectedSeatCoupleArr[selectedButton!] = nil
+        selectedSeatCoupleArr[relatedButton!] = nil
+      }
+    } else {
+      // 클릭한 좌석이 선택되어 있지 않다면
+      if totalCount == selectedSeatCount {
+        // 최대 선택 인원 초과
+        UIAlertController.show(
+          title: "",
+          message: "좌석 선택이 완료되었습니다.",
+          from: self
+        )
+        return
+      }
+      
+      guard let buttonIdentifierStr = sender.accessibilityIdentifier else { return }
+      let buttonIdentifierInt = Int(buttonIdentifierStr) ?? 0
+      
+      if totalCount - selectedSeatCount > 1 {
+        // 남은 좌석 선택 인원이 2명 이상
+        if buttonIdentifierInt % 2 == 0 {
+          // 짝수
+          if isPossibleReservationLeftSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+            // 왼쪽 좌석 여유 있음
+            let leftSeatButton: UIButton = buttonArr[seatIdx - 1]
+            changeSelectButtonColor(
+              isUnselected: false,
+              baseButton: sender,
+              relatedButton: leftSeatButton,
+              allButton: buttonArr,
+              totalCount: totalCount,
+              whatTheater: .OneFiveZero
+            )
+          } else {
+            // 왼쪽 좌석이 불가능 한 경우
+            // 오른쪽 좌석 확인
+            if isPossibleReservationRightSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+              let rightSeatButton: UIButton = buttonArr[seatIdx + 1]
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: rightSeatButton,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneFiveZero
+              )
+            } else {
+              // 오른쪽 좌석도 불가능 한 경우
+              // 한 자리 예약
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: nil,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: TheaterType.OneFiveZero
+              )
+              
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: buttonArr)
+            }
+          }
+        } else {
+          // 홀수
+          if isPossibleReservationRightSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+            // 오른쪽 좌석 여유 있음
+            let rightSeatButton: UIButton = buttonArr[seatIdx + 1]
+            changeSelectButtonColor(
+              isUnselected: false,
+              baseButton: sender,
+              relatedButton: rightSeatButton,
+              allButton: buttonArr,
+              totalCount: totalCount,
+              whatTheater: .OneFiveZero
+            )
+          } else {
+            // 오른쪽에 좌석 여유 없음
+            // 왼쪽 확인
+            if isPossibleReservationLeftSeat(buttonArr: buttonArr, baseButton: sender, buttonIdx: seatIdx) {
+              let leftSeatButton: UIButton = buttonArr[seatIdx - 1]
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: leftSeatButton,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneFiveZero
+              )
+            } else {
+              // 왼쪽도 불가능
+              // 한 자리 예약
+              changeSelectButtonColor(
+                isUnselected: false,
+                baseButton: sender,
+                relatedButton: nil,
+                allButton: buttonArr,
+                totalCount: totalCount,
+                whatTheater: .OneFiveZero
+              )
+              
+              finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+            }
+          }
+        }
+      } else {
+        // 남은 좌석 선택 인원이 1명
+        // 한 자리 예약
+        changeSelectButtonColor(
+          isUnselected: false,
+          baseButton: sender,
+          relatedButton: nil,
+          allButton: buttonArr,
+          totalCount: totalCount,
+          whatTheater: .OneFiveZero
+        )
+        
+        finishSingleChoiceScreen(buttonArr: buttonArr, exceptButtonArr: disabledPerson)
+      }
+    }
   }
   
   func touchUpOneFiveZeroPreviousButton() {

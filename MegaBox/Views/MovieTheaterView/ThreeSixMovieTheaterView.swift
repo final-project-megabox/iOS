@@ -125,23 +125,23 @@ class ThreeSixMovieTheaterView: UIView {
         button.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         button.layer.borderWidth = 0.5
         button.layer.borderColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-        button.accessibilityIdentifier = "\((j - i))"
+        button.accessibilityIdentifier = "\(j - i)"
         button.addTarget(self, action: #selector(touchUpButton(_:)), for: .touchUpInside)
         if i == 0 && (j == 0 || j == 10 || j == 11 || j == 12 || j == 13) {
-          button.setTitle("", for: .normal)
-          button.accessibilityIdentifier = ""
+          button.setTitle("space", for: .normal)
+          button.accessibilityIdentifier = "space"
           button.isHidden = true
         } else if i == 1 && (j == 0 || j == 1 || j == 11 || j == 12 || j == 13) {
-          button.setTitle("", for: .normal)
-          button.accessibilityIdentifier = ""
+          button.setTitle("space", for: .normal)
+          button.accessibilityIdentifier = "space"
           button.isHidden = true
         } else if i == 2 && (j == 0 || j == 1 || j == 2 || j == 12 || j == 13) {
-          button.setTitle("", for: .normal)
-          button.accessibilityIdentifier = ""
+          button.setTitle("space", for: .normal)
+          button.accessibilityIdentifier = "space"
           button.isHidden = true
         } else if i == 3 && (j == 0 || j == 1 || j == 2 || j == 3 || j == 13) {
-          button.setTitle("", for: .normal)
-          button.accessibilityIdentifier = ""
+          button.setTitle("space", for: .normal)
+          button.accessibilityIdentifier = "space"
           button.isHidden = true
         } else if i == 0 && (j == 1 || j == 2) {
           // 장애인석
