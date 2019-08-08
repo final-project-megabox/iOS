@@ -10,6 +10,15 @@ import UIKit
 
 class MyPageWishViewController: UIViewController {
   
+  let shared = UserDataManager.shared
+  
+  let noWishMovieView: MyPageNoWishMovieView = {
+    let view = MyPageNoWishMovieView()
+    view.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
   let topView: MyPageWishMovieTopView = {
     let view = MyPageWishMovieTopView()
     view.translatesAutoresizingMaskIntoConstraints = false
@@ -24,10 +33,23 @@ class MyPageWishViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     view.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    
+    topView.delegate = self
+    getWishMovieCount()
     setupWishMovieView()
+  
+    
   }
+  
+  private func getWishMovieCount() {
+    if shared.wishMovieData.count == 0 {
+      contentView.isHidden = true
+    } else {
+      contentView.isHidden = false
+    }
+  }
+  
   
   func setupWishMovieView() {
     
@@ -39,7 +61,13 @@ class MyPageWishViewController: UIViewController {
     topView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
     topView.heightAnchor.constraint(equalToConstant: 41).isActive = true
     
-    view.addSubview(contentView)
+    view.addSubview(noWishMovieView)
+    noWishMovieView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
+    noWishMovieView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
+    noWishMovieView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
+    noWishMovieView.bottomAnchor.constraint(equalTo: guide.bottomAnchor).isActive = true
+    
+    noWishMovieView.addSubview(contentView)
     contentView.topAnchor.constraint(equalTo: topView.bottomAnchor).isActive = true
     contentView.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
     contentView.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
@@ -49,4 +77,21 @@ class MyPageWishViewController: UIViewController {
   }
   
 
+}
+
+
+extension MyPageWishViewController: MyPageWishMovieTopViewDelegate {
+  func touchUpDismissButton(sender: UIButton) {
+    self.presentingViewController?.dismiss(animated: false, completion: nil)
+  }
+  
+  
+}
+
+extension MyPageWishViewController: MyPageWishMovieViewDelegate {
+  func touchUpDeleteButton(sender: UIButton) {
+//    NetworkService.pushIsWished(<#T##urlStr: String##String#>, movieId: <#T##Int#>)
+  }
+  
+  
 }

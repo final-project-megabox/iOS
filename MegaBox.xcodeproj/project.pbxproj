@@ -109,6 +109,7 @@
 		E604C55F22FAFDBA00C57F5E /* MyPageWishMovieTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C55E22FAFDBA00C57F5E /* MyPageWishMovieTopView.swift */; };
 		E604C56122FAFDDA00C57F5E /* MyPageWishMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C56022FAFDDA00C57F5E /* MyPageWishMovieView.swift */; };
 		E604C56322FAFE1900C57F5E /* MyPageWishMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C56222FAFE1900C57F5E /* MyPageWishMovieCell.swift */; };
+		E604C56522FB3C8500C57F5E /* MyPageNoWishMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E604C56422FB3C8500C57F5E /* MyPageNoWishMovieView.swift */; };
 		E6094AB322F2D4E7008407EA /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AB222F2D4E7008407EA /* UserData.swift */; };
 		E6094AB722F4053E008407EA /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094AB622F4053E008407EA /* UserDataManager.swift */; };
 		E6094ADF22F433A8008407EA /* isLoginNavigationDrawerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6094ADE22F433A8008407EA /* isLoginNavigationDrawerCell.swift */; };
@@ -226,6 +227,7 @@
 		E604C55E22FAFDBA00C57F5E /* MyPageWishMovieTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageWishMovieTopView.swift; sourceTree = "<group>"; };
 		E604C56022FAFDDA00C57F5E /* MyPageWishMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageWishMovieView.swift; sourceTree = "<group>"; };
 		E604C56222FAFE1900C57F5E /* MyPageWishMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageWishMovieCell.swift; sourceTree = "<group>"; };
+		E604C56422FB3C8500C57F5E /* MyPageNoWishMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageNoWishMovieView.swift; sourceTree = "<group>"; };
 		E6094AB222F2D4E7008407EA /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		E6094AB622F4053E008407EA /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		E6094ADE22F433A8008407EA /* isLoginNavigationDrawerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isLoginNavigationDrawerCell.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				E6094AE522F454D9008407EA /* MyPageSettingContentView.swift */,
 				E604C55E22FAFDBA00C57F5E /* MyPageWishMovieTopView.swift */,
 				E604C56022FAFDDA00C57F5E /* MyPageWishMovieView.swift */,
+				E604C56422FB3C8500C57F5E /* MyPageNoWishMovieView.swift */,
 			);
 			path = MyPageView;
 			sourceTree = "<group>";
@@ -721,6 +724,7 @@
 				CF55E60D22F8274700290FED /* MovieDetailSectionView.swift in Sources */,
 				CFBC1C9D22E02B0F006B6839 /* TheaterCategoryReservationViewController.swift in Sources */,
 				E604C52E22F822A300C57F5E /* StillCutCell.swift in Sources */,
+				E604C56522FB3C8500C57F5E /* MyPageNoWishMovieView.swift in Sources */,
 				E6094AE222F45483008407EA /* MyPageSettingViewController.swift in Sources */,
 				CF55E60B22F8273E00290FED /* MovieDetailView.swift in Sources */,
 				CFBC1CCF22E02DBE006B6839 /* EventCollectionCell.swift in Sources */,

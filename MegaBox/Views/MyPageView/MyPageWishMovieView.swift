@@ -9,6 +9,8 @@
 import UIKit
 
 class MyPageWishMovieView: UIView {
+  
+  var delegate: MyPageWishMovieViewDelegate?
 
   let shared = UserDataManager.shared
   let movieShared = MovieDataManager.shared
@@ -50,6 +52,10 @@ class MyPageWishMovieView: UIView {
     
   }
   
+  @objc func didTapDeleteButton(_ sender: UIButton) {
+    delegate?.touchUpDeleteButton(sender: sender)
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
     
@@ -69,6 +75,8 @@ extension MyPageWishMovieView: UITableViewDataSource {
     let wishListCell = tableView.dequeueReusableCell(withIdentifier: MyPageWishMovieCell.identifier, for: indexPath) as! MyPageWishMovieCell
     
     wishListCell.selectionStyle = .none
+    
+    wishListCell.deleteButton.addTarget(self, action: #selector(didTapDeleteButton(_:)), for: .touchUpInside)
     
     //제목
     wishListCell.movieTitleLabel.text = shared.wishMovieData[indexPath.row].title
