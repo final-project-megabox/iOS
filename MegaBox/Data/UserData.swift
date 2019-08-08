@@ -19,14 +19,12 @@ struct MyPage: Codable {
   let phoneNumber: String
   let preferTheater: [PreferTheater]
   let bookingHistory: [BookingHistory]
-  let watchedMovieNumber, wishMovieNumber: Int
-  let lastLogin: String
+  let watchedMovieNumber, wishMovieNumber, mileage: Int
   
   enum CodingKeys: String, CodingKey {
     case phoneNumber, preferTheater
     case bookingHistory = "booking_history"
-    case watchedMovieNumber, wishMovieNumber
-    case lastLogin = "last_login"
+    case watchedMovieNumber, wishMovieNumber, mileage
   }
 }
 
@@ -43,21 +41,23 @@ struct BookingHistory: Codable {
     case theater
   }
 }
-
 // MARK: - PreferTheater
 struct PreferTheater: Codable {
   let theater, region: String
   let id: Int
 }
 
+
 // MARK: - WishMovie
 struct WishMovie: Codable {
+  let movieID: Int
   let imgURL: String
   let age: String
   let title: String
   let bookingRate: Double
   
   enum CodingKeys: String, CodingKey {
+    case movieID = "movie_id"
     case imgURL = "img_url"
     case age, title
     case bookingRate = "booking_rate"

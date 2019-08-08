@@ -44,12 +44,14 @@ class NetworkService {
     }
   }
   
-  static func getUserMyPageData(_ urlStr: String, token: String, completion: @escaping (Swift.Result<MyPage, ErrorType>) -> Void) {
+  static func getUserMyPageData(_ urlStr: String, completion: @escaping (Swift.Result<MyPage, ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
     
-    let headers = [
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let headers: HTTPHeaders = [
       "Content-Type": "application/json",
-      "Authorization": token
+      "Authorization": "JWT \(token)"
     ]
     
     let req = Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
@@ -123,7 +125,16 @@ class NetworkService {
   static func getMovieDetailData(_ urlStr: String, completion: @escaping (Swift.Result<MovieDetailData, ErrorType>) -> Void) {
     let url = URL(string: urlStr)!
   
-    let req = Alamofire.request(url)
+    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
+    
+    let headers: HTTPHeaders = [
+      "Content-Type": "application/json",
+      "Authorization": "JWT \(token)"
+    ]
+    
+    let req = Alamofire.request(url, method: .get, parameters: nil, encoding: URLEncoding.default, headers: headers)
+    
+    
     
     req.validate()
       .responseData { response in
@@ -131,7 +142,6 @@ class NetworkService {
         case .success(let data):
           do {
             let movieDetailData = try JSONDecoder().decode(MovieDetailData.self, from: data)
-            print("[Log] serviceData:", movieDetailData)
           completion(.success(movieDetailData))
           } catch {
             

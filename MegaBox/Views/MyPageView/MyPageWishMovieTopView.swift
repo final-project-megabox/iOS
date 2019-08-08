@@ -10,6 +10,8 @@ import UIKit
 
 class MyPageWishMovieTopView: UIView {
   
+  var delegate: MyPageWishMovieTopViewDelegate?
+  
   private let topView: UIView = {
     let view = UIView()
     view.backgroundColor = .white
@@ -44,6 +46,7 @@ class MyPageWishMovieTopView: UIView {
   private let dismissButton: UIButton = {
     let button = UIButton()
     button.setImage(#imageLiteral(resourceName: "common_btn_topbar_prev2"), for: .normal)
+    button.addTarget(self, action: #selector(didTapDismissButton(_:)), for: .touchUpInside)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -60,6 +63,10 @@ class MyPageWishMovieTopView: UIView {
     super.init(frame: frame)
     
     setupMyPageTopView()
+  }
+  
+  @objc func didTapDismissButton(_ sender: UIButton) {
+    delegate?.touchUpDismissButton(sender: sender)
   }
   
   

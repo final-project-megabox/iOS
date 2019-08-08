@@ -161,9 +161,8 @@ extension MainViewController: MainTopViewDelegate {
     let navigationDrawerVC = NavigationDrawerViewController()
     
     let url = ApiUrlData.ApiUrl(.myPageApi)
-    guard let token = UserDefaults.standard.value(forKey: "Token") else { return }
-    
-    NetworkService.getUserMyPageData(url, token: "JWT \(token)") { (result) in
+   
+    NetworkService.getUserMyPageData(url) { (result) in
       switch result {
       case .success(let value):
         self.userShared.myPageData = value
@@ -239,7 +238,6 @@ extension MainViewController: MainMovieReservationCellDelegate {
         let movieDetailVC = MovieDetailViewController()
         movieDetailVC.movieId = Int(id)!
         movieDetailVC.isWished = self.shared.allMovieData[indexPath].isWished
-        print("알라딘 isWished: ", movieDetailVC.isWished!)
         self.present(movieDetailVC, animated: false)
       case .failure(let err):
         print(err.localizedDescription)

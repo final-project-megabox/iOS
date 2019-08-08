@@ -45,7 +45,7 @@ class MyPageWishMovieCell: UITableViewCell {
   
   let dateLabel: UILabel = {
     let label = UILabel()
-    label.text = "2019.07.31"
+    label.text = "2019-07-31"
     label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     label.font = UIFont.systemFont(ofSize: 12)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +64,7 @@ class MyPageWishMovieCell: UITableViewCell {
   let actorLabel: UILabel = {
     let label = UILabel()
     label.text = "출연 조정석,윤아"
+    label.numberOfLines = 0
     label.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     label.font = UIFont.systemFont(ofSize: 12)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -81,13 +82,18 @@ class MyPageWishMovieCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
     
+    dateType()
     setupWishMovieCell()
+  }
+  
+  func dateType() {
+    
   }
   
   func setupWishMovieCell() {
     addSubview(gradeImageView)
     gradeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 15).isActive = true
-    gradeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+    gradeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
     gradeImageView.widthAnchor.constraint(equalToConstant: 18).isActive = true
     gradeImageView.heightAnchor.constraint(equalToConstant: 18).isActive = true
     
@@ -97,7 +103,7 @@ class MyPageWishMovieCell: UITableViewCell {
     
     addSubview(thumnailImageView)
     thumnailImageView.topAnchor.constraint(equalTo: gradeImageView.bottomAnchor, constant: 2).isActive = true
-    thumnailImageView.leadingAnchor.constraint(equalTo: gradeImageView.leadingAnchor, constant: 5).isActive = true
+    thumnailImageView.leadingAnchor.constraint(equalTo: gradeImageView.leadingAnchor, constant: 2).isActive = true
     thumnailImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
     thumnailImageView.heightAnchor.constraint(equalToConstant: 85).isActive = true
     thumnailImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15).isActive = true
@@ -117,12 +123,13 @@ class MyPageWishMovieCell: UITableViewCell {
     addSubview(actorLabel)
     actorLabel.topAnchor.constraint(equalTo: directorLabel.bottomAnchor, constant: 2).isActive = true
     actorLabel.leadingAnchor.constraint(equalTo: typeLabel.leadingAnchor).isActive = true
+    actorLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
     
     addSubview(deleteButton)
-    deleteButton.topAnchor.constraint(equalTo: directorLabel.topAnchor).isActive = true
+    deleteButton.topAnchor.constraint(equalTo: dateLabel.topAnchor).isActive = true
     deleteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-    deleteButton.widthAnchor.constraint(equalToConstant: 15).isActive = true
-    deleteButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    deleteButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+    deleteButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
