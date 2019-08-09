@@ -81,17 +81,9 @@ class MainMoviePostCollectionCell: UICollectionViewCell {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
     
     setupProperties()
   }
-  
-//  func cellConfigure() {
-//    moviePostImage.image =
-//  }
   
   private func setupProperties() {
     let margin: CGFloat = 10

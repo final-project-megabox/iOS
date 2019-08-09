@@ -15,12 +15,23 @@ class SplashViewController: UIViewController {
   
   private var timer: Timer!
   
+  private let logoImage: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = #imageLiteral(resourceName: "intro_logo")
+    imageView.translatesAutoresizingMaskIntoConstraints = false
+    return imageView
+  }()
+  
   // MARK:- Life Cycle
   // MARK: viewDidLoad()
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(startSplash), userInfo: nil, repeats: false)
+    timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(startSplash), userInfo: nil, repeats: false)
+    
+    view.addSubview(logoImage)
+    logoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    logoImage.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
   }
   
   // MARK:- Methods
