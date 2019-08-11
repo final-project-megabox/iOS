@@ -1,0 +1,6 @@
+framework module Pods_MegaBox {
+  umbrella header "Pods-MegaBox-umbrella.h"
+
+  export *
+  module * { export * }
+}

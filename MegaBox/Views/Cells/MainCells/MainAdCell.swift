@@ -11,9 +11,8 @@ import UIKit
 class MainAdCell: UITableViewCell {
   static let identifier = "AdCell"
   
-  let guideBGView: UIView = {
-    let view = UIView()
-    //    view.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+  let guideBGView: UIImageView = {
+    let view = UIImageView()
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()

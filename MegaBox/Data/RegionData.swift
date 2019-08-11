@@ -8,7 +8,13 @@
 
 import Foundation
 
-struct RegionData {
+struct RegionData: Codable {
+  let id: Int
+  let region, theater: String
+  let selected: Bool
+}
+
+struct AllRegionData {
   let regionNames: [String] = [
     "선호영화관", "서울", "경기", "인천", "대전/충청/세종", "부산/대구/경상",
     "광주/전라", "강원", "제주"
@@ -42,7 +48,7 @@ struct RegionData {
       "거창", "경산하양", "경주", "구미강동", "김천", "남포항",
       "대구(칠성로)", "대구신세계(동대구)", "대구이시아", "덕천", "마산",
       "문경", "부산극장", "부산대", "북대구(칠곡)", "사천", "삼천포",
-      "양산", "양산라피에스타", "울산", "정관", "창원", "해운대(정산)"],
+      "양산", "양산라피에스타", "울산", "정관", "창원", "해운대(장산)"],
     
     "광주/전라": [
       "광주상무", "광주하남", "남원", "목포", "목포하당(포르모)",

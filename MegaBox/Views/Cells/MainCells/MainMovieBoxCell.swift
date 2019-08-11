@@ -112,8 +112,7 @@ class MainMovieBoxCell: UITableViewCell {
     movieBoxImage.topAnchor.constraint(equalTo: guideBGView.topAnchor).isActive = true
     movieBoxImage.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor).isActive = true
     movieBoxImage.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor).isActive = true
-    movieBoxImage.bottomAnchor.constraint(equalTo: guideBGView.bottomAnchor).isActive = true
-    movieBoxImage.heightAnchor.constraint(equalToConstant: (guideBGView.frame.width * 460) / 708).isActive = true
+    movieBoxImage.heightAnchor.constraint(equalToConstant: ((UIScreen.main.bounds.width - 20) * 460) / 708).isActive = true
     
     guideBGView.addSubview(movieBoxLabel)
     movieBoxLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: margin * 2).isActive = true

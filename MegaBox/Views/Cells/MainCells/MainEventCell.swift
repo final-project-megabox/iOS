@@ -12,8 +12,13 @@ class MainEventCell: UITableViewCell {
   var indicatorBarLeadingConstraint: NSLayoutConstraint!
   var indicatorBarTrailingConstraint: NSLayoutConstraint!
   static let identifier = "MainEventCell"
+  private var fontSize: CGFloat = 0
   
   var delegate: MainEventCellDelegate?
+  
+  var eventImageData: Data?
+  var eventTitleText: String?
+  var eventSubTitleText: String?
   
   private let guideBGView: UIView = {
     let view = UIView()
@@ -106,6 +111,7 @@ class MainEventCell: UITableViewCell {
     layout.scrollDirection = .horizontal
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     collectionView.backgroundColor = .clear
+    collectionView.register(EventCollectionCell.self, forCellWithReuseIdentifier: EventCollectionCell.identifier)
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     return collectionView
@@ -114,19 +120,23 @@ class MainEventCell: UITableViewCell {
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
+    getFontSize()
     setupProperties()
+    makeAutoLayout()
   }
   
   override func layoutSubviews() {
     super.layoutSubviews()
-    makeAutoLayout()
+    
+  }
+
+  @objc func touchUpOwlStageButton(_ sender: UIButton) {
+    let stackViewWidth = guideBGView.frame.width
+    delegate?.touchUpEventOwlStageButton(sender, indicatorBarTrailingConstraint, indicatorBarLeadingConstraint, stackViewWidth)
   }
   
-  @objc func touchUpOwlStageButton(_ sender: UIButton) {
-    print("[Log] OwlStaageButtonDidTapped")
-    let stackViewWidth = guideBGView.frame.width
-    
-    delegate?.touchUpEventOwlStageButton(sender, indicatorBarTrailingConstraint, indicatorBarLeadingConstraint, stackViewWidth)
+  private func getFontSize() {
+    fontSize = ("가" as NSString).size(withAttributes: [NSAttributedString.Key.font : allButton.titleLabel?.font ?? "가"]).width
   }
   
   private func setupProperties() {
@@ -138,7 +148,6 @@ class MainEventCell: UITableViewCell {
     
     eventCollection.dataSource = self
     eventCollection.delegate = self
-    eventCollection.register(EventCollectionCell.self, forCellWithReuseIdentifier: EventCollectionCell.identifier)
     
     setupStackView()
   }
@@ -146,7 +155,6 @@ class MainEventCell: UITableViewCell {
   private func setupStackView() {
     eventStack = UIStackView(arrangedSubviews: [allButton, megaBoxButton, movieButton, coalitionButton, theaterButton])
     eventStack.translatesAutoresizingMaskIntoConstraints = false
-    
     eventStack.axis = .horizontal
     eventStack.alignment = .leading
     eventStack.distribution = .fill
@@ -186,13 +194,13 @@ class MainEventCell: UITableViewCell {
     indicatorBarLeadingConstraint = indicatorBar.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2)
     indicatorBarLeadingConstraint.isActive = true
     indicatorBar.heightAnchor.constraint(equalToConstant: 2).isActive = true
-    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -305)
+    indicatorBarTrailingConstraint = indicatorBar.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: -(UIScreen.main.bounds.width - 50) + (fontSize * 2))
     indicatorBarTrailingConstraint.isActive = true
     
     guideBGView.addSubview(eventCollection)
     eventCollection.topAnchor.constraint(equalTo: indicatorBar.bottomAnchor, constant: margin).isActive = true
-    eventCollection.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: -margin).isActive = true
-    eventCollection.trailingAnchor.constraint(equalTo: guideBGView.trailingAnchor, constant: margin).isActive = true
+    eventCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    eventCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     eventCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -margin * 2).isActive = true
   }
   
@@ -208,7 +216,13 @@ extension MainEventCell: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCollectionCell.identifier, for: indexPath) as! EventCollectionCell
-    cell.thumbnailImage.image = #imageLiteral(resourceName: "ad_event1")
+    
+    cell.eventCollectionCellConfigure(
+      imageData: eventImageData!,
+      titleText: eventTitleText ?? "",
+      subTitleText: eventSubTitleText ?? ""
+    )
+    
     return cell
   }
 }

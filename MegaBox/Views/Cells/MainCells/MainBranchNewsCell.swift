@@ -26,9 +26,22 @@ class MainBranchNewsCell: UITableViewCell {
     return label
   }()
   
+  private let branchNewsCollectionView: UICollectionView = {
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .horizontal
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    collectionView.backgroundColor = .clear
+    collectionView.register(BranchNewsCollectionCell.self, forCellWithReuseIdentifier: BranchNewsCollectionCell.identifier)
+    collectionView.showsHorizontalScrollIndicator = false
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    return collectionView
+  }()
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.backgroundColor = #colorLiteral(red: 0.8352941176, green: 0.8392156863, blue: 0.862745098, alpha: 1)
+    branchNewsCollectionView.dataSource = self
+    branchNewsCollectionView.delegate = self
   }
   
   override func layoutSubviews() {
@@ -48,6 +61,12 @@ class MainBranchNewsCell: UITableViewCell {
     guideBGView.addSubview(titleLabel)
     titleLabel.topAnchor.constraint(equalTo: guideBGView.topAnchor, constant: margin * 2).isActive = true
     titleLabel.leadingAnchor.constraint(equalTo: guideBGView.leadingAnchor, constant: margin * 2).isActive = true
+    
+    guideBGView.addSubview(branchNewsCollectionView)
+    branchNewsCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+    branchNewsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+    branchNewsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+    branchNewsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -55,3 +74,29 @@ class MainBranchNewsCell: UITableViewCell {
   }
 }
 
+extension MainBranchNewsCell: UICollectionViewDataSource {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 5
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BranchNewsCollectionCell.identifier, for: indexPath) as! BranchNewsCollectionCell
+    
+    return cell
+  }
+}
+
+extension MainBranchNewsCell: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let width = UIScreen.main.bounds.width / 2.5
+    return CGSize(width: width, height: width)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 10
+  }
+}

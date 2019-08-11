@@ -75,12 +75,22 @@ class QuickReservationViewController: UIViewController {
 extension QuickReservationViewController: QuickReservationViewDelegate {
   func touchUpfarightButton() {
     let movieCategoryVC = MovieCategoryReservationViewController()
+    movieCategoryVC.dismissType = .two
     self.present(movieCategoryVC, animated: false)
   }
   
   func touchUpfaleftButton() {
-    let theaterCategoryVC = TheaterCategorySelectTheaterViewController()
-    self.present(theaterCategoryVC, animated: false)
+    NetworkService.getRegionData { result in
+      switch result {
+      case .success(let data):
+        let theaterCategoryVC = TheaterCategorySelectTheaterViewController()
+        theaterCategoryVC.dismissType = .two
+        theaterCategoryVC.regionData = data
+        self.present(theaterCategoryVC, animated: false)
+      case .failure(let err):
+        print(err.localizedDescription)
+      }
+    }
   }
   
   func touchUpCancelButton() {
